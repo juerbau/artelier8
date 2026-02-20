@@ -1,4 +1,6 @@
 import Image from "next/image";
+import styles from "./page.module.css";
+
 import newart from "@/ui/images/newArt.png";
 import creative from "@/ui/images/creative.png";
 import bild1 from "@/ui/images/Bild4.png";
