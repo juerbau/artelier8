@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { headline } from "@/lib/i18n";
-import bild from "@/ui/images/AMG-HeatZone_100x100.webp";
+import bild from "@/ui/images/AMG_2.avif";
 
 export default async function Home({params}) {
     const { locale } = await params;

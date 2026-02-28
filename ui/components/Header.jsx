@@ -5,40 +5,18 @@ import { usePathname } from "next/navigation"
 import Image from "next/image"
 
 import LangSwitch from "@/ui/components/LangSwitch"
-import MobileNav from "@/ui/components/MobileNav"
-import { nav } from "@/lib/i18n"
+import ResponsiveNav from "@/ui/components/ResponsiveNav"
 import logo from "@/ui/images/creative.png"
 
 export default function Header({ locale }) {
     const pathname = usePathname()
-    const t = nav[locale]
-
-    const links = [
-        { key: "home", href: `/${locale}` },
-        { key: "about", href: `/${locale}/about` },
-        { key: "series", href: `/${locale}/series` },
-        { key: "events", href: `/${locale}/events` },
-        { key: "contact", href: `/${locale}/contact` },
-    ]
-
-    const isActive = (href, key) => {
-        if (key === "home") return pathname === href
-        return pathname === href || pathname.startsWith(href + "/")
-    }
-
-    const linkClass = (href, key) =>
-        `pb-1 border-b-2 transition-colors ${
-            isActive(href, key)
-                ? "border-white text-white"
-                : "border-transparent text-white/70 hover:text-cyan-300 hover:border-white/60"
-        }`;
 
     return (
         <header className="w-full bg-gray-600">
             <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-2">
 
                 {/* Logo */}
-                <Link href={`/${locale}`} className="text-lg">
+                <Link href={`/${locale}`}>
                     <Image
                         src={logo}
                         alt="Logo"
@@ -49,24 +27,11 @@ export default function Header({ locale }) {
                     />
                 </Link>
 
-                {/* Desktop Nav */}
-                <nav className="hidden md:flex font-gochi gap-8 text-3xl">
-                    {links.map(link => (
-                        <Link
-                            key={link.key}
-                            href={link.href}
-                            className={linkClass(link.href, link.key)}
-                        >
-                            {t[link.key]}
-                        </Link>
-                    ))}
-                </nav>
+                {/* Unified Nav */}
+                <ResponsiveNav locale={locale} pathname={pathname} />
 
-                {/* Right side */}
-                <div className="flex items-center gap-4">
-                    <LangSwitch locale={locale} />
-                    <MobileNav locale={locale} />
-                </div>
+                {/* Lang */}
+                <LangSwitch locale={locale} />
             </div>
         </header>
     )

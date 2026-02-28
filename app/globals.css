@@ -11,14 +11,40 @@
   --font-gochi: var(--font-gochi-hand);
 }
 
-/*@media (prefers-color-scheme: dark) {*/
-/*  :root {*/
-/*    --background: #0a0a0a;*/
-/*    --foreground: #ededed;*/
-/*  }*/
-/*}*/
-
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+/* =========================================
+   MENU TRIGGER LINES
+========================================= */
+
+.menu-line-left,
+.menu-line-right {
+  height: 2px;
+  width: 44px;
+  display: block;
+}
+
+/* links: spitz → voll → weich */
+.menu-line-left {
+  background: linear-gradient(
+          to right,
+          transparent 0%,
+          rgba(255,255,255,0.6) 30%,
+          rgba(255,255,255,1) 70%,
+          rgba(255,255,255,1) 100%
+  );
+}
+
+/* rechts: voll → weich → spitz */
+.menu-line-right {
+  background: linear-gradient(
+          to right,
+          rgba(255,255,255,1) 0%,
+          rgba(255,255,255,1) 30%,
+          rgba(255,255,255,0.6) 70%,
+          transparent 100%
+  );
 }
