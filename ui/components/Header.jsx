@@ -34,8 +34,8 @@ export default function Header({ locale }) {
         }`;
 
     return (
-        <header className="w-full bg-black border-b border-neutral-800">
-            <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <header className="w-full bg-gray-600">
+            <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-2">
 
                 {/* Logo */}
                 <Link href={`/${locale}`} className="text-lg">
@@ -44,13 +44,13 @@ export default function Header({ locale }) {
                         alt="Logo"
                         width={653}
                         height={167}
-                        style={{ width: "100px", height: "auto" }}
+                        style={{ width: "120px", height: "auto" }}
                         priority
                     />
                 </Link>
 
                 {/* Desktop Nav */}
-                <nav className="hidden md:flex gap-8 text-xl">
+                <nav className="hidden md:flex font-gochi gap-8 text-3xl">
                     {links.map(link => (
                         <Link
                             key={link.key}

@@ -4,8 +4,8 @@ export default function Footer({ locale }) {
     const isDE = locale === "de"
 
     return (
-        <footer className="mt-24 border-t border-neutral-200">
-            <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-10 text-sm text-neutral-600 md:flex-row md:justify-between">
+        <footer className="mt-24 bg-gray-600">
+            <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-10 text-sm text-white md:flex-row md:justify-between">
 
                 <div>
                     © {new Date().getFullYear()} Künstlerinnenname
