@@ -6,7 +6,7 @@ import Image from "next/image"
 
 import LangSwitch from "@/ui/components/LangSwitch"
 import ResponsiveNav from "@/ui/components/ResponsiveNav"
-import logo from "@/ui/images/creative.png"
+import logo from "@/ui/images/creative_neu.png"
 
 export default function Header({ locale }) {
     const pathname = usePathname()
