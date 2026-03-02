@@ -3,7 +3,7 @@ import "@/app/globals.css";
 
 
 export const metadata = {
-    title: "Artist Website",
+    title: "ARTelier8",
     description: "Painting and exhibitions",
 }
 

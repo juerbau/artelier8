@@ -6,7 +6,7 @@ import Image from "next/image"
 
 import LangSwitch from "@/ui/components/LangSwitch"
 import ResponsiveNav from "@/ui/components/ResponsiveNav"
-import logo from "@/ui/images/creative_neu.png"
+import logo from "@/ui/images/logo_white.webp"
 
 export default function Header({ locale }) {
     const pathname = usePathname()
@@ -20,9 +20,9 @@ export default function Header({ locale }) {
                     <Image
                         src={logo}
                         alt="Logo"
-                        width={653}
-                        height={167}
-                        style={{ width: "120px", height: "auto" }}
+                        width={2840}
+                        height={1328}
+                        style={{ width: "100px", height: "auto" }}
                         priority
                     />
                 </Link>
