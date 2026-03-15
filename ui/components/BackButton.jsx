@@ -1,8 +1,13 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { ChevronLeft } from "lucide-react"
 
-export default function BackButton({ locale, slug }) {
+export default function BackButton({
+                                       href,
+                                       label,
+                                       restoreScroll = false
+                                   }) {
 
     const router = useRouter()
 
@@ -10,19 +15,15 @@ export default function BackButton({ locale, slug }) {
 
         const scroll = sessionStorage.getItem("series-scroll")
 
-        router.push(`/${locale}/series/${slug}`)
+        router.push(href)
 
-        if (scroll) {
-
+        if (restoreScroll && scroll) {
             setTimeout(() => {
-
                 window.scrollTo({
                     top: parseInt(scroll),
                     behavior: "instant"
                 })
-
             }, 50)
-
         }
 
     }
@@ -30,9 +31,18 @@ export default function BackButton({ locale, slug }) {
     return (
         <button
             onClick={handleBack}
-            className="inline-block mb-10 border border-white/70 px-4 py-2 rounded hover:bg-white hover:text-black transition text-white"
+            className="mb-10 flex items-center gap-2 border border-white/30 px-4 py-2 rounded-md text-white/80 hover:bg-white hover:text-black hover:border-white transition group"
         >
-            ← {locale === "en" ? "Back to series" : "Zurück zur Serie"}
+
+            <ChevronLeft
+                size={20}
+                className="transition-transform group-hover:-translate-x-1"
+            />
+
+            <span className="text-sm">
+        {label}
+      </span>
+
         </button>
     )
 }

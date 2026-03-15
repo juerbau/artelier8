@@ -1,28 +1,31 @@
-import { getSeriesList, getFeaturedArtworks } from "@/lib/sanityFetch"
-import HeroQuote from "@/ui/components/HeroQuote";
-import IntroText from "@/ui/components/IntroText";
-import FeaturedArtwork from "@/ui/components/FeaturedArtwork";
-import FeaturedSlider from "@/ui/components/FeaturedSlider";
-import SeriesPreview from "@/ui/components/SeriesPreview";
+import { getSeriesList, getHomeSlider } from "@/lib/sanityFetch"
+import HeroQuote from "@/ui/components/HeroQuote"
+import HomeSlider from "@/ui/components/HomeSlider"
+import ArtistStatement from "@/ui/components/ArtistStatement"
 
 export default async function HomePage({ params }) {
+
     const { locale } = await params
 
-    const artworks = await getFeaturedArtworks()
+    const artworks = await getHomeSlider()
     const series = await getSeriesList()
 
     return (
-        <main className="space-y-8">
+        <main>
 
             <HeroQuote />
 
-            <FeaturedSlider artworks={artworks} locale={locale} />
+            <HomeSlider artworks={artworks} locale={locale} />
 
-            <IntroText locale={locale} />
+            <div className="mt-20 mb-10 flex justify-center">
+                <div className="w-120 h-px bg-linear-to-r from-transparent via-white/70 to-transparent"></div>
+            </div>
 
-            <FeaturedArtwork locale={locale} />
+            <ArtistStatement locale={locale} />
 
-            <SeriesPreview series={series} locale={locale} />
+            <div className="mt-10 mb-20 flex justify-center">
+                <div className="w-120 h-px bg-linear-to-r from-transparent via-white/70 to-transparent"></div>
+            </div>
 
         </main>
     )

@@ -1,8 +1,10 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { useRef } from "react"
+import { useRef, useEffect } from "react"
 import Link from "next/link"
+
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 import ArtworkGallery from "@/ui/components/ArtworkGallery"
 
@@ -12,6 +14,7 @@ export default function ArtworkClient({
                                           artwork,
                                           title,
                                           description,
+                                          technique,
                                           prev,
                                           next,
                                           slug,
@@ -21,6 +24,11 @@ export default function ArtworkClient({
     const router = useRouter()
     const touchStart = useRef(null)
 
+
+
+    /* ---------------------------
+       Swipe Navigation
+    ---------------------------- */
 
     function handleTouchStart(e) {
         touchStart.current = e.touches[0].clientX
@@ -39,31 +47,60 @@ export default function ArtworkClient({
         if (diff < -80 && prev) {
             router.push(`/${locale}/series/${slug}/${prev.slug}`)
         }
+
     }
+
+
+
+    /* ---------------------------
+       Keyboard Navigation
+    ---------------------------- */
+
+    useEffect(() => {
+
+        function handleKey(e) {
+
+            if (e.key === "ArrowRight" && next) {
+                router.push(`/${locale}/series/${slug}/${next.slug}`)
+            }
+
+            if (e.key === "ArrowLeft" && prev) {
+                router.push(`/${locale}/series/${slug}/${prev.slug}`)
+            }
+
+        }
+
+        window.addEventListener("keydown", handleKey)
+
+        return () => {
+            window.removeEventListener("keydown", handleKey)
+        }
+
+    }, [prev, next, router, slug, locale])
 
 
 
     return (
 
         <div
-            className="grid md:grid-cols-2 gap-16 text-white items-center"
+            className="grid md:grid-cols-2 gap-10 text-white items-start"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
         >
 
-            {/* LEFT COLUMN */}
+            {/* LEFT COLUMN — GALLERY */}
 
-            <div>
+            <div className="px-4 md:px-6">
 
-                {/* TITLE (jetzt nur über dem Bild) */}
+                {/* MOBILE TITLE */}
 
-                <h1 className="font-gochi text-4xl mb-6 text-center">
+                <h1 className="text-3xl mb-6 md:hidden truncate">
                     {title}
                 </h1>
 
                 <ArtworkGallery
-                    mainImage={artwork.mainImage}
-                    galleryImages={artwork.galleryImages}
+                    mainImage={artwork?.mainImage}
+                    galleryImages={artwork?.galleryImages}
                     title={title}
                 />
 
@@ -71,46 +108,77 @@ export default function ArtworkClient({
 
 
 
-            {/* RIGHT COLUMN */}
+            {/* RIGHT COLUMN — INFO */}
 
-            <div className="flex flex-col justify-center">
+            <div>
 
-                <div className="space-y-2 text-white/80 mb-8">
+                {/* DESKTOP TITLE */}
 
-                    {artwork.size && <p>{artwork.size}</p>}
-                    {artwork.technique && <p>{artwork.technique}</p>}
-                    {artwork.year && <p>{artwork.year}</p>}
+                <h1 className="text-4xl mb-6 hidden md:block truncate">
+                    {title}
+                </h1>
+
+
+
+                {/* META DATA */}
+
+                <div className="text-lg md:text-xl text-white/80 space-y-2 mb-8 max-w-md">
+
+                    {artwork?.size && (
+                        <p className="truncate" title={artwork.size}>
+                            {artwork.size}
+                        </p>
+                    )}
+
+                    {technique && (
+                        <p className="truncate" title={technique}>
+                            {technique}
+                        </p>
+                    )}
+
+                    {artwork?.year && (
+                        <p className="truncate" title={artwork.year}>
+                            {artwork.year}
+                        </p>
+                    )}
 
                 </div>
 
 
+
+                {/* DESCRIPTION */}
+
                 {description && (
-                    <div className="text-white/90 leading-relaxed">
+
+                    <div className="text-lg md:text-xl text-white/90 leading-relaxed max-w-md line-clamp-3 h-24 overflow-hidden">
                         {description}
                     </div>
+
                 )}
 
 
 
-                {/* NAVIGATION */}
+                {/* FALLBACK NAVIGATION */}
 
-                <div className="flex gap-4 mt-12 flex-wrap">
+                <div className="flex gap-4 mt-8 2xl:hidden">
 
                     {prev && (
                         <Link
                             href={`/${locale}/series/${slug}/${prev.slug}`}
-                            className="border border-white/70 px-4 py-2 rounded hover:bg-white hover:text-black transition"
+                            className="flex items-center gap-2 border border-white/30 px-4 py-2 rounded-md text-white/80 hover:bg-white hover:text-black transition"
                         >
-                            ← {locale === "en" ? "Previous" : "Vorheriges"}
+                            <ChevronLeft size={18} />
+                            {locale === "en" ? "Previous" : "Vorheriges"}
                         </Link>
                     )}
 
                     {next && (
                         <Link
                             href={`/${locale}/series/${slug}/${next.slug}`}
-                            className="border border-white/70 px-4 py-2 rounded hover:bg-white hover:text-black transition"
+                            className="flex items-center gap-2 border border-white/30 px-4 py-2 rounded-md text-white/80 hover:bg-white hover:text-black transition"
                         >
-                            {locale === "en" ? "Next" : "Nächstes"} →
+                            {locale === "en" ? "Next" : "Nächstes"}
+                            <ChevronRight size={18} />
                         </Link>
                     )}
 
@@ -118,6 +186,30 @@ export default function ArtworkClient({
 
             </div>
 
+
+
+            {/* SIDE NAVIGATION */}
+
+            {prev && (
+                <Link
+                    href={`/${locale}/series/${slug}/${prev.slug}`}
+                    className="hidden 2xl:flex fixed left-6 top-1/2 -translate-y-1/2 p-3 rounded-full border border-white/30 text-white/70 hover:text-white hover:border-white transition backdrop-blur-sm"
+                >
+                    <ChevronLeft size={26} />
+                </Link>
+            )}
+
+            {next && (
+                <Link
+                    href={`/${locale}/series/${slug}/${next.slug}`}
+                    className="hidden 2xl:flex fixed right-6 top-1/2 -translate-y-1/2 p-3 rounded-full border border-white/30 text-white/70 hover:text-white hover:border-white transition backdrop-blur-sm"
+                >
+                    <ChevronRight size={26} />
+                </Link>
+            )}
+
         </div>
+
     )
+
 }

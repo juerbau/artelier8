@@ -2,19 +2,17 @@ import Link from "next/link"
 import Image from "next/image"
 import { urlFor } from "@/lib/sanityImage"
 
+
 export default function ArtworkGrid({ artworks, locale, seriesSlug }) {
     return (
         <section className="px-6 py-16">
             <div className="mx-auto max-w-5xl">
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-16">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-20 gap-y-20">
 
                     {artworks.map((artwork, i) => {
 
-                        const title =
-                            locale === "en" && artwork.title_en
-                                ? artwork.title_en
-                                : artwork.title_de
+                        const title = artwork.title;
 
                         return (
                             <Link
@@ -24,7 +22,7 @@ export default function ArtworkGrid({ artworks, locale, seriesSlug }) {
                             >
 
                                 {/* Titel */}
-                                <div className="mb-4 text-center text-white font-gochi text-3xl">
+                                <div className="mb-4 text-white text-2xl">
                                     {title}
                                 </div>
 
@@ -35,7 +33,7 @@ export default function ArtworkGrid({ artworks, locale, seriesSlug }) {
                   group-hover:scale-[1.03] group-hover:shadow-xl"
                                 >
 
-                                    <div className="relative aspect-4/3 overflow-hidden">
+                                    <div className="relative aspect-square overflow-hidden">
                                         <Image
                                             src={urlFor(artwork.mainImage).width(1200).url()}
                                             alt={title}

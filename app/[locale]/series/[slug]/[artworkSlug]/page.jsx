@@ -9,23 +9,25 @@ import ArtworkClient from "@/ui/components/ArtworkClient"
 export async function generateStaticParams() {
 
     const data = await client.fetch(`
-    *[_type == "series"]{
-      "slug": slug.current,
-      "artworks": artworks[]->slug.current
-    }
-  `)
+      *[_type == "series"]{
+        "slug": slug.current,
+        "artworks": artworks[]->slug.current
+      }
+    `)
 
     const locales = ["de", "en"]
 
-    return data.flatMap((series) =>
-        series.artworks.flatMap((artworkSlug) =>
+    return (data ?? []).flatMap((series) => {
+        const artworks = series.artworks ?? []
+
+        return artworks.flatMap((artworkSlug) =>
             locales.map((locale) => ({
                 locale,
                 slug: series.slug,
                 artworkSlug
             }))
         )
-    )
+    })
 }
 
 
@@ -48,17 +50,17 @@ export default async function ArtworkPage({ params }) {
     const next = index < artworks.length - 1 ? artworks[index + 1] : null
 
 
-    const title =
-        locale === "en"
-            ? artwork.title_en
-            : artwork.title_de
-
+    const title = artwork.title
 
     const description =
         locale === "en"
             ? artwork.description_en
             : artwork.description_de
 
+    const technique =
+        locale === "en"
+            ? artwork.technique_en
+            : artwork.technique_de
 
 
     return (
@@ -66,12 +68,17 @@ export default async function ArtworkPage({ params }) {
 
             <div className="mx-auto max-w-6xl">
 
-                <BackButton locale={locale} slug={slug} />
+                <BackButton
+                    href={`/${locale}/series/${slug}`}
+                    label={locale === "en" ? "to series" : "zur Serie"}
+                    restoreScroll
+                />
 
                 <ArtworkClient
                     artwork={artwork}
                     title={title}
                     description={description}
+                    technique={technique}
                     prev={prev}
                     next={next}
                     slug={slug}

@@ -2,20 +2,18 @@ export default function IntroText({ locale }) {
 
     const text =
         locale === "en"
-            ? `Welcome.
+            ? `It's great to have you here...
 
-Explore the works
-and discover the ideas
-behind the paintings.`
-            : `Schön, dass du hier bist.
+Take a look around my site and find out
+who I am and what motivates me.`
+            : `Schön, dass du da bist...
 
-Entdecke meine Arbeiten
-und erfahre mehr über
-die Gedanken hinter den Bildern.`
+Schau dich auf meiner Seite um und erfahre,
+wer ich bin und was mich motiviert.`
 
     return (
-        <section className="max-w-2xl mx-auto text-center px-6">
-            <p className="text-lg leading-relaxed whitespace-pre-line">
+        <section className="max-w-2xl mx-auto text-center px-6 pb-8">
+            <p className="text-2xl leading-relaxed whitespace-pre-line">
                 {text}
             </p>
         </section>

@@ -1,7 +1,7 @@
 import { client } from "@/sanity/client";
 import { getSeriesBySlug } from "@/lib/sanityFetch"
 import ArtworkGrid from "@/ui/components/ArtworkGrid";
-import Link from "next/link";
+import BackButton from "@/ui/components/BackButton";
 
 
 export async function generateStaticParams() {
@@ -46,18 +46,16 @@ export default async function SeriesPage({ params }) {
 
             <div className="mx-auto max-w-5xl mb-8">
 
-                <Link
+                <BackButton
                     href={`/${locale}/series`}
-                    className="inline-flex items-center text-white/80 hover:text-white transition"
-                >
-                    ← {locale === "en" ? "Back to series" : "Zurück zu Serien"}
-                </Link>
+                    label={locale === "en" ? "to series overview" : "zur Serienübersicht"}
+                />
 
             </div>
 
             {/* Titel */}
 
-            <h1 className="text-center text-white font-gochi text-4xl mb-12">
+            <h1 className="text-center text-white text-4xl mb-12">
                 {title}
             </h1>
 

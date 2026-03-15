@@ -6,14 +6,14 @@ import Image from "next/image"
 
 import LangSwitch from "@/ui/components/LangSwitch"
 import ResponsiveNav from "@/ui/components/ResponsiveNav"
-import logo from "@/ui/images/logo_white.webp"
+import logo from "@/ui/images/creative_opt_ergebnis.webp"
 
 export default function Header({ locale }) {
     const pathname = usePathname()
 
     return (
         <header className="w-full bg-gray-600">
-            <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-2">
+            <div className="mx-auto flex max-w-6xl items-center justify-between px-15 py-2">
 
                 {/* Logo */}
                 <Link href={`/${locale}`}>

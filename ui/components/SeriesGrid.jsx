@@ -8,7 +8,7 @@ export default function SeriesGrid({ series, locale }) {
         <section className="px-6 py-16">
             <div className="mx-auto max-w-5xl">
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-16">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-20 gap-y-20">
 
                     {series.map((item, i) => {
 
@@ -25,7 +25,7 @@ export default function SeriesGrid({ series, locale }) {
                                 className="group block"
                             >
 
-                                <div className="mb-4 text-center text-white font-gochi text-3xl">
+                                <div className="mb-4 text-white text-2xl">
                                     {title}
                                 </div>
 
@@ -34,7 +34,7 @@ export default function SeriesGrid({ series, locale }) {
                                 transform-gpu transition-transform duration-500 ease-out
                                 group-hover:scale-[1.03] group-hover:shadow-xl">
 
-                                    <div className="relative aspect-4/3 overflow-hidden">
+                                    <div className="relative aspect-square overflow-hidden">
 
                                         <Image
                                             src={urlFor(item.image).width(1200).url()}

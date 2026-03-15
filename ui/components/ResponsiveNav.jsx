@@ -47,7 +47,7 @@ export default function ResponsiveNav({ locale, pathname }) {
         <div className="relative flex flex-col items-center" ref={menuRef}>
 
             {/* Desktop Nav */}
-            <nav className="hidden md:flex font-gochi gap-8 text-3xl">
+            <nav className="hidden md:flex gap-8 text-2xl">
                 {links.map(link => (
                     <Link
                         key={link.key}

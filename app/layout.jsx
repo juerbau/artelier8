@@ -1,4 +1,4 @@
-import {gochi, inter, openSans, playfair} from "@/ui/fonts";
+import {gochi, openSans, playfair, roboto} from "@/ui/fonts";
 import "@/app/globals.css";
 
 
@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function RootLayout({children}) {
     return (
-        <html lang="de" className={openSans.className}>
+        <html lang="de" className={roboto.className}>
         <body className={`${gochi.variable} ${playfair.variable} antialiased`}>
                 {children}
             </body>

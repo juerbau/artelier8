@@ -1,4 +1,4 @@
-import { Gochi_Hand, Inter, Open_Sans } from 'next/font/google';
+import { Gochi_Hand, Open_Sans, Roboto } from 'next/font/google';
 import { Playfair_Display } from "next/font/google"
 
 export const playfair = Playfair_Display({
@@ -12,9 +12,9 @@ export const openSans = Open_Sans({
     subsets: ['latin']}
 );
 
-export const inter = Inter({
-    variable: '--font-inter',
-    subsets: ['latin'] });
+export const roboto = Roboto({
+    subsets: ['latin']}
+);
 
 export const gochi = Gochi_Hand({
     weight: ['400'],

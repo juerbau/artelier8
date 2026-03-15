@@ -1,55 +1,114 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import Image from "next/image"
 import dynamic from "next/dynamic"
 
 import { urlFor } from "@/lib/sanityImage"
 
 import "yet-another-react-lightbox/styles.css"
+import Zoom from "yet-another-react-lightbox/plugins/zoom"
 
 const Lightbox = dynamic(
     () => import("yet-another-react-lightbox"),
     { ssr: false }
 )
 
-
-
 export default function ArtworkGallery({ mainImage, galleryImages, title }) {
 
     const [index, setIndex] = useState(-1)
+    const [preview, setPreview] = useState(0)
 
-    const gallery = galleryImages || []
 
-    const images = [mainImage, ...gallery]
 
-    const slides = images.map((img) => ({
-        src: urlFor(img).width(2000).url(),
-    }))
+    /* SAFE ARRAY */
+
+    const gallery = useMemo(
+        () => (Array.isArray(galleryImages) ? galleryImages : []),
+        [galleryImages]
+    )
+
+
+
+    /* ALL IMAGES */
+
+    const images = useMemo(() => {
+
+        if (!mainImage) return gallery
+
+        return [mainImage, ...gallery]
+
+    }, [mainImage, gallery])
+
+
+
+    /* LIGHTBOX */
+
+    const slides = useMemo(
+        () =>
+            images.map((img) => ({
+                src: urlFor(img).width(3000).auto("format").url()
+            })),
+        [images]
+    )
+
+
+
+    /* MAIN IMAGE */
+
+    const mainSrc = useMemo(() => {
+
+        if (preview === 0 && mainImage) {
+            return urlFor(mainImage).width(2000).auto("format").url()
+        }
+
+        const img = gallery[preview - 1]
+
+        if (!img) return urlFor(mainImage).width(2000).auto("format").url()
+
+        return urlFor(img).width(2000).auto("format").url()
+
+    }, [preview, mainImage, gallery])
+
+
+
+    /* THUMBNAILS */
+
+    const thumbs = useMemo(
+        () =>
+            gallery.map((img) =>
+                urlFor(img).width(400).auto("format").url()
+            ),
+        [gallery]
+    )
 
 
 
     return (
+
         <div>
 
             {/* MAIN IMAGE */}
 
-            <div
-                className="mb-8 cursor-zoom-in rounded-lg border border-white/80 overflow-hidden"
-                onClick={() => setIndex(0)}
-            >
+            {mainSrc && (
 
-                <Image
-                    src={urlFor(mainImage).width(2000).url()}
-                    alt={title}
-                    width={2000}
-                    height={2000}
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    className="w-full h-auto"
-                    priority
-                />
+                <div
+                    className="mb-8 cursor-zoom-in rounded-lg border border-white/80 overflow-hidden relative aspect-square"
+                    onClick={() => setIndex(preview)}
+                >
 
-            </div>
+                    <Image
+                        src={mainSrc}
+                        alt={title || "Artwork"}
+                        fill
+                        sizes="(min-width: 768px) 50vw, 100vw"
+                        priority
+                        className="object-cover transition-opacity duration-500"
+                    />
+
+                </div>
+
+            )}
 
 
 
@@ -57,22 +116,26 @@ export default function ArtworkGallery({ mainImage, galleryImages, title }) {
 
             {gallery.length > 0 && (
 
-                <div className="flex justify-center flex-wrap gap-4 mb-10">
+                <div
+                    className="flex justify-center gap-4 mb-10"
+                    onMouseLeave={() => setPreview(0)}
+                >
 
-                    {gallery.map((img, i) => (
+                    {thumbs.map((src, i) => (
 
                         <div
                             key={i}
-                            className="relative w-28 h-28 cursor-pointer rounded-md border border-white/70 overflow-hidden transition-transform duration-300 hover:scale-105"
+                            className="relative flex-1 max-w-30 aspect-square cursor-zoom-in rounded-md border border-white/70 overflow-hidden transition-transform duration-300 hover:scale-105"
+                            onMouseEnter={() => setPreview(i + 1)}
                             onClick={() => setIndex(i + 1)}
                         >
 
                             <Image
-                                src={urlFor(img).width(400).url()}
-                                alt={`${title} detail ${i + 1}`}
+                                src={src}
+                                alt={`${title || "Artwork"} detail ${i + 1}`}
                                 fill
+                                sizes="(min-width:768px) 120px, 25vw"
                                 loading="lazy"
-                                sizes="112px"
                                 className="object-cover"
                             />
 
@@ -93,13 +156,26 @@ export default function ArtworkGallery({ mainImage, galleryImages, title }) {
                 index={index}
                 close={() => setIndex(-1)}
                 slides={slides}
+                plugins={[Zoom]}
+                zoom={{
+                    maxZoomPixelRatio: 4
+                }}
                 styles={{
                     container: {
                         backgroundColor: "#7B8794"
+                    },
+                    button: {
+                        filter: "none",
+                        boxShadow: "none"
                     }
+                }}
+                animation={{
+                    fade: 400
                 }}
             />
 
         </div>
+
     )
+
 }

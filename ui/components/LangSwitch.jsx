@@ -21,7 +21,7 @@ export default function LangSwitch({ locale }) {
     return (
         <Link
             href={switchPath}
-            className="flex items-center gap-2 text-sm tracking-wide hover:text-cyan-300"
+            className="flex items-center gap-2 text-sm text-white/70 tracking-wide hover:text-white"
         >
             <Image
                 src={flagMap[switchLocale]}
