@@ -30,6 +30,7 @@ export async function generateStaticParams() {
     })
 }
 
+export const revalidate = 30;
 
 
 export default async function ArtworkPage({ params }) {
