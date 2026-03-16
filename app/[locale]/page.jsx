@@ -17,13 +17,13 @@ export default async function HomePage({ params }) {
 
             <HomeSlider artworks={artworks} locale={locale} />
 
-            <div className="mt-20 mb-10 flex justify-center">
+            <div className="mt-20 mb-15 flex justify-center">
                 <div className="w-120 h-px bg-linear-to-r from-transparent via-white/70 to-transparent"></div>
             </div>
 
             <ArtistStatement locale={locale} />
 
-            <div className="mt-10 mb-20 flex justify-center">
+            <div className="mt-15 mb-20 flex justify-center">
                 <div className="w-120 h-px bg-linear-to-r from-transparent via-white/70 to-transparent"></div>
             </div>
 
