@@ -21,7 +21,7 @@ export default function HomeSlider({ artworks = [] }) {
 
         const interval = setInterval(() => {
             setIndex((prev) => (prev + 1) % artworks.length)
-        }, 3500)
+        }, 3000)
 
         return () => clearInterval(interval)
 
@@ -69,7 +69,7 @@ export default function HomeSlider({ artworks = [] }) {
                     return (
                         <div
                             key={artwork._id}
-                            className={`absolute inset-0 transition-opacity duration-2000 ease-in-out ${
+                            className={`absolute inset-0 transition-opacity duration-1800 ease-in-out ${
                                 i === index ? "opacity-100" : "opacity-0"
                             }`}
                         >
@@ -80,7 +80,7 @@ export default function HomeSlider({ artworks = [] }) {
                                 fill
                                 priority={i === 0}
                                 sizes="(min-width: 768px) 600px, 90vw"
-                                className={`object-cover transition-transform duration-3500 ease-linear ${
+                                className={`object-cover transition-transform duration-3000 ease-linear ${
                                     i === index ? "scale-105" : "scale-100"
                                 }`}
                             />

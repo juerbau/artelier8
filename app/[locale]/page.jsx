@@ -3,6 +3,9 @@ import HeroQuote from "@/ui/components/HeroQuote"
 import HomeSlider from "@/ui/components/HomeSlider"
 import ArtistStatement from "@/ui/components/ArtistStatement"
 
+export const revalidate = 30;
+
+
 export default async function HomePage({ params }) {
 
     const { locale } = await params
