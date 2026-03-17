@@ -9,7 +9,7 @@ import ArtworkClient from "@/ui/components/ArtworkClient"
 export async function generateStaticParams() {
 
     const data = await client.fetch(`
-      *[_type == "series"]{
+      *[_type == "series" && defined(slug.current)]{
         "slug": slug.current,
         "artworks": artworks[]->slug.current
       }
@@ -29,8 +29,6 @@ export async function generateStaticParams() {
         )
     })
 }
-
-export const revalidate = 30;
 
 
 export default async function ArtworkPage({ params }) {

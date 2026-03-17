@@ -19,11 +19,18 @@ export default function HomeSlider({ artworks = [] }) {
 
         if (!artworks.length || paused) return
 
+        const timeout = setTimeout(() => {
+            setIndex((prev) => (prev + 1) % artworks.length)
+        }, 1200)
+
         const interval = setInterval(() => {
             setIndex((prev) => (prev + 1) % artworks.length)
         }, 3000)
 
-        return () => clearInterval(interval)
+        return () => {
+            clearTimeout(timeout)
+            clearInterval(interval)
+        }
 
     }, [paused, artworks.length])
 

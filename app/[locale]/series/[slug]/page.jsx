@@ -7,7 +7,7 @@ import BackButton from "@/ui/components/BackButton";
 export async function generateStaticParams() {
 
     const series = await client.fetch(`
-    *[_type == "series"]{
+    *[_type == "series" && defined(slug.current)]{
       "slug": slug.current
     }
   `)
@@ -21,9 +21,6 @@ export async function generateStaticParams() {
         }))
     )
 }
-
-
-export const revalidate = 30;
 
 
 export default async function SeriesPage({ params }) {
