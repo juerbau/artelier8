@@ -1,14 +1,46 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
+import { motion } from "motion/react"
+import clsx from "clsx"
 import { urlFor } from "@/lib/sanityImage"
 
-export default function SeriesGrid({ series, locale }) {
+export default function SeriesGrid({ series, locale, animated = false, mode = "page" }) {
+
+    const isHome = mode === "home"
 
     return (
         <section className="px-6 py-16">
+
             <div className="mx-auto max-w-5xl">
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-20 gap-y-20">
+                <motion.div
+                    initial={animated ? "hidden" : undefined}
+                    whileInView={animated ? "visible" : undefined}
+                    viewport={
+                        animated
+                            ? {
+                                once: true,
+                                margin: isHome ? "-150px" : "-50px", // 🔥 Unterschied!
+                            }
+                            : undefined
+                    }
+                    variants={
+                        animated
+                            ? {
+                                hidden: {},
+                                visible: {
+                                    transition: {
+                                        delayChildren: isHome ? 0.5 : 0.1, // 🔥 Home langsamer
+                                        staggerChildren: isHome ? 0.32 : 0.22, // 🔥 Page schneller
+                                    },
+                                },
+                            }
+                            : undefined
+                    }
+                    className="grid grid-cols-1 sm:grid-cols-2 gap-x-20 gap-y-20"
+                >
 
                     {series.map((item, i) => {
 
@@ -19,44 +51,77 @@ export default function SeriesGrid({ series, locale }) {
 
                         return (
 
-                            <Link
+                            <motion.div
                                 key={item._id}
-                                href={`/${locale}/series/${item.slug.current}`}
-                                className="group block"
+                                variants={
+                                    animated
+                                        ? {
+                                            hidden: {
+                                                opacity: 0,
+                                                y: isHome ? 60 : 40,
+                                                scale: 0.96,
+                                            },
+                                            visible: {
+                                                opacity: 1,
+                                                y: 0,
+                                                scale: 1,
+                                            },
+                                        }
+                                        : undefined
+                                }
+                                transition={
+                                    animated
+                                        ? {
+                                            duration: isHome ? 1.2 : 0.9, // 🔥 Page schneller
+                                            ease: [0.22, 1, 0.36, 1],
+                                        }
+                                        : undefined
+                                }
                             >
 
-                                <div className="mb-4 text-white text-2xl">
-                                    {title}
-                                </div>
+                                <Link
+                                    href={`/${locale}/series/${item.slug.current}`}
+                                    className="group block"
+                                >
 
+                                    <div className="mb-4 text-white text-2xl">
+                                        {title}
+                                    </div>
 
-                                <div className="rounded-lg border border-white/80 overflow-hidden
-                                transform-gpu transition-transform duration-500 ease-out
-                                group-hover:scale-[1.03] group-hover:shadow-xl">
+                                    <div
+                                        className={clsx(
+                                            "rounded-lg border border-white/80 overflow-hidden",
+                                            "transform-gpu transition-transform duration-500 ease-out",
+                                            "group-hover:scale-[1.03] group-hover:shadow-xl"
+                                        )}
+                                    >
 
-                                    <div className="relative aspect-square overflow-hidden">
+                                        <div className="relative aspect-square overflow-hidden">
 
-                                        <Image
-                                            src={urlFor(item.image).width(1200).url()}
-                                            alt={title}
-                                            fill
-                                            sizes="(min-width: 640px) 50vw, 100vw"
-                                            priority={i === 0}
-                                            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-                                        />
+                                            <Image
+                                                src={urlFor(item.image).width(1200).url()}
+                                                alt={title}
+                                                fill
+                                                sizes="(min-width: 640px) 50vw, 100vw"
+                                                priority={i === 0}
+                                                className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                                            />
+
+                                        </div>
 
                                     </div>
 
-                                </div>
+                                </Link>
 
-                            </Link>
+                            </motion.div>
 
                         )
                     })}
 
-                </div>
+                </motion.div>
 
             </div>
+
         </section>
     )
 }

@@ -1,8 +1,10 @@
 import { getSeriesList, getHomeSlider } from "@/lib/sanityFetch"
-import HeroQuote from "@/ui/components/HeroQuote"
-import HomeSlider from "@/ui/components/HomeSlider"
-import ArtistStatement from "@/ui/components/ArtistStatement"
 
+import HeroQuote from "@/ui/components/HeroQuote"
+import HomeGallery from "@/ui/components/HomeGallery"
+import ArtistStatement from "@/ui/components/ArtistStatement"
+import SeriesGrid from "@/ui/components/SeriesGrid"
+import AnimatedHeading from "@/ui/components/AnimatedHeading"
 
 export default async function HomePage({ params }) {
 
@@ -11,22 +13,35 @@ export default async function HomePage({ params }) {
     const artworks = await getHomeSlider()
     const series = await getSeriesList()
 
+    const heading = locale === "en" ? "Series" : "Serien"
+
     return (
         <main>
 
             <HeroQuote />
 
-            <HomeSlider artworks={artworks} locale={locale} />
-
-            <div className="mt-20 mb-15 flex justify-center">
-                <div className="w-120 h-px bg-linear-to-r from-transparent via-white/70 to-transparent"></div>
+            <div className="mt-4 sm:mt-6 md:mt-10 lg:mt-14">
+                <HomeGallery artworks={artworks} locale={locale} />
             </div>
 
-            <ArtistStatement locale={locale} />
-
-            <div className="mt-15 mb-20 flex justify-center">
-                <div className="w-120 h-px bg-linear-to-r from-transparent via-white/70 to-transparent"></div>
+            <div className="mt-8 sm:mt-10 md:mt-14 lg:mt-20">
+                <ArtistStatement locale={locale} />
             </div>
+
+            <section className="mt-10 sm:mt-12 md:mt-16 lg:mt-20">
+
+                <AnimatedHeading>
+                    {heading}
+                </AnimatedHeading>
+
+                <SeriesGrid
+                    series={series}
+                    locale={locale}
+                    animated
+                    mode="home"
+                />
+
+            </section>
 
         </main>
     )

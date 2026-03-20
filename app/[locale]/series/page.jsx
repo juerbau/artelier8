@@ -9,7 +9,12 @@ export default async function SeriesPage({ params }) {
 
     return (
         <main>
-            <SeriesGrid series={series} locale={locale} />
+            <SeriesGrid
+                series={series}
+                locale={locale}
+                animated
+                mode="page"
+            />
         </main>
     )
 }
