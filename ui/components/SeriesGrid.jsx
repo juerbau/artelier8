@@ -1,3 +1,4 @@
+
 "use client"
 
 import Link from "next/link"
@@ -32,7 +33,7 @@ export default function SeriesGrid({ series, locale, animated = false, mode = "p
                                 hidden: {},
                                 visible: {
                                     transition: {
-                                        delayChildren: isHome ? 0.5 : 0.1, // 🔥 Home langsamer
+                                        delayChildren: isHome ? 0.12 : 0.1, // 🔥 Home langsamer
                                         staggerChildren: isHome ? 0.32 : 0.22, // 🔥 Page schneller
                                     },
                                 },
@@ -84,7 +85,7 @@ export default function SeriesGrid({ series, locale, animated = false, mode = "p
                                     className="group block"
                                 >
 
-                                    <div className="mb-4 text-white text-2xl">
+                                    <div className="mb-4 text-white text-center text-2xl font-serif">
                                         {title}
                                     </div>
 

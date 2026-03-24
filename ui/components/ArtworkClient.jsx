@@ -7,6 +7,7 @@ import Link from "next/link"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 import ArtworkGallery from "@/ui/components/ArtworkGallery"
+import { motion } from "motion/react";
 
 
 
@@ -82,7 +83,13 @@ export default function ArtworkClient({
 
     return (
 
-        <div
+        <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+                duration: 1.2,
+                ease: [0.22, 1, 0.36, 1],
+            }}
             className="grid md:grid-cols-2 gap-10 text-white items-start"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
@@ -208,7 +215,7 @@ export default function ArtworkClient({
                 </Link>
             )}
 
-        </div>
+        </motion.div>
 
     )
 

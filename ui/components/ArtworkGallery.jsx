@@ -165,8 +165,13 @@ export default function ArtworkGallery({ mainImage, galleryImages, title }) {
                         backgroundColor: "#7B8794"
                     },
                     button: {
-                        filter: "none",
-                        boxShadow: "none"
+                        backgroundColor: "rgba(0, 0, 0, 0.5)",
+                        backdropFilter: "blur(8px)",
+                        borderRadius: "9999px",
+                        padding: "5px",
+                    },
+                    icon: {
+                        color: "#fff"
                     }
                 }}
                 animation={{

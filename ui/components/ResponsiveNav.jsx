@@ -13,7 +13,7 @@ export default function ResponsiveNav({ locale, pathname }) {
         { key: "home", href: `/${locale}` },
         { key: "about", href: `/${locale}/about` },
         { key: "series", href: `/${locale}/series` },
-        { key: "events", href: `/${locale}/events` },
+        { key: "moments", href: `/${locale}/moments` },
         { key: "contact", href: `/${locale}/contact` },
     ]
 

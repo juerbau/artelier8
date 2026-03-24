@@ -5,7 +5,6 @@ import BackButton from "@/ui/components/BackButton"
 import ArtworkClient from "@/ui/components/ArtworkClient"
 
 
-
 export async function generateStaticParams() {
 
     const data = await client.fetch(`
@@ -63,15 +62,18 @@ export default async function ArtworkPage({ params }) {
 
 
     return (
-        <main className="px-6 py-16">
+        <main className="px-6 py-16 relative">
 
-            <div className="mx-auto max-w-6xl">
-
+            {/* BackButton */}
+            <div className="absolute left-6 top-6 z-10">
                 <BackButton
                     href={`/${locale}/series/${slug}`}
                     label={locale === "en" ? "to series" : "zur Serie"}
                     restoreScroll
                 />
+            </div>
+
+            <div className="mx-auto max-w-6xl">
 
                 <ArtworkClient
                     artwork={artwork}

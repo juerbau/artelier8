@@ -54,7 +54,7 @@ export default function HomeGallery({ artworks, locale }) {
                         return (
                             <Link key={i} href={href}>
 
-                                <div className="relative aspect-square overflow-hidden rounded-lg md:rounded-xl">
+                                <div className="relative aspect-square overflow-hidden rounded-lg border border-white/80">
 
                                     <AnimatePresence mode="sync">
 

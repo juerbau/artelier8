@@ -2,6 +2,8 @@ import { client } from "@/sanity/client";
 import { getSeriesBySlug } from "@/lib/sanityFetch"
 import ArtworkGrid from "@/ui/components/ArtworkGrid";
 import BackButton from "@/ui/components/BackButton";
+import SeriesDetailIntro from "@/ui/components/SeriesDetailIntro";
+import SeriesPageClient from "@/ui/components/SeriesPageClient";
 
 
 export async function generateStaticParams() {
@@ -39,31 +41,41 @@ export default async function SeriesPage({ params }) {
 
 
     return (
-        <main className="px-6 py-16">
+        <main className="px-6 py-16 relative">
 
-            {/* Back Button */}
-
-            <div className="mx-auto max-w-5xl mb-8">
-
+            {/* BackButton */}
+            <div className="absolute left-6 top-6 z-10">
                 <BackButton
-                    href={`/${locale}/series`}
+                    href={`/${locale}/series/`}
                     label={locale === "en" ? "to series overview" : "zur Serienübersicht"}
+                    restoreScroll
                 />
-
             </div>
 
-            {/* Titel */}
-
-            <h1 className="text-center text-white text-4xl mb-12">
-                {title}
-            </h1>
-
-            <ArtworkGrid
-                artworks={series.artworks}
-                locale={locale}
-                seriesSlug={slug}
+            <SeriesPageClient
+                title={
+                    <h1 className="text-center text-white text-4xl mb-12">
+                        {title}
+                    </h1>
+                }
+                intro={
+                    <SeriesDetailIntro
+                        intro={
+                            locale === "en" && series.intro_en
+                                ? series.intro_en
+                                : series.intro_de
+                        }
+                    />
+                }
+                grid={
+                    <ArtworkGrid
+                        artworks={series.artworks}
+                        locale={locale}
+                        seriesSlug={slug}
+                    />
+                }
             />
 
         </main>
-    )
+    );
 }

@@ -4,7 +4,7 @@ import HeroQuote from "@/ui/components/HeroQuote"
 import HomeGallery from "@/ui/components/HomeGallery"
 import ArtistStatement from "@/ui/components/ArtistStatement"
 import SeriesGrid from "@/ui/components/SeriesGrid"
-import AnimatedHeading from "@/ui/components/AnimatedHeading"
+
 
 export default async function HomePage({ params }) {
 
@@ -12,8 +12,6 @@ export default async function HomePage({ params }) {
 
     const artworks = await getHomeSlider()
     const series = await getSeriesList()
-
-    const heading = locale === "en" ? "Series" : "Serien"
 
     return (
         <main>
@@ -24,15 +22,13 @@ export default async function HomePage({ params }) {
                 <HomeGallery artworks={artworks} locale={locale} />
             </div>
 
-            <div className="mt-8 sm:mt-10 md:mt-14 lg:mt-20">
+
+            <div className="mt-12 sm:mt-14 md:mt-18 lg:mt-24">
                 <ArtistStatement locale={locale} />
             </div>
 
-            <section className="mt-10 sm:mt-12 md:mt-16 lg:mt-20">
+            <section className="mt-15 sm:mt-15 md:mt-15 lg:mt-15">
 
-                <AnimatedHeading>
-                    {heading}
-                </AnimatedHeading>
 
                 <SeriesGrid
                     series={series}
