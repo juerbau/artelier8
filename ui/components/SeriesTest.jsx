@@ -1,6 +1,6 @@
 
 import Image from "next/image";
-import amg from "@/ui/images/AMG_Neu_ergebnis.webp";
+import amg from "@/ui/images/Serien-16zu9_ergebnis.webp";
 
 export default function SeriesTest(){
 
@@ -10,8 +10,8 @@ export default function SeriesTest(){
                 <Image
                 src={amg}
                 alt="Neues Serienbild"
-                width={2528}
-                height={1696}
+                width={2752}
+                height={1536}
                 className="w-full"
                 priority
             />
