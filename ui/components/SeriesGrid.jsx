@@ -1,13 +1,14 @@
-
 "use client"
 
 import Link from "next/link"
 import Image from "next/image"
-import { motion } from "motion/react"
+import {motion} from "motion/react"
 import clsx from "clsx"
-import { urlFor } from "@/lib/sanityImage"
+import {urlFor} from "@/lib/sanityImage"
+import GalleryRoom from "@/ui/components/GalleryRoom"
 
-export default function SeriesGrid({ series, locale, animated = false, mode = "page" }) {
+
+export default function SeriesGrid({series, locale, animated = false, mode = "page"}) {
 
     const isHome = mode === "home"
 
@@ -97,18 +98,7 @@ export default function SeriesGrid({ series, locale, animated = false, mode = "p
                                         )}
                                     >
 
-                                        <div className="relative aspect-square overflow-hidden">
-
-                                            <Image
-                                                src={urlFor(item.image).width(1200).url()}
-                                                alt={title}
-                                                fill
-                                                sizes="(min-width: 640px) 50vw, 100vw"
-                                                priority={i === 0}
-                                                className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-                                            />
-
-                                        </div>
+                                        <GalleryRoom series={item}/>
 
                                     </div>
 
