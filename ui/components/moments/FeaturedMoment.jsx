@@ -1,33 +1,35 @@
-import Image from "next/image"
-import { urlFor } from "@/lib/sanityImage"
+import Image from "next/image";
+import { urlFor } from "@/lib/sanityImage";
 
 export default function FeaturedMoment({ moment, locale }) {
     const description =
-        locale === "de" ? moment.description_de : moment.description_en
+        locale === "de" ? moment.description_de : moment.description_en;
 
     return (
-        <div className="mb-32">
-            <div className="relative w-full h-[50vh] md:h-[60vh] mb-6">
+        <article className="mx-auto max-w-2xl mb-24 md:mb-28 text-center">
+            <div className="relative w-full h-[320px] md:h-[420px] mb-6 overflow-hidden">
                 <Image
-                    src={urlFor(moment.mainImage).width(1600).url()}
+                    src={urlFor(moment.mainImage).width(1400).url()}
                     alt={moment.title}
                     fill
                     className="object-cover"
                 />
             </div>
 
-            <div className="max-w-xl">
-                <h2 className="text-xl mb-2">{moment.title}</h2>
+            <p className="text-[11px] uppercase tracking-[0.16em] text-neutral-400 mb-3">
+                {moment.location ? `${moment.location} · ` : ""}
+                {moment.year}
+            </p>
 
-                <div className="text-sm text-neutral-500 mb-3">
-                    {moment.location && `${moment.location} · `}
-                    {moment.year}
-                </div>
+            <h2 className="text-xl md:text-2xl leading-tight text-neutral-900 mb-3">
+                {moment.title}
+            </h2>
 
-                <p className="text-neutral-700">
+            {description && (
+                <p className="mx-auto max-w-xl text-sm md:text-[15px] leading-7 text-neutral-600">
                     {description}
                 </p>
-            </div>
-        </div>
-    )
+            )}
+        </article>
+    );
 }

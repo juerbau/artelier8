@@ -4,6 +4,7 @@ import HeroQuote from "@/ui/components/HeroQuote"
 import HomeGallery from "@/ui/components/HomeGallery"
 import ArtistStatement from "@/ui/components/ArtistStatement"
 import SeriesGrid from "@/ui/components/SeriesGrid"
+import SeriesList from "../../ui/components/SeriesList";
 
 
 export default async function HomePage({ params }) {
@@ -29,13 +30,18 @@ export default async function HomePage({ params }) {
 
             <section className="mt-15 sm:mt-15 md:mt-15 lg:mt-15">
 
+                <SeriesList
+                    series={series}
+                    locale={locale}
+                />
 
-                <SeriesGrid
+
+                {/*<SeriesGrid
                     series={series}
                     locale={locale}
                     animated
                     mode="home"
-                />
+                />*/}
 
             </section>
 

@@ -1,50 +1,118 @@
 "use client"
 
 import Image from "next/image"
+import { motion } from "motion/react"
 import { urlFor } from "@/lib/sanityImage"
-import galleryRoom from "@/ui/images/gallery-room.webp";
+import galleryRoom from "@/ui/images/gallery-room.webp"
+import { getGalleryLayout } from "@/lib/galleryLayout";
+
+
+
+
+// 🎬 Einzelbild-Animation
+const item = {
+    hidden: { opacity: 0, y: 15, scale: 0.97 },
+    show: {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        transition: {
+            duration: 0.9,
+            ease: [0.22, 1, 0.36, 1],
+        },
+    },
+}
+
 
 export default function GalleryRoom({ series }) {
 
-    // 👉 nimm erstmal nur das Serienbild (später erweitern wir auf 3 artworks)
-    const imageUrl = urlFor(series.image).width(800).url()
+    const artworks = series.previewArtworks?.length
+        ? series.previewArtworks.slice(0, 3)
+        : [{ _id: "fallback", mainImage: series.image }]
 
     return (
-        <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden">
+        <div className="relative w-full aspect-video overflow-hidden">
 
-            {/* 🧱 Background Raum */}
+            {/* 🧱 Raum */}
             <Image
                 src={galleryRoom}
                 alt="Gallery Room"
                 fill
+                sizes="100vw"
                 className="object-cover"
                 priority
             />
 
-            {/* 🖼️ Bild im Raum */}
-            <div className="absolute inset-0 flex items-center justify-center">
+            {/* 🖼️ Bilder */}
+            <motion.div
+                className="absolute inset-0"
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ staggerChildren: 0.18 }}
+            >
 
-                <div className="relative w-[34%] aspect-square">
+                {artworks.map((art, i) => {
 
-                    {/* Shadow */}
-                    <div className="absolute inset-0 rounded-md shadow-[0_25px_50px_rgba(0,0,0,0.25),0_8px_20px_rgba(0,0,0,0.15)]" />
+                    const { className, imageWidth } = getGalleryLayout(artworks.length, i)
 
-                    <div className="absolute inset-0 bg-gradient-to-b from-white/15 via-transparent to-black/25 mix-blend-soft-light pointer-events-none rounded-md" />
-                    {/* Image */}
-                    <Image
-                        src={imageUrl}
-                        alt=""
-                        fill
-                        className="object-cover rounded-md"
-                    />
+                    const src = urlFor(art.mainImage)
+                        .width(imageWidth)
+                        .quality(80)
+                        .auto("format")
+                        .url()
 
-                    {/* Kontakt-Schatten */}
-                    <div className="absolute inset-0 shadow-[0_2px_6px_rgba(0,0,0,0.25)] rounded-md" />
-                </div>
+                    return (
+                        <motion.div
+                            key={art._id}
+                            variants={item}
+                            className={`absolute ${className}`}
+                        >
 
-            </div>
+                            <div className="relative w-full aspect-square">
 
-            {/* 🎯 Licht-Overlay */}
+                                {/* 🌫️ Lokale Wandabschattung */}
+                                <div
+                                    className="absolute inset-0 scale-[1.35] pointer-events-none blur-xl"
+                                    style={{
+                                        background:
+                                            "radial-gradient(ellipse at center, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.08) 40%, rgba(0,0,0,0) 70%)"
+                                    }}
+                                />
+
+                                {/* 🧱 Materialkante */}
+                                <div className="absolute inset-0 bg-stone-400 scale-[1.01]" />
+
+                                {/* 🧱 Wandkontakt */}
+                                <div className="absolute inset-0 bg-black/25 blur-[4px] translate-y-[1.5px]" />
+
+                                {/* 🌫️ Tiefe */}
+                                <div className="absolute inset-0 shadow-[0_6px_16px_rgba(0,0,0,0.15)]" />
+
+                                {/* 🖼️ Bild */}
+                                <Image
+                                    src={src}
+                                    alt=""
+                                    fill
+                                    sizes="(max-width: 768px) 80vw, 22vw"
+                                    className="object-cover"
+                                />
+
+                                {/* 💡 Licht */}
+                                <div className="absolute inset-0 bg-gradient-to-b from-white/8 via-transparent to-black/15 mix-blend-soft-light pointer-events-none" />
+
+                                {/* 🪶 Bodenkontakt */}
+                                <div className="absolute -bottom-0.75 left-1/2 -translate-x-1/2 w-[45%] h-0.75 bg-black/20 blur-sm" />
+
+                            </div>
+
+                        </motion.div>
+                    )
+                })}
+
+            </motion.div>
+
+            {/* 🎯 Globales Licht */}
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-white/10 via-transparent to-black/20 mix-blend-soft-light" />
 
         </div>

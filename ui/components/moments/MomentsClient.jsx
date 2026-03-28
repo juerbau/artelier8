@@ -1,55 +1,55 @@
-"use client"
+"use client";
 
-import { motion } from "motion/react"
-import Image from "next/image"
-import { urlFor } from "@/lib/sanityImage"
+import { motion } from "motion/react";
+import Image from "next/image";
+import { urlFor } from "@/lib/sanityImage";
 
 export default function MomentsClient({ moments, locale }) {
     return (
-        <div className="flex flex-col gap-32">
+        <div className="flex flex-col items-center gap-24 md:gap-28">
             {moments.map((moment, index) => {
                 const description =
-                    locale === "de"
-                        ? moment.description_de
-                        : moment.description_en
+                    locale === "de" ? moment.description_de : moment.description_en;
 
                 return (
-                    <motion.div
+                    <motion.article
                         key={moment._id}
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: true, amount: 0.2 }}
                         transition={{
                             duration: 1.2,
                             ease: [0.22, 1, 0.36, 1],
-                            delay: index * 0.12
+                            delay: index * 0.12,
                         }}
-                        className={`max-w-xl ${
-                            index % 2 === 0 ? "ml-0" : "ml-auto"
-                        }`}
+                        className="w-full max-w-2xl text-center"
                     >
-                        <div className="relative w-full h-[400px] mb-4">
+                        <div className="relative w-full h-[300px] md:h-[380px] mb-6 overflow-hidden">
                             <Image
-                                src={urlFor(moment.mainImage).width(1200).url()}
+                                src={urlFor(moment.mainImage).width(1400).url()}
                                 alt={moment.title}
                                 fill
                                 className="object-cover"
                             />
                         </div>
 
-                        <h3 className="text-lg mb-1">{moment.title}</h3>
-
-                        <div className="text-sm text-neutral-500 mb-2">
-                            {moment.location && `${moment.location} · `}
+                        <p className="text-[11px] uppercase tracking-[0.16em] text-neutral-400 mb-3">
+                            {moment.location ? `${moment.location} · ` : ""}
                             {moment.year}
-                        </div>
-
-                        <p className="text-neutral-700">
-                            {description}
                         </p>
-                    </motion.div>
-                )
+
+                        <h3 className="text-xl md:text-2xl leading-tight text-neutral-900 mb-3">
+                            {moment.title}
+                        </h3>
+
+                        {description && (
+                            <p className="mx-auto max-w-xl text-sm md:text-[15px] leading-7 text-neutral-600">
+                                {description}
+                            </p>
+                        )}
+                    </motion.article>
+                );
             })}
         </div>
-    )
+    );
 }
