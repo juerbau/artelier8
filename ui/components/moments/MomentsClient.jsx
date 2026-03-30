@@ -33,17 +33,17 @@ export default function MomentsClient({ moments, locale }) {
                             />
                         </div>
 
-                        <p className="text-[11px] uppercase tracking-[0.16em] text-neutral-400 mb-3">
+                        <p className="text-[11px] uppercase tracking-[0.16em] mb-3">
                             {moment.location ? `${moment.location} · ` : ""}
-                            {moment.year}
+                            {moment.date}
                         </p>
 
-                        <h3 className="text-xl md:text-2xl leading-tight text-neutral-900 mb-3">
+                        <h3 className="text-xl md:text-2xl leading-tight mb-3">
                             {moment.title}
                         </h3>
 
                         {description && (
-                            <p className="mx-auto max-w-xl text-sm md:text-[15px] leading-7 text-neutral-600">
+                            <p className="mx-auto max-w-xl text-sm md:text-[15px] leading-7 whitespace-pre-line">
                                 {description}
                             </p>
                         )}

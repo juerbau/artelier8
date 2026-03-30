@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4ac7733e-90f9-4642-90d6-514a21181d09" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/tailwindcss.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/moments/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/moments/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/logos/page.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/logos/page.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/post/[slug]/page.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/post/page.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/i18n.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/i18n.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/sanityQueries.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sanityQueries.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/ResponsiveNav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/ResponsiveNav.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/about/AboutClient.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/about/AboutClient.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/moments/FeaturedMoment.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/moments/MomentsClient.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/moments/MomentsClient.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/moments/MomentsIntro.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/moments/MomentsIntro.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/images/AMG_Neu_ergebnis.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/images/ARTelier8_logo.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/images/creative.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/images/output.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/images/test.jpg" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JSX File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "juerbau"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:juerbau/artelier8.git",
+    "accountId": "0910bdae-70a7-4a8c-ad7d-f98c5e584430"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="3BcD0gGG1y0ONNPQcSqw2SusEoe" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "javascript.preferred.runtime.type.id": "node",
+    "js.debugger.nextJs.config.created.client": "true",
+    "js.debugger.nextJs.config.created.server": "true",
+    "last_opened_file_path": "/Users/jurgenbauer/WebstormProjects/artelier8/app/api/contact",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.Next.js: server-side.executor": "Run",
+    "settings.editor.selected.configurable": "preferences.pathVariables",
+    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.intellij.reactbuddy.reactComponents" value="false" />
+        <entry key="com.intellij.reactbuddy.reactInspector" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/api/contact" />
+      <recent name="$PROJECT_DIR$/app/[locale]/contact" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ui" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.Next.js: server-side">
+    <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
+      <method v="2" />
+    </configuration>
+    <configuration name="Next.js: server-side" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-3bd3a6803838-JavaScript-WS-261.22158.274" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4ac7733e-90f9-4642-90d6-514a21181d09" name="Changes" comment="" />
+      <created>1774779245175</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1774779245175</updated>
+      <workItem from="1774779246555" duration="17229000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

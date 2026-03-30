@@ -1,10 +1,10 @@
 "use client";
 
-import { aboutContent } from "@/lib/i18n";
-
 import Portrait from "./Portrait";
 import Studio from "./Studio";
 import Outro from "./Outro";
+import { aboutContent } from "@/lib/i18n";
+
 
 export default function AboutClient({ data, locale }) {
     const safeLocale = locale?.startsWith("de") ? "de" : "en";
