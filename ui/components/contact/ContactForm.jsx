@@ -1,40 +1,91 @@
 "use client"
 
 import { useState } from "react"
-import { motion, AnimatePresence } from "motion/react"
-import ContactSuccessMessage from "./ContactSuccessMessage"
+import clsx from "clsx"
+import { getContactSchema } from "@/lib/validation/contact-schema"
 import { contactForm } from "@/lib/i18n"
-import clsx from "clsx";
+import FormField from "@/ui/components/contact/FormField"
 
-export default function ContactForm({ locale }) {
-    const [status, setStatus] = useState("idle")
+export default function ContactForm({ locale, setStatus }) {
+    const [status, setLocalStatus] = useState("idle")
+    const [errors, setErrors] = useState({})
+    const [hasSubmitted, setHasSubmitted] = useState(false)
 
     const safeLocale = locale?.startsWith("de") ? "de" : "en"
     const content = contactForm[safeLocale]
 
+    // -------------------------
+    // 🔁 Live Validation
+    // -------------------------
+    function handleFieldChange(name, value) {
+        if (!hasSubmitted) return
+
+        const schema = getContactSchema(locale)
+        const fieldSchema = schema.shape[name]
+
+        const result = fieldSchema.safeParse(value)
+
+        setErrors((prev) => ({
+            ...prev,
+            [name]: result.success
+                ? undefined
+                : result.error.issues[0].message,
+        }))
+    }
+
+    // -------------------------
+    // 🚀 Submit
+    // -------------------------
     async function handleSubmit(e) {
         e.preventDefault()
-        setStatus("submitting")
+        setHasSubmitted(true)
+        setLocalStatus("submitting")
 
         const formData = new FormData(e.target)
         const data = Object.fromEntries(formData.entries())
 
+        // Client Validation
+        const schema = getContactSchema(locale)
+        const result = schema.safeParse(data)
+
+        if (!result.success) {
+            const fieldErrors = {}
+
+            result.error.issues.forEach((issue) => {
+                fieldErrors[issue.path[0]] = issue.message
+            })
+
+            setErrors(fieldErrors)
+            setLocalStatus("idle")
+            return
+        }
+
+        setErrors({})
+
         try {
             const res = await fetch("/api/contact", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    ...data,
+                    locale,
+                }),
             })
 
             if (!res.ok) throw new Error()
 
+            // 👉 Scene übernimmt jetzt!
             setStatus("success")
         } catch {
-            setStatus("error")
+            setLocalStatus("error")
         }
     }
 
-
+    // -------------------------
+    // 🎨 Button Styles
+    // -------------------------
     const buttonClasses = clsx(
         "self-end w-auto",
         "inline-flex items-center justify-center",
@@ -45,128 +96,84 @@ export default function ContactForm({ locale }) {
         "transition-colors duration-200",
         "cursor-pointer",
         "hover:bg-neutral-800",
-        "hover:font-bold",
         {
-            "opacity-50 cursor-not-allowed": status === "submitting"
+            "opacity-50 cursor-not-allowed":
+                status === "submitting",
         }
-    );
+    )
 
+    // -------------------------
+    // 🧩 Render
+    // -------------------------
     return (
-        <AnimatePresence mode="wait">
-            {status === "success" ? (
-                <motion.div
-                    key="success"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.8 }}
-                >
-                    <ContactSuccessMessage success={content.success} />
-                </motion.div>
-            ) : (
-                <motion.form
-                    key="form"
-                    onSubmit={handleSubmit}
-                    className="max-w-[520px] mx-auto mt-[6vh] mb-[20vh] flex flex-col gap-8 text-left"
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    transition={{
-                        delay: 0.2,
-                        duration: 1.2,
-                        ease: [0.22, 1, 0.36, 1],
-                    }}
-                >
-                    {/* First Name */}
-                    <div className="flex flex-col gap-2">
-                        <label className="text-sm text-black/60">
-                            {content.firstName}
-                        </label>
-                        <input
-                            type="text"
-                            name="firstName"
-                            required
-                            className={clsx(
-                                "w-full",
-                                "bg-white text-black",
-                                "px-4 py-3",
-                                "rounded-md",
-                                "border border-neutral-300",
-                                "transition-colors duration-200",
-                                "outline-none",
-                                "focus:border-black",
-                            )}
-                        />
-                    </div>
+        <form
+            onSubmit={handleSubmit}
+            className="max-w-[520px] mx-auto mt-[6vh] mb-[20vh] flex flex-col gap-8 text-left"
+        >
+            <FormField
+                label={content.firstName}
+                name="firstName"
+                error={errors.firstName}
+                onChange={(e) =>
+                    handleFieldChange("firstName", e.target.value)
+                }
+            />
 
-                    {/* Last Name */}
-                    <div className="flex flex-col gap-2">
-                        <label className="text-sm text-black/60">
-                            {content.lastName}
-                        </label>
-                        <input
-                            type="text"
-                            name="lastName"
-                            required
-                            className="w-full bg-white text-black border border-black/20 focus:border-black outline-none px-4 py-3 rounded-md transition-colors"
-                        />
-                    </div>
+            <FormField
+                label={content.lastName}
+                name="lastName"
+                error={errors.lastName}
+                onChange={(e) =>
+                    handleFieldChange("lastName", e.target.value)
+                }
+            />
 
-                    {/* Email */}
-                    <div className="flex flex-col gap-2">
-                        <label className="text-sm text-black/60">
-                            {content.email}
-                        </label>
-                        <input
-                            type="email"
-                            name="email"
-                            required
-                            className="w-full bg-white text-black border border-black/20 focus:border-black outline-none px-4 py-3 rounded-md transition-colors"
-                        />
-                    </div>
+            <FormField
+                label={content.email}
+                name="email"
+                type="email"
+                error={errors.email}
+                onChange={(e) =>
+                    handleFieldChange("email", e.target.value)
+                }
+            />
 
-                    {/* Message */}
-                    <div className="flex flex-col gap-2">
-                        <label className="text-sm text-black/60">
-                            {content.message}
-                        </label>
-                        <textarea
-                            name="message"
-                            required
-                            rows={5}
-                            className="w-full bg-white text-black border border-black/20 focus:border-black outline-none px-4 py-3 rounded-md resize-none transition-colors"
-                        />
-                    </div>
+            <FormField
+                label={content.message}
+                name="message"
+                textarea
+                error={errors.message}
+                onChange={(e) =>
+                    handleFieldChange("message", e.target.value)
+                }
+            />
 
-                    {/* Honeypot */}
-                    <input
-                        type="text"
-                        name="website"
-                        className="absolute -left-[9999px]"
-                        tabIndex={-1}
-                        autoComplete="off"
-                    />
+            {/* Honeypot */}
+            <input
+                type="text"
+                name="website"
+                className="absolute -left-[9999px]"
+                tabIndex={-1}
+                autoComplete="off"
+            />
 
-                    {/* Submit */}
+            {/* Submit */}
+            <button
+                type="submit"
+                disabled={status === "submitting"}
+                className={buttonClasses}
+            >
+                {status === "submitting"
+                    ? content.sending
+                    : content.submit}
+            </button>
 
-                    <button
-                        type="submit"
-                        disabled={status === "submitting"}
-                        className={buttonClasses}
-                    >
-                        {status === "submitting"
-                            ? content.sending
-                            : content.submit}
-                    </button>
-
-                    {/* Error */}
-                    {status === "error" && (
-                        <p className="text-sm opacity-60 -mt-2">
-                            {content.error}
-                        </p>
-                    )}
-                </motion.form>
+            {/* Global Error */}
+            {status === "error" && (
+                <p className="text-sm opacity-60 -mt-2">
+                    {content.error}
+                </p>
             )}
-        </AnimatePresence>
+        </form>
     )
 }

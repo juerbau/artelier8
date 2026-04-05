@@ -1,6 +1,6 @@
 import { Resend } from "resend"
 import { checkRateLimit } from "@/lib/security/rate-limit"
-import { contactSchema } from "@/lib/validation/contact-schema"
+import {getContactSchema} from "@/lib/validation/contact-schema"
 import ContactNotificationEmail from "@/ui/emails/ContactNotificationEmail"
 
 // Resend Setup
@@ -52,7 +52,9 @@ export async function POST(req) {
         console.log("6. BEFORE VALIDATION")
 
         // Validation (Zod)
-        const result = contactSchema.safeParse(body)
+        const { locale, ...formData } = body
+        const schema = getContactSchema(locale)
+        const result = schema.safeParse(formData)
 
         if (!result.success) {
             console.log("7. VALIDATION ERROR", result.error)

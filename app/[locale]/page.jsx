@@ -3,7 +3,7 @@ import { getSeriesList, getHomeSlider } from "@/lib/sanityFetch"
 import HeroQuote from "@/ui/components/HeroQuote"
 import HomeGallery from "@/ui/components/HomeGallery"
 import ArtistStatement from "@/ui/components/ArtistStatement"
-import SeriesGrid from "@/ui/components/SeriesGrid"
+//import SeriesGrid from "@/ui/components/SeriesGrid"
 import SeriesList from "../../ui/components/SeriesList";
 
 

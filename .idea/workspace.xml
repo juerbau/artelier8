@@ -6,8 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="4ac7733e-90f9-4642-90d6-514a21181d09" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/contact/test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sanity/client.js" beforeDir="false" afterPath="$PROJECT_DIR$/sanity/client.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/contact/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/contact/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/contact/route.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/contact/route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/i18n.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/i18n.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/validation/contact-schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/validation/contact-schema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/contact/ContactForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/contact/ContactForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/contact/ContactSuccessMessage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/contact/ContactSuccessMessage.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +22,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JSX File" />
         <option value="JavaScript File" />
+        <option value="JSX File" />
       </list>
     </option>
   </component>
@@ -78,6 +83,7 @@
       <map>
         <entry key="com.intellij.reactbuddy.reactComponents" value="false" />
         <entry key="com.intellij.reactbuddy.reactInspector" value="false" />
+        <entry key="com.intellij.reactbuddy.storybook" value="false" />
       </map>
     </option>
   </component>
@@ -121,6 +127,7 @@
       <option name="presentableId" value="Default" />
       <updated>1774779245175</updated>
       <workItem from="1774779246555" duration="17229000" />
+      <workItem from="1775378616187" duration="10217000" />
     </task>
     <servers />
   </component>
