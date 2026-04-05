@@ -5,28 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ac7733e-90f9-4642-90d6-514a21181d09" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/tailwindcss.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/[locale]/moments/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/moments/page.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/logos/page.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/logos/page.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/post/[slug]/page.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/post/page.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/i18n.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/i18n.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/sanityQueries.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sanityQueries.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/ResponsiveNav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/ResponsiveNav.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/about/AboutClient.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/about/AboutClient.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/moments/FeaturedMoment.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/moments/MomentsClient.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/moments/MomentsClient.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/moments/MomentsIntro.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/moments/MomentsIntro.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/images/AMG_Neu_ergebnis.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/images/ARTelier8_logo.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/images/creative.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/images/output.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/images/test.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/contact/test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sanity/client.js" beforeDir="false" afterPath="$PROJECT_DIR$/sanity/client.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,22 +25,22 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "juerbau"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;juerbau&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "git@github.com:juerbau/artelier8.git",
-    "accountId": "0910bdae-70a7-4a8c-ad7d-f98c5e584430"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:juerbau/artelier8.git&quot;,
+    &quot;accountId&quot;: &quot;0910bdae-70a7-4a8c-ad7d-f98c5e584430&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 5
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="3BcD0gGG1y0ONNPQcSqw2SusEoe" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -68,30 +49,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "main",
-    "javascript.preferred.runtime.type.id": "node",
-    "js.debugger.nextJs.config.created.client": "true",
-    "js.debugger.nextJs.config.created.server": "true",
-    "last_opened_file_path": "/Users/jurgenbauer/WebstormProjects/artelier8/app/api/contact",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.Next.js: server-side.executor": "Run",
-    "settings.editor.selected.configurable": "preferences.pathVariables",
-    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
+    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/jurgenbauer/WebstormProjects/artelier8/app/api/contact&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.Next.js: server-side.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pathVariables&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -106,6 +87,7 @@
       <recent name="$PROJECT_DIR$/app/[locale]/contact" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/sanity" />
       <recent name="$PROJECT_DIR$/ui" />
     </key>
   </component>
