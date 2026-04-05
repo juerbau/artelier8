@@ -1,18 +1,24 @@
-import { getSeriesList, getHomeSlider } from "@/lib/sanityFetch"
+import HeroQuote from "@/ui/components/home/HeroQuote"
+import HomeGallery from "@/ui/components/home/HomeGallery"
+import ArtistStatement from "@/ui/components/home/ArtistStatement"
 
-import HeroQuote from "@/ui/components/HeroQuote"
-import HomeGallery from "@/ui/components/HomeGallery"
-import ArtistStatement from "@/ui/components/ArtistStatement"
 //import SeriesGrid from "@/ui/components/SeriesGrid"
-import SeriesList from "../../ui/components/SeriesList";
+import SeriesList from "@/ui/components/SeriesList";
+
+import {sanityFetch} from "@/sanity/fetch";
+import {homeSliderQuery} from "@/sanity/queries/home";
+import {seriesListQuery} from "@/sanity/queries/series";
+
 
 
 export default async function HomePage({ params }) {
 
-    const { locale } = await params
+    const { locale } = await params;
 
-    const artworks = await getHomeSlider()
-    const series = await getSeriesList()
+    const [artworks, series] = await Promise.all([
+        sanityFetch({ query: homeSliderQuery }),
+        sanityFetch({ query: seriesListQuery }),
+    ]);
 
     return (
         <main>

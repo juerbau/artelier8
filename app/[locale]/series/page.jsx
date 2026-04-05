@@ -1,20 +1,25 @@
 import SeriesList from "@/ui/components/SeriesList";
-import { getSeriesList } from "@/lib/sanityFetch";
 import SeriesIntro from "@/ui/components/SeriesIntro";
+
+import { sanityFetch } from "@/sanity/fetch";
+import { seriesListQuery } from "@/sanity/queries/series";
 
 
 export default async function SeriesPage({ params }) {
     const { locale } = await params;
-    const series = await getSeriesList();
 
+    const series = await sanityFetch({
+        query: seriesListQuery,
+    });
 
     return (
         <main>
             <SeriesIntro locale={locale} />
+
             <SeriesList
-                series={series}
+                series={series || []}
                 locale={locale}
             />
         </main>
-    )
+    );
 }

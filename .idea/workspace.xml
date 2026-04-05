@@ -6,6 +6,24 @@
   <component name="ChangeListManager">
     <list default="true" id="4ac7733e-90f9-4642-90d6-514a21181d09" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/about/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/about/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/moments/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/moments/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/series/[slug]/[artworkSlug]/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/series/[slug]/[artworkSlug]/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/series/[slug]/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/series/[slug]/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/series/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/series/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/sanityFetch.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/sanityImage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/sanityQueries.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/ArtworkClient.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/ArtworkClient.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/ArtworkGallery.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/ArtworkGallery.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/ArtworkGrid.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/ArtworkGrid.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/GalleryRoom.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/GalleryRoom.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/HomeGallery.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/HomeGallery.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/SeriesGrid.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/SeriesGrid.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/about/Portrait.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/about/Portrait.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/about/Studio.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/about/Studio.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/moments/MomentsClient.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/moments/MomentsClient.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +33,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="JSX File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -120,7 +138,7 @@
       <option name="presentableId" value="Default" />
       <updated>1774779245175</updated>
       <workItem from="1774779246555" duration="17229000" />
-      <workItem from="1775378616187" duration="12314000" />
+      <workItem from="1775378616187" duration="20762000" />
     </task>
     <servers />
   </component>

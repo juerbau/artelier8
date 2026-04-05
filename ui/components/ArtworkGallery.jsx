@@ -4,7 +4,7 @@ import { useState, useMemo } from "react"
 import Image from "next/image"
 import dynamic from "next/dynamic"
 
-import { urlFor } from "@/lib/sanityImage"
+import { urlFor } from "@/sanity/image"
 
 import "yet-another-react-lightbox/styles.css"
 import Zoom from "yet-another-react-lightbox/plugins/zoom"

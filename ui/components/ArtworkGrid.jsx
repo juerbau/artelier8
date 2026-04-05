@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { urlFor } from "@/lib/sanityImage"
+import { urlFor } from "@/sanity/image"
 
 
 export default function ArtworkGrid({ artworks, locale, seriesSlug }) {

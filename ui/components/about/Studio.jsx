@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
-import { urlFor } from "@/lib/sanityImage";
+import {buildImage, urlFor} from "@/sanity/image";
 
 const ease = [0.22, 1, 0.36, 1];
 
@@ -49,7 +49,7 @@ export default function Studio({ image, text }) {
                 >
                     <div className="rounded-lg border border-white/80 overflow-hidden">
                         <Image
-                            src={urlFor(image).width(1000).url()}
+                            src={buildImage({source: image, width: 1000,})}
                             alt="Studio"
                             width={1000}
                             height={700}

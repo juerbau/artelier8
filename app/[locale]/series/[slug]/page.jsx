@@ -1,5 +1,6 @@
 import { client } from "@/sanity/client";
-import { getSeriesBySlug } from "@/lib/sanityFetch"
+import { sanityFetch } from "@/sanity/fetch";
+import { seriesBySlugQuery } from "@/sanity/queries/series";
 import ArtworkGrid from "@/ui/components/ArtworkGrid";
 import BackButton from "@/ui/components/BackButton";
 import SeriesDetailIntro from "@/ui/components/SeriesDetailIntro";
@@ -29,7 +30,10 @@ export default async function SeriesPage({ params }) {
 
     const { slug, locale } = await params;
 
-    const series = await getSeriesBySlug(slug);
+    const series = await sanityFetch({
+        query: seriesBySlugQuery,
+        params: { slug },
+    });
 
     if (!series) return null
 

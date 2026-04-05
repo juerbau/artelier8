@@ -4,7 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import {motion} from "motion/react"
 import clsx from "clsx"
-import {urlFor} from "@/lib/sanityImage"
+import {urlFor} from "@/sanity/image"
 import GalleryRoom from "@/ui/components/GalleryRoom"
 
 

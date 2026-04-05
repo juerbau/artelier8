@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { motion } from "motion/react"
-import { urlFor } from "@/lib/sanityImage"
+import { urlFor } from "@/sanity/image"
 import galleryRoom from "@/ui/images/gallery-room.webp"
 import { getGalleryLayout } from "@/lib/galleryLayout";
 

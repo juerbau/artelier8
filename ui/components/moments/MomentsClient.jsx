@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
-import { urlFor } from "@/lib/sanityImage";
+import { urlFor } from "@/sanity/image";
 
 export default function MomentsClient({ moments, locale }) {
     return (

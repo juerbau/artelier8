@@ -1,5 +1,6 @@
 import { client } from "@/sanity/client"
-import { getSeriesBySlug } from "@/lib/sanityFetch"
+import { sanityFetch } from "@/sanity/fetch"
+import { seriesBySlugQuery } from "@/sanity/queries/series"
 
 import BackButton from "@/ui/components/BackButton"
 import ArtworkClient from "@/ui/components/ArtworkClient"
@@ -34,13 +35,21 @@ export default async function ArtworkPage({ params }) {
 
     const { slug, artworkSlug, locale } = await params
 
-    const series = await getSeriesBySlug(slug)
+    const series = await sanityFetch({
+        query: seriesBySlugQuery,
+        params: { slug },
+    })
+
+    if (!series) return null
 
     const artworks = series.artworks || []
 
     const index = artworks.findIndex(
         (art) => art.slug === artworkSlug
     )
+
+    // 🔥 kleiner Safety Guard
+    if (index === -1) return null
 
     const artwork = artworks[index]
 

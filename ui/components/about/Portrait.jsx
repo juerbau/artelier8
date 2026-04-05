@@ -2,8 +2,8 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
-import { urlFor } from "@/lib/sanityImage";
 import { aboutContent } from "@/lib/i18n";
+import {buildImage} from "../../../sanity/image";
 
 const ease = [0.22, 1, 0.36, 1];
 
@@ -51,7 +51,7 @@ export default function Portrait({ image, locale }) {
                 >
                     <div className="rounded-lg border border-white/80 overflow-hidden">
                         <Image
-                            src={urlFor(image).width(1400).url()}
+                            src={buildImage({source: image, width: 1400,})}
                             alt="Portrait"
                             width={1400}
                             height={1800}
