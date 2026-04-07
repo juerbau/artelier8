@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react"
+import clsx from "clsx"
 import { motion } from "motion/react";
 import Image from "next/image";
 import { aboutContent } from "@/lib/i18n";
@@ -20,6 +22,7 @@ const item = {
 };
 
 export default function Portrait({ image, locale }) {
+    const [loaded, setLoaded] = useState(false);
     if (!image) return null;
 
     const safeLocale = locale?.startsWith("de") ? "de" : "en";
@@ -51,11 +54,16 @@ export default function Portrait({ image, locale }) {
                 >
                     <div className="rounded-lg border border-white/80 overflow-hidden">
                         <Image
-                            src={buildImage({source: image, width: 1400,})}
+                            src={buildImage({ source: image, width: 1400 })}
                             alt="Portrait"
                             width={1400}
                             height={1800}
-                            className="object-cover w-full h-auto"
+                            sizes="(min-width: 768px) 520px, 100vw"
+                            onLoadingComplete={() => setLoaded(true)}
+                            className={clsx(
+                                "object-cover w-full h-auto transition-opacity duration-1000",
+                                loaded ? "opacity-100" : "opacity-0"
+                            )}
                         />
                     </div>
                 </motion.div>

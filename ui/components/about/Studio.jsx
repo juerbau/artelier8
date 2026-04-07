@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react"
+import clsx from "clsx"
 import { motion } from "motion/react";
 import Image from "next/image";
 import {buildImage, urlFor} from "@/sanity/image";
@@ -19,6 +21,7 @@ const item = {
 };
 
 export default function Studio({ image, text }) {
+    const [loaded, setLoaded] = useState(false);
     if (!image) return null;
 
     const blocks = text.split("\n\n");
@@ -49,11 +52,15 @@ export default function Studio({ image, text }) {
                 >
                     <div className="rounded-lg border border-white/80 overflow-hidden">
                         <Image
-                            src={buildImage({source: image, width: 1000,})}
+                            src={buildImage({ source: image, width: 1000 })}
                             alt="Studio"
                             width={1000}
                             height={700}
-                            className="object-cover w-full h-auto"
+                            onLoadingComplete={() => setLoaded(true)}
+                            className={clsx(
+                                "object-cover w-full h-auto transition-opacity duration-700",
+                                loaded ? "opacity-100" : "opacity-0"
+                            )}
                         />
                     </div>
                 </motion.div>

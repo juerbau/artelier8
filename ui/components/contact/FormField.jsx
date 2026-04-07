@@ -7,8 +7,14 @@ export default function FormField({
                                       error,
                                       textarea = false,
                                       onChange,
+                                      autoComplete,
+                                      type = "text",
                                       ...props
-                                  }) {
+                                  })
+{
+
+    const id = `field-${name}`;
+
     const baseClasses = clsx(
         "w-full",
         "bg-white text-black",
@@ -25,20 +31,25 @@ export default function FormField({
 
     return (
         <div>
-            <label className="block text-sm text-neutral-600 mb-2">
+            <label htmlFor={id} className="block text-sm text-neutral-600 mb-2">
                 {label}
             </label>
 
             {textarea ? (
                 <textarea
+                    id={id}
                     name={name}
+                    autoComplete={autoComplete}
                     className={clsx(baseClasses, "min-h-[140px] resize-none")}
                     onChange={onChange}
                     {...props}
                 />
             ) : (
                 <input
+                    id={id}
                     name={name}
+                    type={type}
+                    autoComplete={autoComplete}
                     className={baseClasses}
                     onChange={onChange}
                     {...props}

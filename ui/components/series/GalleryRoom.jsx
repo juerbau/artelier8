@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { motion } from "motion/react"
-import { urlFor } from "@/sanity/image"
+import {buildImage} from "@/sanity/image"
 import galleryRoom from "@/ui/images/gallery-room.webp"
 import { getGalleryLayout } from "@/lib/galleryLayout";
 
@@ -56,11 +56,7 @@ export default function GalleryRoom({ series }) {
 
                     const { className, imageWidth } = getGalleryLayout(artworks.length, i)
 
-                    const src = urlFor(art.mainImage)
-                        .width(imageWidth)
-                        .quality(80)
-                        .auto("format")
-                        .url()
+                    const src = buildImage({source: art.mainImage, width: imageWidth,});
 
                     return (
                         <motion.div
@@ -94,7 +90,7 @@ export default function GalleryRoom({ series }) {
                                     src={src}
                                     alt=""
                                     fill
-                                    sizes="(max-width: 768px) 80vw, 22vw"
+                                    sizes="(min-width: 768px) 22vw, 80vw"
                                     className="object-cover"
                                 />
 

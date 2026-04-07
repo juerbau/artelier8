@@ -113,6 +113,7 @@ export default function ContactForm({ locale, setStatus }) {
             <FormField
                 label={content.firstName}
                 name="firstName"
+                autoComplete="given-name"
                 error={errors.firstName}
                 onChange={(e) =>
                     handleFieldChange("firstName", e.target.value)
@@ -122,6 +123,7 @@ export default function ContactForm({ locale, setStatus }) {
             <FormField
                 label={content.lastName}
                 name="lastName"
+                autoComplete="family-name"
                 error={errors.lastName}
                 onChange={(e) =>
                     handleFieldChange("lastName", e.target.value)
@@ -132,6 +134,7 @@ export default function ContactForm({ locale, setStatus }) {
                 label={content.email}
                 name="email"
                 type="email"
+                autoComplete="email"
                 error={errors.email}
                 onChange={(e) =>
                     handleFieldChange("email", e.target.value)
@@ -142,6 +145,7 @@ export default function ContactForm({ locale, setStatus }) {
                 label={content.message}
                 name="message"
                 textarea
+                autoComplete="off"
                 error={errors.message}
                 onChange={(e) =>
                     handleFieldChange("message", e.target.value)

@@ -1,10 +1,10 @@
 import { client } from "@/sanity/client";
 import { sanityFetch } from "@/sanity/fetch";
 import { seriesBySlugQuery } from "@/sanity/queries/series";
-import ArtworkGrid from "@/ui/components/ArtworkGrid";
+import ArtworkGrid from "@/ui/components/series/detail/ArtworkGrid";
 import BackButton from "@/ui/components/BackButton";
-import SeriesDetailIntro from "@/ui/components/SeriesDetailIntro";
-import SeriesPageClient from "@/ui/components/SeriesPageClient";
+import SeriesDetailIntro from "@/ui/components/series/detail/SeriesDetailIntro";
+import SeriesPageClient from "@/ui/components/series/detail/SeriesPageClient";
 
 
 export async function generateStaticParams() {

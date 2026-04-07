@@ -22,12 +22,42 @@ export const seriesBySlugQuery = `
   intro_de,
   intro_en,
   "slug": slug.current,
+
   artworks[]->{
     _id,
     title,
     "slug": slug.current,
-    mainImage,
-    galleryImages,
+
+    mainImage{
+      ...,
+      asset->{
+        _id,
+        metadata{
+          lqip,
+          dimensions{
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      }
+    },
+
+    galleryImages[]{
+      ...,
+      asset->{
+        _id,
+        metadata{
+          lqip,
+          dimensions{
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      }
+    },
+
     size,
     technique_de,
     technique_en,

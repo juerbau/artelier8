@@ -5,7 +5,7 @@ import Image from "next/image"
 import {motion} from "motion/react"
 import clsx from "clsx"
 import {urlFor} from "@/sanity/image"
-import GalleryRoom from "@/ui/components/GalleryRoom"
+import GalleryRoom from "@/ui/components/series/GalleryRoom"
 
 
 export default function SeriesGrid({series, locale, animated = false, mode = "page"}) {
@@ -24,7 +24,7 @@ export default function SeriesGrid({series, locale, animated = false, mode = "pa
                         animated
                             ? {
                                 once: true,
-                                margin: isHome ? "-150px" : "-50px", // 🔥 Unterschied!
+                                margin: isHome ? "-150px" : "-50px",
                             }
                             : undefined
                     }
@@ -34,8 +34,8 @@ export default function SeriesGrid({series, locale, animated = false, mode = "pa
                                 hidden: {},
                                 visible: {
                                     transition: {
-                                        delayChildren: isHome ? 0.12 : 0.1, // 🔥 Home langsamer
-                                        staggerChildren: isHome ? 0.32 : 0.22, // 🔥 Page schneller
+                                        delayChildren: isHome ? 0.12 : 0.1,
+                                        staggerChildren: isHome ? 0.32 : 0.22,
                                     },
                                 },
                             }
@@ -74,7 +74,7 @@ export default function SeriesGrid({series, locale, animated = false, mode = "pa
                                 transition={
                                     animated
                                         ? {
-                                            duration: isHome ? 1.2 : 0.9, // 🔥 Page schneller
+                                            duration: isHome ? 1.2 : 0.9,
                                             ease: [0.22, 1, 0.36, 1],
                                         }
                                         : undefined

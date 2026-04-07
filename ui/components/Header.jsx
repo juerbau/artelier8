@@ -6,7 +6,7 @@ import Image from "next/image";
 
 import LangSwitch from "@/ui/components/LangSwitch";
 import ResponsiveNav from "@/ui/components/ResponsiveNav";
-import logo from "@/ui/images/Logo_schwarz-weiss.webp";
+import logo from "@/ui/images/Logo_schwarz-weiss_opt.png";
 
 export default function Header({ locale }) {
     const pathname = usePathname();
@@ -16,14 +16,14 @@ export default function Header({ locale }) {
             <div className="mx-auto flex max-w-6xl items-center justify-between px-15 py-2">
 
                 {/* Logo */}
-                <Link href={`/${locale}`}>
+                <Link href={`/${locale}`} className="block">
                     <Image
                         src={logo}
-                        alt="Logo"
-                        width={2840}
-                        height={1328}
-                        style={{ width: "90px", height: "auto" }}
+                        alt="ARTelier8 Logo"
+                        width={90}
+                        height={42}
                         priority
+                        className="w-[90px] h-auto opacity-90 hover:opacity-100 transition-opacity duration-300"
                     />
                 </Link>
 

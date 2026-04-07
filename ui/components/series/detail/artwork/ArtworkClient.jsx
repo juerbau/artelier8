@@ -6,7 +6,7 @@ import Link from "next/link"
 
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
-import ArtworkGallery from "@/ui/components/ArtworkGallery"
+import ArtworkGallery from "@/ui/components/series/detail/artwork/ArtworkGallery"
 import { motion } from "motion/react";
 
 
@@ -166,7 +166,6 @@ export default function ArtworkClient({
 
 
                 {/* FALLBACK NAVIGATION */}
-
                 <div className="flex gap-4 mt-8 2xl:hidden">
 
                     {prev && (
@@ -196,7 +195,6 @@ export default function ArtworkClient({
 
 
             {/* SIDE NAVIGATION */}
-
             {prev && (
                 <Link
                     href={`/${locale}/series/${slug}/${prev.slug}`}

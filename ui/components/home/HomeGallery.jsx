@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, AnimatePresence } from "motion/react"
-import { urlFor } from "@/sanity/image"
+import {buildImage} from "@/sanity/image"
 
 export default function HomeGallery({ artworks, locale }) {
 
@@ -83,10 +83,11 @@ export default function HomeGallery({ artworks, locale }) {
                                         >
 
                                             <Image
-                                                src={urlFor(artwork.mainImage).width(1200).url()}
+                                                src={buildImage({ source: artwork.mainImage, width: 1200 })}
                                                 alt={artwork.title || "Artwork"}
                                                 fill
-                                                sizes="33vw"
+                                                sizes="(min-width: 1024px) 33vw, 100vw"
+                                                priority={i === 0}
                                                 className="object-cover"
                                             />
 

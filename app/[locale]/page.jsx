@@ -2,8 +2,8 @@ import HeroQuote from "@/ui/components/home/HeroQuote"
 import HomeGallery from "@/ui/components/home/HomeGallery"
 import ArtistStatement from "@/ui/components/home/ArtistStatement"
 
-//import SeriesGrid from "@/ui/components/SeriesGrid"
-import SeriesList from "@/ui/components/SeriesList";
+// import SeriesGrid from "@/ui/components/series/SeriesGrid"
+import SeriesList from "@/ui/components/series/SeriesList";
 
 import {sanityFetch} from "@/sanity/fetch";
 import {homeSliderQuery} from "@/sanity/queries/home";

@@ -1,6 +1,28 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
-import { urlFor } from "@/sanity/image"
+import {buildImage} from "@/sanity/image"
+import { useState } from "react"
+import clsx from "clsx";
+
+function ArtworkImage({ image, title }) {
+    const [loaded, setLoaded] = useState(false)
+
+    return (
+        <Image
+            src={buildImage({ source: image, width: 1200 })}
+            alt={title}
+            fill
+            sizes="(min-width: 640px) 50vw, 100vw"
+            onLoadingComplete={() => setLoaded(true)}
+            className={clsx(
+                "object-cover transition-opacity duration-700",
+                loaded ? "opacity-100" : "opacity-0"
+            )}
+        />
+    )
+}
 
 
 export default function ArtworkGrid({ artworks, locale, seriesSlug }) {
@@ -28,19 +50,17 @@ export default function ArtworkGrid({ artworks, locale, seriesSlug }) {
 
                                 {/* Bildrahmen */}
                                 <div
-                                    className="rounded-lg border border-white/80 overflow-hidden
-                  transform-gpu transition-transform duration-500 ease-out
-                  group-hover:scale-[1.03] group-hover:shadow-xl"
+                                    className={clsx(
+                                        "rounded-lg border border-white/80 overflow-hidden",
+                                        "transform-gpu transition-transform duration-500 ease-out",
+                                        "group-hover:scale-[1.03] group-hover:shadow-xl"
+                                    )}
                                 >
 
                                     <div className="relative aspect-square overflow-hidden">
-                                        <Image
-                                            src={urlFor(artwork.mainImage).width(1200).url()}
-                                            alt={title}
-                                            fill
-                                            sizes="(min-width: 640px) 50vw, 100vw"
-                                            priority={i === 0}
-                                            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                                        <ArtworkImage
+                                            image={artwork.mainImage}
+                                            title={title}
                                         />
                                     </div>
 

@@ -19,6 +19,12 @@ body {
   color: var(--foreground);
 }
 
+input:-webkit-autofill {
+    box-shadow: 0 0 0 1000px white inset;
+    -webkit-text-fill-color: black;
+}
+
+
 /* =========================================
    MENU TRIGGER LINES
 ========================================= */

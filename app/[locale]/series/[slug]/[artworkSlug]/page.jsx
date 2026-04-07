@@ -3,7 +3,7 @@ import { sanityFetch } from "@/sanity/fetch"
 import { seriesBySlugQuery } from "@/sanity/queries/series"
 
 import BackButton from "@/ui/components/BackButton"
-import ArtworkClient from "@/ui/components/ArtworkClient"
+import ArtworkClient from "@/ui/components/series/detail/artwork/ArtworkClient"
 
 
 export async function generateStaticParams() {

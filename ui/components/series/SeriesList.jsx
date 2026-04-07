@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { motion } from "motion/react"
-import GalleryRoom from "@/ui/components/GalleryRoom"
+import GalleryRoom from "@/ui/components/series/GalleryRoom"
 
 export default function SeriesList({ series, locale }) {
 
@@ -20,13 +20,14 @@ export default function SeriesList({ series, locale }) {
 
                     return (
                         <motion.div
-                            key={item._id}
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-80px" }}
+                            key={item._id} // 👈 HIER rein
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true, amount: 0.2 }}
                             transition={{
-                                duration: 1,
-                                ease: [0.22, 1, 0.36, 1],
+                                duration: 1.2,
+                                ease: [0.25, 0.1, 0.25, 1],
+                                delay: 0
                             }}
                         >
 

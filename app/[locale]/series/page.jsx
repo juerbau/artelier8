@@ -1,5 +1,5 @@
-import SeriesList from "@/ui/components/SeriesList";
-import SeriesIntro from "@/ui/components/SeriesIntro";
+import SeriesList from "@/ui/components/series/SeriesList";
+import SeriesIntro from "@/ui/components/series/SeriesIntro";
 
 import { sanityFetch } from "@/sanity/fetch";
 import { seriesListQuery } from "@/sanity/queries/series";

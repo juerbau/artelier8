@@ -1,13 +1,12 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import {useState, useMemo} from "react"
 import Image from "next/image"
 import dynamic from "next/dynamic"
-
-import { urlFor } from "@/sanity/image"
-
+import {buildImage} from "@/sanity/image"
 import "yet-another-react-lightbox/styles.css"
 import Zoom from "yet-another-react-lightbox/plugins/zoom"
+import clsx from "clsx";
 
 const Lightbox = dynamic(
     () => import("yet-another-react-lightbox"),
@@ -18,11 +17,11 @@ export default function ArtworkGallery({ mainImage, galleryImages, title }) {
 
     const [index, setIndex] = useState(-1)
     const [preview, setPreview] = useState(0)
+    const [loaded, setLoaded] = useState(false)
 
 
 
     /* SAFE ARRAY */
-
     const gallery = useMemo(
         () => (Array.isArray(galleryImages) ? galleryImages : []),
         [galleryImages]
@@ -31,7 +30,6 @@ export default function ArtworkGallery({ mainImage, galleryImages, title }) {
 
 
     /* ALL IMAGES */
-
     const images = useMemo(() => {
 
         if (!mainImage) return gallery
@@ -43,11 +41,10 @@ export default function ArtworkGallery({ mainImage, galleryImages, title }) {
 
 
     /* LIGHTBOX */
-
     const slides = useMemo(
         () =>
             images.map((img) => ({
-                src: urlFor(img).width(3000).auto("format").url()
+                src: buildImage({source: img, width: 3000,})
             })),
         [images]
     )
@@ -55,41 +52,40 @@ export default function ArtworkGallery({ mainImage, galleryImages, title }) {
 
 
     /* MAIN IMAGE */
-
     const mainSrc = useMemo(() => {
 
         if (preview === 0 && mainImage) {
-            return urlFor(mainImage).width(2000).auto("format").url()
+            return buildImage({source: mainImage, width: 1400,})
         }
 
         const img = gallery[preview - 1]
 
-        if (!img) return urlFor(mainImage).width(2000).auto("format").url()
+        if (!img) return buildImage({source: mainImage, width: 1400,})
 
-        return urlFor(img).width(2000).auto("format").url()
+        return buildImage({source: img, width: 2000,})
 
     }, [preview, mainImage, gallery])
+
+    const currentImage =
+        preview === 0
+            ? mainImage
+            : gallery[preview - 1] || mainImage
 
 
 
     /* THUMBNAILS */
-
     const thumbs = useMemo(
         () =>
             gallery.map((img) =>
-                urlFor(img).width(400).auto("format").url()
+                buildImage({source: img, width: 400,})
             ),
         [gallery]
     )
 
 
-
     return (
-
         <div>
-
             {/* MAIN IMAGE */}
-
             {mainSrc && (
 
                 <div
@@ -98,12 +94,19 @@ export default function ArtworkGallery({ mainImage, galleryImages, title }) {
                 >
 
                     <Image
+                        key={mainSrc}
                         src={mainSrc}
                         alt={title || "Artwork"}
                         fill
-                        sizes="(min-width: 768px) 50vw, 100vw"
+                        sizes="(min-width: 1536px) 1100px, (min-width: 1024px) 70vw, 100vw"
                         priority
-                        className="object-cover transition-opacity duration-500"
+                        placeholder="blur"
+                        blurDataURL={currentImage?.asset?.metadata?.lqip}
+                        onLoadingComplete={() => setLoaded(true)}
+                        className={clsx(
+                            "object-cover transition-opacity duration-700",
+                            loaded ? "opacity-100" : "opacity-0"
+                        )}
                     />
 
                 </div>
@@ -113,44 +116,36 @@ export default function ArtworkGallery({ mainImage, galleryImages, title }) {
 
 
             {/* DETAIL IMAGES */}
-
             {gallery.length > 0 && (
-
                 <div
                     className="flex justify-center gap-4 mb-10"
                     onMouseLeave={() => setPreview(0)}
                 >
-
                     {thumbs.map((src, i) => (
-
                         <div
                             key={i}
-                            className="relative flex-1 max-w-30 aspect-square cursor-zoom-in rounded-md border border-white/70 overflow-hidden transition-transform duration-300 hover:scale-105"
+                            className={clsx(
+                                "relative flex-1 max-w-30 aspect-square cursor-zoom-in",
+                                "rounded-md border border-white/70 overflow-hidden transition-transform",
+                                "duration-300 hover:scale-105")}
                             onMouseEnter={() => setPreview(i + 1)}
                             onClick={() => setIndex(i + 1)}
                         >
-
                             <Image
                                 src={src}
                                 alt={`${title || "Artwork"} detail ${i + 1}`}
                                 fill
-                                sizes="(min-width:768px) 120px, 25vw"
+                                sizes="120px"
                                 loading="lazy"
                                 className="object-cover"
                             />
-
                         </div>
-
                     ))}
-
                 </div>
-
             )}
 
 
-
             {/* LIGHTBOX */}
-
             <Lightbox
                 open={index >= 0}
                 index={index}
@@ -178,9 +173,6 @@ export default function ArtworkGallery({ mainImage, galleryImages, title }) {
                     fade: 400
                 }}
             />
-
         </div>
-
     )
-
 }
