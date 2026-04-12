@@ -1,24 +1,39 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import Image from "next/image";
-import clsx from "clsx";
-import { buildImage } from "@/sanity/image";
+import { motion } from "motion/react"
+import Image from "next/image"
+import { buildImage } from "@/sanity/image"
 
 export default function MomentImage({ image, title }) {
-    const [loaded, setLoaded] = useState(false);
+    if (!image) return null
 
     return (
-        <Image
-            src={buildImage({ source: image, width: 1400 })}
-            alt={title}
-            fill
-            sizes="(min-width: 768px) 768px, 100vw"
-            onLoadingComplete={() => setLoaded(true)}
-            className={clsx(
-                "object-cover transition-opacity duration-1000",
-                loaded ? "opacity-100" : "opacity-0"
-            )}
-        />
-    );
+        <motion.div
+            initial={{
+                opacity: 0,
+                scale: 1.04,
+                filter: "brightness(0.92)"
+            }}
+            whileInView={{
+                opacity: 1,
+                scale: 1,
+                filter: "brightness(1)"
+            }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{
+                duration: 1.2,
+                ease: [0.22, 1, 0.36, 1],
+            }}
+            className="absolute inset-0"
+        >
+            <Image
+                src={buildImage({ source: image, width: 1400 })}
+                alt={title}
+                fill
+                sizes="(min-width: 768px) 768px, 100vw"
+                loading="eager"   // 🔥 LCP FIX
+                className="object-cover"
+            />
+        </motion.div>
+    )
 }

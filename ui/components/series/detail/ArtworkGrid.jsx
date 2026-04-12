@@ -1,28 +1,6 @@
-"use client"
-
 import Link from "next/link"
-import Image from "next/image"
-import {buildImage} from "@/sanity/image"
-import { useState } from "react"
 import clsx from "clsx";
-
-function ArtworkImage({ image, title }) {
-    const [loaded, setLoaded] = useState(false)
-
-    return (
-        <Image
-            src={buildImage({ source: image, width: 1200 })}
-            alt={title}
-            fill
-            sizes="(min-width: 640px) 50vw, 100vw"
-            onLoadingComplete={() => setLoaded(true)}
-            className={clsx(
-                "object-cover transition-opacity duration-700",
-                loaded ? "opacity-100" : "opacity-0"
-            )}
-        />
-    )
-}
+import ArtworkImage from "@/ui/components/series/detail/ArtworkImage";
 
 
 export default function ArtworkGrid({ artworks, locale, seriesSlug }) {
@@ -61,6 +39,7 @@ export default function ArtworkGrid({ artworks, locale, seriesSlug }) {
                                         <ArtworkImage
                                             image={artwork.mainImage}
                                             title={title}
+                                            priority={i < 2}
                                         />
                                     </div>
 

@@ -1,5 +1,3 @@
-"use client";
-
 import Portrait from "./Portrait";
 import Studio from "./Studio";
 import Outro from "./Outro";

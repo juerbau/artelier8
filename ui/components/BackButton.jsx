@@ -31,7 +31,7 @@ export default function BackButton({
     return (
         <button
             onClick={handleBack}
-            className="mb-10 flex items-center gap-2 border border-white/30 px-4 py-2 rounded-md text-white/80 hover:bg-white hover:text-black hover:border-white transition group"
+            className="mb-10 flex items-center gap-2 border border-white/30 px-2 py-1 rounded-md text-white/80 hover:bg-white hover:text-black hover:border-white transition group"
         >
 
             <ChevronLeft

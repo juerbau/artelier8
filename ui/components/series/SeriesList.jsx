@@ -11,16 +11,17 @@ export default function SeriesList({ series, locale }) {
 
             <div className="max-w-5xl mx-auto space-y-36">
 
-                {series.map((item, i) => {
+                {series.map((item) => {
 
                     const title =
                         locale === "en" && item.title_en
                             ? item.title_en
                             : item.title_de
 
+
                     return (
                         <motion.div
-                            key={item._id} // 👈 HIER rein
+                            key={item._id}
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             viewport={{ once: true, amount: 0.2 }}

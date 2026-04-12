@@ -59,7 +59,10 @@ export default function Portrait({ image, locale }) {
                             width={1400}
                             height={1800}
                             sizes="(min-width: 768px) 520px, 100vw"
-                            onLoadingComplete={() => setLoaded(true)}
+                            priority
+                            onLoad={(e) => {
+                                if (e.target.complete) setLoaded(true)
+                            }}
                             className={clsx(
                                 "object-cover w-full h-auto transition-opacity duration-1000",
                                 loaded ? "opacity-100" : "opacity-0"

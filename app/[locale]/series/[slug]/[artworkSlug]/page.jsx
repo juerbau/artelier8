@@ -4,6 +4,10 @@ import { seriesBySlugQuery } from "@/sanity/queries/series"
 
 import BackButton from "@/ui/components/BackButton"
 import ArtworkClient from "@/ui/components/series/detail/artwork/ArtworkClient"
+import { notFound } from "next/navigation";
+
+
+
 
 
 export async function generateStaticParams() {
@@ -40,7 +44,7 @@ export default async function ArtworkPage({ params }) {
         params: { slug },
     })
 
-    if (!series) return null
+    if (!series) notFound();
 
     const artworks = series.artworks || []
 
@@ -74,7 +78,7 @@ export default async function ArtworkPage({ params }) {
         <main className="px-6 py-16 relative">
 
             {/* BackButton */}
-            <div className="absolute left-6 top-6 z-10">
+            <div className="absolute left-3 top-3 z-10">
                 <BackButton
                     href={`/${locale}/series/${slug}`}
                     label={locale === "en" ? "to series" : "zur Serie"}

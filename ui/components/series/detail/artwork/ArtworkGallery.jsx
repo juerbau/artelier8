@@ -1,12 +1,13 @@
 "use client"
 
-import {useState, useMemo} from "react"
+import { useState, useMemo } from "react"
+import { motion, AnimatePresence } from "motion/react"
 import Image from "next/image"
 import dynamic from "next/dynamic"
-import {buildImage} from "@/sanity/image"
+import { buildImage } from "@/sanity/image"
 import "yet-another-react-lightbox/styles.css"
 import Zoom from "yet-another-react-lightbox/plugins/zoom"
-import clsx from "clsx";
+import clsx from "clsx"
 
 const Lightbox = dynamic(
     () => import("yet-another-react-lightbox"),
@@ -17,53 +18,26 @@ export default function ArtworkGallery({ mainImage, galleryImages, title }) {
 
     const [index, setIndex] = useState(-1)
     const [preview, setPreview] = useState(0)
-    const [loaded, setLoaded] = useState(false)
 
-
-
-    /* SAFE ARRAY */
     const gallery = useMemo(
         () => (Array.isArray(galleryImages) ? galleryImages : []),
         [galleryImages]
     )
 
-
-
-    /* ALL IMAGES */
-    const images = useMemo(() => {
-
-        if (!mainImage) return gallery
-
-        return [mainImage, ...gallery]
-
-    }, [mainImage, gallery])
-
-
-
-    /* LIGHTBOX */
-    const slides = useMemo(
-        () =>
-            images.map((img) => ({
-                src: buildImage({source: img, width: 3000,})
-            })),
-        [images]
-    )
-
-
-
-    /* MAIN IMAGE */
     const mainSrc = useMemo(() => {
-
         if (preview === 0 && mainImage) {
-            return buildImage({source: mainImage, width: 1400,})
+            return buildImage({ source: mainImage, width: 1400 })
         }
 
         const img = gallery[preview - 1]
 
-        if (!img) return buildImage({source: mainImage, width: 1400,})
+        if (!img) {
+            return mainImage
+                ? buildImage({ source: mainImage, width: 1400 })
+                : null
+        }
 
-        return buildImage({source: img, width: 2000,})
-
+        return buildImage({ source: img, width: 2000 })
     }, [preview, mainImage, gallery])
 
     const currentImage =
@@ -71,51 +45,63 @@ export default function ArtworkGallery({ mainImage, galleryImages, title }) {
             ? mainImage
             : gallery[preview - 1] || mainImage
 
-
-
-    /* THUMBNAILS */
     const thumbs = useMemo(
-        () =>
-            gallery.map((img) =>
-                buildImage({source: img, width: 400,})
-            ),
+        () => gallery.map((img) => buildImage({ source: img, width: 400 })),
         [gallery]
     )
 
 
     return (
         <div>
+
             {/* MAIN IMAGE */}
             {mainSrc && (
-
                 <div
                     className="mb-8 cursor-zoom-in rounded-lg border border-white/80 overflow-hidden relative aspect-square"
                     onClick={() => setIndex(preview)}
                 >
 
-                    <Image
-                        key={mainSrc}
-                        src={mainSrc}
-                        alt={title || "Artwork"}
-                        fill
-                        sizes="(min-width: 1536px) 1100px, (min-width: 1024px) 70vw, 100vw"
-                        priority
-                        placeholder="blur"
-                        blurDataURL={currentImage?.asset?.metadata?.lqip}
-                        onLoadingComplete={() => setLoaded(true)}
-                        className={clsx(
-                            "object-cover transition-opacity duration-700",
-                            loaded ? "opacity-100" : "opacity-0"
-                        )}
-                    />
+                    <AnimatePresence mode="sync">
+                        <motion.div
+                            key={mainSrc}
+                            initial={{
+                                opacity: 0,
+                                scale: 1.04,
+                                filter: "brightness(0.92)"
+                            }}
+                            animate={{
+                                opacity: 1,
+                                scale: 1,
+                                filter: "brightness(1)"
+                            }}
+                            exit={{
+                                opacity: 0,
+                                scale: 1.02,
+                                filter: "brightness(0.95)"
+                            }}
+                            transition={{
+                                duration: 0.9,
+                                ease: [0.22, 1, 0.36, 1],
+                            }}
+                            className="absolute inset-0 z-10"   // 🔥 wichtig!
+                        >
+                            <Image
+                                src={mainSrc}
+                                alt={title || "Artwork"}
+                                fill
+                                sizes="(min-width: 1536px) 1100px, (min-width: 1024px) 70vw, 100vw"
+                                priority={preview === 0}
+                                placeholder="blur"
+                                blurDataURL={currentImage?.asset?.metadata?.lqip}
+                                className="object-cover"
+                            />
+                        </motion.div>
+                    </AnimatePresence>
 
                 </div>
-
             )}
 
-
-
-            {/* DETAIL IMAGES */}
+            {/* THUMBNAILS */}
             {gallery.length > 0 && (
                 <div
                     className="flex justify-center gap-4 mb-10"
@@ -127,7 +113,8 @@ export default function ArtworkGallery({ mainImage, galleryImages, title }) {
                             className={clsx(
                                 "relative flex-1 max-w-30 aspect-square cursor-zoom-in",
                                 "rounded-md border border-white/70 overflow-hidden transition-transform",
-                                "duration-300 hover:scale-105")}
+                                "duration-300 hover:scale-105"
+                            )}
                             onMouseEnter={() => setPreview(i + 1)}
                             onClick={() => setIndex(i + 1)}
                         >
@@ -144,35 +131,29 @@ export default function ArtworkGallery({ mainImage, galleryImages, title }) {
                 </div>
             )}
 
-
             {/* LIGHTBOX */}
             <Lightbox
                 open={index >= 0}
                 index={index}
                 close={() => setIndex(-1)}
-                slides={slides}
+                slides={(gallery.length ? [mainImage, ...gallery] : [mainImage]).map(img => ({
+                    src: buildImage({ source: img, width: 3000 })
+                }))}
                 plugins={[Zoom]}
-                zoom={{
-                    maxZoomPixelRatio: 4
-                }}
+                zoom={{ maxZoomPixelRatio: 4 }}
                 styles={{
-                    container: {
-                        backgroundColor: "#7B8794"
-                    },
+                    container: { backgroundColor: "#7B8794" },
                     button: {
                         backgroundColor: "rgba(0, 0, 0, 0.5)",
                         backdropFilter: "blur(8px)",
                         borderRadius: "9999px",
                         padding: "5px",
                     },
-                    icon: {
-                        color: "#fff"
-                    }
+                    icon: { color: "#fff" }
                 }}
-                animation={{
-                    fade: 400
-                }}
+                animation={{ fade: 400 }}
             />
+
         </div>
     )
 }

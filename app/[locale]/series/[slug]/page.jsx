@@ -5,6 +5,38 @@ import ArtworkGrid from "@/ui/components/series/detail/ArtworkGrid";
 import BackButton from "@/ui/components/BackButton";
 import SeriesDetailIntro from "@/ui/components/series/detail/SeriesDetailIntro";
 import SeriesPageClient from "@/ui/components/series/detail/SeriesPageClient";
+import { buildMetadata } from "@/lib/seo";
+import { notFound } from "next/navigation";
+
+
+export async function generateMetadata({ params }) {
+    const { slug, locale } = await params;
+
+    const series = await sanityFetch({
+        query: seriesBySlugQuery,
+        params: { slug },
+    });
+
+    if (!series) return {};
+
+    const title =
+        locale === "de"
+            ? `${series.title_de} — ARTelier8`
+            : `${series.title_en} — ARTelier8`;
+
+    const description =
+        locale === "de"
+            ? series.intro_de
+            : series.intro_en;
+
+    return buildMetadata({
+        title,
+        description,
+        image: series.image?.asset?.url || "https://artelier8.vercel.app/fallback.jpg",
+        locale,
+        path: `/series/${slug}`,
+    });
+}
 
 
 export async function generateStaticParams() {
@@ -35,7 +67,7 @@ export default async function SeriesPage({ params }) {
         params: { slug },
     });
 
-    if (!series) return null
+    if (!series) notFound();
 
 
     const title =
@@ -48,7 +80,7 @@ export default async function SeriesPage({ params }) {
         <main className="px-6 py-16 relative">
 
             {/* BackButton */}
-            <div className="absolute left-6 top-6 z-10">
+            <div className="absolute left-3 top-3 z-10">
                 <BackButton
                     href={`/${locale}/series/`}
                     label={locale === "en" ? "to series overview" : "zur Serienübersicht"}

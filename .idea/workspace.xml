@@ -5,38 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ac7733e-90f9-4642-90d6-514a21181d09" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/ui/components/footer/Footer.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/components/header/Header.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/components/header/ResponsiveNav.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/layout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/layout.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/[locale]/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/page.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/[locale]/series/[slug]/[artworkSlug]/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/series/[slug]/[artworkSlug]/page.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/[locale]/series/[slug]/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/series/[slug]/page.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/[locale]/series/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/series/page.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/layout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sanity/queries/about.js" beforeDir="false" afterPath="$PROJECT_DIR$/sanity/queries/about.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sanity/queries/series.js" beforeDir="false" afterPath="$PROJECT_DIR$/sanity/queries/series.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/back.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/ArtworkClient.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/detail/artwork/ArtworkClient.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/ArtworkGallery.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/detail/artwork/ArtworkGallery.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/ArtworkGrid.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/detail/ArtworkGrid.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/Footer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/GalleryRoom.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/GalleryRoom.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/Header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/SeriesDetailIntro.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/detail/SeriesDetailIntro.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/SeriesGrid.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/SeriesGrid.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/SeriesIntro.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/SeriesIntro.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/SeriesList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/SeriesList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/SeriesPageClient.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/detail/SeriesPageClient.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/SeriesTest.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/i18n.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/i18n.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/BackButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/BackButton.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/Footer.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/Header.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/ResponsiveNav.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/about/AboutClient.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/about/AboutClient.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/components/about/Portrait.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/about/Portrait.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/components/about/Studio.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/about/Studio.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/components/contact/ContactForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/contact/ContactForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/contact/FormField.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/contact/FormField.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/components/home/HomeGallery.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/home/HomeGallery.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/moments/MomentsClient.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/moments/MomentsClient.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/images/Bild1.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/images/Serien-16zu9_ergebnis.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/images/creative_opt.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/images/schlicht.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/moments/MomentImage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/moments/MomentImage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/series/SeriesIntro.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/SeriesIntro.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/series/SeriesList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/SeriesList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/series/detail/ArtworkGrid.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/detail/ArtworkGrid.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/series/detail/artwork/ArtworkGallery.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/detail/artwork/ArtworkGallery.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,11 +109,11 @@
       <recent name="$PROJECT_DIR$/app/[locale]/contact" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ui/components/footer" />
+      <recent name="$PROJECT_DIR$/ui/components/header" />
+      <recent name="$PROJECT_DIR$/ui/components/series/detail" />
       <recent name="$PROJECT_DIR$/app/[locale]" />
       <recent name="$PROJECT_DIR$/ui/components/series" />
-      <recent name="$PROJECT_DIR$/ui/components/series/detail" />
-      <recent name="$PROJECT_DIR$/ui/components/series/detail/artwork" />
-      <recent name="$PROJECT_DIR$/ui/components/home" />
     </key>
   </component>
   <component name="RunManager" selected="npm.Next.js: server-side">
@@ -154,7 +146,7 @@
       <option name="presentableId" value="Default" />
       <updated>1774779245175</updated>
       <workItem from="1774779246555" duration="17229000" />
-      <workItem from="1775378616187" duration="43453000" />
+      <workItem from="1775378616187" duration="80216000" />
     </task>
     <servers />
   </component>

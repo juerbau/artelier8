@@ -108,7 +108,7 @@ export default function ContactForm({ locale, setStatus }) {
     return (
         <form
             onSubmit={handleSubmit}
-            className="max-w-[520px] mx-auto mt-[6vh] mb-[20vh] flex flex-col gap-8 text-left"
+            className="max-w-[520px] mx-auto mt-[6vh] mb-[20vh] flex flex-col gap-1 text-left"
         >
             <FormField
                 label={content.firstName}

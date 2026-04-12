@@ -56,7 +56,9 @@ export default function Studio({ image, text }) {
                             alt="Studio"
                             width={1000}
                             height={700}
-                            onLoadingComplete={() => setLoaded(true)}
+                            onLoad={(e) => {
+                                if (e.target.complete) setLoaded(true)
+                            }}
                             className={clsx(
                                 "object-cover w-full h-auto transition-opacity duration-700",
                                 loaded ? "opacity-100" : "opacity-0"
