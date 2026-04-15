@@ -3,6 +3,23 @@ import MomentsClient from "@/ui/components/moments/MomentsClient";
 
 import { sanityFetch } from "@/sanity/fetch";
 import { momentsQuery } from "@/sanity/queries/moments";
+import { buildMetadata } from "@/lib/seo";
+
+export async function generateMetadata({ params }) {
+    const { locale } = await params;
+
+    const isDe = locale === "de";
+
+    return buildMetadata({
+        title: isDe ? "Momente - ARTelier8" : "Moments - ARTelier8",
+        description: isDe
+            ? "Ausgewählte Momente, Ausstellungen und Einblicke rund um die Arbeiten von ARTelier8."
+            : "Selected moments, exhibitions, and insights surrounding the work of ARTelier8.",
+        image: "https://artelier8.vercel.app/fallback.jpg",
+        locale,
+        path: "/moments",
+    });
+}
 
 export default async function MomentsPage({ params }) {
     const { locale } = await params;

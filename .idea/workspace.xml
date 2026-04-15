@@ -5,30 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ac7733e-90f9-4642-90d6-514a21181d09" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ui/components/footer/Footer.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/components/header/Header.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/components/header/ResponsiveNav.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/[locale]/layout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/layout.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/about/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/about/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/contact/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/contact/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/moments/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/moments/page.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/[locale]/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/page.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/[locale]/series/[slug]/[artworkSlug]/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/series/[slug]/[artworkSlug]/page.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/[locale]/series/[slug]/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/series/[slug]/page.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/i18n.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/i18n.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/BackButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/BackButton.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/Footer.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/Header.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/ResponsiveNav.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/about/AboutClient.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/about/AboutClient.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/about/Portrait.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/about/Portrait.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/about/Studio.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/about/Studio.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/contact/ContactForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/contact/ContactForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/series/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/series/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/seo.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/seo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/components/home/HomeGallery.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/home/HomeGallery.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/moments/MomentImage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/moments/MomentImage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/series/SeriesIntro.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/SeriesIntro.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/series/SeriesList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/SeriesList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/series/detail/ArtworkGrid.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/detail/ArtworkGrid.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/series/detail/artwork/ArtworkGallery.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/detail/artwork/ArtworkGallery.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,8 +25,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="JSX File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -70,30 +57,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
-    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
-    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/jurgenbauer/WebstormProjects/artelier8/app/api/contact&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.Next.js: server-side.executor&quot;: &quot;Run&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pathVariables&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "javascript.preferred.runtime.type.id": "node",
+    "js.debugger.nextJs.config.created.client": "true",
+    "js.debugger.nextJs.config.created.server": "true",
+    "last_opened_file_path": "/Users/jurgenbauer/WebstormProjects/artelier8/app",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.Next.js: server-side.executor": "Run",
+    "settings.editor.selected.configurable": "preferences.pathVariables",
+    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -105,15 +92,16 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$/app/api/contact" />
       <recent name="$PROJECT_DIR$/app/[locale]/contact" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/ui/components/footer" />
       <recent name="$PROJECT_DIR$/ui/components/header" />
       <recent name="$PROJECT_DIR$/ui/components/series/detail" />
-      <recent name="$PROJECT_DIR$/app/[locale]" />
-      <recent name="$PROJECT_DIR$/ui/components/series" />
     </key>
   </component>
   <component name="RunManager" selected="npm.Next.js: server-side">
@@ -146,7 +134,7 @@
       <option name="presentableId" value="Default" />
       <updated>1774779245175</updated>
       <workItem from="1774779246555" duration="17229000" />
-      <workItem from="1775378616187" duration="80216000" />
+      <workItem from="1775378616187" duration="91534000" />
     </task>
     <servers />
   </component>

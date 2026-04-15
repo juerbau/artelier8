@@ -21,8 +21,8 @@ export async function generateMetadata({ params }) {
 
     const title =
         locale === "de"
-            ? `${series.title_de} — ARTelier8`
-            : `${series.title_en} — ARTelier8`;
+            ? `${series.title_de} - ARTelier8`
+            : `${series.title_en} - ARTelier8`;
 
     const description =
         locale === "de"

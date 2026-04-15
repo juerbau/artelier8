@@ -8,8 +8,6 @@ import SeriesList from "@/ui/components/series/SeriesList";
 import {sanityFetch} from "@/sanity/fetch";
 import {homeSliderQuery} from "@/sanity/queries/home";
 import {seriesListQuery} from "@/sanity/queries/series";
-
-
 import { buildMetadata } from "@/lib/seo"
 
 
@@ -22,13 +20,13 @@ export async function generateMetadata({ params }) {
             : "ARTelier8 — Contemporary Works",
 
         description: locale === "de"
-            ? "Eine kuratierte digitale Ausstellung zeitgenössischer Arbeiten, geprägt von Stille, Oberfläche und Atmosphäre."
-            : "A curated digital exhibition of contemporary works shaped by silence, surface, and atmosphere.",
+            ? "Eine kuratierte digitale Ausstellung zeitgenössischer Malerei, geprägt von Stille, Oberfläche und Atmosphäre."
+            : "A curated digital exhibition of contemporary painting, shaped by silence, surface, and atmosphere.",
     }
 
     return buildMetadata({
         ...t,
-        image: "https://artelier8.vercel.app/og/home.jpg", // vorerst statisch oder später ersetzen
+        image: "/og/home.jpg",
         locale,
         path: "/",
     })

@@ -2,6 +2,23 @@ import AboutClient from "@/ui/components/about/AboutClient";
 
 import { sanityFetch } from "@/sanity/fetch";
 import { aboutImagesQuery } from "@/sanity/queries/about";
+import { buildMetadata } from "@/lib/seo";
+
+export async function generateMetadata({ params }) {
+    const { locale } = await params;
+
+    const isDe = locale === "de";
+
+    return buildMetadata({
+        title: isDe ? "Über mich - ARTelier8" : "About me - ARTelier8",
+        description: isDe
+            ? "Über die Künstlerin, das Studio und den kuratorischen Ansatz hinter ARTelier8."
+            : "About the artist, the studio, and the curatorial approach behind ARTelier8.",
+        image: "https://artelier8.vercel.app/fallback.jpg",
+        locale,
+        path: "/about",
+    });
+}
 
 export default async function AboutPage({ params }) {
     const { locale } = await params;

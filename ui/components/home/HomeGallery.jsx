@@ -87,7 +87,7 @@ export default function HomeGallery({ artworks, locale }) {
                                                 alt={artwork.title || "Artwork"}
                                                 fill
                                                 sizes="(min-width: 1024px) 33vw, 100vw"
-                                                loading={i === 0 ? "eager" : "lazy"}
+                                                priority={i === 0}
                                                 className="object-cover"
                                             />
 
