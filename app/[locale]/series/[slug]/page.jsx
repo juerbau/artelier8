@@ -7,7 +7,12 @@ import SeriesDetailIntro from "@/ui/components/series/detail/SeriesDetailIntro";
 import SeriesPageClient from "@/ui/components/series/detail/SeriesPageClient";
 import { buildMetadata } from "@/lib/seo";
 import { notFound } from "next/navigation";
+import { buildImage } from "@/sanity/image";
 
+
+/* =========================
+   Metadata
+========================= */
 
 export async function generateMetadata({ params }) {
     const { slug, locale } = await params;
@@ -17,49 +22,71 @@ export async function generateMetadata({ params }) {
         params: { slug },
     });
 
-    if (!series) return {};
+    // Stabiler Fallback statt leerem Objekt
+    if (!series) {
+        return buildMetadata({
+            title: "Series",
+            description: "",
+            image: "/og/fallback.jpg",
+            locale,
+            path: `/series/${slug}`,
+        });
+    }
+
+    const ogImage = buildImage({
+        source: series?.ogImage,
+        width: 1200,
+        height: 630,
+        fit: "crop",
+    });
 
     const title =
         locale === "de"
-            ? `${series.title_de} - ARTelier8`
-            : `${series.title_en} - ARTelier8`;
+            ? `${series.title_de}`
+            : `${series.title_en}`;
 
     const description =
         locale === "de"
-            ? series.intro_de
-            : series.intro_en;
+            ? series.intro_de || ""
+            : series.intro_en || "";
 
     return buildMetadata({
         title,
         description,
-        image: series.image?.asset?.url || "https://artelier8.vercel.app/fallback.jpg",
+        image: ogImage || "/og/fallback.jpg",
         locale,
         path: `/series/${slug}`,
     });
 }
 
 
+/* =========================
+   Static Params
+========================= */
+
 export async function generateStaticParams() {
-
     const series = await client.fetch(`
-    *[_type == "series" && defined(slug.current)]{
-      "slug": slug.current
-    }
-  `)
+        *[_type == "series" && defined(slug.current)]{
+            "slug": slug.current
+        }
+    `);
 
-    const locales = ["de", "en"]
+    const locales = ["de", "en"];
 
     return series.flatMap((s) =>
         locales.map((locale) => ({
             locale,
-            slug: s.slug
+            slug: s.slug,
         }))
-    )
+    );
 }
 
 
-export default async function SeriesPage({ params }) {
+/* =========================
+   Page
+========================= */
 
+export default async function SeriesPage({ params }) {
     const { slug, locale } = await params;
 
     const series = await sanityFetch({
@@ -69,17 +96,15 @@ export default async function SeriesPage({ params }) {
 
     if (!series) notFound();
 
-
     const title =
         locale === "en"
             ? series.title_en
-            : series.title_de
-
+            : series.title_de;
 
     return (
         <main className="px-6 py-16 relative">
 
-            {/* BackButton */}
+            {/* Back Button */}
             <div className="absolute left-3 top-3 z-10">
                 <BackButton
                     href={`/${locale}/series/`}
@@ -111,7 +136,6 @@ export default async function SeriesPage({ params }) {
                     />
                 }
             />
-
         </main>
     );
 }

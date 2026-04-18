@@ -5,7 +5,6 @@ export const seriesListQuery = `
     title_de,
     title_en,
     slug,
-    image,
     previewArtworks[]->{
       _id,
       mainImage
@@ -57,7 +56,7 @@ export const seriesBySlugQuery = `
         }
       }
     },
-
+    ogImage,
     size,
     technique_de,
     technique_en,
@@ -67,4 +66,19 @@ export const seriesBySlugQuery = `
     description_en
   }
 }
+`;
+
+// sanity/queries/series.js
+
+export const artworkBySlugInSeriesQuery = `
+  *[_type == "series" && slug.current == $slug][0]{
+    title_de,
+    title_en,
+
+    "artwork": artworks[slug.current == $artworkSlug][0]{
+      title_de,
+      title_en,
+      mainImage,
+    }
+  }
 `;

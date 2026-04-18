@@ -28,7 +28,7 @@ export default function GalleryRoom({ series }) {
 
     const artworks = series.previewArtworks?.length
         ? series.previewArtworks.slice(0, 3)
-        : [{ _id: "fallback", mainImage: series.image }]
+        : [];
 
     return (
         <div className="relative w-full aspect-video overflow-hidden">

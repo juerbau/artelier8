@@ -1,8 +1,12 @@
-import LegalLayout from "@/ui/components/legal/LegalLayout"
+import LegalLayout from "@/ui/components/legal/LegalLayout";
 
 export const metadata = {
-    title: "Datenschutz – ARTelier8",
-}
+    title: "Datenschutz",
+    robots: {
+        index: false,
+        follow: true,
+    },
+};
 
 export default function PrivacyPage() {
     return (

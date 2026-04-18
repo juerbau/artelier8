@@ -1,7 +1,7 @@
 import LegalLayout from "@/ui/components/legal/LegalLayout"
 
 export const metadata = {
-    title: "Impressum – ARTelier8",
+    title: "Impressum",
     robots: { index: false, follow: true },
 }
 

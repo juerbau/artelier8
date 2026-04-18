@@ -8,14 +8,19 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/[locale]/about/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/about/page.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/[locale]/contact/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/contact/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/imprint/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/imprint/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/[locale]/moments/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/moments/page.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/[locale]/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/privacy/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/privacy/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/[locale]/series/[slug]/[artworkSlug]/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/series/[slug]/[artworkSlug]/page.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/[locale]/series/[slug]/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/series/[slug]/page.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/[locale]/series/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/series/page.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/seo.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/seo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/home/HomeGallery.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/home/HomeGallery.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/og/home.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/og/fallback.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sanity/queries/series.js" beforeDir="false" afterPath="$PROJECT_DIR$/sanity/queries/series.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/series/GalleryRoom.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/GalleryRoom.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/series/SeriesGrid.jsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +139,7 @@
       <option name="presentableId" value="Default" />
       <updated>1774779245175</updated>
       <workItem from="1774779246555" duration="17229000" />
-      <workItem from="1775378616187" duration="91534000" />
+      <workItem from="1775378616187" duration="100783000" />
     </task>
     <servers />
   </component>

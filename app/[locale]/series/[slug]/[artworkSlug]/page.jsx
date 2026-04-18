@@ -1,55 +1,68 @@
 import { client } from "@/sanity/client"
 import { sanityFetch } from "@/sanity/fetch"
-import { seriesBySlugQuery } from "@/sanity/queries/series"
-
+import {artworkBySlugInSeriesQuery, seriesBySlugQuery} from "@/sanity/queries/series"
 import BackButton from "@/ui/components/BackButton"
 import ArtworkClient from "@/ui/components/series/detail/artwork/ArtworkClient"
 import { notFound } from "next/navigation";
 import { buildMetadata } from "@/lib/seo"
-
+import {buildImage} from "@/sanity/image";
 
 
 export async function generateMetadata({ params }) {
-    const { slug, artworkSlug, locale } = await params
+    const { slug, artworkSlug, locale } = await params;
 
-    const series = await sanityFetch({
-        query: seriesBySlugQuery,
-        params: { slug },
-    })
+    const data = await sanityFetch({
+        query: artworkBySlugInSeriesQuery,
+        params: { slug, artworkSlug },
+    });
 
-    if (!series) return {}
+    const artwork = data?.artwork;
 
-    const artworks = series.artworks || []
+    // Stabiler Fallback
+    if (!artwork) {
+        return buildMetadata({
+            title: "Artwork",
+            description: "",
+            image: "/og/fallback.jpg",
+            locale,
+            path: `/series/${slug}/${artworkSlug}`,
+        });
+    }
 
-    const artwork = artworks.find((art) => art.slug === artworkSlug)
+    // OG Image (sauber skaliert)
+    const ogImage = buildImage({
+        source: artwork.mainImage,
+        width: 1200,
+        height: 630,
+        fit: "crop",
+    });
 
-    if (!artwork) return {}
-
-    const title = artwork.year
-        ? `${artwork.title} — ${artwork.year}`
-        : artwork.title
-
-    const seriesTitle =
+    // Title
+    const title =
         locale === "de"
-            ? series.title_de
-            : series.title_en
+            ? `${artwork.title}`
+            : `${artwork.title}`;
 
-    const description =
+    // Description (primär Artwork, fallback Serie)
+    const rawDescription =
         locale === "de"
-            ? seriesTitle
-                ? `Malerei${artwork.year ? `, ${artwork.year}` : ""}. Teil der Serie ${seriesTitle}.`
-                : `Malerei${artwork.year ? `, ${artwork.year}` : ""}.`
-            : seriesTitle
-                ? `Painting${artwork.year ? `, ${artwork.year}` : ""}. Part of the series ${seriesTitle}.`
-                : `Painting${artwork.year ? `, ${artwork.year}` : ""}.`
+            ? artwork.description_de
+            : artwork.description_en;
+
+    const fallbackDescription =
+        locale === "de"
+            ? `Ein Werk aus der Serie "${data?.title_de}".`
+            : `A work from the series "${data?.title_en}".`;
+
+    const description = rawDescription || fallbackDescription || "";
 
     return buildMetadata({
         title,
         description,
-        image: artwork.mainImage?.asset?.url || "https://artelier8.vercel.app/fallback.jpg",
+        image: ogImage || "/og/fallback.jpg",
         locale,
         path: `/series/${slug}/${artworkSlug}`,
-    })
+    });
 }
 
 

@@ -1,32 +1,40 @@
 import HeroQuote from "@/ui/components/home/HeroQuote"
 import HomeGallery from "@/ui/components/home/HomeGallery"
 import ArtistStatement from "@/ui/components/home/ArtistStatement"
-
-// import SeriesGrid from "@/ui/components/series/SeriesGrid"
 import SeriesList from "@/ui/components/series/SeriesList";
-
 import {sanityFetch} from "@/sanity/fetch";
 import {homeSliderQuery} from "@/sanity/queries/home";
 import {seriesListQuery} from "@/sanity/queries/series";
 import { buildMetadata } from "@/lib/seo"
+import {openGraphQuery} from "@/sanity/queries/openGraph";
+import {buildImage} from "@/sanity/image";
 
 
 export async function generateMetadata({ params }) {
     const { locale } = await params;
 
-    const t = {
-        title: locale === "de"
-            ? "ARTelier8 — Zeitgenössische Arbeiten"
-            : "ARTelier8 — Contemporary Works",
+    const openGraph = await sanityFetch({
+        query: openGraphQuery
+    });
 
+    const ogImage = buildImage({
+        source: openGraph?.ogHome,
+        width: 1200,
+        height: 630,
+        fit: "crop",
+    });
+
+
+    return buildMetadata({
+        title: {
+            absolute: locale === "de"
+                ? "ARTelier8 — Zeitgenössische Arbeiten"
+                : "ARTelier8 — Contemporary Works",
+        },
         description: locale === "de"
             ? "Eine kuratierte digitale Ausstellung zeitgenössischer Malerei, geprägt von Stille, Oberfläche und Atmosphäre."
             : "A curated digital exhibition of contemporary painting, shaped by silence, surface, and atmosphere.",
-    }
-
-    return buildMetadata({
-        ...t,
-        image: "/og/home.jpg",
+        image: ogImage || "/og/fallback.jpg",
         locale,
         path: "/",
     })
@@ -63,14 +71,6 @@ export default async function HomePage({ params }) {
                     series={series}
                     locale={locale}
                 />
-
-
-                {/*<SeriesGrid
-                    series={series}
-                    locale={locale}
-                    animated
-                    mode="home"
-                />*/}
 
             </section>
 

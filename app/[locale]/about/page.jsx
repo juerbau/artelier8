@@ -10,11 +10,11 @@ export async function generateMetadata({ params }) {
     const isDe = locale === "de";
 
     return buildMetadata({
-        title: isDe ? "Über mich - ARTelier8" : "About me - ARTelier8",
+        title: isDe ? "Über mich" : "About me",
         description: isDe
             ? "Über die Künstlerin, das Studio und den kuratorischen Ansatz hinter ARTelier8."
             : "About the artist, the studio, and the curatorial approach behind ARTelier8.",
-        image: "https://artelier8.vercel.app/fallback.jpg",
+        image: "/og/fallback.jpg",
         locale,
         path: "/about",
     });
