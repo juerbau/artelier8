@@ -1,6 +1,6 @@
 import { client } from "@/sanity/client"
 import { sanityFetch } from "@/sanity/fetch"
-import {artworkBySlugInSeriesQuery, seriesBySlugQuery} from "@/sanity/queries/series"
+import {artworkPageQuery, seriesBySlugQuery} from "@/sanity/queries/series"
 import BackButton from "@/ui/components/BackButton"
 import ArtworkClient from "@/ui/components/series/detail/artwork/ArtworkClient"
 import { notFound } from "next/navigation";
@@ -12,11 +12,16 @@ export async function generateMetadata({ params }) {
     const { slug, artworkSlug, locale } = await params;
 
     const data = await sanityFetch({
-        query: artworkBySlugInSeriesQuery,
+        query: artworkPageQuery,
         params: { slug, artworkSlug },
     });
 
     const artwork = data?.artwork;
+    const series = data?.series;
+
+
+    console.log('artwork: ', artwork);
+
 
     // Stabiler Fallback
     if (!artwork) {
@@ -38,10 +43,7 @@ export async function generateMetadata({ params }) {
     });
 
     // Title
-    const title =
-        locale === "de"
-            ? `${artwork.title}`
-            : `${artwork.title}`;
+    const title = artwork.title;
 
     // Description (primär Artwork, fallback Serie)
     const rawDescription =
@@ -51,8 +53,8 @@ export async function generateMetadata({ params }) {
 
     const fallbackDescription =
         locale === "de"
-            ? `Ein Werk aus der Serie "${data?.title_de}".`
-            : `A work from the series "${data?.title_en}".`;
+            ? `Ein Werk aus der Serie "${series?.title_de}".`
+            : `A work from the series "${series?.title_en}".`;
 
     const description = rawDescription || fallbackDescription || "";
 

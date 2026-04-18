@@ -11,7 +11,7 @@ export async function POST(req) {
             return new Response("Unauthorized", { status: 401 });
         }
 
-        // 🧠 Body parsen (optional)
+        // 🧠 Body parsen
         let body = null;
 
         try {
@@ -25,28 +25,44 @@ export async function POST(req) {
 
         console.log("🔄 Revalidation triggered:", { type, slug });
 
-        // 🌍 Basis-Seiten (immer sinnvoll)
-        const basePaths = ["/", "/de", "/en"];
-        basePaths.forEach((path) => revalidatePath(path));
+        const locales = ["de", "en"];
+
+        // 🌍 Basis-Seiten
+        ["/", "/de", "/en"].forEach((path) => revalidatePath(path));
 
         // =========================
         // 🧠 TYPE-BASED LOGIC
         // =========================
 
         switch (type) {
+
+            // =========================
+            // 🏠 GLOBAL OPEN GRAPH
+            // =========================
+            case "openGraph": {
+                locales.forEach((locale) => {
+                    revalidatePath(`/${locale}/series`);
+                });
+
+                break;
+            }
+
             // =========================
             // 🎬 SERIES
             // =========================
             case "series": {
                 const seriesSlug = slug;
 
-                revalidatePath("/de/series");
-                revalidatePath("/en/series");
+                locales.forEach((locale) => {
+                    revalidatePath(`/${locale}/series`);
 
-                if (seriesSlug) {
-                    revalidatePath(`/de/series/${seriesSlug}`);
-                    revalidatePath(`/en/series/${seriesSlug}`);
-                }
+                    if (seriesSlug) {
+                        revalidatePath(`/${locale}/series/${seriesSlug}`);
+                    }
+                });
+
+                // 🆕 Sitemap aktualisieren
+                revalidatePath("/sitemap.xml");
 
                 break;
             }
@@ -59,25 +75,27 @@ export async function POST(req) {
 
                 if (!artworkSlug) break;
 
-                // 🔎 Finde die Series über artworks[]
+                // 🔎 Finde die Series
                 const result = await client.fetch(
                     `
-          *[_type == "series" && $slug in artworks[]->slug.current][0]{
-            "slug": slug.current
-          }
-        `,
+                    *[_type == "series" && $slug in artworks[]->slug.current][0]{
+                        "slug": slug.current
+                    }
+                    `,
                     { slug: artworkSlug }
                 );
 
                 const seriesSlug = result?.slug;
 
                 if (seriesSlug) {
-                    revalidatePath(`/de/series/${seriesSlug}/${artworkSlug}`);
-                    revalidatePath(`/en/series/${seriesSlug}/${artworkSlug}`);
+                    locales.forEach((locale) => {
+                        revalidatePath(`/${locale}/series/${seriesSlug}/${artworkSlug}`);
+                        revalidatePath(`/${locale}/series`);
+                    });
 
-                    // auch Serienübersicht neu laden (Reihenfolge / Inhalte)
-                    revalidatePath("/de/series");
-                    revalidatePath("/en/series");
+                    // 🆕 Sitemap aktualisieren
+                    revalidatePath("/sitemap.xml");
+
                 } else {
                     console.warn("⚠️ No series found for artwork:", artworkSlug);
                 }
@@ -89,8 +107,9 @@ export async function POST(req) {
             // 👤 ABOUT
             // =========================
             case "aboutPage": {
-                revalidatePath("/de/about");
-                revalidatePath("/en/about");
+                locales.forEach((locale) => {
+                    revalidatePath(`/${locale}/about`);
+                });
                 break;
             }
 
@@ -99,8 +118,9 @@ export async function POST(req) {
             // =========================
             case "moment":
             case "momentsPage": {
-                revalidatePath("/de/moments");
-                revalidatePath("/en/moments");
+                locales.forEach((locale) => {
+                    revalidatePath(`/${locale}/moments`);
+                });
                 break;
             }
 
@@ -109,9 +129,7 @@ export async function POST(req) {
             // =========================
             case "homeSlider":
             case "seriesList": {
-                revalidatePath("/");
-                revalidatePath("/de");
-                revalidatePath("/en");
+                ["/", "/de", "/en"].forEach((path) => revalidatePath(path));
                 break;
             }
 
@@ -129,6 +147,7 @@ export async function POST(req) {
             type,
             slug,
         });
+
     } catch (error) {
         console.error("❌ Revalidation error:", error);
 

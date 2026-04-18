@@ -21,7 +21,8 @@ export const seriesBySlugQuery = `
   intro_de,
   intro_en,
   "slug": slug.current,
-
+  ogImage,
+  
   artworks[]->{
     _id,
     title,
@@ -56,7 +57,6 @@ export const seriesBySlugQuery = `
         }
       }
     },
-    ogImage,
     size,
     technique_de,
     technique_en,
@@ -68,17 +68,18 @@ export const seriesBySlugQuery = `
 }
 `;
 
-// sanity/queries/series.js
+export const artworkPageQuery = `
+{
+  "artwork": *[_type == "artwork" && slug.current == $artworkSlug][0]{
+    title,
+    description_de,
+    description_en,
+    mainImage
+  },
 
-export const artworkBySlugInSeriesQuery = `
-  *[_type == "series" && slug.current == $slug][0]{
+  "series": *[_type == "series" && slug.current == $slug][0]{
     title_de,
-    title_en,
-
-    "artwork": artworks[slug.current == $artworkSlug][0]{
-      title_de,
-      title_en,
-      mainImage,
-    }
+    title_en
   }
+}
 `;

@@ -22,6 +22,7 @@ export async function generateMetadata({ params }) {
         params: { slug },
     });
 
+
     // Stabiler Fallback statt leerem Objekt
     if (!series) {
         return buildMetadata({
