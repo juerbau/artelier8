@@ -74,7 +74,9 @@ export const artworkPageQuery = `
     title,
     description_de,
     description_en,
-    mainImage
+    mainImage,
+    _updatedAt,
+    _rev
   },
 
   "series": *[_type == "series" && slug.current == $slug][0]{

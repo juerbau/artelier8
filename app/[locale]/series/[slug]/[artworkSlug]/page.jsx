@@ -35,12 +35,15 @@ export async function generateMetadata({ params }) {
     }
 
     // OG Image (sauber skaliert)
-    const ogImage = buildImage({
+    const ogImageBase = buildImage({
         source: artwork.mainImage,
         width: 1200,
         height: 630,
         fit: "crop",
     });
+    const ogImage = ogImageBase
+        ? `${ogImageBase}&v=${artwork._rev}`
+        : null;
 
     // Title
     const title = artwork.title;
