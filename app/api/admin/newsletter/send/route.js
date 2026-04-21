@@ -1,22 +1,16 @@
 import { NextResponse } from "next/server"
 import { Resend } from "resend"
-import { client } from "@/sanity/client"
+import { writeClient } from "@/sanity/writeClient"
 import { buildImage } from "@/sanity/image"
 import { getCurrentReadyNewsletter } from "@/lib/newsletter/get-current-ready-newsletter"
 import { getActiveSubscribers } from "@/lib/newsletter/get-active-subscribers"
 import { buildNewsletterEmailHtml } from "@/lib/newsletter/buildNewsletterEmailHtml"
-//import { requireBasicAuth } from "@/lib/auth/requireBasicAuth"
 import { acquireNewsletterSendLock, releaseNewsletterSendLock } from "@/lib/newsletter/send-lock"
 import { getEmailFrom } from "@/lib/email/config"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-export async function POST(req) {
-    // const authError = requireBasicAuth(req)
-    //
-    // if (authError) {
-    //     return authError
-    // }
+export async function POST() {
 
     const lockAcquired = await acquireNewsletterSendLock()
 
@@ -38,6 +32,7 @@ export async function POST(req) {
         }
 
         const newsletter = await getCurrentReadyNewsletter()
+        console.log("SEND DEBUG newsletter:", newsletter)
 
         if (!newsletter) {
             return NextResponse.json(
@@ -54,6 +49,7 @@ export async function POST(req) {
         }
 
         const subscribers = await getActiveSubscribers()
+        console.log("SEND DEBUG subscribers:", subscribers)
 
         if (!subscribers.length) {
             return NextResponse.json(
@@ -168,7 +164,7 @@ export async function POST(req) {
             })
         }
 
-        await client
+        await writeClient
             .patch(newsletter._id)
             .set({
                 status: "sent",
@@ -189,10 +185,11 @@ export async function POST(req) {
         console.error("Newsletter send error:", error)
 
         return NextResponse.json(
-            { error: "Failed to send newsletter" },
+            {
+                error: "Failed to send newsletter",
+                details: error?.message || "Unknown error",
+            },
             { status: 500 }
         )
-    } finally {
-        await releaseNewsletterSendLock()
     }
 }
