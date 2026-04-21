@@ -1,6 +1,7 @@
 import Link from "next/link"
 import clsx from "clsx";
 import ArtworkImage from "@/ui/components/series/detail/ArtworkImage";
+import SoldLabel from "@/ui/components/SoldLabel"
 
 
 export default function ArtworkGrid({ artworks, locale, seriesSlug }) {
@@ -41,6 +42,13 @@ export default function ArtworkGrid({ artworks, locale, seriesSlug }) {
                                             title={title}
                                             priority={i < 2}
                                         />
+
+                                        {artwork.sold && (
+                                            <SoldLabel
+                                                locale={locale}
+                                                className="absolute top-4 right-4"
+                                            />
+                                        )}
                                     </div>
 
                                 </div>

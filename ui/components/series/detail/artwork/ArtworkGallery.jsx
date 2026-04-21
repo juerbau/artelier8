@@ -8,13 +8,14 @@ import { buildImage } from "@/sanity/image"
 import "yet-another-react-lightbox/styles.css"
 import Zoom from "yet-another-react-lightbox/plugins/zoom"
 import clsx from "clsx"
+import SoldLabel from "@/ui/components/SoldLabel";
 
 const Lightbox = dynamic(
     () => import("yet-another-react-lightbox"),
     { ssr: false }
 )
 
-export default function ArtworkGallery({ mainImage, galleryImages, title }) {
+export default function ArtworkGallery({ mainImage, galleryImages, title, sold, locale }) {
 
     const [index, setIndex] = useState(-1)
     const [preview, setPreview] = useState(0)
@@ -97,6 +98,12 @@ export default function ArtworkGallery({ mainImage, galleryImages, title }) {
                             />
                         </motion.div>
                     </AnimatePresence>
+                    {sold && (
+                        <SoldLabel
+                            locale={locale}
+                            className="absolute top-4 right-4 z-20"
+                        />
+                    )}
 
                 </div>
             )}

@@ -109,6 +109,8 @@ export default function ArtworkClient({
                     mainImage={artwork?.mainImage}
                     galleryImages={artwork?.galleryImages}
                     title={title}
+                    sold={artwork.sold}
+                    locale={locale}
                 />
 
             </div>

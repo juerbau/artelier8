@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "mode": "test",
+  "locale": "en",
+  "sentTo": "artelier8.web@gmail.com",
+  "result": {
+    "data": {
+      "id": "d9d2bdb5-95a6-4fd5-b8d2-4e02f92c2678"
+    },
+    "error": null,
+    "headers": {
+      "cf-cache-status": "DYNAMIC",
+      "cf-ray": "9eeecb48eaf2f551-FRA",
+      "connection": "keep-alive",
+      "content-length": "45",
+      "content-type": "application/json",
+      "date": "Sun, 19 Apr 2026 20:52:38 GMT",
+      "ratelimit-limit": "5",
+      "ratelimit-policy": "5;w=1",
+      "ratelimit-remaining": "4",
+      "ratelimit-reset": "1",
+      "server": "cloudflare",
+      "x-resend-daily-quota": "4",
+      "x-resend-monthly-quota": "32"
+    }
+  }
+}

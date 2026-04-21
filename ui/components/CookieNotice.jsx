@@ -48,7 +48,7 @@ export default function CookieNotice() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed bottom-6 left-0 w-full flex justify-center pointer-events-none"
+            className="fixed bottom-6 left-0 w-full flex justify-center pointer-events-none z-40"
         >
             <div className="w-full max-w-6xl px-6 flex justify-center">
                 <div className="pointer-events-auto text-sm text-white bg-white/5 backdrop-blur-md px-5 py-3 rounded-full">

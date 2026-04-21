@@ -1,0 +1,224 @@
+POST http://localhost:3000/api/admin/newsletter/test
+Authorization: Basic YWRtaW46c2VjcmV0
+Content-Type: application/json
+Content-Length: 16
+User-Agent: IntelliJ HTTP Client/WebStorm 2026.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{"locale": "en"}
+
+<> 2026-04-19T225238.200.json
+
+###
+
+POST http://localhost:3000/api/admin/newsletter/test
+Authorization: Basic YWRtaW46c2VjcmV0
+Content-Type: application/json
+Content-Length: 16
+User-Agent: IntelliJ HTTP Client/WebStorm 2026.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{"locale": "en"}
+
+<> 2026-04-19T222118.200.json
+
+###
+
+POST http://localhost:3000/api/admin/newsletter/test
+Authorization: Basic YWRtaW46c2VjcmV0
+Content-Type: application/json
+Content-Length: 16
+User-Agent: IntelliJ HTTP Client/WebStorm 2026.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{"locale": "de"}
+
+<> 2026-04-19T221526.200.json
+
+###
+
+POST http://localhost:3000/api/admin/newsletter/test
+Authorization: Basic YWRtaW46c2VjcmV0
+Content-Type: application/json
+Content-Length: 16
+User-Agent: IntelliJ HTTP Client/WebStorm 2026.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{"locale": "de"}
+
+<> 2026-04-19T221035.200.json
+
+###
+
+POST http://localhost:3000/api/admin/newsletter/test
+Authorization: admin:secret
+Content-Type: application/json
+Content-Length: 16
+User-Agent: IntelliJ HTTP Client/WebStorm 2026.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{"locale": "de"}
+
+<> 2026-04-19T220704.401.txt
+
+###
+
+POST http://localhost:3000/api/admin/newsletter/test
+Authorization: admin:secret
+Content-Type: application/json
+Content-Length: 16
+User-Agent: IntelliJ HTTP Client/WebStorm 2026.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{"locale": "de"}
+
+<> 2026-04-19T220637.401.txt
+
+###
+
+POST http://localhost:3000/api/admin/newsletter/test
+Authorization: admin:secret
+Content-Type: application/json
+Content-Length: 16
+User-Agent: IntelliJ HTTP Client/WebStorm 2026.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{"locale": "de"}
+
+<> 2026-04-19T220630.401.txt
+
+###
+
+POST http://localhost:3000/api/admin/newsletter/test
+Authorization: Basic base64(admin:secret)
+Content-Type: application/json
+Content-Length: 16
+User-Agent: IntelliJ HTTP Client/WebStorm 2026.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{"locale": "de"}
+
+<> 2026-04-19T220500.401.txt
+
+###
+
+POST http://localhost:3000/api/admin/newsletter/test
+Authorization: Basic base64(admin:secret)
+Content-Type: application/json
+Content-Length: 16
+User-Agent: IntelliJ HTTP Client/WebStorm 2026.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{"locale": "de"}
+
+<> 2026-04-19T215932.401.txt
+
+###
+
+POST http://localhost:3000/api/admin/newsletter/test
+Authorization: Basic base64(admin:secret)
+Content-Type: application/json
+Content-Length: 16
+User-Agent: IntelliJ HTTP Client/WebStorm 2026.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{"locale": "de"}
+
+<> 2026-04-19T215858.401.txt
+
+###
+
+POST http://localhost:3000/api/admin/newsletter/test
+Authorization: Basic base64(admin:secret)
+Content-Type: application/json
+Content-Length: 16
+User-Agent: IntelliJ HTTP Client/WebStorm 2026.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{"locale": "de"}
+
+<> 2026-04-19T215728.401.txt
+
+###
+
+POST http://localhost:3000/api/admin/newsletter/test
+Authorization: Basic base64(admin:secret)
+Content-Type: application/json
+Content-Length: 16
+User-Agent: IntelliJ HTTP Client/WebStorm 2026.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{"locale": "de"}
+
+<> 2026-04-19T215534.401.txt
+
+###
+
+POST http://localhost:3000/api/admin/newsletter/test
+Authorization: Basic base64(admin:secret)
+Content-Type: application/json
+Content-Length: 16
+User-Agent: IntelliJ HTTP Client/WebStorm 2026.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{"locale": "de"}
+
+<> 2026-04-19T215502.401.txt
+
+###
+
+POST http://localhost:3000/api/admin/newsletter/test
+Authorization: Basic base64(admin:secret)
+Content-Type: application/json
+Content-Length: 16
+User-Agent: IntelliJ HTTP Client/WebStorm 2026.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{"locale": "de"}
+
+<> 2026-04-19T215143.401.txt
+
+###
+
+POST http://localhost:3000/api/admin/newsletter/test
+Authorization: Basic base64(admin:secret)
+Content-Type: application/json
+Content-Length: 16
+User-Agent: IntelliJ HTTP Client/WebStorm 2026.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{"locale": "de"}
+
+<> 2026-04-19T215029.401.txt
+
+###
+
+POST http://localhost:3000/api/admin/newsletter/test
+Authorization: Basic base64(admin:secret)
+Content-Type: application/json
+Content-Length: 16
+User-Agent: IntelliJ HTTP Client/WebStorm 2026.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{"locale": "de"}
+
+<> 2026-04-19T214508.401.txt
+
+###
+

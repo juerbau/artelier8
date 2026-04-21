@@ -20,9 +20,6 @@ export async function generateMetadata({ params }) {
     const series = data?.series;
 
 
-    console.log('artwork: ', artwork);
-
-
     // Stabiler Fallback
     if (!artwork) {
         return buildMetadata({

@@ -1,7 +1,9 @@
 import { Resend } from "resend"
 import { checkRateLimit } from "@/lib/security/rate-limit"
 import {getContactSchema} from "@/lib/validation/contact-schema"
-import ContactNotificationEmail from "@/ui/emails/ContactNotificationEmail"
+import ContactNotificationEmail from "@/ui/components/emails/ContactNotificationEmail"
+import {getEmailFrom} from "@/lib/email/config";
+
 
 // Resend Setup
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -64,12 +66,15 @@ export async function POST(req) {
         console.log("8. VALIDATION OK")
 
         const { firstName, lastName, email, message } = result.data
+        const from = getEmailFrom()
 
         console.log("9. BEFORE RESEND")
 
+
+
         // Mail senden
         const { error } = await resend.emails.send({
-            from: "Portfolio Contact <onboarding@resend.dev>", // später eigene Domain!
+            from: from,
             to: ["artelier8.web@gmail.com"],
             reply_to: email,
             subject: `Neue Anfrage von ${firstName} ${lastName}`,

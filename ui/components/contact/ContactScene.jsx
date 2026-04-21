@@ -6,6 +6,7 @@ import ContactIntro from "./ContactIntro"
 import ContactForm from "./ContactForm"
 import ContactSuccessMessage from "./ContactSuccessMessage"
 import { contactForm } from "@/lib/i18n"
+import NewsletterSignup from "@/ui/components/newsletter/NewsletterSignup"
 
 export default function ContactScene({ locale }) {
     const [status, setStatus] = useState("form")
@@ -25,6 +26,7 @@ export default function ContactScene({ locale }) {
                 >
                     <ContactIntro locale={locale} />
                     <ContactForm locale={locale} setStatus={setStatus} />
+                    <NewsletterSignup locale={locale} />
                 </motion.div>
             ) : (
                 <motion.div

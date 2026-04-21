@@ -5,7 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ac7733e-90f9-4642-90d6-514a21181d09" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/series/[slug]/[artworkSlug]/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/series/[slug]/[artworkSlug]/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/contact/route.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/contact/route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/security/rate-limit.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/security/rate-limit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/validation/contact-schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/validation/contact-schema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/CookieNotice.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/CookieNotice.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/contact/ContactScene.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/contact/ContactScene.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/series/detail/ArtworkGrid.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/detail/ArtworkGrid.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/series/detail/artwork/ArtworkClient.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/detail/artwork/ArtworkClient.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/series/detail/artwork/ArtworkGallery.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/detail/artwork/ArtworkGallery.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/emails/ContactNotificationEmail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/emails/ContactNotificationEmail.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +49,10 @@
     &quot;accountId&quot;: &quot;0910bdae-70a7-4a8c-ad7d-f98c5e584430&quot;
   }
 }</component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 5
@@ -49,6 +67,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "HTTP Request.rest-api_3 | #1.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -87,14 +106,30 @@
       <recent name="$PROJECT_DIR$/app/[locale]/contact" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/api/admin/newsletter" />
+      <recent name="$PROJECT_DIR$/app/api" />
+      <recent name="$PROJECT_DIR$/app/api/newsletter/admin" />
+      <recent name="$PROJECT_DIR$/ui/components" />
       <recent name="$PROJECT_DIR$/app" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/ui/components/footer" />
-      <recent name="$PROJECT_DIR$/ui/components/header" />
-      <recent name="$PROJECT_DIR$/ui/components/series/detail" />
     </key>
   </component>
+  <component name="RunDashboard">
+    <option name="configurationStatuses">
+      <map>
+        <entry key="HttpClient.HttpRequestRunConfigurationType">
+          <value>
+            <map>
+              <entry key="rest-api_3 | #1" value="STOPPED" />
+            </map>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="RunManager" selected="npm.Next.js: server-side">
+    <configuration name="rest-api_3 | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/rest-api_3.http" executionIdentifier="#1" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
       <method v="2" />
     </configuration>
@@ -108,6 +143,11 @@
       <envs />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.rest-api_3 | #1" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -124,7 +164,8 @@
       <option name="presentableId" value="Default" />
       <updated>1774779245175</updated>
       <workItem from="1774779246555" duration="17229000" />
-      <workItem from="1775378616187" duration="105414000" />
+      <workItem from="1775378616187" duration="116098000" />
+      <workItem from="1776582521201" duration="27819000" />
     </task>
     <servers />
   </component>
