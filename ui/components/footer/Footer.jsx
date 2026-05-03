@@ -5,7 +5,7 @@ import LegalLink from "@/ui/components/footer/LegalLink"
 
 export default function Footer({ locale }) {
     return (
-        <footer className="mt-24 bg-gray-600">
+        <footer className="font-roboto bg-gray-600">
             <div className="mx-auto max-w-6xl px-6 md:px-15 py-6">
 
                 <div

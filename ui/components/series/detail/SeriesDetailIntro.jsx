@@ -22,7 +22,7 @@ export default function SeriesDetailIntro({ intro }) {
     const lines = intro.split("\n");
 
     return (
-        <section className="pt-16 pb-20 md:pt-20 md:pb-24 font-serif text-center">
+        <section className="pt-16 pb-20 md:pt-20 md:pb-24 text-center">
 
             <div className="max-w-xl mx-auto px-6">
 

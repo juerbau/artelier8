@@ -31,7 +31,7 @@ export default function ContactScene({ locale }) {
             ) : (
                 <motion.div
                     key="success"
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
                     transition={{

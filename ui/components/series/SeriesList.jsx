@@ -1,5 +1,6 @@
 "use client"
 
+import clsx from "clsx";
 import Link from "next/link"
 import { motion } from "motion/react"
 import GalleryRoom from "@/ui/components/series/GalleryRoom"
@@ -7,7 +8,10 @@ import GalleryRoom from "@/ui/components/series/GalleryRoom"
 export default function SeriesList({ series, locale }) {
 
     return (
-        <section className="px-6 py-20">
+        <section className={clsx(
+            "px-6",
+            "pt-16"
+        )}>
 
             <div className="max-w-5xl mx-auto space-y-36">
 
@@ -38,7 +42,7 @@ export default function SeriesList({ series, locale }) {
                             >
 
                                 {/* 🏷️ Titel */}
-                                <div className="mb-10 text-center text-3xl md:text-4xl font-serif text-white">
+                                <div className="mb-10 text-center text-3xl md:text-4xl text-white">
                                     {title}
                                 </div>
 

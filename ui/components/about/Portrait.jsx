@@ -10,7 +10,7 @@ import {buildImage} from "../../../sanity/image";
 const ease = [0.22, 1, 0.36, 1];
 
 const item = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 30 },
     show: {
         opacity: 1,
         y: 0,
@@ -29,7 +29,7 @@ export default function Portrait({ image, locale }) {
     const content = aboutContent[safeLocale].portrait;
 
     return (
-        <section className="pt-20 pb-4 md:pt-24 md:pb-6 font-serif text-center">
+        <section className="text-center">
 
             <div className="max-w-3xl mx-auto px-6 flex flex-col items-center">
 
@@ -50,7 +50,7 @@ export default function Portrait({ image, locale }) {
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true, margin: "-120px" }}
-                    className="w-full max-w-[520px] mb-16"
+                    className="w-full max-w-130 mb-16"
                 >
                     <div className="rounded-lg border border-white/80 overflow-hidden">
                         <Image

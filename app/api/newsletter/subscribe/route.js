@@ -79,6 +79,15 @@ export async function POST(req) {
 
         const from = getEmailFrom()
 
+        const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+
+        if (!siteUrl) {
+            return NextResponse.json(
+                { error: "Missing NEXT_PUBLIC_SITE_URL" },
+                { status: 500 }
+            )
+        }
+
         // Pending: neue Bestätigungsmail senden
         if (existing?.status === "pending") {
             if (existing.pendingToken) {
@@ -86,18 +95,23 @@ export async function POST(req) {
             }
 
             const newToken = crypto.randomBytes(32).toString("hex")
+            const unsubscribeToken =
+                existing.unsubscribeToken || crypto.randomBytes(32).toString("hex")
             const tokenKey = `newsletter:token:${newToken}`
 
             const updatedSubscriber = {
                 ...existing,
                 locale,
                 pendingToken: newToken,
+                unsubscribeToken,
             }
 
             await redis.set(subscriberKey, JSON.stringify(updatedSubscriber))
             await redis.set(tokenKey, email, { ex: 60 * 60 * 24 })
+            await redis.set(`newsletter:unsubscribe:${unsubscribeToken}`, email)
 
-            const confirmUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/api/newsletter/confirm?token=${newToken}`
+            const confirmUrl = `${siteUrl}/api/newsletter/confirm?token=${newToken}&locale=${locale}`
+
             const content = getMailContent({ locale, confirmUrl })
 
             const result = await resend.emails.send({
@@ -129,6 +143,7 @@ export async function POST(req) {
         // Neuer Subscriber
         const token = crypto.randomBytes(32).toString("hex")
         const tokenKey = `newsletter:token:${token}`
+        const unsubscribeToken = crypto.randomBytes(32).toString("hex")
 
         const subscriber = {
             email,
@@ -137,12 +152,15 @@ export async function POST(req) {
             createdAt: Date.now(),
             confirmedAt: null,
             pendingToken: token,
+            unsubscribeToken,
         }
 
         await redis.set(subscriberKey, JSON.stringify(subscriber))
-        await redis.set(tokenKey, email, { ex: 60 })
+        await redis.set(tokenKey, email, { ex: 60 * 60 * 24 })
+        await redis.set(`newsletter:unsubscribe:${unsubscribeToken}`, email)
 
-        const confirmUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/api/newsletter/confirm?token=${token}`
+        const confirmUrl = `${siteUrl}/api/newsletter/confirm?token=${token}&locale=${locale}`
+
         const content = getMailContent({ locale, confirmUrl })
 
         const result = await resend.emails.send({

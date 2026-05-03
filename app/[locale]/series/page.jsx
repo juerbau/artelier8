@@ -25,8 +25,8 @@ export async function generateMetadata({ params }) {
     return buildMetadata({
         title: isDe ? "Serien" : "Series",
         description: isDe
-            ? "Kuratierte Werkreihen, in denen sich Motive, Stimmungen und Bildgedanken über einzelne Arbeiten hinaus entfalten."
-            : "Curated bodies of work in which motifs, moods, and visual ideas unfold beyond the individual piece.",
+            ? "Serien zeitgenössischer Kunst von Bettina Hagedorn: Motive entwickeln sich weiter, verändern sich und gewinnen eine eigene Präsenz."
+            : "Series of contemporary art by Bettina Hagedorn: motifs evolve, shift, and develop their own presence.",
         image: ogImage || "/og/fallback.jpg",
         locale,
         path: "/series",
@@ -42,13 +42,10 @@ export default async function SeriesPage({ params }) {
     });
 
     return (
-        <main>
+        <div className="space-y-20">
             <SeriesIntro locale={locale} />
-
-            <SeriesList
-                series={series || []}
-                locale={locale}
+            <SeriesList series={series || []} locale={locale}
             />
-        </main>
+        </div>
     );
 }

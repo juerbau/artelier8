@@ -2,14 +2,8 @@ import { NextResponse } from "next/server"
 import { buildImage } from "@/sanity/image"
 import { getCurrentReadyNewsletter } from "@/lib/newsletter/get-current-ready-newsletter"
 import { buildNewsletterEmailHtml } from "@/lib/newsletter/buildNewsletterEmailHtml"
-// import { requireBasicAuth } from "@/lib/auth/requireBasicAuth"
 
 export async function GET(req) {
-    // const authError = requireBasicAuth(req)
-    //
-    // if (authError) {
-    //     return authError
-    // }
 
     try {
         const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
@@ -54,11 +48,14 @@ export async function GET(req) {
             })
             : null
 
+        const unsubscribeUrl = `${siteUrl}/?newsletter=preview-unsubscribe`
+
         const html = await buildNewsletterEmailHtml({
             newsletter,
             locale,
             imageUrl,
             targetUrl,
+            unsubscribeUrl
         })
 
         return new NextResponse(html, {

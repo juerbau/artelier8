@@ -31,7 +31,7 @@ export default function FormField({
 
     return (
         <div>
-            <label htmlFor={id} className="block text-sm text-neutral-600 mb-2">
+            <label htmlFor={id} className="block text-sm mb-2">
                 {label}
             </label>
 

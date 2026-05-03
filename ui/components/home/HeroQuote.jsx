@@ -2,47 +2,43 @@
 
 import { motion } from "motion/react"
 
-export default function HeroQuote() {
-    return (
-        <section className="pt-10 md:pt-14 text-center overflow-hidden">
+export default function HeroQuote({ locale = "de" }) {
 
-            {/* 🔥 TITLE */}
+    const safeLocale = locale?.startsWith("de") ? "de" : "en"
+
+    const content = {
+        de: "Werke mit Präsenz und Charakter.",
+        en: "Works with presence and character.",
+    }
+
+    return (
+        <section className="text-center overflow-hidden">
+
+            {/* ARTelier8 */}
             <motion.h1
-                initial={{
-                    opacity: 0,
-                    y: 20
-                }}
-                animate={{
-                    opacity: 1,
-                    y: 0
-                }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{
-                    duration: 1.4,
+                    duration: 1.35,
                     ease: [0.22, 1, 0.36, 1],
                 }}
-                className="font-serif text-5xl md:text-7xl tracking-tight leading-tight"
+                className="font-light text-[clamp(3.2rem,7vw,5rem)] leading-none tracking-[-0.035em]"
             >
-                Luxury Art
+                ARTelier8
             </motion.h1>
 
-            {/* 🔥 SUBTITLE */}
+            {/* Subtitle */}
             <motion.p
-                initial={{
-                    opacity: 0,
-                    y: 10
-                }}
-                animate={{
-                    opacity: 1,
-                    y: 0
-                }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{
-                    duration: 1.4,
-                    delay: 0.4,
+                    duration: 1.2,
+                    delay: 0.35, // 🔥 leicht nachgezogen → wirkt edel
                     ease: [0.22, 1, 0.36, 1],
                 }}
-                className="mt-3 text-xl font-serif md:text-2xl tracking-wide"
+                className="mt-4 md:mt-6 font-art text-2xl md:text-3xl leading-tight text-white"
             >
-                personal & timeless
+                {content[safeLocale]}
             </motion.p>
 
         </section>

@@ -9,7 +9,7 @@ import {buildImage, urlFor} from "@/sanity/image";
 const ease = [0.22, 1, 0.36, 1];
 
 const item = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 30 },
     show: {
         opacity: 1,
         y: 0,
@@ -27,7 +27,7 @@ export default function Studio({ image, text }) {
     const blocks = text.split("\n\n");
 
     return (
-        <section className="pt-0 pb-0 font-serif text-center">
+        <section className="text-center">
 
             <div className="max-w-3xl mx-auto px-6 flex flex-col items-center">
 

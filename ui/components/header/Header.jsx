@@ -4,7 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import Image from "next/image"
 
-import LangSwitch from "@/ui/components/LangSwitch"
+import LangSwitch from "@/ui/components/header/LangSwitch"
 import ResponsiveNav from "@/ui/components/header/ResponsiveNav"
 
 import logo from "@/ui/images/Logo_schwarz-weiss_opt.png"
@@ -14,7 +14,7 @@ export default function Header({ locale }) {
     const pathname = usePathname()
 
     return (
-        <header className="w-full bg-gray-600">
+        <header className="font-roboto w-full bg-gray-600">
             <div
                 className={clsx(
                     "mx-auto flex max-w-6xl items-center",

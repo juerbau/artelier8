@@ -1,4 +1,6 @@
-export default function ContactSuccessMessage({ success, setStatus }) {
+import clsx from "clsx";
+
+export default function ContactSuccessMessage({success, setStatus}) {
     return (
         <div className="text-center max-w-md mx-auto py-24">
             <p className="text-base leading-relaxed whitespace-pre-line">
@@ -7,14 +9,13 @@ export default function ContactSuccessMessage({ success, setStatus }) {
 
             <button
                 onClick={() => setStatus("form")}
-                className="
-          mt-8
-          text-sm
-          text-neutral-500
-          hover:text-black
-          transition-colors duration-200
-          cursor-pointer
-        "
+                className={clsx(
+                    "mt-8",
+                    "text-sm",
+                    "hover:text-black",
+                    "transition-colors duration-200",
+                    "cursor-pointer"
+                )}
             >
                 Neue Nachricht schreiben
             </button>

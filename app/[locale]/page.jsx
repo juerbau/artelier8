@@ -28,12 +28,12 @@ export async function generateMetadata({ params }) {
     return buildMetadata({
         title: {
             absolute: locale === "de"
-                ? "ARTelier8 — Zeitgenössische Arbeiten"
-                : "ARTelier8 — Contemporary Works",
+                ? "ARTelier8 — Werke mit Präsenz und Charakter"
+                : "ARTelier8 — Works with Presence and Character",
         },
         description: locale === "de"
-            ? "Eine kuratierte digitale Ausstellung zeitgenössischer Malerei, geprägt von Stille, Oberfläche und Atmosphäre."
-            : "A curated digital exhibition of contemporary painting, shaped by silence, surface, and atmosphere.",
+            ? "Zeitgenössische Kunst von Bettina Hagedorn: Werke mit Präsenz und Charakter, geprägt von Struktur, Freiheit, Tiefe und Spannung."
+            : "Contemporary art by Bettina Hagedorn: works with presence and character, shaped by structure, freedom, depth, and tension.",
         image: ogImage || "/og/fallback.jpg",
         locale,
         path: "/",
@@ -52,28 +52,11 @@ export default async function HomePage({ params }) {
     ]);
 
     return (
-        <main>
-
+        <div className="space-y-16">
             <HeroQuote />
-
-            <div className="mt-4 sm:mt-6 md:mt-10 lg:mt-14">
-                <HomeGallery artworks={artworks} locale={locale} />
-            </div>
-
-
-            <div className="mt-12 sm:mt-14 md:mt-18 lg:mt-24">
-                <ArtistStatement locale={locale} />
-            </div>
-
-            <section className="mt-15 sm:mt-15 md:mt-15 lg:mt-15">
-
-                <SeriesList
-                    series={series}
-                    locale={locale}
-                />
-
-            </section>
-
-        </main>
+            <HomeGallery artworks={artworks} locale={locale} />
+            <ArtistStatement locale={locale} />
+            <SeriesList series={series} locale={locale} />
+        </div>
     )
 }

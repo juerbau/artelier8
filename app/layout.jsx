@@ -1,4 +1,4 @@
-import {gochi, playfair, roboto} from "@/ui/fonts";
+import {playfair, roboto, robotoSerif} from "@/ui/fonts";
 import "@/app/globals.css";
 import CookieNotice from "@/ui/components/CookieNotice";
 import {siteUrl} from "@/lib/site";
@@ -23,8 +23,8 @@ export const metadata = {
 
 export default function RootLayout({children}) {
     return (
-        <html lang="de" className={roboto.className}>
-        <body className={`${gochi.variable} ${playfair.variable} antialiased`}>
+        <html lang="de">
+        <body className={`${robotoSerif.variable} ${roboto.variable} font-sans antialiased`}>
                 {children}
                 <ScrollTopButton />
                 <CookieNotice />

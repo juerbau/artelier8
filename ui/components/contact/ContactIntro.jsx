@@ -9,16 +9,19 @@ export default function ContactIntro({ locale }) {
 
     return (
         <motion.section
-            className="mt-[22vh] mb-[10vh] text-center"
-            initial={{ opacity: 0, y: 24 }}
+            className="mb-[10vh] px-6 text-center font-art"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
                 duration: 1.2,
                 ease: [0.22, 1, 0.36, 1],
             }}
         >
-            <p className="text-[22px] leading-[1.7]">{content.line1}</p>
-            <p className="text-[22px] leading-[1.7]">{content.line2}</p>
+            <div className="text-2xl md:text-3xl leading-[1.45]">
+                {content.lines.map((line, i) => (
+                    <div key={i}>{line}</div>
+                ))}
+            </div>
         </motion.section>
     )
 }

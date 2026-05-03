@@ -6,8 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="4ac7733e-90f9-4642-90d6-514a21181d09" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/admin/newsletter/preview/route.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/admin/newsletter/preview/route.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/api/admin/newsletter/send/route.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/admin/newsletter/send/route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/admin/newsletter/test/route.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/admin/newsletter/test/route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/newsletter/confirm/route.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/newsletter/confirm/route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/newsletter/subscribe/route.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/newsletter/subscribe/route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/auth/requireBasicAuth.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/newsletter/buildNewsletterEmailHtml.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/newsletter/buildNewsletterEmailHtml.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/newsletter/get-active-subscribers.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/newsletter/get-active-subscribers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/emails/NewsletterEmail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/emails/NewsletterEmail.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JSX File" />
         <option value="JavaScript File" />
+        <option value="JSX File" />
       </list>
     </option>
   </component>
@@ -94,11 +101,11 @@
       <recent name="$PROJECT_DIR$/app/[locale]/contact" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/newsletter/unsubscribed" />
       <recent name="$PROJECT_DIR$/app/api/admin/newsletter" />
       <recent name="$PROJECT_DIR$/app/api" />
       <recent name="$PROJECT_DIR$/app/api/newsletter/admin" />
       <recent name="$PROJECT_DIR$/ui/components" />
-      <recent name="$PROJECT_DIR$/app" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -140,7 +147,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-3bd3a6803838-JavaScript-WS-261.22158.274" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-WS-261.23567.141" />
       </set>
     </attachedChunks>
   </component>
@@ -154,7 +161,9 @@
       <workItem from="1774779246555" duration="17229000" />
       <workItem from="1775378616187" duration="116098000" />
       <workItem from="1776582521201" duration="27880000" />
-      <workItem from="1776794873078" duration="5873000" />
+      <workItem from="1776794873078" duration="6943000" />
+      <workItem from="1776860999540" duration="22791000" />
+      <workItem from="1777212731547" duration="8779000" />
     </task>
     <servers />
   </component>

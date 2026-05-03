@@ -1,0 +1,13 @@
+import NewsletterUnsubscribeMessage from "@/ui/components/newsletter/NewsletterUnsubscribeMessage"
+
+export default async function Page({ searchParams }) {
+    const params = await searchParams
+    const locale = params?.locale?.startsWith("de") ? "de" : "en"
+
+    return (
+        <NewsletterUnsubscribeMessage
+            type="success"
+            locale={locale}
+        />
+    )
+}

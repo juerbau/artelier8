@@ -5,7 +5,7 @@ import MomentImage from "@/ui/components/moments/MomentImage";
 
 export default function MomentsClient({ moments, locale }) {
     return (
-        <div className="flex flex-col items-center gap-24 md:gap-28">
+        <section className="flex flex-col items-center gap-24 md:gap-28">
             {moments.map((moment) => {
                 const description =
                     locale === "de"
@@ -53,6 +53,6 @@ export default function MomentsClient({ moments, locale }) {
                     </motion.article>
                 );
             })}
-        </div>
+        </section>
     );
 }

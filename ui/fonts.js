@@ -1,23 +1,13 @@
-import { Gochi_Hand, Open_Sans, Roboto } from 'next/font/google';
-import { Playfair_Display } from "next/font/google"
+import { Roboto, Roboto_Serif } from "next/font/google";
 
-export const playfair = Playfair_Display({
+export const robotoSerif = Roboto_Serif({
     subsets: ["latin"],
-    weight: ["400", "500", "600", "700"],
-    variable: "--font-playfair",
+    weight: ["300", "400", "500"],
+    variable: "--font-roboto-serif",
 });
 
-export const openSans = Open_Sans({
-    weight: ['400', '500'],
-    subsets: ['latin']}
-);
-
 export const roboto = Roboto({
-    subsets: ['latin']}
-);
-
-export const gochi = Gochi_Hand({
-    weight: ['400'],
-    variable: '--font-gochi-hand',
-    subsets: ['latin']}
-);
+    subsets: ["latin"],
+    weight: ["300", "400", "500", "700"],
+    variable: "--font-roboto",
+});

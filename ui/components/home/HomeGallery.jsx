@@ -1,5 +1,6 @@
 "use client"
 
+import clsx from "clsx";
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
@@ -29,7 +30,9 @@ export default function HomeGallery({ artworks, locale }) {
     ]
 
     return (
-        <section className="px-4 sm:px-6">
+        <section className={clsx(
+            "px-4 sm:px-6",
+        )}>
 
             <motion.div
                 initial={{ opacity: 0, y: 30 }}

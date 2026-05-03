@@ -11,7 +11,6 @@ import { getEmailFrom } from "@/lib/email/config"
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST() {
-
     const lockAcquired = await acquireNewsletterSendLock()
 
     if (!lockAcquired) {
@@ -32,7 +31,6 @@ export async function POST() {
         }
 
         const newsletter = await getCurrentReadyNewsletter()
-        console.log("SEND DEBUG newsletter:", newsletter)
 
         if (!newsletter) {
             return NextResponse.json(
@@ -49,7 +47,6 @@ export async function POST() {
         }
 
         const subscribers = await getActiveSubscribers()
-        console.log("SEND DEBUG subscribers:", subscribers)
 
         if (!subscribers.length) {
             return NextResponse.json(
@@ -57,14 +54,6 @@ export async function POST() {
                 { status: 404 }
             )
         }
-
-        const deRecipients = subscribers.filter(
-            (subscriber) => subscriber.locale === "de"
-        )
-
-        const enRecipients = subscribers.filter(
-            (subscriber) => subscriber.locale !== "de"
-        )
 
         const slug = newsletter?.slug?.current
 
@@ -80,34 +69,49 @@ export async function POST() {
             })
             : null
 
-        const htmlDe = await buildNewsletterEmailHtml({
-            newsletter,
-            locale: "de",
-            imageUrl,
-            targetUrl,
-        })
-
-        const htmlEn = await buildNewsletterEmailHtml({
-            newsletter,
-            locale: "en",
-            imageUrl,
-            targetUrl,
-        })
-
         const from = getEmailFrom()
-
         const sendResults = []
 
-        for (const subscriber of deRecipients) {
+        for (const subscriber of subscribers) {
+            const locale = subscriber.locale === "de" ? "de" : "en"
+
+            if (!subscriber.unsubscribeToken) {
+                console.error("Missing unsubscribeToken for subscriber:", {
+                    email: subscriber.email,
+                })
+
+                return NextResponse.json(
+                    {
+                        success: false,
+                        error: "Missing unsubscribe token for subscriber",
+                        failedRecipient: subscriber.email,
+                    },
+                    { status: 500 }
+                )
+            }
+
+            const unsubscribeUrl = `${siteUrl}/api/newsletter/unsubscribe?token=${subscriber.unsubscribeToken}&locale=${locale}`
+
+            const html = await buildNewsletterEmailHtml({
+                newsletter,
+                locale,
+                imageUrl,
+                targetUrl,
+                unsubscribeUrl,
+            })
+
             const result = await resend.emails.send({
-                from: from,
+                from,
                 to: subscriber.email,
-                subject: newsletter.title_de,
-                html: htmlDe,
+                subject:
+                    locale === "de"
+                        ? newsletter.title_de
+                        : newsletter.title_en,
+                html,
             })
 
             if (result?.error) {
-                console.error("Newsletter send failed (DE):", {
+                console.error(`Newsletter send failed (${locale.toUpperCase()}):`, {
                     email: subscriber.email,
                     error: result.error,
                 })
@@ -115,9 +119,11 @@ export async function POST() {
                 return NextResponse.json(
                     {
                         success: false,
-                        error: result.error.message || "Failed to send newsletter",
+                        error:
+                            result.error.message ||
+                            "Failed to send newsletter",
                         failedRecipient: subscriber.email,
-                        locale: "de",
+                        locale,
                         result,
                     },
                     { status: result.error.statusCode || 500 }
@@ -126,40 +132,7 @@ export async function POST() {
 
             sendResults.push({
                 email: subscriber.email,
-                locale: "de",
-                id: result?.data?.id || null,
-            })
-        }
-
-        for (const subscriber of enRecipients) {
-            const result = await resend.emails.send({
-                from: from,
-                to: subscriber.email,
-                subject: newsletter.title_en,
-                html: htmlEn,
-            })
-
-            if (result?.error) {
-                console.error("Newsletter send failed (EN):", {
-                    email: subscriber.email,
-                    error: result.error,
-                })
-
-                return NextResponse.json(
-                    {
-                        success: false,
-                        error: result.error.message || "Failed to send newsletter",
-                        failedRecipient: subscriber.email,
-                        locale: "en",
-                        result,
-                    },
-                    { status: result.error.statusCode || 500 }
-                )
-            }
-
-            sendResults.push({
-                email: subscriber.email,
-                locale: "en",
+                locale,
                 id: result?.data?.id || null,
             })
         }
@@ -172,12 +145,20 @@ export async function POST() {
             })
             .commit()
 
+        const sentDe = sendResults.filter(
+            (item) => item.locale === "de"
+        ).length
+
+        const sentEn = sendResults.filter(
+            (item) => item.locale === "en"
+        ).length
+
         return NextResponse.json({
             success: true,
             sent: {
-                de: deRecipients.length,
-                en: enRecipients.length,
-                total: deRecipients.length + enRecipients.length,
+                de: sentDe,
+                en: sentEn,
+                total: sendResults.length,
             },
             results: sendResults,
         })
@@ -191,5 +172,7 @@ export async function POST() {
             },
             { status: 500 }
         )
+    } finally {
+        await releaseNewsletterSendLock()
     }
 }

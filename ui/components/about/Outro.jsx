@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { CircleArrowRight } from "lucide-react";
 import { aboutContent } from "@/lib/i18n";
 
 const ease = [0.22, 1, 0.36, 1];
@@ -27,7 +27,7 @@ export default function Outro({ locale = "de" }) {
     const contactPath = `/${safeLocale}/contact`;
 
     return (
-        <section className="pt-16 pb-32 md:pt-20 md:pb-40 font-serif text-center">
+        <section className="text-center">
 
             <div className="max-w-2xl mx-auto px-6">
 
@@ -46,7 +46,7 @@ export default function Outro({ locale = "de" }) {
                     <div className="mb-6 flex items-center justify-center gap-2">
                         das dich findet.
                         <Link href={seriesPath}>
-                            <ArrowUpRight size={16} className="opacity-50 hover:opacity-100 transition" />
+                            <CircleArrowRight size={20} className="opacity-50 hover:opacity-100 transition" />
                         </Link>
                     </div>
 
@@ -57,7 +57,7 @@ export default function Outro({ locale = "de" }) {
                     <div className="flex items-center justify-center gap-2">
                         das nur für dich entsteht.
                         <Link href={contactPath}>
-                            <ArrowUpRight size={16} className="opacity-50 hover:opacity-100 transition" />
+                            <CircleArrowRight size={20} className="opacity-50 hover:opacity-100 transition" />
                         </Link>
                     </div>
 

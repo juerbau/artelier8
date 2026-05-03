@@ -3,18 +3,12 @@ import { Resend } from "resend"
 import { buildImage } from "@/sanity/image"
 import { getCurrentReadyNewsletter } from "@/lib/newsletter/get-current-ready-newsletter"
 import { buildNewsletterEmailHtml } from "@/lib/newsletter/buildNewsletterEmailHtml"
-// import { requireBasicAuth } from "@/lib/auth/requireBasicAuth"
 import {getEmailFrom} from "@/lib/email/config";
 
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(req) {
-    // const authError = requireBasicAuth(req)
-    //
-    // if (authError) {
-    //     return authError
-    // }
 
     try {
         const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
@@ -60,11 +54,14 @@ export async function POST(req) {
             })
             : null
 
+        const unsubscribeUrl = `${siteUrl}/?newsletter=test-unsubscribe`
+
         const html = await buildNewsletterEmailHtml({
             newsletter,
             locale,
             imageUrl,
             targetUrl,
+            unsubscribeUrl,
         })
 
         const subject =
