@@ -53,7 +53,7 @@ export default async function HomePage({ params }) {
 
     return (
         <div className="space-y-16">
-            <HeroQuote />
+            <HeroQuote locale={locale} />
             <HomeGallery artworks={artworks} locale={locale} />
             <ArtistStatement locale={locale} />
             <SeriesList series={series} locale={locale} />

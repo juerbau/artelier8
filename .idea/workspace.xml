@@ -6,15 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4ac7733e-90f9-4642-90d6-514a21181d09" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/admin/newsletter/preview/route.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/admin/newsletter/preview/route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/admin/newsletter/send/route.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/admin/newsletter/send/route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/admin/newsletter/test/route.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/admin/newsletter/test/route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/newsletter/confirm/route.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/newsletter/confirm/route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/newsletter/subscribe/route.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/newsletter/subscribe/route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/auth/requireBasicAuth.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/newsletter/buildNewsletterEmailHtml.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/newsletter/buildNewsletterEmailHtml.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/newsletter/get-active-subscribers.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/newsletter/get-active-subscribers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/components/emails/NewsletterEmail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/emails/NewsletterEmail.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,11 +92,11 @@
       <recent name="$PROJECT_DIR$/app/[locale]/contact" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ui/components/header" />
       <recent name="$PROJECT_DIR$/app/newsletter/unsubscribed" />
       <recent name="$PROJECT_DIR$/app/api/admin/newsletter" />
       <recent name="$PROJECT_DIR$/app/api" />
       <recent name="$PROJECT_DIR$/app/api/newsletter/admin" />
-      <recent name="$PROJECT_DIR$/ui/components" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -163,7 +154,7 @@
       <workItem from="1776582521201" duration="27880000" />
       <workItem from="1776794873078" duration="6943000" />
       <workItem from="1776860999540" duration="22791000" />
-      <workItem from="1777212731547" duration="8779000" />
+      <workItem from="1777212731547" duration="39153000" />
     </task>
     <servers />
   </component>
