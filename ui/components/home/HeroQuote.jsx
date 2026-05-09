@@ -24,7 +24,7 @@ export default function HeroQuote({ locale = "de" }) {
                 }}
                 className="font-roboto leading-none tracking-[-0.035em]"
             >
-                <soan className="font-bold text-[70px]">ART</soan><span className="font-light text-6xl">elier8</span>
+                <span className="font-bold text-[65px]">ART</span><span className="font-light text-[45px]">elier8</span>
             </motion.h1>
 
             {/* Subtitle */}

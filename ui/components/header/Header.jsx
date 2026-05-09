@@ -3,10 +3,8 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import Image from "next/image"
-
 import LangSwitch from "@/ui/components/header/LangSwitch"
 import ResponsiveNav from "@/ui/components/header/ResponsiveNav"
-
 import logo from "@/ui/images/Logo_schwarz-weiss_opt.png"
 import clsx from "clsx";
 
