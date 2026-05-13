@@ -22,7 +22,7 @@ export default function HeroQuote({ locale = "de" }) {
                     duration: 1.35,
                     ease: [0.22, 1, 0.36, 1],
                 }}
-                className="font-roboto leading-none tracking-[-0.035em]"
+                className="font-roboto text leading-none"
             >
                 <span className="font-bold text-[65px]">ART</span><span className="font-light text-[45px]">elier8</span>
             </motion.h1>

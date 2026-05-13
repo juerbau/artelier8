@@ -42,7 +42,7 @@ export default function HomeGallery({ artworks, locale }) {
                     delay: 0.3, // 🔥 nach Hero
                     ease: [0.22, 1, 0.36, 1],
                 }}
-                className="max-w-6xl mx-auto"
+                className="max-w-5xl mx-auto"
             >
 
                 <div className="grid grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8">

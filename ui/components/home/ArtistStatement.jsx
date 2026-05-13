@@ -20,7 +20,7 @@ const item = {
 
 const content = {
     de: [
-        ["Was du siehst,", "ist mehr als ein Moment."],
+        ["Was du siehst, ist mehr als ein Moment."],
         ["Es ist ein Zusammenspiel", "aus Struktur und Freiheit."],
         ["So entstehen Werke", "mit Tiefe und Spannung."],
         ["In Serien erlebbar."],

@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ac7733e-90f9-4642-90d6-514a21181d09" name="Changes" comment="" />
+    <list default="true" id="4ac7733e-90f9-4642-90d6-514a21181d09" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sanity/client.js" beforeDir="false" afterPath="$PROJECT_DIR$/sanity/client.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/home/ArtistStatement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/home/ArtistStatement.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/home/HeroQuote.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/home/HeroQuote.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/home/HomeGallery.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/home/HomeGallery.jsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
