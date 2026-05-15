@@ -1,6 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
+# -------------------------------------------------------------------
+# Dependencies
+# -------------------------------------------------------------------
 /node_modules
 /.pnp
 .pnp.*
@@ -10,32 +12,83 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
+# -------------------------------------------------------------------
+# Testing
+# -------------------------------------------------------------------
 /coverage
 
-# next.js
+# -------------------------------------------------------------------
+# Next.js
+# -------------------------------------------------------------------
 /.next/
 /out/
 
-# production
+# -------------------------------------------------------------------
+# Production builds
+# -------------------------------------------------------------------
 /build
+/dist
 
-# misc
+# -------------------------------------------------------------------
+# Miscellaneous
+# -------------------------------------------------------------------
 .DS_Store
+Thumbs.db
 *.pem
 
-# debug
+# -------------------------------------------------------------------
+# Debug logs
+# -------------------------------------------------------------------
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# -------------------------------------------------------------------
+# Environment files
+# (Falls du bestimmte .env-Dateien versionieren möchtest,
+# diese Regeln entsprechend anpassen.)
+# -------------------------------------------------------------------
 .env*
 
-# vercel
+# -------------------------------------------------------------------
+# Deployment
+# -------------------------------------------------------------------
 .vercel
 
-# typescript
+# -------------------------------------------------------------------
+# TypeScript artifacts
+# (Auch wenn du kein TypeScript nutzt, kann Next.js diese Dateien erzeugen.)
+# -------------------------------------------------------------------
 *.tsbuildinfo
 next-env.d.ts
+
+# -------------------------------------------------------------------
+# JetBrains IDE (WebStorm, IntelliJ, etc.)
+# -------------------------------------------------------------------
+
+# Einfachste Variante: gesamten .idea-Ordner ignorieren
+.idea/
+
+# Falls du später Team-Einstellungen teilen möchtest,
+# kannst du stattdessen .idea/ entfernen und nur
+# benutzerspezifische Dateien ignorieren.
+
+# Optional: Moduldateien
+*.iml
+
+# -------------------------------------------------------------------
+# Editor files
+# -------------------------------------------------------------------
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# -------------------------------------------------------------------
+# Temporary files
+# -------------------------------------------------------------------
+*.swp
+*.swo
+*~

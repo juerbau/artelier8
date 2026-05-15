@@ -1,94 +1,48 @@
-"use client";
-
-import { useState } from "react"
 import clsx from "clsx"
-import { motion } from "motion/react";
 import Image from "next/image";
-import {buildImage, urlFor} from "@/sanity/image";
+import {buildImage} from "@/sanity/image";
 
-const ease = [0.22, 1, 0.36, 1];
 
-const item = {
-    hidden: { opacity: 0, y: 30 },
-    show: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            duration: 1.2,
-            ease,
-        },
-    },
-};
-
-export default function Studio({ image, text }) {
-    const [loaded, setLoaded] = useState(false);
+export default function Studio({image, text}) {
     if (!image) return null;
 
     const blocks = text.split("\n\n");
 
     return (
-        <section className="text-center">
-
-            <div className="max-w-3xl mx-auto px-6 flex flex-col items-center">
-
-                {/* TITLE */}
-                <motion.div
-                    variants={item}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, margin: "-80px" }}
-                    className="text-2xl md:text-3xl mt-6 mb-14"
-                >
-                    {blocks[0]}
-                </motion.div>
-
-                {/* IMAGE */}
-                <motion.div
-                    variants={item}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, margin: "-80px" }}
-                    className="w-full max-w-[560px] mb-14"
-                >
-                    <div className="rounded-lg border border-white/80 overflow-hidden">
-                        <Image
-                            src={buildImage({ source: image, width: 1000 })}
-                            alt="Studio"
-                            width={1000}
-                            height={700}
-                            onLoad={(e) => {
-                                if (e.target.complete) setLoaded(true)
-                            }}
-                            className={clsx(
-                                "object-cover w-full h-auto transition-opacity duration-700",
-                                loaded ? "opacity-100" : "opacity-0"
-                            )}
-                        />
-                    </div>
-                </motion.div>
-
-                {/* TEXT */}
-                <motion.div
-                    variants={item}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, margin: "-80px" }}
-                    className="text-xl md:text-2xl leading-[1.55]"
-                >
-                    {blocks.slice(1).map((block, i) => (
-                        <p key={i} className="mb-6">
-                            {block.split("\n").map((line, j) => (
-                                <span key={j}>
-                  {line}
-                                    <br />
-                </span>
-                            ))}
-                        </p>
-                    ))}
-                </motion.div>
-
+        <div className="max-w-3xl mx-auto px-6 flex flex-col items-center text-center">
+            {/* TITLE */}
+            <div className="text-2xl md:text-3xl mt-6 mb-14">
+                {blocks[0]}
             </div>
 
-        </section>
+            {/* IMAGE */}
+            <div className="w-full max-w-140 mb-14">
+                <div className="rounded-lg border border-white/80 overflow-hidden">
+                    <Image
+                        src={buildImage({source: image, width: 1000})}
+                        alt="Studio"
+                        width={1000}
+                        height={700}
+                        className={clsx(
+                            "object-cover w-full h-auto transition-opacity duration-700",
+                        )}
+                    />
+                </div>
+            </div>
+
+            {/* TEXT */}
+            <div className="text-xl md:text-2xl leading-[1.55]">
+                {blocks.slice(1).map((block, i) => (
+                    <p key={i}>
+                        {block.split("\n").map((line, j) => (
+                            <span key={j}>
+                                {line}
+                                <br/>
+                            </span>
+                        ))}
+                    </p>
+                ))}
+            </div>
+        </div>
     );
 }

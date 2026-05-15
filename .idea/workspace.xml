@@ -5,11 +5,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ac7733e-90f9-4642-90d6-514a21181d09" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/[locale]/series/[slug]/(detail)/page.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/components/contact/NewsletterSignup.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sanity/client.js" beforeDir="false" afterPath="$PROJECT_DIR$/sanity/client.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/about/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/about/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/contact/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/contact/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/layout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/layout.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/moments/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/moments/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/series/[slug]/[artworkSlug]/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/series/[slug]/[artworkSlug]/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/series/[slug]/page.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/[locale]/series/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[locale]/series/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/i18n.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/i18n.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/validation/newsletter-schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/validation/newsletter-schema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/BackButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/BackButton.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/ScrollTopButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/ScrollTopButton.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/about/Outro.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/about/Outro.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/about/Portrait.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/about/Portrait.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/about/Studio.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/about/Studio.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/contact/ContactForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/contact/ContactForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/contact/ContactIntro.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/contact/ContactIntro.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/contact/ContactScene.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/contact/ContactSuccessMessage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/contact/ContactSuccessMessage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/contact/FormField.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/contact/FormField.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/footer/InstagramLink.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/footer/InstagramLink.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/components/home/ArtistStatement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/home/ArtistStatement.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/components/home/HeroQuote.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/home/HeroQuote.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/components/home/HomeGallery.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/home/HomeGallery.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/moments/MomentImage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/moments/MomentsClient.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/moments/MomentsIntro.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/moments/MomentsIntro.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/newsletter/NewsletterSignup.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/series/GalleryRoom.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/GalleryRoom.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/series/SeriesIntro.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/SeriesIntro.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/series/SeriesList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/SeriesList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/series/detail/ArtworkGrid.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/detail/ArtworkGrid.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/series/detail/SeriesDetailIntro.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ui/components/series/detail/SeriesDetailIntro.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/components/series/detail/SeriesPageClient.jsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,11 +131,11 @@
       <recent name="$PROJECT_DIR$/app/[locale]/contact" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ui/components/contact" />
+      <recent name="$PROJECT_DIR$/app/[locale]/series/[slug]/(detail)" />
       <recent name="$PROJECT_DIR$/ui/components/header" />
       <recent name="$PROJECT_DIR$/app/newsletter/unsubscribed" />
       <recent name="$PROJECT_DIR$/app/api/admin/newsletter" />
-      <recent name="$PROJECT_DIR$/app/api" />
-      <recent name="$PROJECT_DIR$/app/api/newsletter/admin" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -160,6 +195,7 @@
       <workItem from="1776860999540" duration="22791000" />
       <workItem from="1777212731547" duration="39153000" />
       <workItem from="1778156475247" duration="2374000" />
+      <workItem from="1778747919015" duration="43002000" />
     </task>
     <servers />
   </component>

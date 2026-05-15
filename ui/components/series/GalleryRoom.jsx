@@ -49,7 +49,10 @@ export default function GalleryRoom({ series }) {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.4 }}
-                transition={{ staggerChildren: 0.18 }}
+                transition={{
+                    delayChildren: 0.2,
+                    staggerChildren: 0.18
+            }}
             >
 
                 {artworks.map((art, i) => {

@@ -16,8 +16,9 @@ export default async function LocaleLayout({ children, params }) {
         <>
             <Header locale={locale}/>
             <main className={clsx(
+                "relative",
                 "px-10",
-                "pt-14 sm:pt-16 md:pt-20",
+                "pt-20",
                 "pb-28 sm:pb-32 md:pb-40",
                 "min-h-screen"
             )}>{children}</main>

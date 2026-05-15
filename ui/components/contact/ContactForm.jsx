@@ -1,66 +1,63 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import clsx from "clsx"
-import { getContactSchema } from "@/lib/validation/contact-schema"
-import { contactForm } from "@/lib/i18n"
-import FormField from "@/ui/components/contact/FormField"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import clsx from "clsx";
 
-export default function ContactForm({ locale, setStatus }) {
-    const [status, setLocalStatus] = useState("idle")
-    const [errors, setErrors] = useState({})
-    const [hasSubmitted, setHasSubmitted] = useState(false)
+import { getContactSchema } from "@/lib/validation/contact-schema";
+import { contactForm } from "@/lib/i18n";
+import FormField from "@/ui/components/contact/FormField";
 
-    const safeLocale = locale?.startsWith("de") ? "de" : "en"
-    const content = contactForm[safeLocale]
+export default function ContactForm({ locale }) {
+    const router = useRouter();
 
-    // -------------------------
-    // 🔁 Live Validation
-    // -------------------------
+    const [status, setStatus] = useState("idle");
+    const [errors, setErrors] = useState({});
+    const [hasSubmitted, setHasSubmitted] = useState(false);
+
+    const safeLocale = locale?.startsWith("de") ? "de" : "en";
+    const content = contactForm[safeLocale];
+
     function handleFieldChange(name, value) {
-        if (!hasSubmitted) return
+        if (!hasSubmitted) return;
 
-        const schema = getContactSchema(locale)
-        const fieldSchema = schema.shape[name]
+        const schema = getContactSchema(locale);
+        const fieldSchema = schema.shape[name];
 
-        const result = fieldSchema.safeParse(value)
+        const result = fieldSchema.safeParse(value);
 
         setErrors((prev) => ({
             ...prev,
             [name]: result.success
                 ? undefined
                 : result.error.issues[0].message,
-        }))
+        }));
     }
 
-    // -------------------------
-    // 🚀 Submit
-    // -------------------------
     async function handleSubmit(e) {
-        e.preventDefault()
-        setHasSubmitted(true)
-        setLocalStatus("submitting")
+        e.preventDefault();
+        setHasSubmitted(true);
+        setStatus("submitting");
 
-        const formData = new FormData(e.target)
-        const data = Object.fromEntries(formData.entries())
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
 
-        // Client Validation
-        const schema = getContactSchema(locale)
-        const result = schema.safeParse(data)
+        const schema = getContactSchema(locale);
+        const result = schema.safeParse(data);
 
         if (!result.success) {
-            const fieldErrors = {}
+            const fieldErrors = {};
 
             result.error.issues.forEach((issue) => {
-                fieldErrors[issue.path[0]] = issue.message
-            })
+                fieldErrors[issue.path[0]] = issue.message;
+            });
 
-            setErrors(fieldErrors)
-            setLocalStatus("idle")
-            return
+            setErrors(fieldErrors);
+            setStatus("idle");
+            return;
         }
 
-        setErrors({})
+        setErrors({});
 
         try {
             const res = await fetch("/api/contact", {
@@ -72,22 +69,20 @@ export default function ContactForm({ locale, setStatus }) {
                     ...data,
                     locale,
                 }),
-            })
+            });
 
-            if (!res.ok) throw new Error()
+            if (!res.ok) throw new Error();
 
-            // 👉 Scene übernimmt jetzt!
-            setStatus("success")
+            // throw new Error(); // Zum Testen
+
+            router.push(`/${safeLocale}/contact/success`);
         } catch {
-            setLocalStatus("error")
+            setStatus("error");
         }
     }
 
-    // -------------------------
-    // 🎨 Button Styles
-    // -------------------------
     const buttonClasses = clsx(
-        "self-end w-auto",
+        "self-center w-auto",
         "inline-flex items-center justify-center",
         "px-5 py-2.5",
         "text-sm tracking-wide",
@@ -100,15 +95,12 @@ export default function ContactForm({ locale, setStatus }) {
             "opacity-50 cursor-not-allowed":
                 status === "submitting",
         }
-    )
+    );
 
-    // -------------------------
-    // 🧩 Render
-    // -------------------------
     return (
         <form
             onSubmit={handleSubmit}
-            className="max-w-[520px] mx-auto mt-[6vh] mb-[20vh] flex flex-col gap-1 text-left"
+            className="max-w-130 mx-auto flex flex-col gap-1 text-left"
         >
             <FormField
                 label={content.firstName}
@@ -152,16 +144,14 @@ export default function ContactForm({ locale, setStatus }) {
                 }
             />
 
-            {/* Honeypot */}
             <input
                 type="text"
                 name="website"
-                className="absolute -left-[9999px]"
+                className="absolute -left-2499.75"
                 tabIndex={-1}
                 autoComplete="off"
             />
 
-            {/* Submit */}
             <button
                 type="submit"
                 disabled={status === "submitting"}
@@ -172,12 +162,11 @@ export default function ContactForm({ locale, setStatus }) {
                     : content.submit}
             </button>
 
-            {/* Global Error */}
             {status === "error" && (
-                <p className="text-sm opacity-60 -mt-2">
+                <p className="mt-3 text-lg font-roboto text-yellow-300">
                     {content.error}
                 </p>
             )}
         </form>
-    )
+    );
 }

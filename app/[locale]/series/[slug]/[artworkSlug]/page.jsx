@@ -1,19 +1,20 @@
-import { client } from "@/sanity/client"
-import { sanityFetch } from "@/sanity/fetch"
+import {client} from "@/sanity/client"
+import {sanityFetch} from "@/sanity/fetch"
 import {artworkPageQuery, seriesBySlugQuery} from "@/sanity/queries/series"
-import BackButton from "@/ui/components/BackButton"
 import ArtworkClient from "@/ui/components/series/detail/artwork/ArtworkClient"
-import { notFound } from "next/navigation";
-import { buildMetadata } from "@/lib/seo"
+import {notFound} from "next/navigation";
+import {buildMetadata} from "@/lib/seo"
 import {buildImage} from "@/sanity/image";
+import FadeInSection from "@/ui/components/FadeInSection";
+import ScrollToTop from "@/ui/components/ScrollToTop";
 
 
-export async function generateMetadata({ params }) {
-    const { slug, artworkSlug, locale } = await params;
+export async function generateMetadata({params}) {
+    const {slug, artworkSlug, locale} = await params;
 
     const data = await sanityFetch({
         query: artworkPageQuery,
-        params: { slug, artworkSlug },
+        params: {slug, artworkSlug},
     });
 
     const artwork = data?.artwork;
@@ -91,12 +92,12 @@ export async function generateStaticParams() {
     })
 }
 
-export default async function ArtworkPage({ params }) {
-    const { slug, artworkSlug, locale } = await params
+export default async function ArtworkPage({params}) {
+    const {slug, artworkSlug, locale} = await params
 
     const series = await sanityFetch({
         query: seriesBySlugQuery,
-        params: { slug },
+        params: {slug},
     })
 
     if (!series) notFound();
@@ -127,16 +128,9 @@ export default async function ArtworkPage({ params }) {
             : artwork.technique_en
 
     return (
-        <main className="px-6 py-16 relative">
-            <div className="absolute left-3 top-3 z-10">
-                <BackButton
-                    href={`/${locale}/series/${slug}`}
-                    label={locale === "de" ? "zur Serie" : "to series"}
-                    restoreScroll
-                />
-            </div>
-
-            <div className="mx-auto max-w-6xl">
+        <>
+            <ScrollToTop/>
+            <FadeInSection className="pt-10 mx-auto max-w-6xl" as="section">
                 <ArtworkClient
                     artwork={artwork}
                     title={title}
@@ -147,7 +141,7 @@ export default async function ArtworkPage({ params }) {
                     slug={slug}
                     locale={locale}
                 />
-            </div>
-        </main>
+            </FadeInSection>
+        </>
     )
 }

@@ -5,6 +5,7 @@ import { seriesListQuery } from "@/sanity/queries/series";
 import {openGraphQuery} from "@/sanity/queries/openGraph";
 import { buildMetadata } from "@/lib/seo";
 import {buildImage} from "@/sanity/image";
+import FadeInSection from "@/ui/components/FadeInSection";
 
 
 export async function generateMetadata({ params }) {
@@ -42,10 +43,13 @@ export default async function SeriesPage({ params }) {
     });
 
     return (
-        <div className="space-y-20">
-            <SeriesIntro locale={locale} />
-            <SeriesList series={series || []} locale={locale}
-            />
-        </div>
+        <>
+            <FadeInSection className="pb-18" as="section">
+                <SeriesIntro locale={locale}/>
+            </FadeInSection>
+            <FadeInSection as="section" delay={0.3}>
+                <SeriesList series={series || []} locale={locale}/>
+            </FadeInSection>
+        </>
     );
 }

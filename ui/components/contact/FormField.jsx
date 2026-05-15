@@ -1,5 +1,7 @@
+"use client";
+
 import { motion, AnimatePresence } from "motion/react";
-import clsx from "clsx"
+import clsx from "clsx";
 
 export default function FormField({
                                       label,
@@ -10,14 +12,12 @@ export default function FormField({
                                       autoComplete,
                                       type = "text",
                                       ...props
-                                  })
-{
-
+                                  }) {
     const id = `field-${name}`;
 
     const baseClasses = clsx(
         "w-full",
-        "bg-white text-black",
+        "bg-white text-black font-roboto",
         "px-4 py-3",
         "rounded-md",
         "border",
@@ -25,13 +25,16 @@ export default function FormField({
         "outline-none",
         "placeholder:text-neutral-400",
         error
-            ? "border-red-500"
+            ? "border-yellow-300"
             : "border-neutral-300 focus:border-black"
-    )
+    );
 
     return (
         <div>
-            <label htmlFor={id} className="block text-sm mb-2">
+            <label
+                htmlFor={id}
+                className="mb-2 block text-lg font-roboto"
+            >
                 {label}
             </label>
 
@@ -40,7 +43,10 @@ export default function FormField({
                     id={id}
                     name={name}
                     autoComplete={autoComplete}
-                    className={clsx(baseClasses, "min-h-[140px] resize-none")}
+                    className={clsx(
+                        baseClasses,
+                        "min-h-35 resize-none"
+                    )}
                     onChange={onChange}
                     {...props}
                 />
@@ -56,19 +62,21 @@ export default function FormField({
                 />
             )}
 
-            <div className="mt-1 h-[20px]">
+            <div className={clsx(
+                textarea ? "min-h-7" : "mt-1 min-h-7"
+            )}>
                 <AnimatePresence mode="wait">
                     {error && (
                         <motion.p
                             key="error"
-                            initial={{ opacity: 0, y: 6 }}
+                            initial={{ opacity: 0, y: 4 }}
                             animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 4 }}
+                            exit={{ opacity: 0, y: 2 }}
                             transition={{
-                                duration: 0.4,
+                                duration: 0.3,
                                 ease: [0.22, 1, 0.36, 1],
                             }}
-                            className="text-sm text-red-500"
+                            className="text-sm leading-relaxed text-yellow-300"
                         >
                             {error}
                         </motion.p>
@@ -76,5 +84,5 @@ export default function FormField({
                 </AnimatePresence>
             </div>
         </div>
-    )
+    );
 }

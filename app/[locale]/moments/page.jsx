@@ -1,9 +1,11 @@
 import MomentsIntro from "@/ui/components/moments/MomentsIntro";
-import MomentsClient from "@/ui/components/moments/MomentsClient";
+import Moments from "@/ui/components/moments/Moments";
 
 import { sanityFetch } from "@/sanity/fetch";
 import { momentsQuery } from "@/sanity/queries/moments";
 import { buildMetadata } from "@/lib/seo";
+
+import FadeInSection from "@/ui/components/FadeInSection";
 
 export async function generateMetadata({ params }) {
     const { locale } = await params;
@@ -28,9 +30,14 @@ export default async function MomentsPage({ params }) {
     });
 
     return (
-            <div className="space-y-20 mx-auto max-w-3xl">
+        <div className="mx-auto max-w-3xl space-y-20">
+            <FadeInSection as="section">
                 <MomentsIntro locale={locale} />
-                <MomentsClient moments={moments} locale={locale} />
-            </div>
+            </FadeInSection>
+
+            <FadeInSection as="section" delay={0.3}>
+                <Moments moments={moments} locale={locale} />
+            </FadeInSection>
+        </div>
     );
 }

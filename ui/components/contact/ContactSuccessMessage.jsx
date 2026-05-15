@@ -1,24 +1,33 @@
+import Link from "next/link";
 import clsx from "clsx";
 
-export default function ContactSuccessMessage({success, setStatus}) {
+export default function ContactSuccessMessage({
+                                                  success,
+                                                  buttonLabel,
+                                                  locale,
+                                              }) {
+    const buttonClasses = clsx(
+        "inline-flex items-center justify-center",
+        "px-5 py-2.5",
+        "text-sm tracking-wide",
+        "rounded-md",
+        "bg-black text-white",
+        "transition-colors duration-200",
+        "hover:bg-neutral-800"
+    );
+
     return (
-        <div className="text-center max-w-md mx-auto py-24">
-            <p className="text-base leading-relaxed whitespace-pre-line">
+        <div className="mx-auto max-w-md py-24 text-center">
+            <p className="whitespace-pre-line text-2xl leading-relaxed">
                 {success}
             </p>
 
-            <button
-                onClick={() => setStatus("form")}
-                className={clsx(
-                    "mt-8",
-                    "text-sm",
-                    "hover:text-black",
-                    "transition-colors duration-200",
-                    "cursor-pointer"
-                )}
+            <Link
+                href={`/${locale}/contact`}
+                className={clsx("mt-8 inline-flex", buttonClasses)}
             >
-                Neue Nachricht schreiben
-            </button>
+                {buttonLabel}
+            </Link>
         </div>
-    )
+    );
 }

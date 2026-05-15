@@ -1,10 +1,12 @@
 import {sanityFetch} from "@/sanity/fetch";
 import {aboutImagesQuery} from "@/sanity/queries/about";
 import {buildMetadata} from "@/lib/seo";
-import Outro from "@/ui/components/about/Outro";
-import Studio from "@/ui/components/about/Studio";
-import Portrait from "@/ui/components/about/Portrait";
 import {aboutContent} from "@/lib/i18n";
+import Intro from "@/ui/components/about/Intro";
+import Portrait from "@/ui/components/about/Portrait";
+import Studio from "@/ui/components/about/Studio";
+import Outro from "@/ui/components/about/Outro";
+import FadeInSection from "@/ui/components/FadeInSection";
 
 export async function generateMetadata({params}) {
     const {locale} = await params;
@@ -34,9 +36,25 @@ export default async function AboutPage({params}) {
 
     return (
         <div className="space-y-16">
-            <Portrait image={data?.portraitImage} locale={safeLocale}/>
-            <Studio image={data?.studioImage} text={content?.studio}/>
-            <Outro locale={safeLocale}/>
+            <FadeInSection as="section">
+                <Intro/>
+            </FadeInSection>
+
+            <FadeInSection className="space-y-16" as="section" delay={0.3}>
+
+                <Portrait
+                    image={data?.portraitImage}
+                    locale={safeLocale}
+                />
+
+                <Studio
+                    image={data?.studioImage}
+                    text={content?.studio}
+                />
+
+                <Outro locale={safeLocale}/>
+
+            </FadeInSection>
         </div>
     );
 }

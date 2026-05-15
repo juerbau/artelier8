@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import { ChevronLeft } from "lucide-react"
+import clsx from "clsx";
 
 export default function BackButton({
                                        href,
@@ -31,7 +32,13 @@ export default function BackButton({
     return (
         <button
             onClick={handleBack}
-            className="mb-10 flex items-center gap-2 border border-white/30 px-2 py-1 rounded-md text-white/80 hover:bg-white hover:text-black hover:border-white transition group"
+            className={clsx(
+                "flex items-center gap-2",
+                "border border-white/30 px-2 py-1 rounded-md ",
+                "text-white/80 hover:bg-white hover:text-black hover:border-white",
+                "transition group",
+                "absolute left-5 top-5 z-20"
+            )}
         >
 
             <ChevronLeft

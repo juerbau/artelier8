@@ -8,6 +8,7 @@ import {seriesListQuery} from "@/sanity/queries/series";
 import { buildMetadata } from "@/lib/seo"
 import {openGraphQuery} from "@/sanity/queries/openGraph";
 import {buildImage} from "@/sanity/image";
+import FadeInSection from "../../ui/components/FadeInSection";
 
 
 export async function generateMetadata({ params }) {
@@ -41,7 +42,6 @@ export async function generateMetadata({ params }) {
 }
 
 
-
 export default async function HomePage({ params }) {
 
     const { locale } = await params;
@@ -53,10 +53,15 @@ export default async function HomePage({ params }) {
 
     return (
         <div className="space-y-16">
-            <HeroQuote locale={locale} />
-            <HomeGallery artworks={artworks} locale={locale} />
-            <ArtistStatement locale={locale} />
-            <SeriesList series={series} locale={locale} />
+            <FadeInSection as="section">
+                <HeroQuote locale={locale}/>
+            </FadeInSection>
+
+            <FadeInSection className="space-y-16"  as="section" delay={0.3}>
+                <HomeGallery artworks={artworks} locale={locale} />
+                <ArtistStatement locale={locale} />
+                <SeriesList series={series} locale={locale} />
+            </FadeInSection>
         </div>
     )
 }
