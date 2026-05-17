@@ -34,12 +34,6 @@ export async function GET(req) {
             )
         }
 
-        const slug = newsletter?.slug?.current
-
-        const targetUrl = slug
-            ? `${siteUrl}/newsletter/${slug}`
-            : siteUrl
-
         const imageUrl = newsletter.mainImage
             ? buildImage({
                 source: newsletter.mainImage,
@@ -54,7 +48,6 @@ export async function GET(req) {
             newsletter,
             locale,
             imageUrl,
-            targetUrl,
             unsubscribeUrl
         })
 

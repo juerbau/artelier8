@@ -26,30 +26,30 @@ export default async function AdminNewsletterPage() {
     const previewEn = `${siteUrl}/api/admin/newsletter/preview?locale=en`
 
     return (
-        <main className="min-h-screen bg-black text-white px-6 py-12 md:px-10">
+        <main className="min-h-screen px-6 py-12 md:px-10 font-roboto">
             <div className="mx-auto max-w-4xl space-y-12">
                 <header className="space-y-3">
-                    <p className="text-xs uppercase tracking-[0.25em] text-white/40">
+                    <p className="text-xs uppercase tracking-[0.25em]">
                         Admin
                     </p>
                     <h1 className="text-3xl md:text-4xl font-normal tracking-tight">
                         Newsletter
                     </h1>
-                    <p className="max-w-2xl text-sm text-white/60 leading-7">
-                        Minimaler Versandbereich für Test, Vorschau und Live-Send.
+                    <p className="max-w-2xl text-sm leading-7">
+                        Bereich für Vorschau, Test und Versand.
                     </p>
                 </header>
 
                 <section className="grid gap-4 md:grid-cols-3">
-                    <div className="border border-white/10 p-5">
-                        <p className="text-xs uppercase tracking-[0.2em] text-white/40">
+                    <div className="border border-white p-5">
+                        <p className="text-xs uppercase tracking-[0.2em]">
                             Active
                         </p>
                         <p className="mt-3 text-3xl">{counts.active}</p>
                     </div>
 
-                    <div className="border border-white/10 p-5">
-                        <p className="text-xs uppercase tracking-[0.2em] text-white/40">
+                    <div className="border border-white p-5">
+                        <p className="text-xs uppercase tracking-[0.2em]">
                             DE / EN
                         </p>
                         <p className="mt-3 text-3xl">
@@ -57,8 +57,8 @@ export default async function AdminNewsletterPage() {
                         </p>
                     </div>
 
-                    <div className="border border-white/10 p-5">
-                        <p className="text-xs uppercase tracking-[0.2em] text-white/40">
+                    <div className="border border-white p-5">
+                        <p className="text-xs uppercase tracking-[0.2em]">
                             Pending
                         </p>
                         <p className="mt-3 text-3xl">{counts.pending}</p>
@@ -66,9 +66,9 @@ export default async function AdminNewsletterPage() {
                 </section>
 
                 {!newsletter ? (
-                    <section className="border border-white/10 p-6">
-                        <p className="text-sm text-white/70">
-                            Kein Newsletter mit Status <span className="text-white">ready</span> gefunden.
+                    <section className="border border-white p-6">
+                        <p className="text-sm">
+                            Kein Newsletter mit Status <span className="font-bold">&#34;Bereit zum Versand&#34;</span> gefunden.
                         </p>
                     </section>
                 ) : (
@@ -76,34 +76,28 @@ export default async function AdminNewsletterPage() {
                         <section className="grid gap-8 md:grid-cols-[1.1fr_0.9fr]">
                             <div className="space-y-6">
                                 <div className="space-y-2">
-                                    <p className="text-xs uppercase tracking-[0.2em] text-white/40">
+                                    <p className="text-xs uppercase tracking-[0.2em]">
                                         Aktueller Newsletter
                                     </p>
                                     <h2 className="text-2xl font-normal">
                                         {newsletter.title_de}
                                     </h2>
-                                    <p className="text-sm text-white/50">
+                                    <p className="text-sm">
                                         EN: {newsletter.title_en}
                                     </p>
                                 </div>
 
-                                <div className="space-y-4 text-sm text-white/70 leading-7">
-                                    <div>
-                                        <p className="text-xs uppercase tracking-[0.2em] text-white/40 mb-2">
-                                            Slug
-                                        </p>
-                                        <p>{slug || "—"}</p>
-                                    </div>
+                                <div className="space-y-4 text-sm leading-7">
 
                                     <div>
-                                        <p className="text-xs uppercase tracking-[0.2em] text-white/40 mb-2">
+                                        <p className="text-xs uppercase tracking-[0.2em] mb-2">
                                             Text (DE)
                                         </p>
                                         <p className="whitespace-pre-line">{newsletter.text_de}</p>
                                     </div>
 
                                     <div>
-                                        <p className="text-xs uppercase tracking-[0.2em] text-white/40 mb-2">
+                                        <p className="text-xs uppercase tracking-[0.2em] mb-2">
                                             Text (EN)
                                         </p>
                                         <p className="whitespace-pre-line">{newsletter.text_en}</p>
@@ -116,16 +110,16 @@ export default async function AdminNewsletterPage() {
                                     <img
                                         src={imageUrl}
                                         alt={newsletter.title_de}
-                                        className="w-full h-auto border border-white/10"
+                                        className="w-full h-auto border border-white"
                                     />
                                 ) : (
-                                    <div className="border border-white/10 p-6 text-sm text-white/50">
+                                    <div className="border border-white p-6 text-sm">
                                         Kein Bild vorhanden.
                                     </div>
                                 )}
 
-                                <div className="space-y-3 text-sm text-white/70">
-                                    <p className="text-xs uppercase tracking-[0.2em] text-white/40">
+                                <div className="space-y-3 text-sm">
+                                    <p className="text-xs uppercase tracking-[0.2em]">
                                         Preview
                                     </p>
 
@@ -133,7 +127,7 @@ export default async function AdminNewsletterPage() {
                                         <Link
                                             href={previewDe}
                                             target="_blank"
-                                            className="text-white/80 underline underline-offset-4 hover:text-white"
+                                            className="underline underline-offset-4 hover:text-white"
                                         >
                                             Preview DE
                                         </Link>
@@ -141,7 +135,7 @@ export default async function AdminNewsletterPage() {
                                         <Link
                                             href={previewEn}
                                             target="_blank"
-                                            className="text-white/80 underline underline-offset-4 hover:text-white"
+                                            className="underline underline-offset-4 hover:text-white"
                                         >
                                             Preview EN
                                         </Link>
@@ -150,8 +144,8 @@ export default async function AdminNewsletterPage() {
                             </div>
                         </section>
 
-                        <section className="border border-white/10 p-6">
-                            <p className="mb-5 text-xs uppercase tracking-[0.2em] text-white/40">
+                        <section className="border border-white p-6">
+                            <p className="mb-5 text-xs uppercase tracking-[0.2em]">
                                 Aktionen
                             </p>
                             <AdminNewsletterActions />

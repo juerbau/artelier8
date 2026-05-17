@@ -6,7 +6,7 @@ import LegalLink from "@/ui/components/footer/LegalLink"
 export default function Footer({ locale }) {
     return (
         <footer className="font-roboto bg-gray-600">
-            <div className="mx-auto max-w-6xl px-6 md:px-15 py-6">
+            <div className="mx-auto max-w-6xl px-12 md:px-15 py-6">
 
                 <div
                     className={clsx(
@@ -14,7 +14,7 @@ export default function Footer({ locale }) {
                         // Typography scaling statt Layout break
                         "text-[18px]",
                         "max-[600px]:text-[16px]",
-                        "max-[420px]:text-[15px]"
+                        "max-[420px]:text-[13px]"
                     )}
                 >
 

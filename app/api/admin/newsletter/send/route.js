@@ -55,12 +55,6 @@ export async function POST() {
             )
         }
 
-        const slug = newsletter?.slug?.current
-
-        const targetUrl = slug
-            ? `${siteUrl}/newsletter/${slug}`
-            : siteUrl
-
         const imageUrl = newsletter.mainImage
             ? buildImage({
                 source: newsletter.mainImage,
@@ -96,17 +90,15 @@ export async function POST() {
                 newsletter,
                 locale,
                 imageUrl,
-                targetUrl,
                 unsubscribeUrl,
             })
+
+            const subject = locale === "de" ? "Neuigkeiten aus dem ARTelier8" : "Latest news from ARTelier8";
 
             const result = await resend.emails.send({
                 from,
                 to: subscriber.email,
-                subject:
-                    locale === "de"
-                        ? newsletter.title_de
-                        : newsletter.title_en,
+                subject,
                 html,
             })
 

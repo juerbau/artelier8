@@ -40,12 +40,6 @@ export async function POST(req) {
             )
         }
 
-        const slug = newsletter?.slug?.current
-
-        const targetUrl = slug
-            ? `${siteUrl}/newsletter/${slug}`
-            : siteUrl
-
         const imageUrl = newsletter.mainImage
             ? buildImage({
                 source: newsletter.mainImage,
@@ -54,20 +48,18 @@ export async function POST(req) {
             })
             : null
 
-        const unsubscribeUrl = `${siteUrl}/?newsletter=test-unsubscribe`
+        const unsubscribeUrl = `${siteUrl}/?newsletter=test-unsubscribe`;
 
         const html = await buildNewsletterEmailHtml({
             newsletter,
             locale,
             imageUrl,
-            targetUrl,
             unsubscribeUrl,
-        })
+        });
 
-        const subject =
-            locale === "de" ? newsletter.title_de : newsletter.title_en
+        const subject = locale === "de" ? "Neuigkeiten aus dem ARTelier8" : "Latest news from ARTelier8";
 
-        const from = getEmailFrom()
+        const from = getEmailFrom();
 
         const result = await resend.emails.send({
             from: from,

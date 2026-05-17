@@ -90,7 +90,7 @@ export default function AdminNewsletterActions() {
                 </button>
             </div>
 
-            <p className="min-h-[1.5rem] text-sm text-white/60">
+            <p className="min-h-6 text-sm text-white/60">
                 {status}
             </p>
         </div>

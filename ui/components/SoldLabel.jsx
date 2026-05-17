@@ -15,6 +15,7 @@ export default function SoldLabel({ locale = "en", className = "" }) {
             className={clsx(
                 "uppercase tracking-[0.2em]",
                 "text-black text-xs",
+                "font-roboto",
                 "border border-gray-600",
                 "rounded-md",
                 "px-3 py-1",

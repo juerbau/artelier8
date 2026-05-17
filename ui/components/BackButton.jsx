@@ -1,7 +1,9 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { ChevronLeft } from "lucide-react"
+import { ArrowBigLeft } from "lucide-react";
+
+
 import clsx from "clsx";
 
 export default function BackButton({
@@ -34,22 +36,14 @@ export default function BackButton({
             onClick={handleBack}
             className={clsx(
                 "flex items-center gap-2",
-                "border border-white/30 px-2 py-1 rounded-md ",
+                "cursor-pointer",
+                "border border-white/30 px-3 py-2 rounded-md ",
                 "text-white/80 hover:bg-white hover:text-black hover:border-white",
-                "transition group",
+                "transition-colors duration-500 ease-[0.22,1,0.36,1]",
                 "absolute left-5 top-5 z-20"
-            )}
-        >
-
-            <ChevronLeft
-                size={20}
-                className="transition-transform group-hover:-translate-x-1"
-            />
-
-            <span className="text-sm">
-        {label}
-      </span>
-
+            )}>
+            <ArrowBigLeft size={18} />
+            <span className="text-sm">{label}</span>
         </button>
     )
 }

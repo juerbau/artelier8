@@ -16,7 +16,7 @@ export default function Moments({ moments = [], locale = "de" }) {
                         className="w-full max-w-2xl text-center"
                     >
                         {moment.mainImage && (
-                            <div className="relative mb-6 h-[300px] w-full overflow-hidden md:h-[380px]">
+                            <div className="relative mb-6 w-full overflow-hidden aspect-[16/9]">
                                 <Image
                                     src={buildImage({
                                         source: moment.mainImage,

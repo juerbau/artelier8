@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { motion } from "motion/react"
-import { CircleChevronUp } from "lucide-react"
+import { CircleChevronUp, ArrowBigUp } from "lucide-react"
 import clsx from "clsx";
 
 export default function ScrollTopButton() {
@@ -33,10 +33,11 @@ export default function ScrollTopButton() {
             animate={{ opacity: visible ? 1 : 0 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className={clsx(
-                "fixed bottom-6 right-6 z-50",
-                 "text-white/60 hover:text-white",
-                 "backdrop-blur-sm",
-                 "transition-colors")}
+                "fixed bottom-1 right-2.5 -translate-y-1/2 z-50",
+                "text-white/60 hover:text-white",
+                "backdrop-blur-sm",
+                "transition-colors"
+            )}
         >
             <CircleChevronUp size={28} />
         </motion.button>

@@ -1,9 +1,10 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { motion } from "motion/react"
-import { usePathname } from "next/navigation"
-import Link from "next/link"
+import { useEffect, useState } from "react";
+import { motion } from "motion/react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { cookieContent } from "@/lib/i18n/cookieContent";
 
 const EXPIRY_DAYS = 14
 
@@ -13,6 +14,7 @@ export default function CookieNotice() {
 
     // Locale aus URL extrahieren (z. B. /de/... oder /en/...)
     const locale = pathname?.split("/")[1] || "de"
+    const content = cookieContent[locale];
 
     useEffect(() => {
         const stored = localStorage.getItem("cookie-notice-date")
@@ -51,18 +53,18 @@ export default function CookieNotice() {
             className="fixed bottom-6 left-0 w-full flex justify-center pointer-events-none z-40"
         >
             <div className="w-full max-w-6xl px-6 flex justify-center">
-                <div className="pointer-events-auto text-sm text-white bg-white/5 backdrop-blur-md px-5 py-3 rounded-full">
+                <div className="pointer-events-auto text-sm font-roboto text-white bg-white/5 backdrop-blur-md px-5 py-3 rounded-full">
                     <p className="text-center leading-relaxed">
-                        This site uses essential cookies for a calm, functional experience.{" "}
+                        {content.text}
                         <Link
                             href={`/${locale}/privacy`}
                             className="underline underline-offset-4 hover:text-white hover:font-bold transition-colors"
                         >
-                            Learn more
+                            {content.link}
                         </Link>{" "}
                         <button
                             onClick={handleAccept}
-                            className="ml-3 text-white hover:text-white hover:font-bold hover:cursor-pointer transition-colors"
+                            className="ml-2 text-white hover:text-white hover:font-bold hover:cursor-pointer transition-colors"
                         >
                             OK
                         </button>

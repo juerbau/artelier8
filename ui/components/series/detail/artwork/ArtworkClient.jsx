@@ -1,14 +1,14 @@
 "use client"
 
-import { useRouter } from "next/navigation"
-import { useRef, useEffect } from "react"
-import Link from "next/link"
+import { useRouter } from "next/navigation";
+import { useRef, useEffect } from "react";
+import Link from "next/link";
+import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 
-import { ChevronLeft, ChevronRight } from "lucide-react"
 
-import ArtworkGallery from "@/ui/components/series/detail/artwork/ArtworkGallery"
 import { motion } from "motion/react";
-
+import clsx from "clsx"
+import ArtworkGallery from "@/ui/components/series/detail/artwork/ArtworkGallery";
 
 
 export default function ArtworkClient({
@@ -22,15 +22,12 @@ export default function ArtworkClient({
                                           locale
                                       }) {
 
-    const router = useRouter()
-    const touchStart = useRef(null)
-
-
+    const router = useRouter();
+    const touchStart = useRef(null);
 
     /* ---------------------------
        Swipe Navigation
     ---------------------------- */
-
     function handleTouchStart(e) {
         touchStart.current = e.touches[0].clientX
     }
@@ -44,45 +41,32 @@ export default function ArtworkClient({
         if (diff > 80 && next) {
             router.push(`/${locale}/series/${slug}/${next.slug}`)
         }
-
         if (diff < -80 && prev) {
             router.push(`/${locale}/series/${slug}/${prev.slug}`)
         }
-
     }
-
-
 
     /* ---------------------------
        Keyboard Navigation
     ---------------------------- */
-
     useEffect(() => {
-
         function handleKey(e) {
-
             if (e.key === "ArrowRight" && next) {
                 router.push(`/${locale}/series/${slug}/${next.slug}`)
             }
-
             if (e.key === "ArrowLeft" && prev) {
                 router.push(`/${locale}/series/${slug}/${prev.slug}`)
             }
-
         }
-
         window.addEventListener("keydown", handleKey)
-
         return () => {
             window.removeEventListener("keydown", handleKey)
-        }
-
-    }, [prev, next, router, slug, locale])
+        }},
+        [prev, next, router, slug, locale])
 
 
 
     return (
-
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -96,11 +80,9 @@ export default function ArtworkClient({
         >
 
             {/* LEFT COLUMN — GALLERY */}
-
-            <div className="px-4 md:px-6">
+            <div>
 
                 {/* MOBILE TITLE */}
-
                 <h1 className="text-3xl mb-6 md:hidden truncate">
                     {title}
                 </h1>
@@ -112,111 +94,75 @@ export default function ArtworkClient({
                     sold={artwork.sold}
                     locale={locale}
                 />
-
             </div>
 
-
-
             {/* RIGHT COLUMN — INFO */}
-
             <div>
-
                 {/* DESKTOP TITLE */}
-
                 <h1 className="text-4xl mb-6 hidden md:block truncate">
                     {title}
                 </h1>
 
-
-
                 {/* META DATA */}
-
                 <div className="text-lg md:text-xl text-white/80 space-y-2 mb-8 max-w-md">
-
                     {artwork?.size && (
                         <p className="truncate" title={artwork.size}>
                             {artwork.size}
                         </p>
                     )}
-
                     {technique && (
                         <p className="truncate" title={technique}>
                             {technique}
                         </p>
                     )}
-
                     {artwork?.year && (
                         <p className="truncate" title={artwork.year}>
                             {artwork.year}
                         </p>
                     )}
-
                 </div>
 
-
-
                 {/* DESCRIPTION */}
-
                 {description && (
-
-                    <div className="text-lg md:text-xl text-white/90 leading-relaxed max-w-md line-clamp-3 h-24 overflow-hidden">
+                    <div className="text-lg md:text-xl text-white/90 leading-relaxed max-w-md whitespace-pre-line">
                         {description}
                     </div>
-
                 )}
 
-
-
-                {/* FALLBACK NAVIGATION */}
-                <div className="flex gap-4 mt-8 2xl:hidden">
+                {/* NAVIGATION */}
+                <div className="flex gap-5 mt-8 font-roboto">
 
                     {prev && (
                         <Link
                             href={`/${locale}/series/${slug}/${prev.slug}`}
-                            className="flex items-center gap-2 border border-white/30 px-4 py-2 rounded-md text-white/80 hover:bg-white hover:text-black transition"
+                            aria-label={locale === "de" ? "Vorheriges Werk" : "Previous artwork"}
+                            className={clsx(
+                                "border border-white/40",
+                                "px-5 py-2",
+                                "rounded-md ",
+                                "text-white/50 hover:bg-white hover:text-black",
+                                "transition-colors duration-500 ease-[0.22,1,0.36,1]")}
                         >
-                            <ChevronLeft size={18} />
-                            {locale === "en" ? "Previous" : "Vorheriges"}
+                            <ArrowBigLeft size={24} />
                         </Link>
                     )}
 
                     {next && (
                         <Link
                             href={`/${locale}/series/${slug}/${next.slug}`}
-                            className="flex items-center gap-2 border border-white/30 px-4 py-2 rounded-md text-white/80 hover:bg-white hover:text-black transition"
+                            aria-label={locale === "de" ? "Nächstes Werk" : "Next artwork"}
+                            className={clsx(
+                                "border border-white/40",
+                                "px-5 py-2",
+                                "rounded-md ",
+                                "text-white/50 hover:bg-white hover:text-black",
+                                "transition-colors duration-500 ease-[0.22,1,0.36,1]")}
                         >
-                            {locale === "en" ? "Next" : "Nächstes"}
-                            <ChevronRight size={18} />
+                            <ArrowBigRight size={24} />
                         </Link>
                     )}
-
                 </div>
-
             </div>
-
-
-
-            {/* SIDE NAVIGATION */}
-            {prev && (
-                <Link
-                    href={`/${locale}/series/${slug}/${prev.slug}`}
-                    className="hidden 2xl:flex fixed left-6 top-1/2 -translate-y-1/2 p-3 rounded-full border border-white/30 text-white/70 hover:text-white hover:border-white transition backdrop-blur-sm"
-                >
-                    <ChevronLeft size={26} />
-                </Link>
-            )}
-
-            {next && (
-                <Link
-                    href={`/${locale}/series/${slug}/${next.slug}`}
-                    className="hidden 2xl:flex fixed right-6 top-1/2 -translate-y-1/2 p-3 rounded-full border border-white/30 text-white/70 hover:text-white hover:border-white transition backdrop-blur-sm"
-                >
-                    <ChevronRight size={26} />
-                </Link>
-            )}
-
         </motion.div>
-
     )
-
 }
