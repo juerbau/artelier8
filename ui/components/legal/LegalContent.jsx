@@ -5,11 +5,11 @@ export default function LegalContent({sections}) {
         <div className="space-y-12 text-lg leading-relaxed">
             {sections.map((section) => (
                 <div key={section.title}>
-                    <h2 className="uppercase tracking-widest">
+                    <h2 className="text-[22px]">
                         {section.title}
                     </h2>
 
-                    <div className="mt-3 space-y-3">
+                    <div className="mt-2 space-y-2">
                         {section.blocks.map((block, index) => {
                             if (block.type === "list") {
                                 return (
