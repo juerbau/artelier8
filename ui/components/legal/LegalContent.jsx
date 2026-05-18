@@ -1,19 +1,21 @@
-export default function LegalContent({ sections }) {
+import {linkifyText} from "../../../lib/legal/linkifyText";
+
+export default function LegalContent({sections}) {
     return (
-        <>
+        <div className="space-y-12 text-lg leading-relaxed">
             {sections.map((section) => (
-                <section key={section.title}>
-                    <h2 className="text-xs uppercase tracking-[0.22em] text-neutral-500">
+                <div key={section.title}>
+                    <h2 className="uppercase tracking-widest">
                         {section.title}
                     </h2>
 
-                    <div className="mt-6 space-y-5">
+                    <div className="mt-3 space-y-3">
                         {section.blocks.map((block, index) => {
                             if (block.type === "list") {
                                 return (
                                     <ul
                                         key={index}
-                                        className="list-disc space-y-2 pl-5 text-neutral-400"
+                                        className="list-disc space-y-1 pl-7"
                                     >
                                         {block.items.map((item) => (
                                             <li key={item}>{item}</li>
@@ -24,13 +26,13 @@ export default function LegalContent({ sections }) {
 
                             return (
                                 <p key={index} className="whitespace-pre-line">
-                                    {block.text}
+                                    {linkifyText(block.text)}
                                 </p>
                             );
                         })}
                     </div>
-                </section>
+                </div>
             ))}
-        </>
+        </div>
     );
 }
