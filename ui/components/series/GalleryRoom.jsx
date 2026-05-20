@@ -38,7 +38,7 @@ export default function GalleryRoom({ series }) {
                 src={galleryRoom}
                 alt="Gallery Room"
                 fill
-                sizes="100vw"
+                sizes="(min-width: 1024px) 1024px, 100vw"
                 className="object-cover"
                 priority
             />
@@ -95,6 +95,7 @@ export default function GalleryRoom({ series }) {
                                     fill
                                     sizes="(min-width: 768px) 22vw, 80vw"
                                     className="object-cover"
+                                    loading="eager"
                                 />
 
                                 {/* 💡 Licht */}

@@ -67,7 +67,7 @@ export default function ArtworkGallery({ mainImage, galleryImages, title, sold, 
                             key={mainSrc}
                             initial={{
                                 opacity: 0,
-                                scale: 1.04,
+                                scale: 1.1,
                                 filter: "brightness(0.92)"
                             }}
                             animate={{
@@ -81,8 +81,8 @@ export default function ArtworkGallery({ mainImage, galleryImages, title, sold, 
                                 filter: "brightness(0.95)"
                             }}
                             transition={{
-                                duration: 0.9,
-                                ease: [0.22, 1, 0.36, 1],
+                                duration: 2,
+                                ease: [0.16, 1, 0.3, 1],
                             }}
                             className="absolute inset-0 z-10"   // 🔥 wichtig!
                         >

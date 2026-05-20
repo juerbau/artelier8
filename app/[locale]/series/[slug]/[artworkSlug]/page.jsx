@@ -130,7 +130,7 @@ export default async function ArtworkPage({params}) {
     return (
         <>
             <ScrollToTop/>
-            <FadeInSection className="pt-10 mx-auto max-w-6xl" as="section">
+            <div className="pt-10 mx-auto max-w-6xl">
                 <ArtworkClient
                     artwork={artwork}
                     title={title}
@@ -141,7 +141,8 @@ export default async function ArtworkPage({params}) {
                     slug={slug}
                     locale={locale}
                 />
-            </FadeInSection>
+            </div>
+
         </>
     )
 }

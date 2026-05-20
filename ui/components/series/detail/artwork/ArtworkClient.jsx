@@ -4,9 +4,6 @@ import { useRouter } from "next/navigation";
 import { useRef, useEffect } from "react";
 import Link from "next/link";
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
-
-
-import { motion } from "motion/react";
 import clsx from "clsx"
 import ArtworkGallery from "@/ui/components/series/detail/artwork/ArtworkGallery";
 
@@ -67,13 +64,7 @@ export default function ArtworkClient({
 
 
     return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{
-                duration: 1.2,
-                ease: [0.22, 1, 0.36, 1],
-            }}
+        <div
             className="grid md:grid-cols-2 gap-10 text-white items-start"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
@@ -112,7 +103,7 @@ export default function ArtworkClient({
                     )}
                     {technique && (
                         <p className="truncate" title={technique}>
-                            {technique}
+                            {`Technik: ${technique}`}
                         </p>
                     )}
                     {artwork?.year && (
@@ -163,6 +154,6 @@ export default function ArtworkClient({
                     )}
                 </div>
             </div>
-        </motion.div>
+        </div>
     )
 }
