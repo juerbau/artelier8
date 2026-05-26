@@ -10,7 +10,7 @@ const content = {
     ],
 
     en: [
-        ["What you see", "is more than a moment."],
+        ["What you see is more than a moment."],
         ["It is an interplay", "of structure and freedom."],
         ["This is how works emerge", "with depth and tension."],
         ["Experienced in series."],

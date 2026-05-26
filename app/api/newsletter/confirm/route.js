@@ -9,6 +9,7 @@ export async function GET(req) {
     let locale = "de"
 
     try {
+
         if (!siteUrl) {
             return NextResponse.json(
                 { error: "Missing NEXT_PUBLIC_SITE_URL" },
@@ -22,7 +23,8 @@ export async function GET(req) {
 
         if (!token) {
             return NextResponse.redirect(
-                new URL(`/newsletter/confirm-invalid?locale=${locale}`, siteUrl)
+                new URL(`/newsletter/message?locale=${locale}&action=confirm&status=invalid`, siteUrl)
+
             )
         }
 
@@ -31,7 +33,7 @@ export async function GET(req) {
 
         if (!email) {
             return NextResponse.redirect(
-                new URL(`/newsletter/confirm-invalid?locale=${locale}`, siteUrl)
+                new URL(`/newsletter/message?locale=${locale}&action=confirm&status=invalid`, siteUrl)
             )
         }
 
@@ -43,7 +45,7 @@ export async function GET(req) {
 
         if (!subscriberRaw) {
             return NextResponse.redirect(
-                new URL(`/newsletter/confirm-invalid?locale=${locale}`, siteUrl)
+                new URL(`/newsletter/message?locale=${locale}&action=confirm&status=invalid`, siteUrl)
             )
         }
 
@@ -73,13 +75,13 @@ export async function GET(req) {
         }
 
         return NextResponse.redirect(
-            new URL(`/newsletter/confirmed?locale=${locale}`, siteUrl)
+            new URL(`/newsletter/message?locale=${locale}&action=confirm&status=success`, siteUrl)
         )
     } catch (error) {
         console.error("Newsletter confirm error:", error)
 
         return NextResponse.redirect(
-            new URL(`/newsletter/confirm-error?locale=${locale}`, siteUrl)
+            new URL(`/newsletter/message?locale=${locale}&action=confirm&status=error`, siteUrl)
         )
     }
 }

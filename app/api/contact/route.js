@@ -20,29 +20,21 @@ function checkOrigin(req) {
 
 export async function POST(req) {
     try {
-        console.log("1. START")
-
         // Origin Check
         if (!checkOrigin(req)) {
-            console.log("❌ ORIGIN BLOCKED")
             return new Response("Forbidden", { status: 403 })
         }
 
         // Body lesen
         const body = await req.json()
-        console.log("2. BODY OK")
 
         // Honeypot
         if (body.website) {
-            console.log("3. HONEYPOT TRIGGERED")
             return new Response("OK", { status: 200 })
         }
 
-        console.log("4. HONEYPOT PASSED")
-
         // Rate Limit
         const allowed = await checkRateLimit(req, "contact")
-        console.log("5. RATE LIMIT:", allowed)
 
         if (!allowed) {
             return new Response("Too Many Requests", {
@@ -51,26 +43,17 @@ export async function POST(req) {
             })
         }
 
-        console.log("6. BEFORE VALIDATION")
-
         // Validation (Zod)
         const { locale, ...formData } = body
         const schema = getContactSchema(locale)
         const result = schema.safeParse(formData)
 
         if (!result.success) {
-            console.log("7. VALIDATION ERROR", result.error)
             return new Response("Invalid data", { status: 400 })
         }
 
-        console.log("8. VALIDATION OK")
-
         const { firstName, lastName, email, message } = result.data
         const from = getEmailFrom()
-
-        console.log("9. BEFORE RESEND")
-
-
 
         // Mail senden
         const { error } = await resend.emails.send({
@@ -87,16 +70,12 @@ export async function POST(req) {
         })
 
         if (error) {
-            console.error("❌ RESEND ERROR:", error)
             return new Response("Mail failed", { status: 500 })
         }
-
-        console.log("10. AFTER RESEND")
 
         return new Response("OK", { status: 200 })
 
     } catch (err) {
-        console.error("🔥 ERROR:", err)
         return new Response("Server error", { status: 500 })
     }
 }

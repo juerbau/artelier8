@@ -12,7 +12,6 @@ export default async function AdminNewsletterPage() {
 
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || ""
 
-    const slug = newsletter?.slug?.current
     const imageUrl =
         newsletter?.mainImage
             ? buildImage({

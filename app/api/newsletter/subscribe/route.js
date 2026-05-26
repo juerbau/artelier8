@@ -1,30 +1,10 @@
 import { NextResponse } from "next/server"
 import crypto from "crypto"
-import { Resend } from "resend"
 import { redis, checkRateLimit } from "@/lib/security/rate-limit"
 import { getNewsletterSchema } from "@/lib/validation/newsletter-schema"
 import { getEmailFrom } from "@/lib/email/config"
+import { sendConfirmationEmail } from "@/lib/newsletter/sendConfirmationEmail"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
-function getMailContent({ locale, confirmUrl }) {
-    return {
-        de: {
-            subject: "Bitte bestätige deine Anmeldung",
-            html: `
-                <p>Bitte bestätige deine Anmeldung:</p>
-                <p><a href="${confirmUrl}">E-Mail bestätigen</a></p>
-            `,
-        },
-        en: {
-            subject: "Confirm your subscription",
-            html: `
-                <p>Please confirm your subscription:</p>
-                <p><a href="${confirmUrl}">Confirm email</a></p>
-            `,
-        },
-    }[locale]
-}
 
 export async function POST(req) {
     try {
@@ -78,7 +58,6 @@ export async function POST(req) {
         }
 
         const from = getEmailFrom()
-
         const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
 
         if (!siteUrl) {
@@ -88,7 +67,10 @@ export async function POST(req) {
             )
         }
 
-        // Pending: neue Bestätigungsmail senden
+        let confirmUrl
+        let responseStatus
+        let errorLogMessage
+
         if (existing?.status === "pending") {
             if (existing.pendingToken) {
                 await redis.del(`newsletter:token:${existing.pendingToken}`)
@@ -110,68 +92,42 @@ export async function POST(req) {
             await redis.set(tokenKey, email, { ex: 60 * 60 * 24 })
             await redis.set(`newsletter:unsubscribe:${unsubscribeToken}`, email)
 
-            const confirmUrl = `${siteUrl}/api/newsletter/confirm?token=${newToken}&locale=${locale}`
+            confirmUrl = `${siteUrl}/api/newsletter/confirm?token=${newToken}&locale=${locale}`
+            responseStatus = "pending-confirmation"
+            errorLogMessage = "Newsletter pending resend failed:"
+        } else {
+            const token = crypto.randomBytes(32).toString("hex")
+            const tokenKey = `newsletter:token:${token}`
+            const unsubscribeToken = crypto.randomBytes(32).toString("hex")
 
-            const content = getMailContent({ locale, confirmUrl })
-
-            const result = await resend.emails.send({
-                from,
-                to: email,
-                subject: content.subject,
-                html: content.html,
-            })
-
-            if (result?.error) {
-                console.error("Newsletter pending resend failed:", result.error)
-
-                return NextResponse.json(
-                    {
-                        error:
-                            result.error.message ||
-                            "Failed to resend confirmation email",
-                    },
-                    { status: result.error.statusCode || 500 }
-                )
+            const subscriber = {
+                email,
+                status: "pending",
+                locale,
+                createdAt: Date.now(),
+                confirmedAt: null,
+                pendingToken: token,
+                unsubscribeToken,
             }
 
-            return NextResponse.json({
-                success: true,
-                status: "pending-confirmation",
-            })
+            await redis.set(subscriberKey, JSON.stringify(subscriber))
+            await redis.set(tokenKey, email, { ex: 60 * 60 * 24 })
+            await redis.set(`newsletter:unsubscribe:${unsubscribeToken}`, email)
+
+            confirmUrl = `${siteUrl}/api/newsletter/confirm?token=${token}&locale=${locale}`
+            responseStatus = "confirmation-sent"
+            errorLogMessage = "Newsletter subscribe send failed:"
         }
 
-        // Neuer Subscriber
-        const token = crypto.randomBytes(32).toString("hex")
-        const tokenKey = `newsletter:token:${token}`
-        const unsubscribeToken = crypto.randomBytes(32).toString("hex")
-
-        const subscriber = {
-            email,
-            status: "pending",
-            locale,
-            createdAt: Date.now(),
-            confirmedAt: null,
-            pendingToken: token,
-            unsubscribeToken,
-        }
-
-        await redis.set(subscriberKey, JSON.stringify(subscriber))
-        await redis.set(tokenKey, email, { ex: 60 * 60 * 24 })
-        await redis.set(`newsletter:unsubscribe:${unsubscribeToken}`, email)
-
-        const confirmUrl = `${siteUrl}/api/newsletter/confirm?token=${token}&locale=${locale}`
-
-        const content = getMailContent({ locale, confirmUrl })
-
-        const result = await resend.emails.send({
+        const result = await sendConfirmationEmail({
             from,
             to: email,
-            subject: content.subject,
-            html: content.html,
+            locale,
+            confirmUrl,
         })
 
         if (result?.error) {
-            console.error("Newsletter subscribe send failed:", result.error)
+            console.error(errorLogMessage, result.error)
 
             return NextResponse.json(
                 {
@@ -185,7 +141,7 @@ export async function POST(req) {
 
         return NextResponse.json({
             success: true,
-            status: "confirmation-sent",
+            status: responseStatus,
         })
     } catch (err) {
         console.error("Newsletter subscribe error:", err)
