@@ -30,6 +30,7 @@ export default function Header({ locale }) {
                 <Logo
                     href={`/${locale}`}
                     priority
+                    className="w-[clamp(60px,6vw,90px)]"
                 />
 
                 {/* Center Nav (FIX: kein flex-1 mehr!) */}

@@ -8,15 +8,15 @@ export default function Logo({
                                  href = "/",
                                  className,
                                  imageClassName,
-                                 wrapperClassName,
+                                 sizes = "(max-width: 768px) 70px, 90px",
                                  priority = false,
                              }) {
     return (
-        <Link href={href} className={clsx("block", className)}>
+        <Link href={href} className="block">
             <div
                 className={clsx(
-                    "relative w-[clamp(60px,6vw,90px)] aspect-90/68",
-                    wrapperClassName
+                    "relative aspect-50/38",
+                    className
                 )}
             >
                 <Image
@@ -24,7 +24,7 @@ export default function Logo({
                     alt="ARTelier8 Logo"
                     fill
                     priority={priority}
-                    sizes="(max-width: 768px) 70px, 90px"
+                    sizes={sizes}
                     className={clsx(
                         "object-contain opacity-90 hover:opacity-100 transition-opacity duration-300",
                         imageClassName

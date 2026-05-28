@@ -8,7 +8,7 @@ import {seriesListQuery} from "@/sanity/queries/series";
 import { buildMetadata } from "@/lib/seo"
 import {openGraphQuery} from "@/sanity/queries/openGraph";
 import {buildImage} from "@/sanity/image";
-import FadeInSection from "../../ui/components/FadeInSection";
+import FadeInSection from "@/ui/components/FadeInSection";
 
 
 export async function generateMetadata({ params }) {

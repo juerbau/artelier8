@@ -22,10 +22,7 @@ export async function GET(req) {
 
         if (!token) {
             return NextResponse.redirect(
-                new URL(
-                    `/newsletter/message?locale=${locale}&action=unsubscribe&status=invalid`,
-                    siteUrl
-                )
+                new URL(`/${locale}/newsletter/message?action=unsubscribe&status=invalid`, siteUrl)
             )
         }
 
@@ -34,10 +31,7 @@ export async function GET(req) {
 
         if (!email) {
             return NextResponse.redirect(
-                new URL(
-                    `/newsletter/message?locale=${locale}&action=unsubscribe&status=invalid`,
-                    siteUrl
-                )
+                new URL(`/${locale}/newsletter/message?action=unsubscribe&status=invalid`, siteUrl)
             )
         }
 
@@ -55,10 +49,7 @@ export async function GET(req) {
             await redis.del(tokenKey)
 
             return NextResponse.redirect(
-                new URL(
-                    `/newsletter/message?locale=${locale}&action=unsubscribe&status=invalid`,
-                    siteUrl
-                )
+                new URL(`/${locale}/newsletter/message?action=unsubscribe&status=invalid`, siteUrl)
             )
         }
 
@@ -67,20 +58,14 @@ export async function GET(req) {
         await redis.del(tokenKey)
 
         return NextResponse.redirect(
-            new URL(
-                `/newsletter/message?locale=${locale}&action=unsubscribe&status=success`,
-                siteUrl
-            )
+            new URL(`/${locale}/newsletter/message?action=unsubscribe&status=success`, siteUrl)
         )
 
     } catch (error) {
         console.error("Newsletter unsubscribe error:", error)
 
         return NextResponse.redirect(
-            new URL(
-                `/newsletter/message?locale=${locale}&action=unsubscribe&status=error`,
-                siteUrl
-            )
+            new URL(`/${locale}/newsletter/message?action=unsubscribe&status=error`, siteUrl)
         )
     }
 }
