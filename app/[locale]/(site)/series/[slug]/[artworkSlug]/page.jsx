@@ -5,7 +5,6 @@ import ArtworkClient from "@/ui/components/series/detail/artwork/ArtworkClient"
 import {notFound} from "next/navigation";
 import {buildMetadata} from "@/lib/seo"
 import {buildImage} from "@/sanity/image";
-import FadeInSection from "@/ui/components/FadeInSection";
 import ScrollToTop from "@/ui/components/ScrollToTop";
 
 

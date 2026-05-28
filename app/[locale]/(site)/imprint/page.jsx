@@ -1,7 +1,7 @@
-import {legal} from "../../../lib/i18n/legal";
-import LegalContent from "../../../ui/components/legal/LegalContent";
-import LegalHeading from "../../../ui/components/legal/LegalHeading";
-import FadeInSection from "../../../ui/components/FadeInSection";
+import {legal} from "@/lib/i18n/legal";
+import LegalContent from "@/ui/components/legal/LegalContent";
+import LegalHeading from "@/ui/components/legal/LegalHeading";
+import FadeInSection from "@/ui/components/FadeInSection";
 
 export async function generateMetadata({params}) {
     const {locale} = await params;
