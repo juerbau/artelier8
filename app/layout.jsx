@@ -1,6 +1,5 @@
-import {playfair, roboto, robotoSerif} from "@/ui/fonts";
+import { roboto, robotoSerif } from "@/ui/fonts";
 import "@/app/globals.css";
-import CookieNotice from "@/ui/components/CookieNotice";
 import {siteUrl} from "@/lib/site";
 import ScrollTopButton from "@/ui/components/ScrollTopButton";
 
@@ -27,7 +26,6 @@ export default function RootLayout({children}) {
         <body className={`${robotoSerif.variable} ${roboto.variable} font-sans antialiased`}>
                 {children}
                 <ScrollTopButton />
-                <CookieNotice />
             </body>
         </html>
     );

@@ -1,18 +1,8 @@
-import {
-    Html,
-    Head,
-    Body,
-    Container,
-    Section,
-    Heading,
-    Text,
-    Img,
-    Link,
-} from "@react-email/components"
+import { Section, Heading, Text, Link } from "@react-email/components"
+import MailLayout, { mailStyles } from "./MailLayout"
 
 export default function NewsletterConfirmEmail({ locale, confirmUrl }) {
     const isDe = locale === "de"
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
 
     const content = {
         title: isDe ? "Newsletter bestätigen" : "Confirm newsletter",
@@ -23,191 +13,20 @@ export default function NewsletterConfirmEmail({ locale, confirmUrl }) {
         hint: isDe
             ? "Falls du dich nicht angemeldet hast, kannst du diese E-Mail ignorieren."
             : "If you did not subscribe, you can ignore this email.",
-        privacy: isDe ? "Datenschutz" : "Privacy",
-        imprint: isDe ? "Impressum" : "Imprint",
     }
 
     return (
-        <Html lang={isDe ? "de" : "en"}>
-            <Head />
-            <Body style={styles.body}>
-                <Container style={styles.outer}>
-                    <Section style={styles.header}>
-                        <Link href={siteUrl}>
-                            <Img
-                                src={`${siteUrl}/images/Logo_schwarz-weiss_opt.png`}
-                                alt="ARTelier8"
-                                width="300"
-                                style={styles.logo}
-                            />
-                        </Link>
-                    </Section>
+        <MailLayout locale={locale}>
+            <Section style={mailStyles.content}>
+                <Heading style={mailStyles.heading}>{content.title}</Heading>
+                <Text style={mailStyles.text}>{content.text}</Text>
 
-                    <Container style={styles.card}>
-                        <Section style={styles.content}>
-                            <Heading style={styles.heading}>{content.title}</Heading>
+                <Link href={confirmUrl} style={mailStyles.button}>
+                    {content.button}
+                </Link>
 
-                            <Text style={styles.text}>{content.text}</Text>
-
-                            <Link href={confirmUrl} style={styles.button}>
-                                {content.button}
-                            </Link>
-
-                            <Text style={styles.hint}>{content.hint}</Text>
-                        </Section>
-                    </Container>
-
-                    <Section style={styles.footerOutside}>
-                        <Text style={styles.footerTitle}>
-                            <span style={styles.footerArt}>ART</span>elier8
-                        </Text>
-
-                        <Text style={styles.footerText}>
-                            <Link href={siteUrl} style={styles.footerLink}>
-                                www.artelier8.de
-                            </Link>
-                        </Text>
-
-                        <Text style={styles.footerText}>
-                            <Link href="https://www.instagram.com/artelier_8/">
-                                <Img
-                                    src={`${siteUrl}/images/instagram.png`}
-                                    alt="Instagram"
-                                    width="20"
-                                    height="20"
-                                    style={styles.socialIcon}
-                                />
-                            </Link>
-                        </Text>
-
-                        <Text style={styles.footerText}>
-                            <Link href={`${siteUrl}/${locale}/imprint`} style={styles.footerLink}>
-                                {content.imprint}
-                            </Link>
-                            {" · "}
-                            <Link href={`${siteUrl}/${locale}/privacy`} style={styles.footerLink}>
-                                {content.privacy}
-                            </Link>
-                        </Text>
-
-                        <Text style={styles.signature}>
-                            © {new Date().getFullYear()} ARTelier8
-                        </Text>
-                    </Section>
-                </Container>
-            </Body>
-        </Html>
+                <Text style={mailStyles.hint}>{content.hint}</Text>
+            </Section>
+        </MailLayout>
     )
-}
-
-const styles = {
-    body: {
-        margin: 0,
-        padding: "0",
-        backgroundColor: "#4a5565",
-        fontFamily:
-            "Avenir, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif",
-    },
-    outer: {
-        maxWidth: "680px",
-        margin: "0 auto",
-        padding: "34px 20px 36px",
-    },
-    header: {
-        textAlign: "center",
-        padding: "4px 0 30px",
-    },
-    logo: {
-        display: "block",
-        margin: "0 auto",
-        width: "300px",
-        maxWidth: "80%",
-        height: "auto",
-    },
-    card: {
-        maxWidth: "620px",
-        margin: "0 auto",
-        backgroundColor: "#7B8794",
-        border: "1px solid rgba(255,255,255,0.9)",
-    },
-    content: {
-        padding: "46px 42px 48px",
-        textAlign: "center",
-    },
-    heading: {
-        margin: "0 0 28px",
-        color: "#ffffff",
-        fontSize: "34px",
-        lineHeight: "1.25",
-        fontWeight: "400",
-    },
-    text: {
-        maxWidth: "500px",
-        margin: "0 auto",
-        padding: "0 20px",
-        color: "#ffffff",
-        fontSize: "18px",
-        lineHeight: "1.7",
-        whiteSpace: "pre-line",
-    },
-    button: {
-        display: "inline-block",
-        margin: "34px auto 0",
-        padding: "13px 26px",
-        color: "#ffffff",
-        border: "1px solid rgba(255,255,255,0.9)",
-        textDecoration: "none",
-        fontSize: "14px",
-        lineHeight: "1.4",
-        letterSpacing: "0.12em",
-        textTransform: "uppercase",
-    },
-    hint: {
-        maxWidth: "460px",
-        margin: "28px auto 0",
-        color: "rgba(255,255,255,0.78)",
-        fontSize: "13px",
-        lineHeight: "1.7",
-    },
-    footerOutside: {
-        maxWidth: "620px",
-        margin: "30px auto 0",
-        padding: "0 32px 12px",
-        textAlign: "center",
-    },
-    footerTitle: {
-        margin: "0 0 10px",
-        color: "#ffffff",
-        fontSize: "14px",
-        lineHeight: "1.5",
-        letterSpacing: "0.16em",
-    },
-    footerArt: {
-        fontWeight: "bold",
-        fontSize: "20px",
-    },
-    footerText: {
-        margin: "0 0 8px",
-        color: "rgba(255,255,255,0.58)",
-        fontSize: "14px",
-        lineHeight: "1.7",
-        textAlign: "center",
-    },
-    footerLink: {
-        color: "rgba(255,255,255,0.78)",
-        textDecoration: "underline",
-    },
-    socialIcon: {
-        display: "inline-block",
-        margin: "4px auto 2px",
-        border: "0",
-    },
-    signature: {
-        margin: "18px 0 0",
-        color: "rgb(255,255,255)",
-        fontSize: "12px",
-        lineHeight: "1.6",
-        letterSpacing: "0.12em",
-        textAlign: "center",
-    },
 }

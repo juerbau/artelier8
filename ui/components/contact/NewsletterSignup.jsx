@@ -167,8 +167,8 @@ export default function NewsletterSignup({ locale }) {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             className={clsx(
-                                "mx-auto max-w-md text-center text-sm leading-relaxed",
-                                isWarning ? "text-yellow-300" : "text-white"
+                                "mx-auto max-w-md text-center leading-relaxed",
+                                isWarning ? "text-yellow-300 text-sm" : "text-white text-lg"
                             )}
                         >
                             {message}
