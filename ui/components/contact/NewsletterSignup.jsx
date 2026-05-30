@@ -7,7 +7,6 @@ import { getNewsletterSchema } from "@/lib/validation/newsletter-schema";
 import FormField from "@/ui/components/contact/FormField";
 
 export default function NewsletterSignup({ locale }) {
-    const [email, setEmail] = useState("");
     const [status, setStatus] = useState("idle");
     const [validationError, setValidationError] = useState("");
     const [apiError, setApiError] = useState("");
@@ -46,8 +45,11 @@ export default function NewsletterSignup({ locale }) {
         setApiError("");
         setStatus("idle");
 
+        const formData = new FormData(e.currentTarget);
+        const data = Object.fromEntries(formData.entries());
+
         const schema = getNewsletterSchema(locale);
-        const result = schema.safeParse({ email });
+        const result = schema.safeParse(data);
 
         if (!result.success) {
             setValidationError(
@@ -65,31 +67,30 @@ export default function NewsletterSignup({ locale }) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    email: result.data.email,
+                    ...result.data,
                     locale,
                 }),
             });
 
-            // throw new Error(); // Zum Testen
-
-            const data = await res.json();
+            const responseData = await res.json();
 
             if (!res.ok) {
-                throw new Error(data?.error || content.apiError);
+                throw new Error(responseData?.error || content.apiError);
             }
 
-            if (data?.status === "already-subscribed") {
+            if (responseData?.status === "already-subscribed") {
                 setStatus("already-subscribed");
                 return;
             }
 
-            if (data?.status === "pending-confirmation") {
+            if (responseData?.status === "pending-confirmation") {
                 setStatus("pending-confirmation");
+                e.currentTarget.reset();
                 return;
             }
 
             setStatus("success");
-            setEmail("");
+            e.currentTarget.reset();
         } catch (err) {
             setApiError(err.message || content.apiError);
             setStatus("idle");
@@ -107,22 +108,17 @@ export default function NewsletterSignup({ locale }) {
         "cursor-pointer",
         "hover:bg-neutral-800",
         {
-            "opacity-50 cursor-not-allowed":
-                status === "loading",
+            "opacity-50 cursor-not-allowed": status === "loading",
         }
     );
 
     const message =
         apiError ||
         (status === "success" && content.success) ||
-        (status === "already-subscribed" &&
-            content.alreadySubscribed) ||
-        (status === "pending-confirmation" &&
-            content.pendingConfirmation);
+        (status === "already-subscribed" && content.alreadySubscribed) ||
+        (status === "pending-confirmation" && content.pendingConfirmation);
 
-    const isWarning =
-        Boolean(apiError) ||
-        status === "already-subscribed";
+    const isWarning = Boolean(apiError) || status === "already-subscribed";
 
     return (
         <>
@@ -140,15 +136,21 @@ export default function NewsletterSignup({ locale }) {
                     name="email"
                     type="email"
                     autoComplete="email"
-                    value={email}
                     error={validationError}
-                    onChange={(e) => {
-                        setEmail(e.target.value);
-
+                    onChange={() => {
                         if (validationError) setValidationError("");
                         if (apiError) setApiError("");
                         if (status !== "idle") setStatus("idle");
                     }}
+                />
+
+                <input
+                    type="text"
+                    name="website"
+                    className="absolute -left-2499.75"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
                 />
 
                 <button
@@ -156,9 +158,7 @@ export default function NewsletterSignup({ locale }) {
                     disabled={status === "loading"}
                     className={buttonClasses}
                 >
-                    {status === "loading"
-                        ? "..."
-                        : content.button}
+                    {status === "loading" ? "..." : content.button}
                 </button>
 
                 <div className="min-h-24 pt-3 text-center">
@@ -168,7 +168,9 @@ export default function NewsletterSignup({ locale }) {
                             animate={{ opacity: 1 }}
                             className={clsx(
                                 "mx-auto max-w-md text-center leading-relaxed",
-                                isWarning ? "text-yellow-300 text-sm" : "text-white text-lg"
+                                isWarning
+                                    ? "text-yellow-300 text-sm"
+                                    : "text-white text-lg"
                             )}
                         >
                             {message}

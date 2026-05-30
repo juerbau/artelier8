@@ -58,8 +58,6 @@ export async function GET(req) {
             },
         })
     } catch (error) {
-        console.error("Newsletter preview error:", error)
-
         return NextResponse.json(
             { error: "Failed to render newsletter preview" },
             { status: 500 }

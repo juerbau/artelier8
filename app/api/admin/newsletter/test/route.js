@@ -1,29 +1,20 @@
 import { NextResponse } from "next/server"
-import { Resend } from "resend"
 import { buildImage } from "@/sanity/image"
 import { getCurrentReadyNewsletter } from "@/lib/newsletter/get-current-ready-newsletter"
 import { buildNewsletterEmailHtml } from "@/lib/newsletter/buildNewsletterEmailHtml"
-import {getEmailFrom} from "@/lib/email/config";
+import { getEmailFrom, getEmailTo } from "@/lib/email/config";
+import {resendAPI} from "@/lib/email/resend";
 
-
-const resend = new Resend(process.env.RESEND_API_KEY)
+const resend = resendAPI();
 
 export async function POST(req) {
 
     try {
-        const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
-        const testEmail = process.env.NEWSLETTER_TEST_EMAIL
+        const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
         if (!siteUrl) {
             return NextResponse.json(
                 { error: "Missing NEXT_PUBLIC_SITE_URL" },
-                { status: 500 }
-            )
-        }
-
-        if (!testEmail) {
-            return NextResponse.json(
-                { error: "Missing NEWSLETTER_TEST_EMAIL" },
                 { status: 500 }
             )
         }
@@ -60,23 +51,22 @@ export async function POST(req) {
         const subject = locale === "de" ? "Neuigkeiten aus dem ARTelier8" : "Latest news from ARTelier8";
 
         const from = getEmailFrom();
+        const to = getEmailTo();
 
         const result = await resend.emails.send({
-            from: from,
-            to: testEmail,
+            from,
+            to,
             subject: `[TEST] ${subject}`,
             html,
         })
 
         if (result?.error) {
-            console.error("Newsletter test send failed:", result.error)
-
             return NextResponse.json(
                 {
                     success: false,
                     mode: "test",
                     locale,
-                    sentTo: testEmail,
+                    sentTo: to,
                     error: result.error.message || "Failed to send test newsletter",
                     result,
                 },
@@ -88,12 +78,10 @@ export async function POST(req) {
             success: true,
             mode: "test",
             locale,
-            sentTo: testEmail,
+            sentTo: to,
             result,
         })
     } catch (error) {
-        console.error("Newsletter test send error:", error)
-
         return NextResponse.json(
             { error: "Failed to send test newsletter" },
             { status: 500 }

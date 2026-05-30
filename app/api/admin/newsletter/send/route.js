@@ -1,14 +1,14 @@
-import { NextResponse } from "next/server"
-import { Resend } from "resend"
-import { writeClient } from "@/sanity/writeClient"
-import { buildImage } from "@/sanity/image"
-import { getCurrentReadyNewsletter } from "@/lib/newsletter/get-current-ready-newsletter"
-import { getActiveSubscribers } from "@/lib/newsletter/get-active-subscribers"
-import { buildNewsletterEmailHtml } from "@/lib/newsletter/buildNewsletterEmailHtml"
-import { acquireNewsletterSendLock, releaseNewsletterSendLock } from "@/lib/newsletter/send-lock"
-import { getEmailFrom } from "@/lib/email/config"
+import { NextResponse } from "next/server";
+import { writeClient } from "@/sanity/writeClient";
+import { buildImage } from "@/sanity/image";
+import { getCurrentReadyNewsletter } from "@/lib/newsletter/get-current-ready-newsletter";
+import { getActiveSubscribers } from "@/lib/newsletter/get-active-subscribers";
+import { buildNewsletterEmailHtml } from "@/lib/newsletter/buildNewsletterEmailHtml";
+import { acquireNewsletterSendLock, releaseNewsletterSendLock } from "@/lib/security/send-lock";
+import { getEmailFrom } from "@/lib/email/config";
+import {resendAPI} from "@/lib/email/resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const resend = resendAPI();
 
 export async function POST() {
     const lockAcquired = await acquireNewsletterSendLock()

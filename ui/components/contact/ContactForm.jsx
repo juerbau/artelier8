@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
-
 import { getContactSchema } from "@/lib/validation/contact-schema";
 import { contactForm } from "@/lib/i18n";
 import FormField from "@/ui/components/contact/FormField";
+
 
 export default function ContactForm({ locale }) {
     const router = useRouter();
@@ -66,14 +66,16 @@ export default function ContactForm({ locale }) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    ...data,
+                    ...result.data,
                     locale,
                 }),
             });
 
-            if (!res.ok) throw new Error();
+            const responseData = await res.json().catch(() => null);
 
-            // throw new Error(); // Zum Testen
+            if (!res.ok || !responseData?.success) {
+                throw new Error(responseData?.error || "request_failed");
+            }
 
             router.push(`/${safeLocale}/contact/success`);
         } catch {
@@ -150,6 +152,7 @@ export default function ContactForm({ locale }) {
                 className="absolute -left-2499.75"
                 tabIndex={-1}
                 autoComplete="off"
+                aria-hidden="true"
             />
 
             <button

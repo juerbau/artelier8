@@ -1,81 +1,139 @@
-import { Resend } from "resend"
-import { checkRateLimit } from "@/lib/security/rate-limit"
-import {getContactSchema} from "@/lib/validation/contact-schema"
-import ContactNotificationEmail from "@/ui/components/emails/ContactNotificationEmail"
-import {getEmailFrom} from "@/lib/email/config";
+import { NextResponse } from "next/server";
+import { checkRateLimit } from "@/lib/security/rate-limit";
+import { getContactSchema } from "@/lib/validation/contact-schema";
+import { checkOrigin } from "@/lib/security/origin-check";
+import { sendContactNotificationEmail } from "@/lib/email/sendContactNotificationEmail";
+import { sendOrderLinkEmail } from "@/lib/email/sendOrderLinkEmail";
+import { isHoneypotTriggered } from "@/lib/security/honeypot";
+import { checkEmailAttempts } from "@/lib/security/email-attempts";
 
-
-// Resend Setup
-const resend = new Resend(process.env.RESEND_API_KEY)
-
-// Optional: Origin Check
-function checkOrigin(req) {
-    const origin = req.headers.get("origin")
-    const allowed = process.env.ALLOWED_ORIGIN
-
-    if (!origin) return true
-
-    return origin === allowed
-}
 
 export async function POST(req) {
     try {
-        // Origin Check
         if (!checkOrigin(req)) {
-            return new Response("Forbidden", { status: 403 })
+            return NextResponse.json(
+                { success: false, error: "forbidden" },
+                { status: 403 }
+            );
         }
 
-        // Body lesen
-        const body = await req.json()
+        const body = await req.json();
 
-        // Honeypot
-        if (body.website) {
-            return new Response("OK", { status: 200 })
+        if (isHoneypotTriggered(body)) {
+            return NextResponse.json(
+                { success: true },
+                { status: 200 }
+            );
         }
 
-        // Rate Limit
-        const allowed = await checkRateLimit(req, "contact")
+        const allowed = await checkRateLimit(req, "contact");
 
         if (!allowed) {
-            return new Response("Too Many Requests", {
-                status: 429,
-                headers: { "Retry-After": "60" },
-            })
+            return NextResponse.json(
+                { success: false, error: "rate_limit" },
+                {
+                    status: 429,
+                    headers: { "Retry-After": "60" },
+                }
+            );
         }
 
-        // Validation (Zod)
-        const { locale, ...formData } = body
-        const schema = getContactSchema(locale)
-        const result = schema.safeParse(formData)
+        const locale = body?.locale?.startsWith("de") ? "de" : "en";
+        const { locale: _locale, ...formData } = body;
+
+        const schema = getContactSchema(locale);
+        const result = schema.safeParse(formData);
 
         if (!result.success) {
-            return new Response("Invalid data", { status: 400 })
+            return NextResponse.json(
+                {
+                    success: false,
+                    error: "validation",
+                    issues: result.error.issues,
+                },
+                { status: 400 }
+            );
         }
 
-        const { firstName, lastName, email, message } = result.data
-        const from = getEmailFrom()
+        const { firstName, lastName, email, message, inquiryType } = result.data;
 
-        // Mail senden
-        const { error } = await resend.emails.send({
-            from: from,
-            to: ["artelier8.web@gmail.com"],
-            reply_to: email,
-            subject: `Neue Anfrage von ${firstName} ${lastName}`,
-            react: ContactNotificationEmail({
-                firstName,
-                lastName,
-                email,
-                message,
-            }),
-        })
+        const emailAllowed = await checkEmailAttempts({
+            scope: "contact",
+            email,
+            limit: 2,
+            windowSeconds: 60,
+        });
 
-        if (error) {
-            return new Response("Mail failed", { status: 500 })
+        if (!emailAllowed) {
+            return NextResponse.json(
+                { success: false, error: "rate_limit" },
+                {
+                    status: 429,
+                    headers: { "Retry-After": "60" },
+                }
+            );
         }
 
-        return new Response("OK", { status: 200 })
+        const res = await sendContactNotificationEmail({
+            firstName,
+            lastName,
+            email,
+            message,
+            inquiryType,
+            locale,
+        });
+
+
+        if (res?.error) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    error:
+                        res.error.message ||
+                        "Failed to send contact notification email",
+                },
+                { status: res.error.statusCode || 500 }
+            );
+        }
+
+        if (inquiryType === "order") {
+            const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
+            if (!siteUrl) {
+                return NextResponse.json(
+                    { success: false, error: "missing_site_url" },
+                    { status: 500 }
+                );
+            }
+
+            const orderUrl = `${siteUrl}/${locale}/order`;
+            const resOrder = await sendOrderLinkEmail({
+                to: email,
+                locale,
+                orderUrl,
+            });
+
+            if (resOrder?.error) {
+                return NextResponse.json(
+                    {
+                        success: false,
+                        error:
+                            resOrder.error.message ||
+                            "Failed to send order link email",
+                    },
+                    { status: resOrder.error.statusCode || 500 }
+                );
+            }
+        }
+
+        return NextResponse.json({ success: true });
 
     } catch (err) {
-        return new Response("Server error", { status: 500 })
+        console.error("Contact route error:", err);
+
+        return NextResponse.json(
+            { success: false, error: "server_error" },
+            { status: 500 }
+        );
     }
 }

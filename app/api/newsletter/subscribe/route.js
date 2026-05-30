@@ -1,40 +1,76 @@
-import { NextResponse } from "next/server"
-import crypto from "crypto"
-import { redis, checkRateLimit } from "@/lib/security/rate-limit"
-import { getNewsletterSchema } from "@/lib/validation/newsletter-schema"
-import { getEmailFrom } from "@/lib/email/config"
-import { sendConfirmationEmail } from "@/lib/newsletter/sendConfirmationEmail"
+import { NextResponse } from "next/server";
+import crypto from "crypto";
+import { redis, checkRateLimit } from "@/lib/security/rate-limit";
+import { getNewsletterSchema } from "@/lib/validation/newsletter-schema";
+import { getEmailFrom } from "@/lib/email/config";
+import { sendConfirmationEmail } from "@/lib/email/sendConfirmationEmail";
+import { checkOrigin } from "@/lib/security/origin-check";
+import { isHoneypotTriggered } from "@/lib/security/honeypot"
+import { checkEmailAttempts } from "@/lib/security/email-attempts";
 
 
 export async function POST(req) {
     try {
+        if (!checkOrigin(req)) {
+            return NextResponse.json(
+                { success: false, error: "forbidden" },
+                { status: 403 }
+            )
+        }
+
         const body = await req.json()
 
-        const locale = body?.locale?.startsWith("de") ? "de" : "en"
-
-        const schema = getNewsletterSchema(locale)
-        const { email } = schema.parse(body)
+        if (isHoneypotTriggered(body)) {
+            return NextResponse.json(
+                { success: true },
+                { status: 200 }
+            )
+        }
 
         const allowed = await checkRateLimit(req, "newsletter")
 
         if (!allowed) {
             return NextResponse.json(
-                { error: "Too many requests" },
-                { status: 429 }
+                { success: false, error: "rate_limit" },
+                {
+                    status: 429,
+                    headers: { "Retry-After": "60" },
+                }
             )
         }
 
-        const emailRateLimitKey = `newsletter:email:${email}`
-        const emailAttempts = await redis.incr(emailRateLimitKey)
+        const locale = body?.locale?.startsWith("de") ? "de" : "en"
 
-        if (emailAttempts === 1) {
-            await redis.expire(emailRateLimitKey, 60)
+        const schema = getNewsletterSchema(locale)
+        const result = schema.safeParse(body)
+
+        if (!result.success) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    error: "validation",
+                    issues: result.error.issues,
+                },
+                { status: 400 }
+            )
         }
 
-        if (emailAttempts > 3) {
+        const { email } = result.data
+
+        const emailAllowed = await checkEmailAttempts({
+            scope: "newsletter",
+            email,
+            limit: 3,
+            windowSeconds: 60,
+        })
+
+        if (!emailAllowed) {
             return NextResponse.json(
-                { error: "Too many requests" },
-                { status: 429 }
+                { success: false, error: "rate_limit" },
+                {
+                    status: 429,
+                    headers: { "Retry-After": "60" },
+                }
             )
         }
 
@@ -62,14 +98,15 @@ export async function POST(req) {
 
         if (!siteUrl) {
             return NextResponse.json(
-                { error: "Missing NEXT_PUBLIC_SITE_URL" },
+                {
+                    success: false,
+                    error: "missing_site_url",
+                },
                 { status: 500 }
             )
         }
 
         let confirmUrl
-        let responseStatus
-        let errorLogMessage
 
         if (existing?.status === "pending") {
             if (existing.pendingToken) {
@@ -93,8 +130,7 @@ export async function POST(req) {
             await redis.set(`newsletter:unsubscribe:${unsubscribeToken}`, email)
 
             confirmUrl = `${siteUrl}/api/newsletter/confirm?token=${newToken}&locale=${locale}`
-            responseStatus = "pending-confirmation"
-            errorLogMessage = "Newsletter pending resend failed:"
+
         } else {
             const token = crypto.randomBytes(32).toString("hex")
             const tokenKey = `newsletter:token:${token}`
@@ -115,43 +151,41 @@ export async function POST(req) {
             await redis.set(`newsletter:unsubscribe:${unsubscribeToken}`, email)
 
             confirmUrl = `${siteUrl}/api/newsletter/confirm?token=${token}&locale=${locale}`
-            responseStatus = "confirmation-sent"
-            errorLogMessage = "Newsletter subscribe send failed:"
         }
 
-        const result = await sendConfirmationEmail({
+        const res = await sendConfirmationEmail({
             from,
             to: email,
             locale,
             confirmUrl,
-        })
+        });
 
-        if (result?.error) {
-            console.error(errorLogMessage, result.error)
-
+        if (res?.error) {
             return NextResponse.json(
                 {
+                    success: false,
                     error:
-                        result.error.message ||
+                        res.error.message ||
                         "Failed to send confirmation email",
                 },
-                { status: result.error.statusCode || 500 }
+                { status: res.error.statusCode || 500 }
             )
         }
 
         return NextResponse.json({
             success: true,
-            status: responseStatus,
+            status: "pending-confirmation",
         })
     } catch (err) {
+
         console.error("Newsletter subscribe error:", err)
 
         return NextResponse.json(
             {
-                error: "Invalid request",
-                details: err?.message || "Unknown error",
+                success: false,
+                error: "server_error",
             },
-            { status: 400 }
+            { status: 500 }
         )
     }
 }
