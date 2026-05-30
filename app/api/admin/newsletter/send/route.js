@@ -8,7 +8,7 @@ import { acquireNewsletterSendLock, releaseNewsletterSendLock } from "@/lib/secu
 import { getEmailFrom } from "@/lib/email/config";
 import {resendAPI} from "@/lib/email/resend";
 
-const resend = resendAPI();
+const resend = resendAPI;
 
 export async function POST() {
     const lockAcquired = await acquireNewsletterSendLock()

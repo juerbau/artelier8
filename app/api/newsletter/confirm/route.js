@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { redis } from "@/lib/security/rate-limit";
 import {resendAPI} from "@/lib/email/resend";
 
-const resend = resendAPI();
+const resend = resendAPI;
 
 export async function GET(req) {
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL

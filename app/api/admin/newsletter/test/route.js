@@ -5,7 +5,7 @@ import { buildNewsletterEmailHtml } from "@/lib/newsletter/buildNewsletterEmailH
 import { getEmailFrom, getEmailTo } from "@/lib/email/config";
 import {resendAPI} from "@/lib/email/resend";
 
-const resend = resendAPI();
+const resend = resendAPI;
 
 export async function POST(req) {
 

@@ -135,6 +135,35 @@ export default function ContactForm({ locale }) {
                 }
             />
 
+            <fieldset className="space-y-3">
+                <legend className="text-sm font-medium text-neutral-900">
+                    Art der Anfrage
+                </legend>
+
+                <div className="space-y-2">
+                    {[
+                        { value: "general", label: "Allgemeine Anfrage" },
+                        { value: "artwork", label: "Interesse an einem Werk" },
+                        { value: "order", label: "Unverbindliche Auftragsanfrage" },
+                    ].map((option) => (
+                        <label
+                            key={option.value}
+                            className="flex items-center gap-3 text-sm text-neutral-700"
+                        >
+                            <input
+                                type="radio"
+                                name="inquiryType"
+                                value={option.value}
+                                checked={formData.inquiryType === option.value}
+                                onChange={handleChange}
+                                className="h-4 w-4 border-neutral-300 text-neutral-900 focus:ring-neutral-900"
+                            />
+                            {option.label}
+                        </label>
+                    ))}
+                </div>
+            </fieldset>
+
             <FormField
                 label={content.message}
                 name="message"
