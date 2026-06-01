@@ -1,4 +1,4 @@
-import { Roboto, Roboto_Serif } from "next/font/google";
+import { Roboto, Roboto_Serif, Imperial_Script } from "next/font/google";
 
 export const robotoSerif = Roboto_Serif({
     subsets: ["latin"],
@@ -10,4 +10,10 @@ export const roboto = Roboto({
     subsets: ["latin"],
     weight: ["300", "400", "500", "700"],
     variable: "--font-roboto",
+});
+
+export const imperialScript = Imperial_Script({
+    subsets: ["latin"],
+    weight: ["400"],
+    variable: "--font-imperialScript",
 });

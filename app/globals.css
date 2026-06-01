@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #7B8794;
+  --background: #505c6c;
   --foreground: #ffffff;
 }
 
@@ -11,6 +11,7 @@
 
     --font-sans: var(--font-roboto-serif);
     --font-roboto: var(--font-roboto);
+    --font-imperialScript: var(--font-imperialScript);
 }
 
 body {
