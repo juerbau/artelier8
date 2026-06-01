@@ -19,7 +19,7 @@ export default function Wordmark({
 
       <span
           className={clsx(
-              "font-signature text-[#D8B56A]",
+              "text-[#D8B56A]",
               scriptClassName
           )}
       >

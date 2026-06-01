@@ -45,8 +45,18 @@ export default function HeroQuote({ locale = "de" }) {
             </h1>
 
             {/* Artist */}
-            <div className="mt-8 flex flex-col items-center">
+            <div
+                className="
+                    mt-8
 
+                    flex flex-col
+                    items-center
+
+                    md:flex-row
+                    md:justify-center
+                    md:gap-3
+                "
+            >
                 <span
                     className="
                         text-[#D8B56A]
@@ -60,7 +70,7 @@ export default function HeroQuote({ locale = "de" }) {
 
                 <span
                     className="
-                        font-imperialScript
+                        font-signature
                         text-[#D8B56A]
                         leading-none
 
@@ -71,7 +81,6 @@ export default function HeroQuote({ locale = "de" }) {
                 >
                     Bettina J. Hagedorn
                 </span>
-
             </div>
 
         </div>

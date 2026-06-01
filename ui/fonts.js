@@ -12,8 +12,8 @@ export const roboto = Roboto({
     variable: "--font-roboto",
 });
 
-export const imperialScript = Imperial_Script({
+export const signature = Imperial_Script({
     subsets: ["latin"],
     weight: ["400"],
-    variable: "--font-imperialScript",
+    variable: "--font-signature",
 });
