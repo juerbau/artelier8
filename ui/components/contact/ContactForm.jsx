@@ -4,16 +4,18 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
 import { getContactSchema } from "@/lib/validation/contact-schema";
+import { splitZodErrors } from "@/lib/validation/validation-helpers";
 import { contactForm } from "@/lib/i18n";
 import FormField from "@/ui/components/contact/FormField";
-
 
 export default function ContactForm({ locale }) {
     const router = useRouter();
 
     const [status, setStatus] = useState("idle");
     const [errors, setErrors] = useState({});
+    const [formError, setFormError] = useState("");
     const [hasSubmitted, setHasSubmitted] = useState(false);
+    const [inquiryType, setInquiryType] = useState("general");
 
     const safeLocale = locale?.startsWith("de") ? "de" : "en";
     const content = contactForm[safeLocale];
@@ -24,6 +26,8 @@ export default function ContactForm({ locale }) {
         const schema = getContactSchema(locale);
         const fieldSchema = schema.shape[name];
 
+        if (!fieldSchema) return;
+
         const result = fieldSchema.safeParse(value);
 
         setErrors((prev) => ({
@@ -32,12 +36,17 @@ export default function ContactForm({ locale }) {
                 ? undefined
                 : result.error.issues[0].message,
         }));
+
+        setFormError("");
     }
 
     async function handleSubmit(e) {
         e.preventDefault();
+
         setHasSubmitted(true);
         setStatus("submitting");
+        setErrors({});
+        setFormError("");
 
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData.entries());
@@ -46,18 +55,13 @@ export default function ContactForm({ locale }) {
         const result = schema.safeParse(data);
 
         if (!result.success) {
-            const fieldErrors = {};
+            const { fieldErrors, formErrors } = splitZodErrors(result.error)
 
-            result.error.issues.forEach((issue) => {
-                fieldErrors[issue.path[0]] = issue.message;
-            });
-
-            setErrors(fieldErrors);
-            setStatus("idle");
+            setErrors(fieldErrors)
+            setFormError(formErrors.length > 0 ? content.error : "")
+            setStatus("idle")
             return;
         }
-
-        setErrors({});
 
         try {
             const res = await fetch("/api/contact", {
@@ -135,34 +139,66 @@ export default function ContactForm({ locale }) {
                 }
             />
 
-            <fieldset className="space-y-3">
-                <legend className="text-sm font-medium text-neutral-900">
-                    Art der Anfrage
+            <fieldset className="mb-7 mt-3">
+                <legend className="mb-4 font-roboto text-lg text-white">
+                    {content.inquiryType}
                 </legend>
 
-                <div className="space-y-2">
+                <div className="space-y-3 font-roboto">
                     {[
-                        { value: "general", label: "Allgemeine Anfrage" },
-                        { value: "artwork", label: "Interesse an einem Werk" },
-                        { value: "order", label: "Unverbindliche Auftragsanfrage" },
+                        {
+                            value: "general",
+                            label: content.inquiryOptions.general,
+                        },
+                        {
+                            value: "artwork",
+                            label: content.inquiryOptions.artwork,
+                        },
+                        {
+                            value: "order",
+                            label: content.inquiryOptions.order,
+                        },
                     ].map((option) => (
                         <label
                             key={option.value}
-                            className="flex items-center gap-3 text-sm text-neutral-700"
+                            className="flex cursor-pointer items-center gap-3 text-lg"
                         >
                             <input
                                 type="radio"
                                 name="inquiryType"
                                 value={option.value}
-                                checked={formData.inquiryType === option.value}
-                                onChange={handleChange}
-                                className="h-4 w-4 border-neutral-300 text-neutral-900 focus:ring-neutral-900"
+                                checked={inquiryType === option.value}
+                                onChange={(e) => {
+                                    setInquiryType(e.target.value);
+                                    handleFieldChange(
+                                        "inquiryType",
+                                        e.target.value
+                                    );
+                                }}
+                                className="h-4 w-4 accent-black"
                             />
+
                             {option.label}
                         </label>
                     ))}
                 </div>
+
+                {errors.inquiryType && (
+                    <p className="mt-3 text-sm text-yellow-300">
+                        {errors.inquiryType}
+                    </p>
+                )}
             </fieldset>
+
+            {inquiryType === "order" && (
+                <div className="mb-7 rounded-2xl border border-white/15 bg-white/5 p-4 font-roboto text-[16px] leading-relaxed">
+                    <p>{content.orderHint.paragraph1}</p>
+
+                    <p className="mt-3">
+                        {content.orderHint.paragraph2}
+                    </p>
+                </div>
+            )}
 
             <FormField
                 label={content.message}
@@ -193,6 +229,12 @@ export default function ContactForm({ locale }) {
                     ? content.sending
                     : content.submit}
             </button>
+
+            {formError && (
+                <p className="mt-3 text-lg font-roboto text-yellow-300">
+                    {formError}
+                </p>
+            )}
 
             {status === "error" && (
                 <p className="mt-3 text-lg font-roboto text-yellow-300">

@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
-import { checkRateLimit } from "@/lib/security/rate-limit";
+import crypto from "crypto";
+import { redis, checkRateLimit } from "@/lib/security/rate-limit";
 import { getContactSchema } from "@/lib/validation/contact-schema";
+import { removeMetaFields } from "@/lib/validation/validation-helpers";
 import { checkOrigin } from "@/lib/security/origin-check";
 import { sendContactNotificationEmail } from "@/lib/email/sendContactNotificationEmail";
 import { sendOrderLinkEmail } from "@/lib/email/sendOrderLinkEmail";
@@ -39,7 +41,7 @@ export async function POST(req) {
         }
 
         const locale = body?.locale?.startsWith("de") ? "de" : "en";
-        const { locale: _locale, ...formData } = body;
+        const formData = removeMetaFields(body);
 
         const schema = getContactSchema(locale);
         const result = schema.safeParse(formData);
@@ -106,7 +108,23 @@ export async function POST(req) {
                 );
             }
 
-            const orderUrl = `${siteUrl}/${locale}/order`;
+            const token = crypto.randomBytes(32).toString("hex");
+            const orderRequestKey = `order:request:${token}`;
+
+            const orderRequest = {
+                email,
+                locale,
+                createdAt: Date.now(),
+            };
+
+            await redis.set(
+                orderRequestKey,
+                JSON.stringify(orderRequest),
+                { ex: 60 * 60 * 24 * 30 }
+            );
+
+            const orderUrl = `${siteUrl}/${locale}/order?token=${token}`;
+
             const resOrder = await sendOrderLinkEmail({
                 to: email,
                 locale,

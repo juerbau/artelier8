@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import crypto from "crypto";
 import { redis, checkRateLimit } from "@/lib/security/rate-limit";
 import { getNewsletterSchema } from "@/lib/validation/newsletter-schema";
+import { removeMetaFields } from "@/lib/validation/validation-helpers";
 import { getEmailFrom } from "@/lib/email/config";
 import { sendConfirmationEmail } from "@/lib/email/sendConfirmationEmail";
 import { checkOrigin } from "@/lib/security/origin-check";
@@ -39,10 +40,11 @@ export async function POST(req) {
             )
         }
 
-        const locale = body?.locale?.startsWith("de") ? "de" : "en"
+        const locale = body?.locale?.startsWith("de") ? "de" : "en";
+        const formData = removeMetaFields(body);
 
-        const schema = getNewsletterSchema(locale)
-        const result = schema.safeParse(body)
+        const schema = getNewsletterSchema(locale);
+        const result = schema.safeParse(formData);
 
         if (!result.success) {
             return NextResponse.json(

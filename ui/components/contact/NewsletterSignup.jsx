@@ -4,7 +4,9 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import clsx from "clsx";
 import { getNewsletterSchema } from "@/lib/validation/newsletter-schema";
+import { splitZodErrors } from "@/lib/validation/validation-helpers";
 import FormField from "@/ui/components/contact/FormField";
+
 
 export default function NewsletterSignup({ locale }) {
     const [status, setStatus] = useState("idle");
@@ -52,9 +54,10 @@ export default function NewsletterSignup({ locale }) {
         const result = schema.safeParse(data);
 
         if (!result.success) {
-            setValidationError(
-                result.error.issues[0]?.message || content.apiError
-            );
+            const { fieldErrors, formErrors } = splitZodErrors(result.error)
+
+            setValidationError(fieldErrors.email || "")
+            setApiError(formErrors.length > 0 ? content.apiError : "")
             return;
         }
 
