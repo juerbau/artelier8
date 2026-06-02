@@ -2,7 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import clsx from "clsx";
 
-import logo from "@/ui/images/wortLogo.png";
+import logo from "@/ui/images/Logo_schwarz-weiss_opt.png";
 
 export default function Logo({
                                  href = "/",

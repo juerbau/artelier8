@@ -52,7 +52,7 @@ export default async function HomePage({ params }) {
     ]);
 
     return (
-        <div className="space-y-16">
+        <div className="space-y-20">
             <FadeInSection as="section">
                 <HeroQuote locale={locale}/>
             </FadeInSection>
