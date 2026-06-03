@@ -7,6 +7,7 @@ import {buildMetadata} from "@/lib/seo";
 import {notFound} from "next/navigation";
 import {buildImage} from "@/sanity/image";
 import FadeInSection from "@/ui/components/FadeInSection";
+import PageIntro from "@/ui/components/PageIntro";
 
 
 /* SEO Metadata */
@@ -94,13 +95,20 @@ export default async function SeriesPage({params}) {
 
     return (
         <>
-            <FadeInSection className="pb-5" as="section">
-                <h1 className="text-center text-white text-4xl">
-                    {title}
-                </h1>
+            <FadeInSection className="pb-15" as="section">
+                <PageIntro
+                    title={title}
+                    text={
+                        locale === "en" && series.intro_en
+                            ? series.intro_en
+                            : series.intro_de
+                    }
+                />
             </FadeInSection>
 
-            <FadeInSection className="pb-15" as="section" delay={0.1}>
+
+
+            {/*<FadeInSection className="pb-15" as="section" delay={0.1}>
                 <SeriesDetailIntro
                     intro={
                         locale === "en" && series.intro_en
@@ -108,7 +116,7 @@ export default async function SeriesPage({params}) {
                             : series.intro_de
                     }
                 />
-            </FadeInSection>
+            </FadeInSection>*/}
 
             <FadeInSection as="section" delay={0.3}>
                 <ArtworkGrid

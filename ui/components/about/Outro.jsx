@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { CircleArrowRight } from "lucide-react";
-import { aboutContent } from "@/lib/i18n";
 
-export default function Outro({ locale = "de" }) {
+export default function Outro({ locale = "de", text }) {
     const safeLocale = locale?.startsWith("de") ? "de" : "en";
-    const lines = aboutContent[safeLocale]?.outro;
+    const lines = text;
 
     if (!lines || lines.length < 5) return null;
 

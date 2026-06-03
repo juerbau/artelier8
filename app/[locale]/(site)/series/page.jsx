@@ -1,15 +1,16 @@
 import SeriesList from "@/ui/components/series/SeriesList";
-import SeriesIntro from "@/ui/components/series/SeriesIntro";
+import { pageContent } from "@/lib/i18n/pageContent";
 import { sanityFetch } from "@/sanity/fetch";
 import { seriesListQuery } from "@/sanity/queries/series";
-import {openGraphQuery} from "@/sanity/queries/openGraph";
+import { openGraphQuery } from "@/sanity/queries/openGraph";
 import { buildMetadata } from "@/lib/seo";
-import {buildImage} from "@/sanity/image";
+import { buildImage } from "@/sanity/image";
 import FadeInSection from "@/ui/components/FadeInSection";
+import PageIntro from "@/ui/components/PageIntro";
 
 
-export async function generateMetadata({ params }) {
-    const { locale } = await params;
+export async function generateMetadata({params}) {
+    const {locale} = await params;
     const isDe = locale === "de";
 
     const openGraph = await sanityFetch({
@@ -35,21 +36,29 @@ export async function generateMetadata({ params }) {
 }
 
 
-export default async function SeriesPage({ params }) {
-    const { locale } = await params;
+export default async function SeriesPage({params}) {
+    const {locale} = await params;
 
     const series = await sanityFetch({
         query: seriesListQuery,
     });
 
+    const safeLocale = locale?.startsWith("de") ? "de" : "en";
+    const content = pageContent[safeLocale].series;
+
     return (
         <>
-            <FadeInSection className="pb-18" as="section">
-                <SeriesIntro locale={locale}/>
-            </FadeInSection>
-            <FadeInSection as="section" delay={0.3}>
-                <SeriesList series={series || []} locale={locale}/>
-            </FadeInSection>
+            <div className="space-y-20">
+                <FadeInSection as="section">
+                    <PageIntro
+                        title={content?.title}
+                        text={content?.subtitle}
+                    />
+                </FadeInSection>
+                <FadeInSection as="section" delay={0.3}>
+                    <SeriesList series={series || []} locale={locale}/>
+                </FadeInSection>
+            </div>
         </>
     );
 }

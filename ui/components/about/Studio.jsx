@@ -1,6 +1,6 @@
 import clsx from "clsx"
 import Image from "next/image";
-import {buildImage} from "@/sanity/image";
+import { buildImage } from "@/sanity/image";
 
 
 export default function Studio({image, text}) {

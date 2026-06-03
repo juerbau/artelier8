@@ -2,10 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
-import { orderFormContent } from "@/lib/i18n/orderContent";
+import { orderFormContent } from "@/lib/i18n/orderFormContent";
 import { uploadReferenceImages } from "@/lib/upload/upload-reference-images";
-
 import OrderSection from "./OrderSection";
 import OrderRadioGroup from "./OrderRadioGroup";
 import OrderField from "./OrderField";
@@ -73,10 +71,14 @@ export default function OrderForm({ locale, token }) {
             const responseData = await res.json().catch(() => null);
 
             if (!res.ok || !responseData?.success) {
-                throw new Error(responseData?.error || content.error || "request_failed");
+                throw new Error(
+                    responseData?.error ||
+                    content.error ||
+                    "request_failed"
+                );
             }
 
-            
+
             router.push(`/${safeLocale}/order/success`);
 
 
@@ -262,7 +264,9 @@ export default function OrderForm({ locale, token }) {
                 disabled={isSubmitting}
                 className="rounded-full bg-black px-6 py-3 text-sm text-white transition disabled:opacity-40"
             >
-                {isSubmitting ? "Wird gesendet..." : "Anfrage testen"}
+                {isSubmitting
+                    ? content.submitting
+                    : content.submit}
             </button>
 
         </form>

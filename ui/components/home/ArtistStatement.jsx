@@ -31,7 +31,7 @@ export default function ArtistStatement({locale = "de"}) {
             {blocks.map((block) => (
                 <div
                     key={block[0]}
-                    className="text-xl md:text-2xl leading-[1.35]"
+                    className="text-xl md:text-3xl leading-[1.35]"
                 >
                     {block.map((line) => (
                         <div key={line}>{line}</div>

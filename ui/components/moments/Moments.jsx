@@ -13,7 +13,7 @@ export default function Moments({ moments = [], locale = "de" }) {
                 return (
                     <article
                         key={moment._id}
-                        className="w-full max-w-2xl text-center"
+                        className="w-full max-w-3xl text-center"
                     >
                         {moment.mainImage && (
                             <div className="relative mb-6 w-full overflow-hidden aspect-[16/9]">

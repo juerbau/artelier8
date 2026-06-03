@@ -43,6 +43,8 @@ export default function NewsletterSignup({ locale }) {
     async function handleSubmit(e) {
         e.preventDefault();
 
+        const form = e.currentTarget;
+
         setValidationError("");
         setApiError("");
         setStatus("idle");
@@ -88,12 +90,13 @@ export default function NewsletterSignup({ locale }) {
 
             if (responseData?.status === "pending-confirmation") {
                 setStatus("pending-confirmation");
-                e.currentTarget.reset();
+                form.reset();
                 return;
             }
 
             setStatus("success");
-            e.currentTarget.reset();
+            form.reset();
+
         } catch (err) {
             setApiError(err.message || content.apiError);
             setStatus("idle");
