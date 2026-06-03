@@ -6,6 +6,7 @@ import ResponsiveNav from "@/ui/components/header/ResponsiveNav"
 import Link from "next/link"
 import clsx from "clsx";
 import Wordmark from "@/ui/components/Wordmark";
+import Logo from "../Logo";
 
 
 
@@ -20,7 +21,7 @@ export default function Header({locale}) {
                 className={clsx(
                     "mx-auto flex max-w-6xl items-center",
                     "justify-center md:justify-between",
-                    "px-4 sm:px-5 md:px-8 py-5",
+                    "px-4 sm:px-5 md:px-8 py-2",
 
                     // Desktop
                     "gap-15",
@@ -32,12 +33,12 @@ export default function Header({locale}) {
                     "max-[420px]:gap-16"
                 )}
             >                {/* Logo */}
-                <Link href={`/${locale}`}>
-                    <Wordmark
-                        artClassName="text-[28px]"
-                        scriptClassName="text-[22px]"
+                    <Logo
+                        href="/"
+                        priority
+                        className="w-12 md:w-22"
+                        sizes="(max-width: 768px) 150px, 200px"
                     />
-                </Link>
 
                 {/* Center Nav (FIX: kein flex-1 mehr!) */}
                 <div className="flex justify-center">

@@ -41,11 +41,11 @@ export default function HeroQuote({locale = "de"}) {
             {/* Artist */}
             <p
                 className={clsx(
-                    "mt-5 font-signature text-[#D8B56A]",
-                    "leading-none text-[3rem] md:text-6xl lg:text-7xl"
+                    "mt-5 font-roboto-serif text-[#D8B56A]",
+                    "leading-normal font-signature md:text-6xl lg:text-7xl"
                 )}
             >
-                Bettina J. Hagedorn
+                Bettina Hagedorn
             </p>
 
         </div>

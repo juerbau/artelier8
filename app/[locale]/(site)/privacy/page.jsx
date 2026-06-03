@@ -1,4 +1,4 @@
-import {legal} from "@/lib/i18n/legal";
+import { legalContent } from "@/lib/i18n/legalContent";
 import LegalContent from "@/ui/components/legal/LegalContent";
 import LegalHeading from "@/ui/components/legal/LegalHeading";
 import FadeInSection from "@/ui/components/FadeInSection";
@@ -6,7 +6,7 @@ import FadeInSection from "@/ui/components/FadeInSection";
 
 export async function generateMetadata({ params }) {
     const { locale } = await params;
-    const data = legal.privacy[locale] ?? legal.privacy.de;
+    const data = legalContent.privacy[locale] ?? legalContent.privacy.de;
 
     return {
         title: `${data.title} – ARTelier8`,
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }) {
 
 export default async function PrivacyPage({params}) {
     const {locale} = await params;
-    const data = legal.privacy[locale] ?? legal.privacy.de;
+    const data = legalContent.privacy[locale] ?? legalContent.privacy.de;
 
     return (
         <div className="min-h-screen mx-auto max-w-250 space-y-10 font-roboto px-6 md:px-12">

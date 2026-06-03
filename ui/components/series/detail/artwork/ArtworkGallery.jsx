@@ -149,7 +149,7 @@ export default function ArtworkGallery({ mainImage, galleryImages, title, sold, 
                 plugins={[Zoom]}
                 zoom={{ maxZoomPixelRatio: 4 }}
                 styles={{
-                    container: { backgroundColor: "#7B8794" },
+                    container: { backgroundColor: "#505c6c" },
                     button: {
                         backgroundColor: "rgba(0, 0, 0, 0.5)",
                         backdropFilter: "blur(8px)",

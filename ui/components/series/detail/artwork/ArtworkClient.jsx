@@ -103,7 +103,7 @@ export default function ArtworkClient({
                     )}
                     {technique && (
                         <p className="truncate" title={technique}>
-                            {`Technik: ${technique}`}
+                            {technique}
                         </p>
                     )}
                     {artwork?.year && (

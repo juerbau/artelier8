@@ -1,9 +1,12 @@
 import { NextResponse } from "next/server";
+import { redis, checkRateLimit } from "@/lib/security/rate-limit";
 import { getOrderSchema } from "@/lib/validation/order-schema";
 import { removeMetaFields } from "@/lib/validation/validation-helpers";
 import { checkOrigin } from "@/lib/security/origin-check";
-import { checkRateLimit } from "@/lib/security/rate-limit";
 import { isHoneypotTriggered } from "@/lib/security/honeypot";
+import { sendOrderRequestEmail } from "@/lib/email/sendOrderRequestEmail";
+import { sendOrderConfirmationEmail } from "@/lib/email/sendOrderConfirmationEmail";
+import { getEmailTo } from "@/lib/email/config";
 
 export async function POST(req) {
     try {
@@ -36,7 +39,49 @@ export async function POST(req) {
         }
 
         const locale = body?.locale?.startsWith("de") ? "de" : "en";
-        const formData = removeMetaFields(body);
+        const token = body?.token;
+
+        if (!token) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    error: "missing_token",
+                },
+                { status: 400 }
+            );
+        }
+
+        const orderRequestKey = `order:request:${token}`;
+        const orderRequestRaw = await redis.get(orderRequestKey);
+
+        if (!orderRequestRaw) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    error: "invalid_or_expired_token",
+                },
+                { status: 400 }
+            );
+        }
+
+        const orderRequest =
+            typeof orderRequestRaw === "string"
+                ? JSON.parse(orderRequestRaw)
+                : orderRequestRaw;
+
+        const customerEmail = orderRequest?.email;
+
+        if (!customerEmail) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    error: "missing_customer_email",
+                },
+                { status: 400 }
+            );
+        }
+
+        const formData = removeMetaFields(body, ["locale", "token"]);
 
         const schema = getOrderSchema(locale);
         const result = schema.safeParse(formData);
@@ -54,9 +99,62 @@ export async function POST(req) {
 
         const order = result.data;
 
-        // TODO:
-        // 1. Order Mail senden
-        // 2. Success Response erweitern
+        const artistEmail = getEmailTo();
+
+        if (!artistEmail) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    error: "missing_contact_email",
+                },
+                { status: 500 }
+            );
+        }
+
+        const resArtist = await sendOrderRequestEmail({
+            locale,
+            customerEmail,
+            order,
+        });
+
+        if (resArtist?.error) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    error:
+                        resArtist.error.message ||
+                        "Failed to send order request email",
+                },
+                { status: resArtist.error.statusCode || 500 }
+            );
+        }
+
+        const resCustomer = await sendOrderConfirmationEmail({
+            locale,
+            to: customerEmail,
+            artistEmail,
+            order,
+        });
+
+        if (resCustomer?.error) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    error:
+                        resCustomer.error.message ||
+                        "Failed to send order confirmation email",
+                },
+                { status: resCustomer.error.statusCode || 500 }
+            );
+        }
+
+        await redis.del(orderRequestKey);
+
+        return NextResponse.json({
+            success: true,
+            status: "order-received",
+            locale,
+        });
 
         return NextResponse.json({
             success: true,

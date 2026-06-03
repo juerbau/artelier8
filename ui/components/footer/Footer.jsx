@@ -5,7 +5,7 @@ import InstagramLink from "@/ui/components/footer/InstagramLink";
 import LegalLink from "@/ui/components/footer/LegalLink";
 import Wordmark from "@/ui/components/Wordmark";
 
-export default function Footer({ locale }) {
+export default function Footer({locale}) {
     return (
         <footer className="font-roboto bg-gray-700">
             <div className="mx-auto max-w-6xl px-12 md:px-15 py-5">
@@ -13,17 +13,13 @@ export default function Footer({ locale }) {
                 <div className="flex items-center justify-between">
 
                     {/* Left */}
-                    <Link href={`/${locale}`}>
-  <span className="flex items-center gap-1">
-    <span className="text-white opacity-80">
-      &copy;
+                    <Link href={'/'}>
+
+    <span className="text-white text-[18px] opacity-80 flex items-center gap-1">
+      &copy; ARTelier8
     </span>
 
-    <Wordmark
-        artClassName="text-[28px]"
-        scriptClassName="text-[22px]"
-    />
-  </span>
+
                     </Link>
 
                     {/* Right */}
@@ -42,7 +38,7 @@ export default function Footer({ locale }) {
                             "max-[420px]:text-[13px]"
                         )}
                     >
-                        <InstagramLink />
+                        <InstagramLink/>
 
                         <LegalLink
                             locale={locale}
