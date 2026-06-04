@@ -1,12 +1,14 @@
 import SeriesList from "@/ui/components/series/SeriesList";
-import { pageContent } from "@/lib/i18n/pageContent";
-import { sanityFetch } from "@/sanity/fetch";
-import { seriesListQuery } from "@/sanity/queries/series";
-import { openGraphQuery } from "@/sanity/queries/openGraph";
-import { buildMetadata } from "@/lib/seo";
-import { buildImage } from "@/sanity/image";
+import {pageContent} from "@/lib/i18n/pageContent";
+import {sanityFetch} from "@/sanity/fetch";
+import {seriesListQuery} from "@/sanity/queries/series";
+import {openGraphQuery} from "@/sanity/queries/openGraph";
+import {buildMetadata} from "@/lib/seo";
+import {buildImage} from "@/sanity/image";
 import FadeInSection from "@/ui/components/FadeInSection";
-import PageIntro from "@/ui/components/PageIntro";
+import PageTitle from "@/ui/components/PageTitle";
+import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
+import PageSubtitle from "@/ui/components/PageSubtitle";
 
 
 export async function generateMetadata({params}) {
@@ -47,18 +49,37 @@ export default async function SeriesPage({params}) {
     const content = pageContent[safeLocale].series;
 
     return (
-        <>
-            <div className="space-y-20">
-                <FadeInSection as="section">
-                    <PageIntro
-                        title={content?.title}
-                        text={content?.subtitle}
-                    />
-                </FadeInSection>
-                <FadeInSection as="section" delay={0.3}>
-                    <SeriesList series={series || []} locale={locale}/>
-                </FadeInSection>
-            </div>
-        </>
+
+        <div className="space-y-10">
+
+            <FadeInSection
+                as="section"
+                duration={2}
+            >
+                <PageTitle
+                    title={content?.title}
+                />
+            </FadeInSection>
+
+            <GoldenLineDivider
+                delay={0.08}
+                duration={1}
+                className="mt-3 w-[min(50%,1000px)]"
+            />
+
+            <FadeInSection
+                className="space-y-16"
+                as="section"
+                delay={0.25}
+                duration={1.8}
+            >
+                <PageSubtitle
+                    subtitle={content?.subtitle}
+                />
+
+                <SeriesList series={series || []} locale={locale}/>
+            </FadeInSection>
+
+        </div>
     );
 }

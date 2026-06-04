@@ -5,14 +5,16 @@ import SeriesList from "@/ui/components/series/SeriesList";
 import {sanityFetch} from "@/sanity/fetch";
 import {homeSliderQuery} from "@/sanity/queries/home";
 import {seriesListQuery} from "@/sanity/queries/series";
-import { buildMetadata } from "@/lib/seo"
+import {buildMetadata} from "@/lib/seo"
 import {openGraphQuery} from "@/sanity/queries/openGraph";
 import {buildImage} from "@/sanity/image";
 import FadeInSection from "@/ui/components/FadeInSection";
+import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
+import Slogan from "@/ui/components/home/Slogan";
 
 
-export async function generateMetadata({ params }) {
-    const { locale } = await params;
+export async function generateMetadata({params}) {
+    const {locale} = await params;
 
     const openGraph = await sanityFetch({
         query: openGraphQuery
@@ -42,26 +44,43 @@ export async function generateMetadata({ params }) {
 }
 
 
-export default async function HomePage({ params }) {
+export default async function HomePage({params}) {
 
-    const { locale } = await params;
+    const {locale} = await params;
 
     const [artworks, series] = await Promise.all([
-        sanityFetch({ query: homeSliderQuery }),
-        sanityFetch({ query: seriesListQuery }),
+        sanityFetch({query: homeSliderQuery}),
+        sanityFetch({query: seriesListQuery}),
     ]);
 
     return (
-        <div className="space-y-20">
-            <FadeInSection as="section">
-                <HeroQuote locale={locale}/>
+        <div className="space-y-10">
+
+            <FadeInSection
+                as="section"
+                duration={2}
+            >
+                <HeroQuote locale={locale} />
             </FadeInSection>
 
-            <FadeInSection className="space-y-16"  as="section" delay={0.3}>
+            <GoldenLineDivider
+                delay={0.08}
+                duration={1}
+                className="mt-3 w-[min(60%,1000px)]"
+            />
+
+            <FadeInSection
+                className="space-y-16"
+                as="section"
+                delay={0.25}
+                duration={1.8}
+            >
+                <Slogan locale={locale} />
                 <HomeGallery artworks={artworks} locale={locale} />
                 <ArtistStatement locale={locale} />
                 <SeriesList series={series} locale={locale} />
             </FadeInSection>
+
         </div>
     )
 }

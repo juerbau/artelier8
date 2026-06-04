@@ -8,6 +8,12 @@ import {notFound} from "next/navigation";
 import {buildImage} from "@/sanity/image";
 import FadeInSection from "@/ui/components/FadeInSection";
 import PageIntro from "@/ui/components/PageIntro";
+import PageTitle from "@/ui/components/PageTitle";
+import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
+import PageSubtitle from "@/ui/components/PageSubtitle";
+import Portrait from "@/ui/components/about/Portrait";
+import Studio from "@/ui/components/about/Studio";
+import Outro from "@/ui/components/about/Outro";
 
 
 /* SEO Metadata */
@@ -94,37 +100,47 @@ export default async function SeriesPage({params}) {
             : series.title_de;
 
     return (
-        <>
-            <FadeInSection className="pb-15" as="section">
-                <PageIntro
+
+        <div className="space-y-10">
+
+            <FadeInSection
+                as="section"
+                duration={2}
+            >
+                <PageTitle
                     title={title}
-                    text={
-                        locale === "en" && series.intro_en
-                            ? series.intro_en
-                            : series.intro_de
-                    }
                 />
             </FadeInSection>
 
+            <GoldenLineDivider
+                delay={0.08}
+                duration={1}
+                className="mt-3 w-[min(50%,1000px)]"
+            />
 
-
-            {/*<FadeInSection className="pb-15" as="section" delay={0.1}>
-                <SeriesDetailIntro
-                    intro={
+            <FadeInSection
+                className="space-y-16"
+                as="section"
+                delay={0.25}
+                duration={1.8}
+            >
+                <PageSubtitle
+                    subtitle={
                         locale === "en" && series.intro_en
                             ? series.intro_en
                             : series.intro_de
                     }
                 />
-            </FadeInSection>*/}
 
-            <FadeInSection as="section" delay={0.3}>
                 <ArtworkGrid
                     artworks={series.artworks}
                     locale={locale}
                     seriesSlug={slug}
                 />
+
             </FadeInSection>
-        </>
+
+        </div>
+        
     );
 }

@@ -1,13 +1,15 @@
 import Moments from "@/ui/components/moments/Moments";
-import { pageContent } from "@/lib/i18n/pageContent";
-import { sanityFetch } from "@/sanity/fetch";
-import { momentsQuery } from "@/sanity/queries/moments";
-import { buildMetadata } from "@/lib/seo";
+import {pageContent} from "@/lib/i18n/pageContent";
+import {sanityFetch} from "@/sanity/fetch";
+import {momentsQuery} from "@/sanity/queries/moments";
+import {buildMetadata} from "@/lib/seo";
 import FadeInSection from "@/ui/components/FadeInSection";
-import PageIntro from "@/ui/components/PageIntro";
+import PageTitle from "@/ui/components/PageTitle";
+import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
+import PageSubtitle from "@/ui/components/PageSubtitle";
 
-export async function generateMetadata({ params }) {
-    const { locale } = await params;
+export async function generateMetadata({params}) {
+    const {locale} = await params;
     const isDe = locale === "de";
 
     return buildMetadata({
@@ -21,8 +23,8 @@ export async function generateMetadata({ params }) {
     });
 }
 
-export default async function MomentsPage({ params }) {
-    const { locale } = await params;
+export default async function MomentsPage({params}) {
+    const {locale} = await params;
 
     const moments = await sanityFetch({
         query: momentsQuery,
@@ -32,17 +34,37 @@ export default async function MomentsPage({ params }) {
     const content = pageContent[safeLocale].moments;
 
     return (
-        <div className="space-y-20">
-            <FadeInSection as="section">
-                <PageIntro
+
+        <div className="space-y-10">
+
+            <FadeInSection
+                as="section"
+                duration={2}
+            >
+                <PageTitle
                     title={content?.title}
-                    text={content?.subtitle}
                 />
             </FadeInSection>
 
-            <FadeInSection as="section" delay={0.3}>
-                <Moments moments={moments} locale={locale} />
+            <GoldenLineDivider
+                delay={0.08}
+                duration={1}
+                className="mt-3 w-[min(50%,1000px)]"
+            />
+
+            <FadeInSection
+                className="space-y-16"
+                as="section"
+                delay={0.25}
+                duration={1.8}
+            >
+                <PageSubtitle
+                    subtitle={content?.subtitle}
+                />
+
+                <Moments moments={moments} locale={locale}/>
             </FadeInSection>
+
         </div>
     );
 }

@@ -15,7 +15,6 @@ export default function FadeInSection({
                                           once = true,
                                           margin = "-60px",
                                       }) {
-
     const MotionComponent = motion[as] || motion.div;
 
     return (
