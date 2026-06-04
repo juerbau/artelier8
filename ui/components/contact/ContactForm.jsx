@@ -7,6 +7,7 @@ import { getContactSchema } from "@/lib/validation/contact-schema";
 import { splitZodErrors } from "@/lib/validation/validation-helpers";
 import { contactForm } from "@/lib/i18n";
 import FormField from "@/ui/components/contact/FormField";
+import InfoBox from "@/ui/components/InfoBox";
 
 export default function ContactForm({ locale }) {
     const router = useRouter();
@@ -81,7 +82,10 @@ export default function ContactForm({ locale }) {
                 throw new Error(responseData?.error || "request_failed");
             }
 
-            router.push(`/${safeLocale}/contact/success`);
+            router.push(
+                `/${safeLocale}/contact-success?type=${inquiryType}`
+            );
+
         } catch {
             setStatus("error");
         }
@@ -191,13 +195,13 @@ export default function ContactForm({ locale }) {
             </fieldset>
 
             {inquiryType === "order" && (
-                <div className="mb-7 rounded-2xl border border-white/15 bg-white/5 p-4 font-roboto text-[16px] leading-relaxed">
-                    <p>{content.orderHint.paragraph1}</p>
+                    <InfoBox>
+                        <p>{content.orderHint.paragraph1}</p>
 
-                    <p className="mt-3">
-                        {content.orderHint.paragraph2}
-                    </p>
-                </div>
+                        <p className="mt-3">
+                            {content.orderHint.paragraph2}
+                        </p>
+                    </InfoBox>
             )}
 
             <FormField

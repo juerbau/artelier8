@@ -6,6 +6,8 @@ import clsx from "clsx";
 import { getNewsletterSchema } from "@/lib/validation/newsletter-schema";
 import { splitZodErrors } from "@/lib/validation/validation-helpers";
 import FormField from "@/ui/components/contact/FormField";
+import InfoBox from "@/ui/components/InfoBox";
+import { newsletterSignupContent } from "@/lib/i18n/newsletterSignupContent";
 
 
 export default function NewsletterSignup({ locale }) {
@@ -13,32 +15,7 @@ export default function NewsletterSignup({ locale }) {
     const [validationError, setValidationError] = useState("");
     const [apiError, setApiError] = useState("");
 
-    const isDe = locale?.startsWith("de");
-
-    const content = {
-        intro: isDe
-            ? "Oder bleib über neue Arbeiten,\nAusstellungen und aktuelle Einblicke informiert."
-            : "Or stay informed about new works,\nexhibitions, and current updates.",
-
-        email: isDe ? "E-Mail" : "Email",
-        button: isDe ? "Abonnieren" : "Subscribe",
-
-        success: isDe
-            ? "Vielen Dank für Dein Interesse.\nBitte bestätige Deine E-Mail-Adresse in Deinem Postfach."
-            : "Thank you for your interest.\nPlease confirm your email address in your inbox.",
-
-        alreadySubscribed: isDe
-            ? "Diese E-Mail-Adresse ist bereits für den Newsletter registriert."
-            : "This email address is already subscribed to the newsletter.",
-
-        pendingConfirmation: isDe
-            ? "Vielen Dank für Dein Interesse.\nBitte bestätige Deine E-Mail-Adresse in Deinem Postfach."
-            : "Thank you for your interest.\nPlease confirm your email address in your inbox.",
-
-        apiError: isDe
-            ? "Die Anmeldung war leider nicht erfolgreich.\nBitte überprüfe Deine E-Mail-Adresse und versuche es erneut."
-            : "Unfortunately, your subscription could not be completed.\nPlease check your email address and try again.",
-    };
+    const content = newsletterSignupContent[locale];
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -77,11 +54,18 @@ export default function NewsletterSignup({ locale }) {
                 }),
             });
 
-            const responseData = await res.json();
+            let responseData = {};
+
+            try {
+                responseData = await res.json();
+            } catch {
+                responseData = {};
+            }
 
             if (!res.ok) {
-                throw new Error(responseData?.error || content.apiError);
+                throw new Error(content.apiError);
             }
+
 
             if (responseData?.status === "already-subscribed") {
                 setStatus("already-subscribed");
@@ -121,8 +105,9 @@ export default function NewsletterSignup({ locale }) {
     const message =
         apiError ||
         (status === "success" && content.success) ||
-        (status === "already-subscribed" && content.alreadySubscribed) ||
-        (status === "pending-confirmation" && content.pendingConfirmation);
+        (status === "pending-confirmation" && content.success) ||
+        (status === "already-subscribed" && content.alreadySubscribed);
+
 
     const isWarning = Boolean(apiError) || status === "already-subscribed";
 
@@ -169,18 +154,21 @@ export default function NewsletterSignup({ locale }) {
 
                 <div className="min-h-24 pt-3 text-center">
                     {message && (
-                        <motion.p
+                        <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             className={clsx(
                                 "mx-auto max-w-md text-center leading-relaxed",
+                                "whitespace-pre-line",
                                 isWarning
                                     ? "text-yellow-300 text-sm"
                                     : "text-white text-lg"
                             )}
                         >
-                            {message}
-                        </motion.p>
+                            <InfoBox>
+                                {message}
+                            </InfoBox>
+                        </motion.div>
                     )}
                 </div>
             </form>

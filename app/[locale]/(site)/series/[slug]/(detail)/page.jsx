@@ -2,18 +2,13 @@ import {client} from "@/sanity/client";
 import {sanityFetch} from "@/sanity/fetch";
 import {seriesBySlugQuery} from "@/sanity/queries/series";
 import ArtworkGrid from "@/ui/components/series/detail/ArtworkGrid";
-import SeriesDetailIntro from "@/ui/components/series/detail/SeriesDetailIntro";
 import {buildMetadata} from "@/lib/seo";
 import {notFound} from "next/navigation";
 import {buildImage} from "@/sanity/image";
 import FadeInSection from "@/ui/components/FadeInSection";
-import PageIntro from "@/ui/components/PageIntro";
 import PageTitle from "@/ui/components/PageTitle";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
 import PageSubtitle from "@/ui/components/PageSubtitle";
-import Portrait from "@/ui/components/about/Portrait";
-import Studio from "@/ui/components/about/Studio";
-import Outro from "@/ui/components/about/Outro";
 
 
 /* SEO Metadata */
@@ -141,6 +136,6 @@ export default async function SeriesPage({params}) {
             </FadeInSection>
 
         </div>
-        
+
     );
 }

@@ -3,7 +3,7 @@ import NewsletterSignup from "@/ui/components/contact/NewsletterSignup";
 import FadeInSection from "@/ui/components/FadeInSection";
 import {buildMetadata} from "@/lib/seo";
 import ContactAddress from "@/ui/components/contact/ContactAddress";
-import {pageContent} from "@/lib/i18n/pageContent";
+import { pageContent } from "@/lib/i18n/pageContent";
 import PageTitle from "@/ui/components/PageTitle";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
 import PageSubtitle from "@/ui/components/PageSubtitle";

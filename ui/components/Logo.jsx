@@ -5,12 +5,12 @@ import clsx from "clsx";
 import logo from "@/ui/images/Logo_schwarz-weiss_opt.png";
 
 export default function Logo({
-                                 href = "/",
-                                 className,
-                                 imageClassName,
-                                 sizes = "(max-width: 768px) 70px, 90px",
-                                 priority = false,
-                             }) {
+                                    href = "/",
+                                    className,
+                                    imageClassName,
+                                    sizes = "(max-width: 768px) 300px, 500px",
+                                    priority = false,
+                                }) {
     return (
         <Link href={href} className="block">
             <div

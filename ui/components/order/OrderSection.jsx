@@ -1,13 +1,9 @@
-import clsx from "clsx";
 
-export default function OrderSection({ title, children, className }) {
+
+export default function OrderSection({ title, children }) {
     return (
-        <section
-            className={clsx(
-                "border-t border-white/15 pt-7",
-                className
-            )}
-        >
+        <section className="pt-10">
+
             <h2 className="mb-5 font-roboto text-2xl">
                 {title}
             </h2>

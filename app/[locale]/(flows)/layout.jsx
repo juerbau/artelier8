@@ -1,6 +1,5 @@
 import clsx from "clsx";
-import Logo from "@/ui/components/Logo";
-import FadeInSection from "@/ui/components/FadeInSection";
+
 
 export default function FlowsLayout({ children }) {
     return (
@@ -13,21 +12,8 @@ export default function FlowsLayout({ children }) {
                 "min-h-screen flex justify-center"
             )}
         >
-            <div className="w-full max-w-xl text-center">
-                <FadeInSection as="section">
-                    <div className="mb-10 flex justify-center">
-                        <Logo
-                            href="/"
-                            priority
-                            className="w-37.5 md:w-50"
-                            sizes="(max-width: 768px) 150px, 200px"
-                        />
-                    </div>
-                </FadeInSection>
-
-                <FadeInSection as="section" delay={0.3}>
-                    {children}
-                </FadeInSection>
+            <div className="w-full max-w-160 text-center">
+                {children}
             </div>
         </main>
     );

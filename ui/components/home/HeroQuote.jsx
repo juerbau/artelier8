@@ -1,4 +1,4 @@
-import LogoNeu from "@/ui/components/LogoNeu";
+import Logo from "@/ui/components/Logo";
 import Image from "next/image"
 import signature from "@/ui/images/Signatur-weiss.png";
 
@@ -8,7 +8,7 @@ export default function HeroQuote() {
         <div className="text-center overflow-hidden">
 
             {/* Logo */}
-            <LogoNeu
+            <Logo
                 href="/"
                 priority
                 className="mx-auto w-[clamp(240px,35vw,450px)]"

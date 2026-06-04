@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { orderFormContent } from "@/lib/i18n/orderFormContent";
 import { uploadReferenceImages } from "@/lib/upload/upload-reference-images";
 import OrderSection from "./OrderSection";
 import OrderRadioGroup from "./OrderRadioGroup";
@@ -12,7 +11,7 @@ import OrderSlider from "./OrderSlider";
 import OrderImageUpload from "./OrderImageUpload";
 
 
-export default function OrderForm({ locale, token }) {
+export default function OrderForm({ locale, token, formContent }) {
     const [timeline, setTimeline] = useState("");
     const [occasion, setOccasion] = useState("");
     const [colorPreferences, setColorPreferences] = useState("");
@@ -32,7 +31,7 @@ export default function OrderForm({ locale, token }) {
 
     const safeLocale = locale?.startsWith("de") ? "de" : "en";
 
-    const content = orderFormContent[safeLocale];
+    const content = formContent;
 
     async function handleSubmit(event) {
         event.preventDefault()
@@ -262,7 +261,7 @@ export default function OrderForm({ locale, token }) {
             <button
                 type="submit"
                 disabled={isSubmitting}
-                className="rounded-full bg-black px-6 py-3 text-sm text-white transition disabled:opacity-40"
+                className="rounded-full bg-black mt-10 px-6 py-3 text-sm text-white transition disabled:opacity-40"
             >
                 {isSubmitting
                     ? content.submitting
