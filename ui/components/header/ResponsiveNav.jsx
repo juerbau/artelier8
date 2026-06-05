@@ -1,24 +1,26 @@
-"use client"
+"use client";
 
-import {useState, useRef, useEffect} from "react"
-import { motion, AnimatePresence } from "motion/react"
-import Link from "next/link"
-import {nav} from "../../../lib/i18n"
+import {useState, useRef, useEffect} from "react";
+import { motion, AnimatePresence } from "motion/react";
+import Link from "next/link";
+import {nav} from "@/lib/i18n";
 import clsx from "clsx";
-import { SquareMenu } from "lucide-react"
+import { SquareMenu } from "lucide-react";
+
 
 export default function ResponsiveNav({locale, pathname}) {
-    const [open, setOpen] = useState(false)
-    const menuRef = useRef(null)
-    const t = nav[locale]
+    const [open, setOpen] = useState(false);
+    const menuRef = useRef(null);
+    const t = nav[locale];
 
     const links = [
         {key: "home", href: `/${locale}`},
         {key: "about", href: `/${locale}/about`},
         {key: "series", href: `/${locale}/series`},
-        {key: "moments", href: `/${locale}/moments`},
+        {key: "forYou", href: `/${locale}/for-you`},
+        {key: "insights", href: `/${locale}/insights`},
         {key: "contact", href: `/${locale}/contact`},
-    ]
+    ];
 
     const isActive = (href, key) => {
         if (key === "home") return pathname === href
@@ -50,14 +52,14 @@ export default function ResponsiveNav({locale, pathname}) {
                     <Link
                         key={link.key}
                         href={link.href}
-                        className="group relative pb-[2px] text-white whitespace-nowrap"
+                        className="group relative pb-0.5 text-white whitespace-nowrap"
                     >
                         {t[link.key]}
 
                         {/* Hover underline */}
                         <span
                             className={clsx(
-                                "pointer-events-none absolute left-0 bottom-0 h-[1px] w-full",
+                                "pointer-events-none absolute left-0 bottom-0 h-px w-full",
                                 "bg-white/30",
                                 "opacity-0",
                                 "transition-all duration-500 ease-out",
@@ -69,7 +71,7 @@ export default function ResponsiveNav({locale, pathname}) {
                         {isActive(link.href, link.key) && (
                             <motion.span
                                 layoutId="nav-underline"
-                                className="absolute left-0 bottom-0 h-[1px] w-full bg-white"
+                                className="absolute left-0 bottom-0 h-px w-full bg-white"
                                 transition={{
                                     type: "spring",
                                     stiffness: 280,
@@ -87,7 +89,7 @@ export default function ResponsiveNav({locale, pathname}) {
                 onClick={() => setOpen(!open)}
                 className={clsx(
                     "md:hidden flex flex-col items-center",
-                    "pt-2 pb-[2px]",
+                    "pt-2 pb-0.5",
                     "text-lg tracking-wide",
                     "text-white",
                     "border-b border-transparent",
@@ -115,7 +117,7 @@ export default function ResponsiveNav({locale, pathname}) {
                             <SquareMenu
                                 size={12}
                                 strokeWidth={1.3}
-                                className="text-white/80 mb-[3px]"
+                                className="text-white/80 mb-0.75"
                             />
 
                             <span>
@@ -148,7 +150,7 @@ export default function ResponsiveNav({locale, pathname}) {
                             className={clsx(
                                 "whitespace-nowrap",
                                 "text-lg tracking-wide text-white",
-                                "pb-[2px] leading-none",
+                                "pb-0.5 leading-none",
                                 "border-b border-transparent",
                                 "hover:border-white/60",
                                 "active:border-white",

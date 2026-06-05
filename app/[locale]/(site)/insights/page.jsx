@@ -8,22 +8,22 @@ import PageTitle from "@/ui/components/PageTitle";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
 import PageSubtitle from "@/ui/components/PageSubtitle";
 
-export async function generateMetadata({params}) {
-    const {locale} = await params;
+export async function generateMetadata({ params }) {
+    const { locale } = await params;
     const isDe = locale === "de";
 
     return buildMetadata({
-        title: isDe ? "Momente" : "Moments",
+        title: isDe ? "Einblicke" : "Insights",
         description: isDe
             ? "Ausgewählte Momente, Ausstellungen und Einblicke rund um die Arbeiten von ARTelier8."
             : "Selected moments, exhibitions, and insights surrounding the work of ARTelier8.",
         image: "/og/fallback.jpg",
         locale,
-        path: "/moments",
+        path: "/insights",
     });
 }
 
-export default async function MomentsPage({params}) {
+export default async function InsightsPage({params}) {
     const {locale} = await params;
 
     const moments = await sanityFetch({
@@ -31,7 +31,7 @@ export default async function MomentsPage({params}) {
     });
 
     const safeLocale = locale?.startsWith("de") ? "de" : "en";
-    const content = pageContent[safeLocale].moments;
+    const content = pageContent[safeLocale].insights;
 
     return (
 

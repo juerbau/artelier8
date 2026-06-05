@@ -17,13 +17,13 @@ export default function OrderSuccessMessage({
     );
 
     return (
-        <div className="mx-auto max-w-md py-24 text-center">
+        <div className="mx-auto max-w-md text-center">
             <p className="whitespace-pre-line text-2xl leading-relaxed">
                 {success}
             </p>
 
             <Link
-                href={`/${locale}/order`}
+                href={`/${locale}/`}
                 className={clsx("mt-8 inline-flex", buttonClasses)}
             >
                 {buttonLabel}
