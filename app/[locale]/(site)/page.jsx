@@ -46,6 +46,12 @@ export async function generateMetadata({params}) {
 
 export default async function HomePage({params}) {
 
+    const desire = "<< Dinge, die uns wichtig sind,\n" +
+        "verdienen mehr als einen flüchtigen Moment.\n" +
+        "\n" +
+        "Sie verdienen einen Platz,\n" +
+        "der bleibt. >>"
+
     const {locale} = await params;
 
     const [artworks, series] = await Promise.all([
@@ -77,8 +83,11 @@ export default async function HomePage({params}) {
             >
                 <Slogan locale={locale} />
                 <HomeGallery artworks={artworks} locale={locale} />
-                <ArtistStatement locale={locale} />
-                <SeriesList series={series} locale={locale} />
+                <div className="italic text-5xl mx-auto text-center whitespace-pre-line leading-relaxed">
+                    {desire}
+                </div>
+                {/*<ArtistStatement locale={locale} />*/}
+                {/*<SeriesList series={series} locale={locale} />*/}
             </FadeInSection>
 
         </div>
