@@ -1,6 +1,6 @@
-import clsx from "clsx";
 import Header from "@/ui/components/header/Header";
 import Footer from "@/ui/components/footer/Footer";
+import PageMain from "@/ui/components/util/PageMain";
 
 export default async function SiteLayout({ children, params }) {
     const { locale } = await params;
@@ -9,17 +9,9 @@ export default async function SiteLayout({ children, params }) {
         <>
             <Header locale={locale} />
 
-            <main
-                className={clsx(
-                    "relative",
-                    "px-12",
-                    "pt-20",
-                    "pb-28 sm:pb-32 md:pb-40",
-                    "min-h-screen"
-                )}
-            >
+            <PageMain>
                 {children}
-            </main>
+            </PageMain>
 
             <Footer locale={locale} />
         </>

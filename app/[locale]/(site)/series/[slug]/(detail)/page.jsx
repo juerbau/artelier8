@@ -9,6 +9,7 @@ import FadeInSection from "@/ui/components/FadeInSection";
 import PageTitle from "@/ui/components/PageTitle";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
 import PageSubtitle from "@/ui/components/PageSubtitle";
+import PageContent from "@/ui/components/util/PageContent";
 
 
 /* SEO Metadata */
@@ -95,9 +96,10 @@ export default async function SeriesPage({params}) {
             : series.title_de;
 
     return (
-
-        <div className="space-y-10">
-
+        <PageContent
+            width="md"
+            className="text-center"
+        >
             <FadeInSection
                 as="section"
                 duration={2}
@@ -134,8 +136,6 @@ export default async function SeriesPage({params}) {
                 />
 
             </FadeInSection>
-
-        </div>
-
+        </PageContent>
     );
 }

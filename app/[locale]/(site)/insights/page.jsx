@@ -7,9 +7,10 @@ import FadeInSection from "@/ui/components/FadeInSection";
 import PageTitle from "@/ui/components/PageTitle";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
 import PageSubtitle from "@/ui/components/PageSubtitle";
+import PageContent from "@/ui/components/util/PageContent";
 
-export async function generateMetadata({ params }) {
-    const { locale } = await params;
+export async function generateMetadata({params}) {
+    const {locale} = await params;
     const isDe = locale === "de";
 
     return buildMetadata({
@@ -34,9 +35,10 @@ export default async function InsightsPage({params}) {
     const content = pageContent[safeLocale].insights;
 
     return (
-
-        <div className="space-y-10">
-
+        <PageContent
+            width="md"
+            className="text-center"
+        >
             <FadeInSection
                 as="section"
                 duration={2}
@@ -64,7 +66,6 @@ export default async function InsightsPage({params}) {
 
                 <Moments moments={moments} locale={locale}/>
             </FadeInSection>
-
-        </div>
+        </PageContent>
     );
 }

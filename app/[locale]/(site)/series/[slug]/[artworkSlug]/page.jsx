@@ -5,7 +5,7 @@ import ArtworkClient from "@/ui/components/series/detail/artwork/ArtworkClient"
 import {notFound} from "next/navigation";
 import {buildMetadata} from "@/lib/seo"
 import {buildImage} from "@/sanity/image";
-import ScrollToTop from "@/ui/components/ScrollToTop";
+import PageContent from "@/ui/components/util/PageContent";
 
 
 export async function generateMetadata({params}) {
@@ -127,21 +127,22 @@ export default async function ArtworkPage({params}) {
             : artwork.technique_en
 
     return (
-        <>
-            <ScrollToTop/>
-            <div className="pt-10 mx-auto max-w-6xl">
-                <ArtworkClient
-                    artwork={artwork}
-                    title={title}
-                    description={description}
-                    technique={technique}
-                    prev={prev}
-                    next={next}
-                    slug={slug}
-                    locale={locale}
-                />
-            </div>
+        <PageContent
+            width="md"
+            className="text-center"
+        >
 
-        </>
+            <ArtworkClient
+                artwork={artwork}
+                title={title}
+                description={description}
+                technique={technique}
+                prev={prev}
+                next={next}
+                slug={slug}
+                locale={locale}
+            />
+
+        </PageContent>
     )
 }

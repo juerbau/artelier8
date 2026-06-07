@@ -9,6 +9,7 @@ import FadeInSection from "@/ui/components/FadeInSection";
 import PageTitle from "@/ui/components/PageTitle";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
 import PageSubtitle from "@/ui/components/PageSubtitle";
+import PageContent from "@/ui/components/util/PageContent";
 
 
 export async function generateMetadata({params}) {
@@ -49,9 +50,10 @@ export default async function SeriesPage({params}) {
     const content = pageContent[safeLocale].series;
 
     return (
-
-        <div className="space-y-10">
-
+        <PageContent
+            width="md"
+            className="text-center"
+        >
             <FadeInSection
                 as="section"
                 duration={2}
@@ -79,7 +81,6 @@ export default async function SeriesPage({params}) {
 
                 <SeriesList series={series || []} locale={locale}/>
             </FadeInSection>
-
-        </div>
+        </PageContent>
     );
 }

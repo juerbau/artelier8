@@ -11,6 +11,12 @@ import {buildImage} from "@/sanity/image";
 import FadeInSection from "@/ui/components/FadeInSection";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
 import Slogan from "@/ui/components/home/Slogan";
+import clsx from "clsx";
+import {motion} from "motion/react";
+import Outro from "@/ui/components/about/Outro";
+import {pageContent} from "@/lib/i18n/pageContent";
+import MainButton from "@/ui/components/MainButton";
+import PageContent from "@/ui/components/util/PageContent";
 
 
 export async function generateMetadata({params}) {
@@ -46,13 +52,15 @@ export async function generateMetadata({params}) {
 
 export default async function HomePage({params}) {
 
-    const desire = "<< Dinge, die uns wichtig sind,\n" +
+    const desire = "\"Dinge, die uns wichtig sind,\n" +
         "verdienen mehr als einen flüchtigen Moment.\n" +
         "\n" +
         "Sie verdienen einen Platz,\n" +
-        "der bleibt. >>"
+        "der bleibt.\""
 
     const {locale} = await params;
+    const safeLocale = locale?.startsWith("de") ? "de" : "en";
+    const content = pageContent[safeLocale].about;
 
     const [artworks, series] = await Promise.all([
         sanityFetch({query: homeSliderQuery}),
@@ -60,13 +68,15 @@ export default async function HomePage({params}) {
     ]);
 
     return (
-        <div className="space-y-10">
-
+        <PageContent
+            width="md"
+            className="text-center"
+        >
             <FadeInSection
                 as="section"
                 duration={2}
             >
-                <HeroQuote locale={locale} />
+                <HeroQuote locale={locale}/>
             </FadeInSection>
 
             <GoldenLineDivider
@@ -81,15 +91,57 @@ export default async function HomePage({params}) {
                 delay={0.25}
                 duration={1.8}
             >
-                <Slogan locale={locale} />
-                <HomeGallery artworks={artworks} locale={locale} />
-                <div className="italic text-5xl mx-auto text-center whitespace-pre-line leading-relaxed">
-                    {desire}
+                <Slogan locale={locale}/>
+                <HomeGallery artworks={artworks} locale={locale}/>
+
+
+                <div className="space-y-5">
+
+                    <div
+                        className="py-5  w-[1000px] text-3xl mx-auto text-center whitespace-pre-line leading-relaxed">
+                        {desire}
+                    </div>
+                    <div className={clsx(
+                        "mx-auto w-150 h-px origin-center bg-white/30"
+                    )}
+                    />
                 </div>
+                <div
+                    className="py-5  w-[1000px] text-3xl mx-auto text-center tracking-wide whitespace-pre-line leading-relaxed">
+                    Willkommen im ARTelier8.<br/>
+                    Schön, dass du hierher gefunden hast. 😊
+                    <br/><br/>
+                    Du bist herzlich eingeladen ...
+                    <br/><br/>
+                    ...auf eine Entdeckungsreise durch die Werke,<br/>
+                    die bereits im ARTelier8 entstanden sind.
+                    <br/>
+                    [visueller Teaser zu den Serien]
+                    <br/>
+                    [Button]
+                    <br/><br/>
+                    Manche Momente begleiten uns ein Leben lang.
+                    <br/>
+                    Hier kann dein Moment seinen Platz bekommen.
+                    <br/>
+                    [Vorher/Nachher-Slider]
+                    <br/>
+                    [Button]
+
+                </div>
+
                 {/*<ArtistStatement locale={locale} />*/}
                 {/*<SeriesList series={series} locale={locale} />*/}
             </FadeInSection>
 
-        </div>
+            <div className="mx-auto text-center">
+                <MainButton
+                    href={`/${locale}/series`}
+                    type="button"
+                >
+                    Serien entdecken
+                </MainButton>
+            </div>
+        </PageContent>
     )
 }
