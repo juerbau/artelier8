@@ -1,8 +1,8 @@
-import Moments from "@/ui/components/moments/Moments";
-import {pageContent} from "@/lib/i18n/pageContent";
-import {sanityFetch} from "@/sanity/fetch";
-import {momentsQuery} from "@/sanity/queries/moments";
-import {buildMetadata} from "@/lib/seo";
+import Insights from "@/ui/components/insights/Insights";
+import { pageContent} from "@/lib/i18n/pageContent";
+import { sanityFetch} from "@/sanity/fetch";
+import { momentsQuery} from "@/sanity/queries/moments";
+import { buildMetadata} from "@/lib/seo";
 import FadeInSection from "@/ui/components/FadeInSection";
 import PageTitle from "@/ui/components/PageTitle";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
@@ -36,7 +36,7 @@ export default async function InsightsPage({params}) {
 
     return (
         <PageContent
-            width="md"
+            width="lg"
             className="text-center"
         >
             <FadeInSection
@@ -64,7 +64,7 @@ export default async function InsightsPage({params}) {
                     subtitle={content?.subtitle}
                 />
 
-                <Moments moments={moments} locale={locale}/>
+                <Insights moments={moments} locale={locale}/>
             </FadeInSection>
         </PageContent>
     );

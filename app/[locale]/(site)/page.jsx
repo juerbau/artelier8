@@ -69,7 +69,7 @@ export default async function HomePage({params}) {
 
     return (
         <PageContent
-            width="md"
+            width="lg"
             className="text-center"
         >
             <FadeInSection

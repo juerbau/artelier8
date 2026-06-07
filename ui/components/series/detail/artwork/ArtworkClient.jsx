@@ -88,7 +88,7 @@ export default function ArtworkClient({
             </div>
 
             {/* RIGHT COLUMN — INFO */}
-            <div>
+            <div className="text-left">
                 {/* DESKTOP TITLE */}
                 <h1 className="text-4xl mb-6 hidden md:block truncate">
                     {title}

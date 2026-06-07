@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { buildImage } from "@/sanity/image";
 
-export default function Moments({ moments = [], locale = "de" }) {
+export default function Insights({ moments = [], locale = "de" }) {
     return (
         <section className="flex flex-col items-center gap-24 md:gap-28">
             {moments.map((moment) => {

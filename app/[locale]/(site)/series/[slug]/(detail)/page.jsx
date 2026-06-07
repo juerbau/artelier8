@@ -80,7 +80,7 @@ export async function generateStaticParams() {
 
 
 /* Page */
-export default async function SeriesPage({params}) {
+export default async function SeriesDetailPage({params}) {
     const {slug, locale} = await params;
 
     const series = await sanityFetch({
@@ -97,7 +97,7 @@ export default async function SeriesPage({params}) {
 
     return (
         <PageContent
-            width="md"
+            width="lg"
             className="text-center"
         >
             <FadeInSection

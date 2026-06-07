@@ -51,7 +51,7 @@ export default async function SeriesPage({params}) {
 
     return (
         <PageContent
-            width="md"
+            width="lg"
             className="text-center"
         >
             <FadeInSection

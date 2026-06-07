@@ -128,7 +128,7 @@ export default async function ArtworkPage({params}) {
 
     return (
         <PageContent
-            width="md"
+            width="lg"
             className="text-center"
         >
 
