@@ -4,7 +4,7 @@ import GalleryRoom from "@/ui/components/series/GalleryRoom"
 export default function SeriesList({series, locale}) {
 
     return (
-        <div className="max-w-7xl mx-auto space-y-36">
+        <div className="space-y-36">
             {series.map((item, i) => {
                 const title =
                     locale === "en" && item.title_en

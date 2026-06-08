@@ -13,10 +13,10 @@ export default function Insights({ moments = [], locale = "de" }) {
                 return (
                     <article
                         key={moment._id}
-                        className="w-full max-w-3xl text-center"
+                        className="w-full max-w-4xl text-center"
                     >
                         {moment.mainImage && (
-                            <div className="relative mb-6 w-full overflow-hidden aspect-[16/9]">
+                            <div className="relative mb-6 w-full overflow-hidden aspect-video">
                                 <Image
                                     src={buildImage({
                                         source: moment.mainImage,

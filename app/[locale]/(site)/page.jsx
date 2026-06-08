@@ -17,6 +17,7 @@ import Outro from "@/ui/components/about/Outro";
 import {pageContent} from "@/lib/i18n/pageContent";
 import MainButton from "@/ui/components/MainButton";
 import PageContent from "@/ui/components/util/PageContent";
+import ContentWidth from "../../../ui/components/util/ContentWidth";
 
 
 export async function generateMetadata({params}) {
@@ -92,13 +93,15 @@ export default async function HomePage({params}) {
                 duration={1.8}
             >
                 <Slogan locale={locale}/>
-                <HomeGallery artworks={artworks} locale={locale}/>
+                <ContentWidth width="full">
+                    <HomeGallery artworks={artworks} locale={locale}/>
+                </ContentWidth>
 
 
                 <div className="space-y-5">
 
                     <div
-                        className="py-5  w-[1000px] text-3xl mx-auto text-center whitespace-pre-line leading-relaxed">
+                        className="py-5  w-250 text-3xl mx-auto text-center whitespace-pre-line leading-relaxed">
                         {desire}
                     </div>
                     <div className={clsx(
@@ -107,7 +110,7 @@ export default async function HomePage({params}) {
                     />
                 </div>
                 <div
-                    className="py-5  w-[1000px] text-3xl mx-auto text-center tracking-wide whitespace-pre-line leading-relaxed">
+                    className="py-5  w-250 text-3xl mx-auto text-center tracking-wide whitespace-pre-line leading-relaxed">
                     Willkommen im ARTelier8.<br/>
                     Schön, dass du hierher gefunden hast. 😊
                     <br/><br/>

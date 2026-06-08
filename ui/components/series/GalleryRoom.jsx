@@ -7,8 +7,6 @@ import galleryRoom from "@/ui/images/gallery-room.webp"
 import { getGalleryLayout } from "@/lib/galleryLayout";
 
 
-
-
 // 🎬 Einzelbild-Animation
 const item = {
     hidden: { opacity: 0, y: 15, scale: 0.97 },
@@ -31,7 +29,7 @@ export default function GalleryRoom({ series }) {
         : [];
 
     return (
-        <div className="relative w-full aspect-video overflow-hidden">
+        <div className="relative aspect-video overflow-hidden">
 
             {/* 🧱 Raum */}
             <Image
@@ -83,7 +81,7 @@ export default function GalleryRoom({ series }) {
                                 <div className="absolute inset-0 bg-stone-400 scale-[1.01]" />
 
                                 {/* 🧱 Wandkontakt */}
-                                <div className="absolute inset-0 bg-black/25 blur-[4px] translate-y-[1.5px]" />
+                                <div className="absolute inset-0 bg-black/25 blur-xs translate-y-[1.5px]" />
 
                                 {/* 🌫️ Tiefe */}
                                 <div className="absolute inset-0 shadow-[0_6px_16px_rgba(0,0,0,0.15)]" />
@@ -113,7 +111,7 @@ export default function GalleryRoom({ series }) {
             </motion.div>
 
             {/* 🎯 Globales Licht */}
-            <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-white/10 via-transparent to-black/20 mix-blend-soft-light" />
+            <div className="absolute inset-0 pointer-events-none bg-linear-to-b from-white/10 via-transparent to-black/20 mix-blend-soft-light" />
 
         </div>
     )

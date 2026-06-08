@@ -30,69 +30,64 @@ export default function HomeGallery({artworks, locale}) {
     ]
 
     return (
+        <div className="grid grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8">
 
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            {visible.map((artwork, i) => {
 
-            <div className="grid grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8">
+                const href =
+                    artwork.seriesSlug && artwork.slug
+                        ? `/${locale}/series/${artwork.seriesSlug}/${artwork.slug}`
+                        : "#"
 
-                {visible.map((artwork, i) => {
+                return (
+                    <Link key={i} href={href}>
 
-                    const href =
-                        artwork.seriesSlug && artwork.slug
-                            ? `/${locale}/series/${artwork.seriesSlug}/${artwork.slug}`
-                            : "#"
+                        <div className="relative aspect-square overflow-hidden rounded-lg border border-white/80">
 
-                    return (
-                        <Link key={i} href={href}>
+                            <AnimatePresence mode="sync">
 
-                            <div className="relative aspect-square overflow-hidden rounded-lg border border-white/80">
+                                <motion.div
+                                    key={artwork._id}
+                                    initial={{
+                                        opacity: 0,
+                                        scale: 1.02,
+                                        filter: "brightness(0.9)"
+                                    }}
+                                    animate={{
+                                        opacity: 1,
+                                        scale: 1.06,
+                                        filter: "brightness(1)"
+                                    }}
+                                    exit={{
+                                        opacity: 0,
+                                        scale: 1.02,
+                                        filter: "brightness(0.95)"
+                                    }}
+                                    transition={{
+                                        duration: 5.5,
+                                        ease: [0.22, 1, 0.36, 1],
+                                    }}
+                                    className="absolute inset-0"
+                                >
 
-                                <AnimatePresence mode="sync">
+                                    <Image
+                                        src={buildImage({source: artwork.mainImage, width: 1200})}
+                                        alt={artwork.title || "Artwork"}
+                                        fill
+                                        sizes="(min-width: 1024px) 33vw, 100vw"
+                                        priority={i === 0}
+                                        className="object-cover"
+                                    />
 
-                                    <motion.div
-                                        key={artwork._id}
-                                        initial={{
-                                            opacity: 0,
-                                            scale: 1.02,
-                                            filter: "brightness(0.9)"
-                                        }}
-                                        animate={{
-                                            opacity: 1,
-                                            scale: 1.06,
-                                            filter: "brightness(1)"
-                                        }}
-                                        exit={{
-                                            opacity: 0,
-                                            scale: 1.02,
-                                            filter: "brightness(0.95)"
-                                        }}
-                                        transition={{
-                                            duration: 5.5,
-                                            ease: [0.22, 1, 0.36, 1],
-                                        }}
-                                        className="absolute inset-0"
-                                    >
+                                </motion.div>
 
-                                        <Image
-                                            src={buildImage({source: artwork.mainImage, width: 1200})}
-                                            alt={artwork.title || "Artwork"}
-                                            fill
-                                            sizes="(min-width: 1024px) 33vw, 100vw"
-                                            priority={i === 0}
-                                            className="object-cover"
-                                        />
+                            </AnimatePresence>
 
-                                    </motion.div>
+                        </div>
 
-                                </AnimatePresence>
-
-                            </div>
-
-                        </Link>
-                    )
-                })}
-
-            </div>
+                    </Link>
+                )
+            })}
 
         </div>
     )
