@@ -18,6 +18,11 @@ import {pageContent} from "@/lib/i18n/pageContent";
 import MainButton from "@/ui/components/MainButton";
 import PageContent from "@/ui/components/util/PageContent";
 import ContentWidth from "../../../ui/components/util/ContentWidth";
+import DiscoverCarousel from "../../../ui/components/home/DiscoverCarousel";
+import {discoverJourneyQuery} from "@/sanity/queries/discoverJourney";
+import beforeImage from "../../../ui/images/Boot-vorher_ergebnis.webp";
+import afterImage from "../../../ui/images/Boot-nachher_ergebnis.webp";
+import BeforeAfterSlider from "../../../ui/components/home/BeforeAfterSlider";
 
 
 export async function generateMetadata({params}) {
@@ -63,9 +68,9 @@ export default async function HomePage({params}) {
     const safeLocale = locale?.startsWith("de") ? "de" : "en";
     const content = pageContent[safeLocale].about;
 
-    const [artworks, series] = await Promise.all([
+    const [artworks, discoverJourney] = await Promise.all([
         sanityFetch({query: homeSliderQuery}),
-        sanityFetch({query: seriesListQuery}),
+        sanityFetch({query: discoverJourneyQuery}),
     ]);
 
     return (
@@ -119,17 +124,39 @@ export default async function HomePage({params}) {
                     ...auf eine Entdeckungsreise durch die Werke,<br/>
                     die bereits im ARTelier8 entstanden sind.
                     <br/>
-                    [visueller Teaser zu den Serien]
                     <br/>
-                    [Button]
-                    <br/><br/>
+                    <ContentWidth width="full">
+                        <DiscoverCarousel galleries={discoverJourney?.galleries}/>
+                    </ContentWidth>
+                    <br/>
+                    <div className="mx-auto">
+                        <MainButton
+                            href={`/${locale}/series`}
+                            type="button"
+                        >
+                            Serien entdecken
+                        </MainButton>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
                     Manche Momente begleiten uns ein Leben lang.
-                    <br/>
                     Hier kann dein Moment seinen Platz bekommen.
                     <br/>
-                    [Vorher/Nachher-Slider]
                     <br/>
-                    [Button]
+                    <ContentWidth width="full">
+                        <BeforeAfterSlider
+                            beforeImage={beforeImage}
+                            afterImage={afterImage}
+                        />
+                    </ContentWidth>
+                    <br/>
+                    <MainButton
+                        href={`/${locale}/for-you`}
+                        type="button"
+                    >
+                        Auftragsarbeiten entdecken
+                    </MainButton>
 
                 </div>
 
@@ -137,14 +164,7 @@ export default async function HomePage({params}) {
                 {/*<SeriesList series={series} locale={locale} />*/}
             </FadeInSection>
 
-            <div className="mx-auto text-center">
-                <MainButton
-                    href={`/${locale}/series`}
-                    type="button"
-                >
-                    Serien entdecken
-                </MainButton>
-            </div>
+
         </PageContent>
     )
 }
