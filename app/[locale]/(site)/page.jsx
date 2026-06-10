@@ -115,7 +115,7 @@ export default async function HomePage({params}) {
                     {/*/>*/}
                 </div>
                 <div
-                    className="py-5  w-250 text-3xl mx-auto text-center tracking-wide whitespace-pre-line leading-relaxed">
+                    className="py-5 w-250 text-3xl mx-auto text-center tracking-wide whitespace-pre-line leading-relaxed">
                     Willkommen im ARTelier8.<br/>
                     Schön, dass du hierher gefunden hast. 😊
                     <br/><br/>
@@ -129,10 +129,44 @@ export default async function HomePage({params}) {
                         <DiscoverCarousel galleries={discoverJourney?.galleries}/>
                     </ContentWidth>
                     <br/>
-                    <div className="mx-auto">
+                    <div className="flex flex-row justify-between">
+                        {/*<div className="mx-auto">*/}
+                            <MainButton
+                                href={`/${locale}/series`}
+                                type="button"
+                                className="text-black bg-[#D8B56A]"
+                            >
+                                Serien entdecken
+                            </MainButton>
+                        {/*</div>*/}
+
+                            <MainButton
+                                href={`/${locale}/series`}
+                                type="button"
+                                className="text-white bg-[#C63D7C]"
+                            >
+                                Serien entdecken
+                            </MainButton>
+
+                            <MainButton
+                                href={`/${locale}/series`}
+                                type="button"
+                                className="text-white bg-black"
+                            >
+                                Serien entdecken
+                            </MainButton>
+
                         <MainButton
                             href={`/${locale}/series`}
                             type="button"
+                            className="text-white  bg-[#D8B56A]"
+                        >
+                            Serien entdecken
+                        </MainButton>
+                        <MainButton
+                            href={`/${locale}/series`}
+                            type="button"
+                            className="text-black bg-green-300"
                         >
                             Serien entdecken
                         </MainButton>
@@ -155,6 +189,7 @@ export default async function HomePage({params}) {
                     <MainButton
                         href={`/${locale}/for-you`}
                         type="button"
+                        className="text-black bg-[#D8B56A]"
                     >
                         Für Dich entdecken
                     </MainButton>

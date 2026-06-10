@@ -30,7 +30,7 @@ export default async function Page({params, searchParams}) {
             </FadeInSection>
 
             <FadeInSection delay={0.25}>
-                <div className="text-4xl md:text-5xl">
+                <div className="text-4xl md:text-5xl mx-auto text-center">
                     Newsletter
                 </div>
             </FadeInSection>
