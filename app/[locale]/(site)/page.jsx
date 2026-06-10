@@ -20,7 +20,7 @@ import PageContent from "@/ui/components/util/PageContent";
 import ContentWidth from "../../../ui/components/util/ContentWidth";
 import DiscoverCarousel from "../../../ui/components/home/DiscoverCarousel";
 import {discoverJourneyQuery} from "@/sanity/queries/discoverJourney";
-import beforeImage from "../../../ui/images/Boot-vorher_ergebnis.webp";
+import beforeImage from "../../../ui/images/Boot-vorher-justiert-neu.png";
 import afterImage from "../../../ui/images/Boot-nachher_ergebnis.webp";
 import BeforeAfterSlider from "../../../ui/components/home/BeforeAfterSlider";
 
@@ -58,11 +58,11 @@ export async function generateMetadata({params}) {
 
 export default async function HomePage({params}) {
 
-    const desire = "\"Dinge, die uns wichtig sind,\n" +
+    const desire = "Dinge, die uns wichtig sind,\n" +
         "verdienen mehr als einen flüchtigen Moment.\n" +
         "\n" +
         "Sie verdienen einen Platz,\n" +
-        "der bleibt.\""
+        "der bleibt."
 
     const {locale} = await params;
     const safeLocale = locale?.startsWith("de") ? "de" : "en";
@@ -103,16 +103,16 @@ export default async function HomePage({params}) {
                 </ContentWidth>
 
 
-                <div className="space-y-5">
+                <div className="w-200 mx-auto">
 
                     <div
-                        className="py-5  w-250 text-3xl mx-auto text-center whitespace-pre-line leading-relaxed">
+                        className="px-5 py-8 bg-gray-600 rounded-2xl text-3xl mx-auto text-center whitespace-pre-line leading-relaxed">
                         {desire}
                     </div>
-                    <div className={clsx(
-                        "mx-auto w-150 h-px origin-center bg-white/30"
-                    )}
-                    />
+                    {/*<div className={clsx(*/}
+                    {/*    "mx-auto w-150 h-px origin-center bg-white/30"*/}
+                    {/*)}*/}
+                    {/*/>*/}
                 </div>
                 <div
                     className="py-5  w-250 text-3xl mx-auto text-center tracking-wide whitespace-pre-line leading-relaxed">
@@ -140,8 +140,9 @@ export default async function HomePage({params}) {
                     <br/>
                     <br/>
                     <br/>
-                    Manche Momente begleiten uns ein Leben lang.
-                    Hier kann dein Moment seinen Platz bekommen.
+                    Oder wir gestalten gemeinsam etwas,
+                    <br/>
+                    das nur für dich entsteht.
                     <br/>
                     <br/>
                     <ContentWidth width="full">
@@ -155,7 +156,7 @@ export default async function HomePage({params}) {
                         href={`/${locale}/for-you`}
                         type="button"
                     >
-                        Auftragsarbeiten entdecken
+                        Für Dich entdecken
                     </MainButton>
 
                 </div>

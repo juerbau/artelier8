@@ -15,7 +15,7 @@ export default async function ForYouPage({params}) {
 
     return (
         <PageContent
-            width="md"
+            width="lg"
             className="text-center"
         >
             <FadeInSection
@@ -23,7 +23,7 @@ export default async function ForYouPage({params}) {
                 duration={2}
             >
                 <PageTitle
-                    title="Auftragsarbeiten"
+                    title={content.title}
                 />
             </FadeInSection>
 
