@@ -26,6 +26,7 @@ export default function DiscoverGrid({gallery}) {
                             })}
                             alt=""
                             fill
+                            sizes="25vw"
                             className="object-cover"
                         />
                     </div>
@@ -40,6 +41,7 @@ export default function DiscoverGrid({gallery}) {
                             })}
                             alt=""
                             fill
+                            sizes="75vw"
                             className="object-cover"
                         />
                     </div>
@@ -58,6 +60,7 @@ export default function DiscoverGrid({gallery}) {
                             })}
                             alt=""
                             fill
+                            sizes="75vw"
                             className="object-cover"
                         />
                     </div>
@@ -71,6 +74,7 @@ export default function DiscoverGrid({gallery}) {
                             })}
                             alt=""
                             fill
+                            sizes="25vw"
                             className="object-cover"
                         />
                     </div>

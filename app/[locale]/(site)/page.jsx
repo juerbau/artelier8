@@ -2,8 +2,8 @@ import HeroQuote from "@/ui/components/home/HeroQuote"
 import HomeGallery from "@/ui/components/home/HomeGallery"
 import ArtistStatement from "@/ui/components/home/ArtistStatement"
 import SeriesList from "@/ui/components/series/SeriesList";
-import {sanityFetch} from "@/sanity/fetch";
-import {homeSliderQuery} from "@/sanity/queries/home";
+import { sanityFetch } from "@/sanity/fetch";
+import { homeSliderQuery } from "@/sanity/queries/home";
 import {seriesListQuery} from "@/sanity/queries/series";
 import {buildMetadata} from "@/lib/seo"
 import {openGraphQuery} from "@/sanity/queries/openGraph";
@@ -18,11 +18,13 @@ import {pageContent} from "@/lib/i18n/pageContent";
 import MainButton from "@/ui/components/MainButton";
 import PageContent from "@/ui/components/util/PageContent";
 import ContentWidth from "../../../ui/components/util/ContentWidth";
-import DiscoverCarousel from "../../../ui/components/home/DiscoverCarousel";
-import {discoverJourneyQuery} from "@/sanity/queries/discoverJourney";
-import beforeImage from "../../../ui/images/Boot-vorher-justiert-neu.png";
-import afterImage from "../../../ui/images/Boot-nachher_ergebnis.webp";
-import BeforeAfterSlider from "../../../ui/components/home/BeforeAfterSlider";
+import DiscoverJourney from "../../../ui/components/home/DiscoverJourney";
+import { discoverJourneyQuery } from "@/sanity/queries/discoverJourney";
+import { beforeAfterJourneyQuery } from "@/sanity/queries/beforeAfterJourney";
+import beforeImage from "../../../ui/images/vyper-vorher.webp";
+import afterImage from "../../../ui/images/vyper-nachher.webp";
+import BeforeAfterJourney from "../../../ui/components/home/BeforeAfterJourney";
+
 
 
 export async function generateMetadata({params}) {
@@ -58,6 +60,7 @@ export async function generateMetadata({params}) {
 
 export default async function HomePage({params}) {
 
+
     const desire = "Dinge, die uns wichtig sind,\n" +
         "verdienen mehr als einen flüchtigen Moment.\n" +
         "\n" +
@@ -68,10 +71,12 @@ export default async function HomePage({params}) {
     const safeLocale = locale?.startsWith("de") ? "de" : "en";
     const content = pageContent[safeLocale].about;
 
-    const [artworks, discoverJourney] = await Promise.all([
+    const [artworks, discoverJourney, beforeAfterJourney] = await Promise.all([
         sanityFetch({query: homeSliderQuery}),
         sanityFetch({query: discoverJourneyQuery}),
+        sanityFetch({query: beforeAfterJourneyQuery}),
     ]);
+
 
     return (
         <PageContent
@@ -126,50 +131,50 @@ export default async function HomePage({params}) {
                     <br/>
                     <br/>
                     <ContentWidth width="full">
-                        <DiscoverCarousel galleries={discoverJourney?.galleries}/>
+                        <DiscoverJourney galleries={discoverJourney?.galleries ?? []}/>
                     </ContentWidth>
                     <br/>
-                    <div className="flex flex-row justify-between">
+                    <div className="mx-auto">
                         {/*<div className="mx-auto">*/}
-                            <MainButton
-                                href={`/${locale}/series`}
-                                type="button"
-                                className="text-black bg-[#D8B56A]"
-                            >
-                                Serien entdecken
-                            </MainButton>
+                        <MainButton
+                            href={`/${locale}/series`}
+                            type="button"
+                            className="text-black bg-[#D8B56A]"
+                        >
+                            Serien entdecken
+                        </MainButton>
                         {/*</div>*/}
 
-                            <MainButton
-                                href={`/${locale}/series`}
-                                type="button"
-                                className="text-white bg-[#C63D7C]"
-                            >
-                                Serien entdecken
-                            </MainButton>
+                        {/*<MainButton*/}
+                        {/*    href={`/${locale}/series`}*/}
+                        {/*    type="button"*/}
+                        {/*    className="text-white bg-[#C63D7C]"*/}
+                        {/*>*/}
+                        {/*    Serien entdecken*/}
+                        {/*</MainButton>*/}
 
-                            <MainButton
-                                href={`/${locale}/series`}
-                                type="button"
-                                className="text-white bg-black"
-                            >
-                                Serien entdecken
-                            </MainButton>
+                        {/*<MainButton*/}
+                        {/*    href={`/${locale}/series`}*/}
+                        {/*    type="button"*/}
+                        {/*    className="text-white bg-black"*/}
+                        {/*>*/}
+                        {/*    Serien entdecken*/}
+                        {/*</MainButton>*/}
 
-                        <MainButton
-                            href={`/${locale}/series`}
-                            type="button"
-                            className="text-white  bg-[#D8B56A]"
-                        >
-                            Serien entdecken
-                        </MainButton>
-                        <MainButton
-                            href={`/${locale}/series`}
-                            type="button"
-                            className="text-black bg-green-300"
-                        >
-                            Serien entdecken
-                        </MainButton>
+                        {/*<MainButton*/}
+                        {/*    href={`/${locale}/series`}*/}
+                        {/*    type="button"*/}
+                        {/*    className="text-white  bg-[#D8B56A]"*/}
+                        {/*>*/}
+                        {/*    Serien entdecken*/}
+                        {/*</MainButton>*/}
+                        {/*<MainButton*/}
+                        {/*    href={`/${locale}/series`}*/}
+                        {/*    type="button"*/}
+                        {/*    className="text-black bg-green-300"*/}
+                        {/*>*/}
+                        {/*    Serien entdecken*/}
+                        {/*</MainButton>*/}
                     </div>
                     <br/>
                     <br/>
@@ -180,9 +185,8 @@ export default async function HomePage({params}) {
                     <br/>
                     <br/>
                     <ContentWidth width="full">
-                        <BeforeAfterSlider
-                            beforeImage={beforeImage}
-                            afterImage={afterImage}
+                        <BeforeAfterJourney
+                            items={beforeAfterJourney?.items ?? []}
                         />
                     </ContentWidth>
                     <br/>

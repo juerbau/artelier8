@@ -2,8 +2,9 @@
 
 import {useState} from "react";
 import DiscoverGrid from "./DiscoverGrid";
+import CarouselNavigation from "./CarouselNavigation";
 
-export default function DiscoverCarousel({galleries = []}) {
+export default function DiscoverJourney({galleries = []}) {
 
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -35,21 +36,13 @@ export default function DiscoverCarousel({galleries = []}) {
             <DiscoverGrid gallery={gallery} />
 
             {showNavigation && (
-                <div className="flex items-center justify-center gap-6">
-
-                    <button onClick={previous}>
-                        ←
-                    </button>
-
-                    <span>
-                        {currentIndex + 1} / {galleries.length}
-                    </span>
-
-                    <button onClick={next}>
-                        →
-                    </button>
-
-                </div>
+                <CarouselNavigation
+                    currentIndex={currentIndex}
+                    totalItems={galleries.length}
+                    onPrevious={previous}
+                    onNext={next}
+                    onSelect={setCurrentIndex}
+                />
             )}
 
         </div>

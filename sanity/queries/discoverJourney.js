@@ -5,9 +5,7 @@ export const discoverJourneyQuery = `
     galleries[]->{
         _id,
 
-            title_de,
-            title_en,
-
+            title,
             imageTopLeft,
             imageTopRight,
             imageBottomLeft,
