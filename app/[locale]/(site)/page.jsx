@@ -1,29 +1,26 @@
-import HeroQuote from "@/ui/components/home/HeroQuote"
-import HomeGallery from "@/ui/components/home/HomeGallery"
-import ArtistStatement from "@/ui/components/home/ArtistStatement"
-import SeriesList from "@/ui/components/series/SeriesList";
+
 import { sanityFetch } from "@/sanity/fetch";
 import { homeSliderQuery } from "@/sanity/queries/home";
-import {seriesListQuery} from "@/sanity/queries/series";
-import {buildMetadata} from "@/lib/seo"
-import {openGraphQuery} from "@/sanity/queries/openGraph";
-import {buildImage} from "@/sanity/image";
-import FadeInSection from "@/ui/components/FadeInSection";
-import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
-import Slogan from "@/ui/components/home/Slogan";
-import clsx from "clsx";
-import {motion} from "motion/react";
-import Outro from "@/ui/components/about/Outro";
-import {pageContent} from "@/lib/i18n/pageContent";
-import MainButton from "@/ui/components/MainButton";
-import PageContent from "@/ui/components/util/PageContent";
-import ContentWidth from "../../../ui/components/util/ContentWidth";
-import DiscoverJourney from "../../../ui/components/home/DiscoverJourney";
 import { discoverJourneyQuery } from "@/sanity/queries/discoverJourney";
 import { beforeAfterJourneyQuery } from "@/sanity/queries/beforeAfterJourney";
-import beforeImage from "../../../ui/images/vyper-vorher.webp";
-import afterImage from "../../../ui/images/vyper-nachher.webp";
-import BeforeAfterJourney from "../../../ui/components/home/BeforeAfterJourney";
+import { buildImage } from "@/sanity/image";
+
+import { openGraphQuery } from "@/sanity/queries/openGraph";
+import { buildMetadata } from "@/lib/seo"
+
+import { homePageContent } from "@/lib/i18n/pages/homePageContent"
+
+import HeroQuote from "@/ui/components/home/HeroQuote"
+import HomeGallery from "@/ui/components/home/HomeGallery"
+import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
+import Slogan from "@/ui/components/home/Slogan";
+import DiscoverJourney from "@/ui/components/home/DiscoverJourney";
+import BeforeAfterJourney from "@/ui/components/home/BeforeAfterJourney";
+import MainButton from "@/ui/components/MainButton";
+
+import PageContent from "@/ui/components/util/PageContent";
+import ContentWidth from "@/ui/components/util/ContentWidth";
+import FadeInSection from "@/ui/components/FadeInSection";
 
 
 
@@ -60,16 +57,9 @@ export async function generateMetadata({params}) {
 
 export default async function HomePage({params}) {
 
-
-    const desire = "Dinge, die uns wichtig sind,\n" +
-        "verdienen mehr als einen flüchtigen Moment.\n" +
-        "\n" +
-        "Sie verdienen einen Platz,\n" +
-        "der bleibt."
-
     const {locale} = await params;
     const safeLocale = locale?.startsWith("de") ? "de" : "en";
-    const content = pageContent[safeLocale].about;
+    const content = homePageContent[safeLocale];
 
     const [artworks, discoverJourney, beforeAfterJourney] = await Promise.all([
         sanityFetch({query: homeSliderQuery}),
@@ -93,7 +83,7 @@ export default async function HomePage({params}) {
             <GoldenLineDivider
                 delay={0.08}
                 duration={1}
-                className="mt-3 w-[min(60%,1000px)]"
+                className="mt-3 w-[90%]"
             />
 
             <FadeInSection
@@ -102,23 +92,20 @@ export default async function HomePage({params}) {
                 delay={0.25}
                 duration={1.8}
             >
-                <Slogan locale={locale}/>
+                <Slogan content={content.slogan}/>
                 <ContentWidth width="full">
                     <HomeGallery artworks={artworks} locale={locale}/>
                 </ContentWidth>
 
 
-                <div className="w-200 mx-auto">
 
-                    <div
-                        className="px-5 py-8 bg-gray-600 rounded-2xl text-3xl mx-auto text-center whitespace-pre-line leading-relaxed">
-                        {desire}
-                    </div>
-                    {/*<div className={clsx(*/}
-                    {/*    "mx-auto w-150 h-px origin-center bg-white/30"*/}
-                    {/*)}*/}
-                    {/*/>*/}
-                </div>
+                    <p
+                        className="w-200 mx-auto px-5 py-8 bg-gray-600 rounded-2xl text-3xl whitespace-pre-line leading-relaxed">
+                        {content.motto}
+                    </p>
+
+
+
                 <div
                     className="py-5 w-250 text-3xl mx-auto text-center tracking-wide whitespace-pre-line leading-relaxed">
                     Willkommen im ARTelier8.<br/>
@@ -135,46 +122,13 @@ export default async function HomePage({params}) {
                     </ContentWidth>
                     <br/>
                     <div className="mx-auto">
-                        {/*<div className="mx-auto">*/}
                         <MainButton
                             href={`/${locale}/series`}
                             type="button"
-                            className="text-black bg-[#D8B56A]"
                         >
                             Serien entdecken
                         </MainButton>
-                        {/*</div>*/}
 
-                        {/*<MainButton*/}
-                        {/*    href={`/${locale}/series`}*/}
-                        {/*    type="button"*/}
-                        {/*    className="text-white bg-[#C63D7C]"*/}
-                        {/*>*/}
-                        {/*    Serien entdecken*/}
-                        {/*</MainButton>*/}
-
-                        {/*<MainButton*/}
-                        {/*    href={`/${locale}/series`}*/}
-                        {/*    type="button"*/}
-                        {/*    className="text-white bg-black"*/}
-                        {/*>*/}
-                        {/*    Serien entdecken*/}
-                        {/*</MainButton>*/}
-
-                        {/*<MainButton*/}
-                        {/*    href={`/${locale}/series`}*/}
-                        {/*    type="button"*/}
-                        {/*    className="text-white  bg-[#D8B56A]"*/}
-                        {/*>*/}
-                        {/*    Serien entdecken*/}
-                        {/*</MainButton>*/}
-                        {/*<MainButton*/}
-                        {/*    href={`/${locale}/series`}*/}
-                        {/*    type="button"*/}
-                        {/*    className="text-black bg-green-300"*/}
-                        {/*>*/}
-                        {/*    Serien entdecken*/}
-                        {/*</MainButton>*/}
                     </div>
                     <br/>
                     <br/>
@@ -193,15 +147,12 @@ export default async function HomePage({params}) {
                     <MainButton
                         href={`/${locale}/for-you`}
                         type="button"
-                        className="text-black bg-[#D8B56A]"
                     >
                         Für Dich entdecken
                     </MainButton>
 
                 </div>
 
-                {/*<ArtistStatement locale={locale} />*/}
-                {/*<SeriesList series={series} locale={locale} />*/}
             </FadeInSection>
 
 

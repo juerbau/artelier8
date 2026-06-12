@@ -13,6 +13,7 @@ export default function PageContent({
                 "mx-auto",
 
                 {
+                    "max-w-100": width === "xs",
                     "max-w-160": width === "md",
                     "max-w-250": width === "lg",
                     "max-w-7xl": width === "xl",

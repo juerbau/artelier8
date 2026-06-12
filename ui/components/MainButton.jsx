@@ -13,10 +13,9 @@ export default function MainButton({
         "rounded-md",
         "text-lg tracking-wide",
         "font-roboto",
-        // "bg-[#C63D7C]",
-        // "transition-colors duration-300",
-        // "hover:bg-[#D14C8A]",
-        // "hover:shadow-[0_8px_20px_rgba(198,61,124,0.25)]",
+        "text-black bg-[#D8B56A]",
+        "transition-colors duration-300",
+        "hover:bg-[#C8A459]",
         className
     );
 
