@@ -1,3 +1,4 @@
+import clsx from "clsx";
 
 import { sanityFetch } from "@/sanity/fetch";
 import { homeSliderQuery } from "@/sanity/queries/home";
@@ -10,7 +11,6 @@ import { buildMetadata } from "@/lib/seo"
 
 import { homePageContent } from "@/lib/i18n/pages/homePageContent"
 
-import HeroQuote from "@/ui/components/home/HeroQuote"
 import HomeGallery from "@/ui/components/home/HomeGallery"
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
 import Slogan from "@/ui/components/home/Slogan";
@@ -21,6 +21,8 @@ import MainButton from "@/ui/components/MainButton";
 import PageContent from "@/ui/components/util/PageContent";
 import ContentWidth from "@/ui/components/util/ContentWidth";
 import FadeInSection from "@/ui/components/FadeInSection";
+import Logo from "@/ui/components/Logo";
+import Signature from "@/ui/components/home/Signature";
 
 
 
@@ -69,15 +71,13 @@ export default async function HomePage({params}) {
 
 
     return (
-        <PageContent
-            width="lg"
-            className="text-center"
-        >
-            <FadeInSection
-                as="section"
-                duration={2}
-            >
-                <HeroQuote locale={locale}/>
+        <PageContent width="lg" className="text-center">
+
+            <FadeInSection as="section" duration={2}>
+
+                <Logo variant="hero" />
+                <Signature />
+
             </FadeInSection>
 
             <GoldenLineDivider
@@ -92,22 +92,26 @@ export default async function HomePage({params}) {
                 delay={0.25}
                 duration={1.8}
             >
+
                 <Slogan content={content.slogan}/>
+
                 <ContentWidth width="full">
                     <HomeGallery artworks={artworks} locale={locale}/>
                 </ContentWidth>
 
-
-
-                    <p
-                        className="w-200 mx-auto px-5 py-8 bg-gray-600 rounded-2xl text-3xl whitespace-pre-line leading-relaxed">
+                {/*Motto*/}
+                <p className={clsx(
+                    "w-200 mx-auto px-5 py-8",
+                    "bg-gray-600 rounded-2xl",
+                    "text-3xl whitespace-pre-line leading-relaxed"
+                )}>
                         {content.motto}
                     </p>
 
 
 
                 <div
-                    className="py-5 w-250 text-3xl mx-auto text-center tracking-wide whitespace-pre-line leading-relaxed">
+                    className="py-5 w-250 text-2xl mx-auto text-center tracking-wide whitespace-pre-line leading-relaxed">
                     Willkommen im ARTelier8.<br/>
                     Schön, dass du hierher gefunden hast. 😊
                     <br/><br/>

@@ -9,7 +9,7 @@ export default function PageContent({
         <div
             className={clsx(
                 "w-full",
-                "space-y-10",
+                "space-y-5",
                 "mx-auto",
 
                 {

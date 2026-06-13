@@ -1,9 +1,9 @@
 "use client";
 
-import {useState, useRef, useEffect} from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Link from "next/link";
-import {nav} from "@/lib/i18n";
+import { nav } from "@/lib/i18n";
 import clsx from "clsx";
 import { SquareMenu } from "lucide-react";
 

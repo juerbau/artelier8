@@ -23,24 +23,14 @@ export default async function ContactSuccessPage({params, searchParams}) {
                 as="section"
                 duration={2}
             >
-                <div className="mb-5 flex justify-center">
-
-                    <Logo
-                        href="/"
-                        priority
-                        className="w-37.5 md:w-50"
-                        sizes="(max-width: 768px) 150px, 200px"
-                    />
-
-                </div>
+                <Logo variant="message" />
 
             </FadeInSection>
 
             <FadeInSection delay={0.25}>
-                <PageTitle
-                    title={content?.title}
-                    textSize="text-3xl md:text-4xl"
-                />
+                <PageTitle>
+                    {content?.title}
+                </PageTitle>
             </FadeInSection>
 
             <GoldenLineDivider

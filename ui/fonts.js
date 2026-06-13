@@ -11,9 +11,3 @@ export const roboto = Roboto({
     weight: ["300", "400", "500", "700"],
     variable: "--font-roboto",
 });
-
-export const signature = Birthstone({
-    subsets: ["latin"],
-    weight: ["400"],
-    variable: "--font-signature",
-});

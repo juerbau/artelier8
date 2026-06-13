@@ -3,7 +3,6 @@ import clsx from "clsx";
 
 import InstagramLink from "@/ui/components/footer/InstagramLink";
 import LegalLink from "@/ui/components/footer/LegalLink";
-import Wordmark from "@/ui/components/Wordmark";
 
 export default function Footer({locale}) {
     return (

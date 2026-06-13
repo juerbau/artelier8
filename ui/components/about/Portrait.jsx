@@ -7,11 +7,11 @@ export default function Portrait({image, text}) {
     if (!image) return null;
 
     return (
-        <div className="max-w-3xl mx-auto flex flex-col items-center text-center">
+        <div className="flex flex-col items-center text-center">
 
             {/* IMAGE */}
             <div
-                className="w-full max-w-130 mb-16"
+                className="mb-16 w-full"
             >
                 <div className="rounded-lg border border-white/80 overflow-hidden">
                     <Image
@@ -30,7 +30,7 @@ export default function Portrait({image, text}) {
 
             {/* TEXT */}
             <div
-                className="text-xl md:text-2xl leading-[1.55]"
+                className="text-body leading-relaxed"
             >
                 {text.split("\n\n").map((block, i) => (
                     <p key={i} className="mb-8">

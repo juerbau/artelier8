@@ -60,6 +60,7 @@ export default async function InsightsPage({params}) {
                 delay={0.25}
                 duration={1.8}
             >
+
                 <PageSubtitle
                     subtitle={content?.subtitle}
                 />

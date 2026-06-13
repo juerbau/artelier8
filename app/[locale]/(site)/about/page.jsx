@@ -10,6 +10,8 @@ import PageSubtitle from "@/ui/components/PageSubtitle";
 import PageTitle from "@/ui/components/PageTitle";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
 import PageContent from "@/ui/components/util/PageContent";
+import ContentWidth from "../../../../ui/components/util/ContentWidth";
+import ArtistPortrait from "@/ui/components/about/ArtistPortrait";
 
 export async function generateMetadata({params}) {
     const {locale} = await params;
@@ -42,46 +44,50 @@ export default async function AboutPage({params}) {
             width="md"
             className="text-center"
         >
-            <FadeInSection
+            <ContentWidth width="full">
+
+                <FadeInSection
                 as="section"
                 duration={2}
             >
-                <PageTitle
-                    title={content?.title}
-                />
+                <PageTitle>
+                    {content?.title}
+                </PageTitle>
             </FadeInSection>
 
-            <GoldenLineDivider
-                delay={0.08}
-                duration={1}
-                className="mt-3 w-[min(50%,1000px)]"
-            />
-
-            <FadeInSection
-                className="space-y-16"
-                as="section"
-                delay={0.25}
-                duration={1.8}
-            >
-                <PageSubtitle
-                    subtitle={content?.subtitle}
+                <GoldenLineDivider
+                    delay={0.08}
+                    duration={1}
+                    className="mt-3"
                 />
 
-                <Portrait
-                    image={data?.portraitImage}
-                    text={content?.portrait}
-                />
+                <FadeInSection
+                    className="space-y-10"
+                    as="section"
+                    delay={0.25}
+                    duration={1.8}
+                >
+                    <PageSubtitle>
+                        {content?.subtitle}
+                    </PageSubtitle>
 
-                <Studio
-                    image={data?.studioImage}
-                    text={content?.studio}
-                />
+                    <ArtistPortrait image={data?.portraitImage}/>
+                    {/*<Portrait*/}
+                    {/*    */}
+                    {/*    text={content?.portrait}*/}
+                    {/*/>*/}
 
-                <Outro
-                    locale={safeLocale}
-                    text={content?.outro}
-                />
-            </FadeInSection>
+                    <Studio
+                        image={data?.studioImage}
+                        text={content?.studio}
+                    />
+
+                    <Outro
+                        locale={safeLocale}
+                        text={content?.outro}
+                    />
+                </FadeInSection>
+            </ContentWidth>
         </PageContent>
     );
 }

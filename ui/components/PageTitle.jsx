@@ -1,19 +1,17 @@
 import clsx from "clsx";
 
-export default function PageTitle ({
-                                       title,
-                                       textSize = "text-4xl md:text-5xl"
-                                   }){
+export default function PageTitle({
+                                      children,
+                                      className,
+                                  }) {
     return (
-        <div className="text-center">
-
-            <h1 className={clsx(
-                "text-[#F2EFE7]",
-                textSize)}
-            >
-                {title}
-            </h1>
-
-        </div>
+        <h1
+            className={clsx(
+                "text-[clamp(2rem,4vw,3rem)]",
+                className
+            )}
+        >
+            {children}
+        </h1>
     );
 }

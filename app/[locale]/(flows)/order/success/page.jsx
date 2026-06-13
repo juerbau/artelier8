@@ -1,12 +1,12 @@
 import FadeInSection from "@/ui/components/FadeInSection";
 import OrderSuccessMessage from "@/ui/components/order/OrderSuccessMessage";
-import { orderFormContent } from "@/lib/i18n/orderFormContent";
+import {orderFormContent} from "@/lib/i18n/orderFormContent";
 import Logo from "@/ui/components/Logo";
 import PageTitle from "@/ui/components/PageTitle";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
 
-export default async function OrderSuccessPage({ params }) {
-    const { locale } = await params;
+export default async function OrderSuccessPage({params}) {
+    const {locale} = await params;
 
     const safeLocale = locale?.startsWith("de") ? "de" : "en";
     const content = orderFormContent[safeLocale];
@@ -19,23 +19,14 @@ export default async function OrderSuccessPage({ params }) {
                 as="section"
                 duration={2}
             >
-                <div className="mb-5 flex justify-center">
 
-                    <Logo
-                        href="/"
-                        priority
-                        className="w-37.5 md:w-50"
-                        sizes="(max-width: 768px) 150px, 200px"
-                    />
-
-                </div>
+                <Logo variant="message" />
 
             </FadeInSection>
 
             <FadeInSection delay={0.25}>
                 <PageTitle
                     title={content?.title}
-                    textSize="text-3xl md:text-4xl"
                 />
             </FadeInSection>
 

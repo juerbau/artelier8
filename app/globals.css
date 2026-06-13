@@ -1,24 +1,28 @@
 @import "tailwindcss";
 
-:root {
-  --background: #505c6c;
-  --foreground: #ffffff;
-}
-
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
 
     --font-sans: var(--font-roboto-serif);
     --font-roboto: var(--font-roboto);
-    --font-signature: var(--font-signature);
+
+    --text-display: 2.25rem;
+    --text-section: 1.875rem;
+    --text-body: 1.5rem;
+    --text-meta: 1.125rem;
+    --text-small: 0.875rem;
+}
+
+:root {
+    --background: #505c6c;
+    --foreground: #ffffff;
 }
 
 body {
     background: var(--background);
     color: var(--foreground);
 }
-
 
 
 input:-webkit-autofill {

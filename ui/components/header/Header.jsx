@@ -7,7 +7,6 @@ import clsx from "clsx";
 import Logo from "@/ui/components/Logo";
 
 
-
 export default function Header({locale}) {
     const pathname = usePathname()
 
@@ -30,13 +29,8 @@ export default function Header({locale}) {
                     "max-[520px]:gap-22",
                     "max-[420px]:gap-16"
                 )}
-            >                {/* Logo */}
-                    <Logo
-                        href="/"
-                        priority
-                        className="w-12 md:w-22"
-                        sizes="(max-width: 768px) 150px, 200px"
-                    />
+            >
+                <Logo variant="header" />
 
                 {/* Center Nav (FIX: kein flex-1 mehr!) */}
                 <div className="flex justify-center">
