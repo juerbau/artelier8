@@ -10,7 +10,7 @@ import PageSubtitle from "@/ui/components/PageSubtitle";
 import PageTitle from "@/ui/components/PageTitle";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
 import PageContent from "@/ui/components/util/PageContent";
-import ContentWidth from "../../../../ui/components/util/ContentWidth";
+import ContentWidth from "@/ui/components/util/ContentWidth";
 import ArtistPortrait from "@/ui/components/about/ArtistPortrait";
 
 export async function generateMetadata({params}) {

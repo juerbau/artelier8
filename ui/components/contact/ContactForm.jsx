@@ -83,7 +83,7 @@ export default function ContactForm({ locale }) {
             }
 
             router.push(
-                `/${safeLocale}/contact-success?type=${inquiryType}`
+                `/${safeLocale}/message?type=contact&option=${inquiryType}`
             );
 
         } catch {

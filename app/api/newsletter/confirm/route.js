@@ -23,7 +23,7 @@ export async function GET(req) {
 
         if (!token) {
             return NextResponse.redirect(
-                new URL(`/${locale}/newsletter/message?action=confirm&status=invalid`, siteUrl)
+                new URL(`/${locale}/message?type=newsletter&action=confirm&status=invalid`, siteUrl)
             )
         }
 
@@ -32,7 +32,7 @@ export async function GET(req) {
 
         if (!email) {
             return NextResponse.redirect(
-                new URL(`/${locale}/newsletter/message?action=confirm&status=invalid`, siteUrl)
+                new URL(`/${locale}/message?type=newsletter&action=confirm&status=invalid`, siteUrl)
             )
         }
 
@@ -44,7 +44,7 @@ export async function GET(req) {
 
         if (!subscriberRaw) {
             return NextResponse.redirect(
-                new URL(`/${locale}/newsletter/message?action=confirm&status=invalid`, siteUrl)
+                new URL(`/${locale}/message?type=newsletter&action=confirm&status=invalid`, siteUrl)
             )
         }
 
@@ -74,13 +74,13 @@ export async function GET(req) {
         }
 
         return NextResponse.redirect(
-            new URL(`/${locale}/newsletter/message?action=confirm&status=success`, siteUrl)
+            new URL(`/${locale}/message?type=newsletter&action=confirm&status=success`, siteUrl)
         )
     } catch (error) {
         console.error("Newsletter confirm error:", error)
 
         return NextResponse.redirect(
-            new URL(`/${locale}/newsletter/message?action=confirm&status=error`, siteUrl)
+            new URL(`/${locale}/message?type=newsletter&action=confirm&status=error`, siteUrl)
         )
     }
 }

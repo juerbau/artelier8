@@ -78,7 +78,7 @@ export default function OrderForm({ locale, token, formContent }) {
             }
 
 
-            router.push(`/${safeLocale}/order/success`);
+            router.push(`/${safeLocale}/message?type=order`);
 
 
         } catch (error) {

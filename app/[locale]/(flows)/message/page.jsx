@@ -1,4 +1,5 @@
-import {newsletterMessageContent} from "@/lib/i18n/newsletterMessageContent";
+import {notFound} from "next/navigation";
+import {messageContent} from "@/lib/i18n/messageContent";
 import FadeInSection from "@/ui/components/FadeInSection";
 import Logo from "@/ui/components/Logo";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
@@ -9,21 +10,47 @@ import ContentWidth from "@/ui/components/util/ContentWidth";
 import Text from "@/ui/components/util/Text";
 
 
-export default async function Page({params, searchParams}) {
 
-    const {locale} = await params
-    const {action, status} = await searchParams
 
-    const safeLocale = newsletterMessageContent[locale] ? locale : "de"
-    const safeAction = newsletterMessageContent[safeLocale][action]
-        ? action
-        : "confirm"
-    const safeStatus = newsletterMessageContent[safeLocale][safeAction][status]
-        ? status
-        : "error"
+export default async function MessagePage({params, searchParams}) {
 
-    const content =
-        newsletterMessageContent[safeLocale][safeAction][safeStatus]
+    const {locale} = await params;
+    const safeLocale = locale?.startsWith("de") ? "de" : "en";
+
+    const {type} = await searchParams;
+
+    let content = {};
+    let href = "/";
+
+    if (type === 'newsletter') {
+        const {action, status} = await searchParams;
+        content = {
+            title: messageContent[safeLocale][type].title,
+            message: messageContent[safeLocale][type][action][status],
+            button: messageContent[safeLocale][type].buttonText,
+        }
+    }
+    else if (type === 'order') {
+        content = {
+            title: messageContent[safeLocale][type].title,
+            message: messageContent[safeLocale][type].success,
+            button: messageContent[safeLocale][type].buttonText,
+        }
+
+    } else if (type === 'contact') {
+            const {option} = await searchParams;
+            content = {
+                title: messageContent[safeLocale][type].title,
+                message: messageContent[safeLocale][type][option],
+                button: messageContent[safeLocale][type].buttonText,
+            }
+            href = `/${safeLocale}/contact`
+
+    }
+
+    if (!content.title || !content.message || !content.button) {
+        notFound();
+    }
 
     return (
 
@@ -42,7 +69,7 @@ export default async function Page({params, searchParams}) {
 
             <FadeInSection delay={0.25}>
                 <PageTitle>
-                    Newsletter
+                    {content.title}
                 </PageTitle>
             </FadeInSection>
 
@@ -67,7 +94,7 @@ export default async function Page({params, searchParams}) {
                         variant="body"
                         className="leading-relaxed py-5"
                     >
-                        {content}
+                        {content.message}
                     </Text>
                 </ContentWidth>
             </FadeInSection>
@@ -75,10 +102,10 @@ export default async function Page({params, searchParams}) {
             <FadeInSection
                 delay={0.8}>
                 <MainButton
-                    href="/"
+                    href={href}
                     className="text-black bg-[#D8B56A]"
                 >
-                    Zurück zur Website
+                    {content.button}
                 </MainButton>
             </FadeInSection>
 
