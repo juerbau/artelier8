@@ -5,6 +5,7 @@ import {
     ChevronLeft,
     ChevronRight,
 } from "lucide-react";
+import {motion} from "motion/react";
 
 export default function CarouselNavigation({
                                                currentIndex,
@@ -41,18 +42,28 @@ export default function CarouselNavigation({
                 {Array.from({
                     length: totalItems,
                 }).map((_, index) => (
-                    <button
+                    <motion.button
                         key={index}
                         type="button"
-                        onClick={() =>
-                            onSelect(index)
+                        onClick={() => onSelect(index)}
+                        animate={
+                            index === currentIndex
+                                ? {
+                                    scale: [1, 1.3, 1],
+                                }
+                                : {
+                                    scale: 1,
+                                }
                         }
+                        transition={{
+                            duration: 1.1,
+                            ease: "easeInOut",
+                        }}
                         className={clsx(
                             "rounded-full",
-                            "transition-all duration-200",
                             index === currentIndex
-                                ? "w-4 h-4  bg-[#D8B56A]"
-                                : "w-3 h-3  bg-white hover:bg-[#D8B56A]"
+                                ? "w-4 h-4 bg-[#D8B56A]"
+                                : "w-3 h-3 bg-white hover:bg-[#D8B56A]"
                         )}
                     />
                 ))}

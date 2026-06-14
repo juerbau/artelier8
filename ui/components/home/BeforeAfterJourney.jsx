@@ -4,6 +4,7 @@ import { useState } from "react";
 import { urlFor } from "@/sanity/image";
 import BeforeAfterSlider from "./BeforeAfterSlider";
 import CarouselNavigation from "./CarouselNavigation";
+import {AnimatePresence, motion} from "motion/react";
 
 export default function BeforeAfterJourney({
                                                items = [],
@@ -40,10 +41,34 @@ export default function BeforeAfterJourney({
     return (
         <div className="space-y-6">
 
-            <BeforeAfterSlider
-                beforeImage={urlFor(item.beforeImage).url()}
-                afterImage={urlFor(item.afterImage).url()}
-            />
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key={item._id}
+                    initial={{
+                        opacity: 0,
+                        scale: 0.95,
+                    }}
+                    animate={{
+                        opacity: 1,
+                        scale: 1,
+                    }}
+                    exit={{
+                        opacity: 0,
+                        scale: 0.95,
+                    }}
+                    transition={{
+                        duration: 0.7,
+                        ease: "easeInOut",
+                    }}
+                >
+                    <BeforeAfterSlider
+                        beforeImage={urlFor(item.beforeImage).url()}
+                        afterImage={urlFor(item.afterImage).url()}
+                    />
+                </motion.div>
+            </AnimatePresence>
+
+
 
             {showNavigation && (
                 <CarouselNavigation

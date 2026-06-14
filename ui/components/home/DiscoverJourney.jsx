@@ -1,11 +1,12 @@
 "use client";
 
-import {useState} from "react";
+import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+
 import DiscoverGrid from "./DiscoverGrid";
 import CarouselNavigation from "./CarouselNavigation";
 
-export default function DiscoverJourney({galleries = []}) {
-
+export default function DiscoverJourney({ galleries = [] }) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     if (!galleries.length) return null;
@@ -33,7 +34,29 @@ export default function DiscoverJourney({galleries = []}) {
     return (
         <div className="space-y-6">
 
-            <DiscoverGrid gallery={gallery} />
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key={gallery._id}
+                    initial={{
+                        opacity: 0,
+                        scale: 0.95,
+                    }}
+                    animate={{
+                        opacity: 1,
+                        scale: 1,
+                    }}
+                    exit={{
+                        opacity: 0,
+                        scale: 0.95,
+                    }}
+                    transition={{
+                        duration: 0.7,
+                        ease: "easeInOut",
+                    }}
+                >
+                    <DiscoverGrid gallery={gallery} />
+                </motion.div>
+            </AnimatePresence>
 
             {showNavigation && (
                 <CarouselNavigation

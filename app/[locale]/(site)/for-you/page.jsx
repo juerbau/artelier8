@@ -4,6 +4,7 @@ import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
 import PageSubtitle from "@/ui/components/PageSubtitle";
 import {pageContent} from "@/lib/i18n/pageContent";
 import PageContent from "@/ui/components/util/PageContent";
+import ImageTransform from "../../../../ui/components/for-you/ImageTransform";
 
 
 export default async function ForYouPage({params}) {
@@ -22,9 +23,9 @@ export default async function ForYouPage({params}) {
                 as="section"
                 duration={2}
             >
-                <PageTitle
-                    title={content.title}
-                />
+                <PageTitle>
+                    {content.title}
+                </PageTitle>
             </FadeInSection>
 
             <GoldenLineDivider
@@ -39,15 +40,18 @@ export default async function ForYouPage({params}) {
                 delay={0.25}
                 duration={1.8}
             >
-                <PageSubtitle
-                    subtitle="Jede Auftragsarbeit beginnt mit einer Idee.
 
-Von den ersten Referenzen bis zum fertigen Werk
-entsteht etwas Persönliches, das ausschließlich
-für Dich geschaffen wird."
-                />
+                <ImageTransform/>
 
                 <div className="space-y-5 text-2xl w-200 mx-auto pl-5">
+
+                    <p>
+                        Jede Auftragsarbeit beginnt mit einer Idee.
+
+                        Von den ersten Referenzen bis zum fertigen Werk
+                        entsteht etwas Persönliches, das ausschließlich
+                        für Dich geschaffen wird.
+                    </p>
 
                     <div className="space-y-2">
                         <h2>Die Idee<span
