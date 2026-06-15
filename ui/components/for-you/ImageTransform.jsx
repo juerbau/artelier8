@@ -3,8 +3,7 @@
 import Image from "next/image";
 import clsx from "clsx";
 import {useState} from "react";
-import {motion} from "motion/react";
-import imageBefore from "@/ui/images/vyper-vorher.webp";
+import imageBefore from "@/ui/images/vyper-vorher-neu.webp";
 import imageAfter from "@/ui/images/vyper-nachher.webp";
 
 export default function ImageTransform() {
