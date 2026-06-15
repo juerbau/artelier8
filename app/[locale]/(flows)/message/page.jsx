@@ -103,7 +103,6 @@ export default async function MessagePage({params, searchParams}) {
                 delay={0.8}>
                 <MainButton
                     href={href}
-                    className="text-black bg-[#D8B56A]"
                 >
                     {content.button}
                 </MainButton>

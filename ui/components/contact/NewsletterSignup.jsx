@@ -8,6 +8,7 @@ import { splitZodErrors } from "@/lib/validation/validation-helpers";
 import FormField from "@/ui/components/contact/FormField";
 import InfoBox from "@/ui/components/InfoBox";
 import { newsletterSignupContent } from "@/lib/i18n/newsletterSignupContent";
+import MainButton from "@/ui/components/MainButton";
 
 
 export default function NewsletterSignup({ locale }) {
@@ -144,13 +145,14 @@ export default function NewsletterSignup({ locale }) {
                     aria-hidden="true"
                 />
 
-                <button
-                    type="submit"
-                    disabled={status === "loading"}
-                    className={buttonClasses}
-                >
-                    {status === "loading" ? "..." : content.button}
-                </button>
+                <div className="flex justify-center">
+                    <MainButton
+                        type="submit"
+                        disabled={status === "loading"}
+                    >
+                        {status === "loading" ? "..." : content.button}
+                    </MainButton>
+                </div>
 
                 <div className="min-h-24 pt-3 text-center">
                     {message && (

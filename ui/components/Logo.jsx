@@ -34,7 +34,7 @@ export default function Logo({variant}) {
                     src={logo}
                     alt="ARTelier8 Logo"
                     fill
-                    priority
+                    priority={variant === "hero" || variant === "message"}
                     sizes={logoConfig[variant].sizes}
                     className={clsx(
                         "object-contain",

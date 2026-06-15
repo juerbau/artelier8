@@ -9,7 +9,7 @@ import { buildImage } from "@/sanity/image";
 import { openGraphQuery } from "@/sanity/queries/openGraph";
 import { buildMetadata } from "@/lib/seo"
 
-import { homePageContent } from "@/lib/i18n/pages/homePageContent"
+import { homePageContent } from "@/lib/i18n/home/homePageContent"
 
 import HomeGallery from "@/ui/components/home/HomeGallery"
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";

@@ -5,17 +5,22 @@ export default function MainButton({
                                        children,
                                        href,
                                        type = "button",
+                                       onClick,
                                        className,
+                                       ...props
                                    }) {
+
     const buttonClasses = clsx(
         "inline-flex items-center justify-center",
-        "px-5 py-2.5",
+        "w-auto",
+        "px-5 py-2",
         "rounded-md",
         "text-lg tracking-wide",
         "font-roboto",
         "text-black bg-[#D8B56A]",
         "transition-colors duration-300",
         "hover:bg-[#C8A459]",
+        "disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-[#D8B56A]",
         className
     );
 
@@ -24,6 +29,7 @@ export default function MainButton({
             <Link
                 href={href}
                 className={buttonClasses}
+                {...props}
             >
                 {children}
             </Link>
@@ -33,7 +39,9 @@ export default function MainButton({
     return (
         <button
             type={type}
+            onClick={onClick}
             className={buttonClasses}
+            {...props}
         >
             {children}
         </button>

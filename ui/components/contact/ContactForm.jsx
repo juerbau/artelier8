@@ -1,15 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import clsx from "clsx";
-import { getContactSchema } from "@/lib/validation/contact-schema";
-import { splitZodErrors } from "@/lib/validation/validation-helpers";
-import { contactForm } from "@/lib/i18n";
+import {useState} from "react";
+import {useRouter} from "next/navigation";
+import {getContactSchema} from "@/lib/validation/contact-schema";
+import {splitZodErrors} from "@/lib/validation/validation-helpers";
+import {contactForm} from "@/lib/i18n";
 import FormField from "@/ui/components/contact/FormField";
 import InfoBox from "@/ui/components/InfoBox";
+import MainButton from "@/ui/components/MainButton";
 
-export default function ContactForm({ locale }) {
+export default function ContactForm({locale}) {
     const router = useRouter();
 
     const [status, setStatus] = useState("idle");
@@ -56,7 +56,7 @@ export default function ContactForm({ locale }) {
         const result = schema.safeParse(data);
 
         if (!result.success) {
-            const { fieldErrors, formErrors } = splitZodErrors(result.error)
+            const {fieldErrors, formErrors} = splitZodErrors(result.error)
 
             setErrors(fieldErrors)
             setFormError(formErrors.length > 0 ? content.error : "")
@@ -90,22 +90,6 @@ export default function ContactForm({ locale }) {
             setStatus("error");
         }
     }
-
-    const buttonClasses = clsx(
-        "self-center w-auto",
-        "inline-flex items-center justify-center",
-        "px-5 py-2.5",
-        "text-sm tracking-wide",
-        "rounded-md",
-        "bg-black text-white",
-        "transition-colors duration-200",
-        "cursor-pointer",
-        "hover:bg-neutral-800",
-        {
-            "opacity-50 cursor-not-allowed":
-                status === "submitting",
-        }
-    );
 
     return (
         <form
@@ -144,7 +128,7 @@ export default function ContactForm({ locale }) {
             />
 
             <fieldset className="mb-7 mt-3">
-                <legend className="mb-4 font-roboto text-lg text-white">
+                <legend className="mb-4 font-roboto text-lg">
                     {content.inquiryType}
                 </legend>
 
@@ -195,13 +179,13 @@ export default function ContactForm({ locale }) {
             </fieldset>
 
             {inquiryType === "order" && (
-                    <InfoBox>
-                        <p>{content.orderHint.paragraph1}</p>
+                <InfoBox>
+                    <p>{content.orderHint.paragraph1}</p>
 
-                        <p className="mt-3">
-                            {content.orderHint.paragraph2}
-                        </p>
-                    </InfoBox>
+                    <p className="mt-3">
+                        {content.orderHint.paragraph2}
+                    </p>
+                </InfoBox>
             )}
 
             <FormField
@@ -224,15 +208,16 @@ export default function ContactForm({ locale }) {
                 aria-hidden="true"
             />
 
-            <button
-                type="submit"
-                disabled={status === "submitting"}
-                className={buttonClasses}
-            >
-                {status === "submitting"
-                    ? content.sending
-                    : content.submit}
-            </button>
+            <div className="flex justify-center">
+                <MainButton
+                    type="submit"
+                    disabled={status === "submitting"}
+                >
+                    {status === "submitting"
+                        ? content.sending
+                        : content.submit}
+                </MainButton>
+            </div>
 
             {formError && (
                 <p className="mt-3 text-lg font-roboto text-yellow-300">

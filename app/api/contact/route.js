@@ -1,21 +1,21 @@
-import { NextResponse } from "next/server";
+import {NextResponse} from "next/server";
 import crypto from "crypto";
-import { redis, checkRateLimit } from "@/lib/security/rate-limit";
-import { getContactSchema } from "@/lib/validation/contact-schema";
-import { removeMetaFields } from "@/lib/validation/validation-helpers";
-import { checkOrigin } from "@/lib/security/origin-check";
-import { sendContactNotificationEmail } from "@/lib/email/sendContactNotificationEmail";
-import { sendOrderLinkEmail } from "@/lib/email/sendOrderLinkEmail";
-import { isHoneypotTriggered } from "@/lib/security/honeypot";
-import { checkEmailAttempts } from "@/lib/security/email-attempts";
+import {redis, checkRateLimit} from "@/lib/security/rate-limit";
+import {getContactSchema} from "@/lib/validation/contact-schema";
+import {removeMetaFields} from "@/lib/validation/validation-helpers";
+import {checkOrigin} from "@/lib/security/origin-check";
+import {sendContactNotificationEmail} from "@/lib/email/sendContactNotificationEmail";
+import {sendOrderLinkEmail} from "@/lib/email/sendOrderLinkEmail";
+import {isHoneypotTriggered} from "@/lib/security/honeypot";
+import {checkEmailAttempts} from "@/lib/security/email-attempts";
 
 
 export async function POST(req) {
     try {
         if (!checkOrigin(req)) {
             return NextResponse.json(
-                { success: false, error: "forbidden" },
-                { status: 403 }
+                {success: false, error: "forbidden"},
+                {status: 403}
             );
         }
 
@@ -23,8 +23,8 @@ export async function POST(req) {
 
         if (isHoneypotTriggered(body)) {
             return NextResponse.json(
-                { success: true },
-                { status: 200 }
+                {success: true},
+                {status: 200}
             );
         }
 
@@ -32,10 +32,10 @@ export async function POST(req) {
 
         if (!allowed) {
             return NextResponse.json(
-                { success: false, error: "rate_limit" },
+                {success: false, error: "rate_limit"},
                 {
                     status: 429,
-                    headers: { "Retry-After": "60" },
+                    headers: {"Retry-After": "60"},
                 }
             );
         }
@@ -53,11 +53,11 @@ export async function POST(req) {
                     error: "validation",
                     issues: result.error.issues,
                 },
-                { status: 400 }
+                {status: 400}
             );
         }
 
-        const { firstName, lastName, email, message, inquiryType } = result.data;
+        const {firstName, lastName, email, message, inquiryType} = result.data;
 
         const emailAllowed = await checkEmailAttempts({
             scope: "contact",
@@ -68,10 +68,10 @@ export async function POST(req) {
 
         if (!emailAllowed) {
             return NextResponse.json(
-                { success: false, error: "rate_limit" },
+                {success: false, error: "rate_limit"},
                 {
                     status: 429,
-                    headers: { "Retry-After": "60" },
+                    headers: {"Retry-After": "60"},
                 }
             );
         }
@@ -94,7 +94,7 @@ export async function POST(req) {
                         res.error.message ||
                         "Failed to send contact notification email",
                 },
-                { status: res.error.statusCode || 500 }
+                {status: res.error.statusCode || 500}
             );
         }
 
@@ -103,8 +103,8 @@ export async function POST(req) {
 
             if (!siteUrl) {
                 return NextResponse.json(
-                    { success: false, error: "missing_site_url" },
-                    { status: 500 }
+                    {success: false, error: "missing_site_url"},
+                    {status: 500}
                 );
             }
 
@@ -120,7 +120,7 @@ export async function POST(req) {
             await redis.set(
                 orderRequestKey,
                 JSON.stringify(orderRequest),
-                { ex: 60 * 60 * 24 * 30 }
+                {ex: 60 * 60 * 24 * 30}
             );
 
             const orderUrl = `${siteUrl}/${locale}/order?token=${token}`;
@@ -139,19 +139,19 @@ export async function POST(req) {
                             resOrder.error.message ||
                             "Failed to send order link email",
                     },
-                    { status: resOrder.error.statusCode || 500 }
+                    {status: resOrder.error.statusCode || 500}
                 );
             }
         }
 
-        return NextResponse.json({ success: true });
+        return NextResponse.json({success: true});
 
     } catch (err) {
         console.error("Contact route error:", err);
 
         return NextResponse.json(
-            { success: false, error: "server_error" },
-            { status: 500 }
+            {success: false, error: "server_error"},
+            {status: 500}
         );
     }
 }

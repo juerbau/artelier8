@@ -2,27 +2,11 @@ import Image from "next/image";
 import clsx from "clsx";
 
 export default function DesignProcess({
-                                          eyebrow,
-                                          title,
-                                          intro,
+
                                           steps = [],
                                       }) {
     return (
         <section className="space-y-30">
-
-            <div className="space-y-6 text-center">
-                <p className="text-lg uppercase tracking-[0.3em] text-[#D8B56A]">
-                    {eyebrow}
-                </p>
-
-                <h2 className="text-3xl md:text-4xl">
-                    {title}
-                </h2>
-
-                <p className="mx-auto max-w-3xl text-xl text-white/80 leading-relaxed whitespace-pre-line md:text-xl">
-                    {intro}
-                </p>
-            </div>
 
             <div className="space-y-20">
                 {steps.map((step, index) => {

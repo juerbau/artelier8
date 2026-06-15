@@ -5,30 +5,14 @@ import clsx from "clsx";
 import {useState} from "react";
 import imageBefore from "@/ui/images/vyper-vorher-neu.webp";
 import imageAfter from "@/ui/images/vyper-nachher.webp";
+import MainButton from "@/ui/components/MainButton";
 
-export default function ImageTransform() {
+export default function ImageTransform({content}) {
 
     const [revealed, setRevealed] = useState(false);
 
     return (
         <section className="space-y-8">
-
-            <div className="flex justify-center">
-
-                <button
-                    type="button"
-                    onClick={() =>
-                        setRevealed((prev) => !prev)
-                    }
-                    className={clsx("rounded-full bg-[#D8B56A] px-8 py-3",
-                        "font-medium text-black transition-transform hover:scale-105")}
-                >
-                    {revealed
-                        ? "Original ansehen"
-                        : "Transformation erleben ✨"}
-                </button>
-
-            </div>
 
             <div
                 className={clsx(
@@ -39,7 +23,7 @@ export default function ImageTransform() {
                 <div
                     className={clsx(
                         "absolute inset-0",
-                        "transition-opacity duration-1500",
+                        "transition-opacity duration-900",
                         revealed
                             ? "opacity-100"
                             : "opacity-0"
@@ -58,7 +42,7 @@ export default function ImageTransform() {
                 <div
                     className={clsx(
                         "absolute inset-0",
-                        "transition-opacity duration-1500",
+                        "transition-opacity duration-900",
                         revealed
                             ? "opacity-0"
                             : "opacity-100"
@@ -74,6 +58,23 @@ export default function ImageTransform() {
                 </div>
 
             </div>
+
+            <button
+                type="button"
+                onClick={() => setRevealed((prev) => !prev)}
+                aria-pressed={revealed}
+                className={clsx(
+                    "inline-flex w-40 items-center justify-center",
+                    "rounded-full border border-white/70",
+                    "bg-black/25 px-5 py-2",
+                    "font-roboto text-base tracking-wide text-white",
+                    "transition-colors duration-300",
+                    "hover:bg-black/40"
+                )}
+            >
+                {revealed ? content.buttonText.original : content.buttonText.transform}
+            </button>
+
 
         </section>
     );
