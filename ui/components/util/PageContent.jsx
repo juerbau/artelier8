@@ -9,14 +9,13 @@ export default function PageContent({
         <div
             className={clsx(
                 "w-full",
-                "space-y-5",
                 "mx-auto",
 
                 {
-                    "max-w-100": width === "xs",
-                    "max-w-160": width === "md",
-                    "max-w-250": width === "lg",
-                    "max-w-7xl": width === "xl",
+                    "max-w-100": width === "xs", /* 400px */
+                    "max-w-160": width === "md", /* 648px */
+                    "max-w-250": width === "lg", /* 1000px */
+                    "max-w-7xl": width === "xl", /* 1280px */
                 },
 
                 className

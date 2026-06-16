@@ -9,6 +9,7 @@ export default function Slogan({ content }){
                 className={clsx(
                     "text-[#F2EFE7] leading-tight",
                     "text-[clamp(2.5rem,3vw,3rem)]",
+                    "font-normal",
                 )}
             >
                 {content}

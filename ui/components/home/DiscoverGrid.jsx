@@ -12,7 +12,7 @@ export default function DiscoverGrid({gallery}) {
     if (!gallery) return null;
 
     return (
-        <div className="space-y-4 md:space-y-6">
+        <div className="space-y-4 md:space-y-6 rounded-xl overflow-hidden">
 
             {/* Reihe 1 */}
             <div className="flex gap-4 md:gap-6">
@@ -53,7 +53,7 @@ export default function DiscoverGrid({gallery}) {
             <div className="flex gap-4 md:gap-6">
 
                 <div className="w-3/4">
-                    <div className="relative aspect-[3/1] overflow-hidden">
+                    <div className="relative aspect-3/1 overflow-hidden">
                         <Image
                             src={buildImage({
                                 source: gallery.imageBottomLeft,                                width: 800,

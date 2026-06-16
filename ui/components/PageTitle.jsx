@@ -7,7 +7,7 @@ export default function PageTitle({
     return (
         <h1
             className={clsx(
-                "text-[clamp(2rem,4vw,3rem)]",
+                "text-[clamp(2rem,calc(1.5rem+2vw),3rem)]",
                 className
             )}
         >

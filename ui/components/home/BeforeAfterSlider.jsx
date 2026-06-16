@@ -11,7 +11,7 @@ export default function BeforeAfterSlider({ beforeImage, afterImage }) {
     const [position, setPosition] = useState(50);
 
     return (
-        <div className="relative w-full overflow-hidden aspect-[16/9]">
+        <div className="relative w-full overflow-hidden rounded-xl aspect-video">
 
             {/* Nachher */}
             <Image

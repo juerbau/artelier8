@@ -1,15 +1,15 @@
 import clsx from "clsx";
 
-import { sanityFetch } from "@/sanity/fetch";
-import { homeSliderQuery } from "@/sanity/queries/home";
-import { discoverJourneyQuery } from "@/sanity/queries/discoverJourney";
-import { beforeAfterJourneyQuery } from "@/sanity/queries/beforeAfterJourney";
-import { buildImage } from "@/sanity/image";
+import {sanityFetch} from "@/sanity/fetch";
+import {homeSliderQuery} from "@/sanity/queries/home";
+import {discoverJourneyQuery} from "@/sanity/queries/discoverJourney";
+import {beforeAfterJourneyQuery} from "@/sanity/queries/beforeAfterJourney";
+import {buildImage} from "@/sanity/image";
 
-import { openGraphQuery } from "@/sanity/queries/openGraph";
-import { buildMetadata } from "@/lib/seo"
+import {openGraphQuery} from "@/sanity/queries/openGraph";
+import {buildMetadata} from "@/lib/seo"
 
-import { homePageContent } from "@/lib/i18n/home/homePageContent"
+import {homePageContent} from "@/lib/i18n/home/homePageContent"
 
 import HomeGallery from "@/ui/components/home/HomeGallery"
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
@@ -23,7 +23,8 @@ import ContentWidth from "@/ui/components/util/ContentWidth";
 import FadeInSection from "@/ui/components/FadeInSection";
 import Logo from "@/ui/components/Logo";
 import Signature from "@/ui/components/home/Signature";
-
+import Text from "@/ui/components/util/Text";
+import MottoBlock from "@/ui/components/home/Motto";
 
 
 export async function generateMetadata({params}) {
@@ -72,94 +73,71 @@ export default async function HomePage({params}) {
 
     return (
         <PageContent width="lg" className="text-center">
+            <header>
+                <FadeInSection as="div" duration={2}>
+                    <Logo variant="hero"/>
+                    <Signature/>
+                </FadeInSection>
 
-            <FadeInSection as="section" duration={2}>
+                <GoldenLineDivider delay={0.08} duration={1} className="mt-5 w-[90%]"/>
+            </header>
 
-                <Logo variant="hero" />
-                <Signature />
-
-            </FadeInSection>
-
-            <GoldenLineDivider
-                delay={0.08}
-                duration={1}
-                className="mt-3 w-[90%]"
-            />
-
-            <FadeInSection
-                className="space-y-16"
-                as="section"
-                delay={0.25}
-                duration={1.8}
-            >
-
-                <Slogan content={content.slogan}/>
-
-                <ContentWidth width="full">
-                    <HomeGallery artworks={artworks} locale={locale}/>
-                </ContentWidth>
-
-                {/*Motto*/}
-                <p className={clsx(
-                    "w-200 mx-auto px-5 py-8",
-                    "bg-gray-600 rounded-2xl",
-                    "text-3xl whitespace-pre-line leading-relaxed"
-                )}>
-                        {content.motto}
-                    </p>
+            <FadeInSection as="div" delay={0.25} duration={1.8} className="mt-10">
+                <div className="space-y-24 md:space-y-32">
+                    <div className="space-y-16">
+                        <Slogan content={content.slogan}/>
 
 
+                        <HomeGallery artworks={artworks} locale={locale}/>
 
-                <div
-                    className="py-5 w-250 text-2xl mx-auto text-center tracking-wide whitespace-pre-line leading-relaxed">
-                    Willkommen im ARTelier8.<br/>
-                    Schön, dass du hierher gefunden hast. 😊
-                    <br/><br/>
-                    Du bist herzlich eingeladen ...
-                    <br/><br/>
-                    ...auf eine Entdeckungsreise durch die Werke,<br/>
-                    die bereits im ARTelier8 entstanden sind.
-                    <br/>
-                    <br/>
-                    <ContentWidth width="full">
-                        <DiscoverJourney galleries={discoverJourney?.galleries ?? []}/>
-                    </ContentWidth>
-                    <br/>
-                    <div className="mx-auto">
-                        <MainButton
-                            href={`/${locale}/series`}
-                            type="button"
-                        >
-                            Serien entdecken
-                        </MainButton>
-
+                        {/* Motto */}
+                        <ContentWidth width="default">
+                            <MottoBlock>
+                                {content.motto}
+                            </MottoBlock>
+                        </ContentWidth>
                     </div>
-                    <br/>
-                    <br/>
-                    <br/>
-                    Oder wir gestalten gemeinsam etwas,
-                    <br/>
-                    das nur für dich entsteht.
-                    <br/>
-                    <br/>
-                    <ContentWidth width="full">
-                        <BeforeAfterJourney
-                            items={beforeAfterJourney?.items ?? []}
-                        />
-                    </ContentWidth>
-                    <br/>
-                    <MainButton
-                        href={`/${locale}/for-you`}
-                        type="button"
-                    >
-                        Für Dich entdecken
-                    </MainButton>
 
+                    <div className="space-y-8">
+                        <p className="text-2xl text-white/80 leading-relaxed whitespace-pre-line">
+                            {content.welcome}
+                        </p>
+
+                        <p className="text-2xl text-white/80 leading-relaxed whitespace-pre-line">
+                            {content.introduction}
+                        </p>
+                    </div>
+
+                    <section className="space-y-10 md:space-y-12">
+                        <h2 className="text-2xl font-normal text-white/80 leading-relaxed whitespace-pre-line">
+                            {content.discover.title}
+                        </h2>
+
+                        <DiscoverJourney galleries={discoverJourney?.galleries ?? []}/>
+
+
+                        <div className="flex justify-center pt-2">
+                            <MainButton href={`/${locale}/series`}>
+                                {content.discover.button}
+                            </MainButton>
+                        </div>
+                    </section>
+
+                    <section className="space-y-10 md:space-y-12">
+                        <h2 className="text-2xl font-normal text-white/80 leading-relaxed whitespace-pre-line">
+                            {content.create.title}
+                        </h2>
+
+                        <BeforeAfterJourney items={beforeAfterJourney?.items ?? []}/>
+
+                        <div className="flex justify-center pt-2">
+                            <MainButton href={`/${locale}/for-you`}>
+                                {content.create.button}
+                            </MainButton>
+                        </div>
+                    </section>
                 </div>
-
             </FadeInSection>
-
-
         </PageContent>
-    )
+    );
 }

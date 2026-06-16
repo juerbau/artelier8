@@ -3,10 +3,10 @@ import clsx from "clsx";
 export default function Text({
                                  children,
                                  variant = "body",
+                                 leading = "relaxed",
                                  className,
-                                 as= "p",
+                                 as = "p",
                              }) {
-
     const Component = as;
 
     const typographyVariants = {
@@ -17,11 +17,20 @@ export default function Text({
         small: "text-small",
     };
 
+    const leadingVariants = {
+        none: "leading-none",
+        tight: "leading-tight",
+        snug: "leading-snug",
+        normal: "leading-normal",
+        relaxed: "leading-relaxed",
+        loose: "leading-loose",
+    };
 
     return (
         <Component
             className={clsx(
-                typographyVariants[variant],
+                typographyVariants[variant] ?? typographyVariants.body,
+                leadingVariants[leading] ?? leadingVariants.relaxed,
                 className
             )}
         >

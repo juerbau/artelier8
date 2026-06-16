@@ -61,12 +61,12 @@ export default async function ForYouPage({params}) {
                 delay={0.25}
                 duration={1.8}
             >
-                <div className="mb-30 space-y-6 text-center">
+                <div className="mb-30 space-y-6">
                     <p className="text-2xl mb-10 uppercase tracking-[0.3em] text-[#D8B56A]">
                         {content.eyebrow}
                     </p>
 
-                    <p className="mx-auto max-w-3xl text-xl text-white/80 leading-relaxed whitespace-pre-line md:text-2xl">
+                    <p className="text-2xl text-white/80 leading-relaxed whitespace-pre-line">
                         {content.intro}
                     </p>
                 </div>
@@ -84,7 +84,7 @@ export default async function ForYouPage({params}) {
                 <ImageTransform
                     content={content.imageTransform}
                 />
-                <section className="pt-20 md:pt-28 text-center space-y-6">
+                <section className="pt-20 md:pt-28 space-y-6">
                     <p className="mx-auto max-w-2xl text-xl leading-relaxed text-white/80 md:text-2xl whitespace-pre-line">
                         {content.outro}
                     </p>
