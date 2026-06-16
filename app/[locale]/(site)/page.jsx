@@ -24,7 +24,7 @@ import FadeInSection from "@/ui/components/FadeInSection";
 import Logo from "@/ui/components/Logo";
 import Signature from "@/ui/components/home/Signature";
 import Text from "@/ui/components/util/Text";
-import MottoBlock from "@/ui/components/home/Motto";
+import Motto from "@/ui/components/home/Motto";
 
 
 export async function generateMetadata({params}) {
@@ -92,24 +92,24 @@ export default async function HomePage({params}) {
 
                         {/* Motto */}
                         <ContentWidth width="default">
-                            <MottoBlock>
+                            <Motto className="text-2xl">
                                 {content.motto}
-                            </MottoBlock>
+                            </Motto>
                         </ContentWidth>
                     </div>
 
                     <div className="space-y-8">
-                        <p className="text-2xl text-white/80 leading-relaxed whitespace-pre-line">
+                        <p className="text-body text-white/80 leading-relaxed whitespace-pre-line">
                             {content.welcome}
                         </p>
 
-                        <p className="text-2xl text-white/80 leading-relaxed whitespace-pre-line">
+                        <p className="text-body text-white/80 leading-relaxed whitespace-pre-line">
                             {content.introduction}
                         </p>
                     </div>
 
                     <section className="space-y-10 md:space-y-12">
-                        <h2 className="text-2xl font-normal text-white/80 leading-relaxed whitespace-pre-line">
+                        <h2 className="text-body font-normal text-white/80 leading-relaxed whitespace-pre-line">
                             {content.discover.title}
                         </h2>
 
@@ -124,7 +124,7 @@ export default async function HomePage({params}) {
                     </section>
 
                     <section className="space-y-10 md:space-y-12">
-                        <h2 className="text-2xl font-normal text-white/80 leading-relaxed whitespace-pre-line">
+                        <h2 className="text-body font-normal text-white/80 leading-relaxed whitespace-pre-line">
                             {content.create.title}
                         </h2>
 

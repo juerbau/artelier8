@@ -31,7 +31,7 @@ export default function Studio({image, text}) {
             </div>
 
             {/* TEXT */}
-            <div className="text-xl md:text-2xl leading-[1.55]">
+            <div className="text-xl md:text-2xl leading-relaxed">
                 {blocks.slice(1).map((block, i) => (
                     <p key={i}>
                         {block.split("\n").map((line, j) => (
