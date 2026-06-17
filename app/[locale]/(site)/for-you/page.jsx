@@ -62,7 +62,7 @@ export default async function ForYouPage({params}) {
                 duration={1.8}
             >
                 <div className="mb-30 space-y-6">
-                    <p className="text-2xl mb-10 uppercase tracking-[0.3em] text-[#D8B56A]">
+                    <p className="text-2xl mt-5 mb-10 uppercase tracking-[0.3em] text-[#D8B56A]">
                         {content.eyebrow}
                     </p>
 
@@ -90,7 +90,7 @@ export default async function ForYouPage({params}) {
                     </p>
 
                     <div className="flex justify-center pt-2">
-                        <MainButton href={`/${locale}/kontakt`}>
+                        <MainButton href={`/${locale}/contact`}>
                             {content.button}
                         </MainButton>
                     </div>

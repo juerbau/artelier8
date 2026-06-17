@@ -58,9 +58,10 @@ export default async function SeriesPage({params}) {
                 as="section"
                 duration={2}
             >
-                <PageTitle
-                    title={content?.title}
-                />
+                <PageTitle>
+                    {content?.title}
+                </PageTitle>
+
             </FadeInSection>
 
             <GoldenLineDivider
@@ -75,9 +76,9 @@ export default async function SeriesPage({params}) {
                 delay={0.25}
                 duration={1.8}
             >
-                <PageSubtitle
-                    subtitle={content?.subtitle}
-                />
+                <PageSubtitle>
+                    {content?.subtitle}
+                </PageSubtitle>
 
                 <SeriesList series={series || []} locale={locale}/>
             </FadeInSection>

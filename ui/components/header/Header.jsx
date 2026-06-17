@@ -14,22 +14,7 @@ export default function Header({locale}) {
 
     return (
         <header className="font-roboto w-full bg-gray-700">
-            <div
-                className={clsx(
-                    "mx-auto flex max-w-6xl items-center",
-                    "justify-center md:justify-between",
-                    "px-4 sm:px-5 md:px-8 py-2",
-
-                    // Desktop
-                    "gap-15",
-
-                    // Tablet → Mobile Abstufung
-                    "max-[767px]:gap-36",
-                    "max-[640px]:gap-28",
-                    "max-[520px]:gap-22",
-                    "max-[420px]:gap-16"
-                )}
-            >
+            <div className="mx-auto flex max-w-lg md:max-w-6xl items-center justify-between px-8 py-2 gap-12">
                 <Logo variant="header" />
 
                 {/* Center Nav (FIX: kein flex-1 mehr!) */}

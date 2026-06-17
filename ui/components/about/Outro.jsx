@@ -8,7 +8,7 @@ export default function Outro({ locale = "de", text }) {
     if (!lines || lines.length < 5) return null;
 
     const seriesPath = `/${safeLocale}/series`;
-    const contactPath = `/${safeLocale}/contact`;
+    const forYouPath = `/${safeLocale}/for-you`;
 
     return (
             <div className="max-w-2xl mx-auto px-6 text-center">
@@ -33,7 +33,7 @@ export default function Outro({ locale = "de", text }) {
 
                     <div className="flex items-center justify-center gap-2">
                         {lines[4]}
-                        <Link href={contactPath}>
+                        <Link href={forYouPath}>
                             <CircleArrowRight
                                 size={20}
                                 className="opacity-50 hover:opacity-100 transition"

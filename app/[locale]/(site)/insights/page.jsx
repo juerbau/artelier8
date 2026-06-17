@@ -43,15 +43,15 @@ export default async function InsightsPage({params}) {
                 as="section"
                 duration={2}
             >
-                <PageTitle
-                    title={content?.title}
-                />
+                <PageTitle>
+                    {content?.title}
+                </PageTitle>
             </FadeInSection>
 
             <GoldenLineDivider
                 delay={0.08}
                 duration={1}
-                className="mt-3 w-[min(50%,1000px)]"
+                className="mt-3 w-[80%]"
             />
 
             <FadeInSection
@@ -61,9 +61,9 @@ export default async function InsightsPage({params}) {
                 duration={1.8}
             >
 
-                <PageSubtitle
-                    subtitle={content?.subtitle}
-                />
+                <PageSubtitle>
+                    {content?.subtitle}
+                </PageSubtitle>
 
                 <Insights moments={moments} locale={locale}/>
             </FadeInSection>

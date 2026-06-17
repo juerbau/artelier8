@@ -23,7 +23,7 @@ export default function ImageTransform({content}) {
                 <div
                     className={clsx(
                         "absolute inset-0",
-                        "transition-opacity duration-900",
+                        "transition-opacity duration-2000",
                         revealed
                             ? "opacity-100"
                             : "opacity-0"
@@ -42,7 +42,7 @@ export default function ImageTransform({content}) {
                 <div
                     className={clsx(
                         "absolute inset-0",
-                        "transition-opacity duration-900",
+                        "transition-opacity duration-2000",
                         revealed
                             ? "opacity-0"
                             : "opacity-100"

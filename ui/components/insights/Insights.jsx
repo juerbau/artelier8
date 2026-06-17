@@ -15,8 +15,21 @@ export default function Insights({ moments = [], locale = "de" }) {
                         key={moment._id}
                         className="w-full max-w-4xl text-center"
                     >
-                        {moment.mainImage && (
-                            <div className="relative mb-6 w-full overflow-hidden aspect-video">
+
+
+                        <h3 className="mb-3 text-2xl leading-tight">
+                            {moment.title}
+                        </h3>
+
+                        <p className="mb-3 text-[11px] uppercase tracking-[0.16em]">
+                            {moment.location
+                                ? `${moment.location} · `
+                                : ""}
+                            {moment.date}
+                        </p>
+
+                        <div className="max-w-3xl mx-auto">{moment.mainImage && (
+                            <div className="mx-auto relative mb-6 overflow-hidden aspect-video">
                                 <Image
                                     src={buildImage({
                                         source: moment.mainImage,
@@ -30,22 +43,12 @@ export default function Insights({ moments = [], locale = "de" }) {
                             </div>
                         )}
 
-                        <p className="mb-3 text-[11px] uppercase tracking-[0.16em]">
-                            {moment.location
-                                ? `${moment.location} · `
-                                : ""}
-                            {moment.date}
-                        </p>
 
-                        <h3 className="mb-3 text-xl leading-tight md:text-2xl">
-                            {moment.title}
-                        </h3>
-
-                        {description && (
-                            <p className="mx-auto max-w-xl whitespace-pre-line text-sm leading-7 md:text-[15px]">
-                                {description}
-                            </p>
-                        )}
+                            {description && (
+                                <p className="text-left whitespace-pre-line text-lg leading-7">
+                                    {description}
+                                </p>
+                            )}</div>
                     </article>
                 );
             })}

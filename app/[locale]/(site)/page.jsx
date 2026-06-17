@@ -92,9 +92,8 @@ export default async function HomePage({params}) {
 
                         {/* Motto */}
                         <ContentWidth width="default">
-                            <Motto className="text-2xl">
-                                {content.motto}
-                            </Motto>
+                            <Motto content={content}/>
+                            
                         </ContentWidth>
                     </div>
 
