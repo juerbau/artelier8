@@ -47,13 +47,13 @@ export default async function AboutPage({params}) {
             <ContentWidth width="full">
 
                 <FadeInSection
-                as="section"
-                duration={2}
-            >
-                <PageTitle>
-                    {content?.title}
-                </PageTitle>
-            </FadeInSection>
+                    as="section"
+                    duration={2}
+                >
+                    <PageTitle>
+                        {content?.title}
+                    </PageTitle>
+                </FadeInSection>
 
                 <GoldenLineDivider
                     delay={0.08}

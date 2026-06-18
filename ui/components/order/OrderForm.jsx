@@ -9,6 +9,7 @@ import OrderField from "./OrderField";
 import OrderTextarea from "./OrderTextarea";
 import OrderSlider from "./OrderSlider";
 import OrderImageUpload from "./OrderImageUpload";
+import MainButton from "@/ui/components/MainButton";
 
 
 export default function OrderForm({ locale, token, formContent }) {
@@ -258,15 +259,15 @@ export default function OrderForm({ locale, token, formContent }) {
                 </p>
             )}
 
-            <button
+            <MainButton
                 type="submit"
                 disabled={isSubmitting}
-                className="rounded-full bg-black mt-10 px-6 py-3 text-sm text-white transition disabled:opacity-40"
+                className="mx-auto mt-10 transition disabled:opacity-40"
             >
                 {isSubmitting
                     ? content.submitting
                     : content.submit}
-            </button>
+            </MainButton>
 
         </form>
     );

@@ -1,5 +1,7 @@
 import {notFound} from "next/navigation";
 import {messageContent} from "@/lib/i18n/messageContent";
+import {getStringParam, getContentEntry} from "@/lib/validation/searchParams-helpers";
+
 import FadeInSection from "@/ui/components/FadeInSection";
 import Logo from "@/ui/components/Logo";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
@@ -12,45 +14,80 @@ import Text from "@/ui/components/util/Text";
 
 
 
-export default async function MessagePage({params, searchParams}) {
-
-    const {locale} = await params;
+export default async function MessagePage({ params, searchParams }) {
+    const { locale } = await params;
     const safeLocale = locale?.startsWith("de") ? "de" : "en";
 
-    const {type} = await searchParams;
+    const query = await searchParams;
 
-    let content = {};
+    const type = getStringParam(query, "type");
+    const messages = messageContent[safeLocale];
+
+    let content = null;
     let href = "/";
 
-    if (type === 'newsletter') {
-        const {action, status} = await searchParams;
-        content = {
-            title: messageContent[safeLocale][type].title,
-            message: messageContent[safeLocale][type][action][status],
-            button: messageContent[safeLocale][type].buttonText,
-        }
-    }
-    else if (type === 'order') {
-        content = {
-            title: messageContent[safeLocale][type].title,
-            message: messageContent[safeLocale][type].success,
-            button: messageContent[safeLocale][type].buttonText,
-        }
+    if (type === "newsletter") {
+        const action = getStringParam(query, "action");
+        const status = getStringParam(query, "status");
 
-    } else if (type === 'contact') {
-            const {option} = await searchParams;
+        const newsletterContent = getContentEntry(messages, "newsletter");
+        const actionContent = getContentEntry(newsletterContent, action);
+        const message = getContentEntry(actionContent, status);
+
+        if (
+            newsletterContent?.title &&
+            newsletterContent?.buttonText &&
+            typeof message === "string"
+        ) {
             content = {
-                title: messageContent[safeLocale][type].title,
-                message: messageContent[safeLocale][type][option],
-                button: messageContent[safeLocale][type].buttonText,
-            }
-            href = `/${safeLocale}/contact`
-
+                title: newsletterContent.title,
+                message,
+                button: newsletterContent.buttonText,
+            };
+        }
     }
 
-    if (!content.title || !content.message || !content.button) {
+    if (type === "order") {
+        const orderContent = getContentEntry(messages, "order");
+
+        if (
+            orderContent?.title &&
+            orderContent?.success &&
+            orderContent?.buttonText
+        ) {
+            content = {
+                title: orderContent.title,
+                message: orderContent.success,
+                button: orderContent.buttonText,
+            };
+        }
+    }
+
+    if (type === "contact") {
+        const option = getStringParam(query, "option");
+
+        const contactContent = getContentEntry(messages, "contact");
+        const message = getContentEntry(contactContent, option);
+
+        if (
+            contactContent?.title &&
+            contactContent?.buttonText &&
+            typeof message === "string"
+        ) {
+            content = {
+                title: contactContent.title,
+                message,
+                button: contactContent.buttonText,
+            };
+
+            href = `/${safeLocale}/contact`;
+        }
+    }
+
+    if (!content) {
         notFound();
     }
+
 
     return (
 
@@ -67,18 +104,19 @@ export default async function MessagePage({params, searchParams}) {
 
             </FadeInSection>
 
-            <FadeInSection delay={0.25}>
+            <FadeInSection delay={0.25} y={18}>
                 <PageTitle>
-                    {content.title}
+                    {content?.title}
                 </PageTitle>
             </FadeInSection>
 
             <ContentWidth
-                width="default"
+                width="wide"
             >
                 <GoldenLineDivider
                     delay={0.08}
                     duration={1}
+                    className="mt-3 mb-5"
                 />
             </ContentWidth>
 
@@ -92,9 +130,9 @@ export default async function MessagePage({params, searchParams}) {
                 >
                     <Text
                         variant="body"
-                        className="leading-relaxed py-5"
+                        className="leading-relaxed py-5 mb-5"
                     >
-                        {content.message}
+                        {content?.message}
                     </Text>
                 </ContentWidth>
             </FadeInSection>
@@ -104,7 +142,7 @@ export default async function MessagePage({params, searchParams}) {
                 <MainButton
                     href={href}
                 >
-                    {content.button}
+                    {content?.button}
                 </MainButton>
             </FadeInSection>
 
