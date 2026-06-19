@@ -9,17 +9,25 @@ import FormField from "@/ui/components/contact/FormField";
 import InfoBox from "@/ui/components/InfoBox";
 import MainButton from "@/ui/components/MainButton";
 
-export default function ContactForm({locale}) {
+export default function ContactForm({locale, initialType, initialArtworkTitle, sold, message}) {
     const router = useRouter();
 
     const [status, setStatus] = useState("idle");
     const [errors, setErrors] = useState({});
     const [formError, setFormError] = useState("");
     const [hasSubmitted, setHasSubmitted] = useState(false);
-    const [inquiryType, setInquiryType] = useState("general");
+    const [inquiryType, setInquiryType] = useState(initialType);
 
     const safeLocale = locale?.startsWith("de") ? "de" : "en";
     const content = contactForm[safeLocale];
+
+    const isSold = sold === "true";
+    const initialMessage = initialArtworkTitle
+        ? isSold
+            ? `${message.sold} „${initialArtworkTitle}“.`
+            : `${message.available} „${initialArtworkTitle}“.`
+        : "";
+
 
     function handleFieldChange(name, value) {
         if (!hasSubmitted) return;
@@ -193,6 +201,7 @@ export default function ContactForm({locale}) {
                 name="message"
                 textarea
                 autoComplete="off"
+                defaultValue={initialMessage}
                 error={errors.message}
                 onChange={(e) =>
                     handleFieldChange("message", e.target.value)

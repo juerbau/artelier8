@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 import clsx from "clsx"
 import ArtworkGallery from "@/ui/components/series/detail/artwork/ArtworkGallery";
+import ArtworkInquiryLink from "@/ui/components/series/detail/artwork/ArtworkInquiryLink";
 
 
 export default function ArtworkClient({
@@ -16,7 +17,8 @@ export default function ArtworkClient({
                                           prev,
                                           next,
                                           slug,
-                                          locale
+                                          locale,
+                                          content,
                                       }) {
 
     const router = useRouter();
@@ -61,6 +63,14 @@ export default function ArtworkClient({
         }},
         [prev, next, router, slug, locale])
 
+
+    const inquiryHref = artwork.sold
+        ? `/${locale}/contact?type=order&artwork=${encodeURIComponent(artwork.title)}&sold=true`
+        : `/${locale}/contact?type=artwork&artwork=${encodeURIComponent(artwork.title)}`;
+
+    const inquiryLabel = artwork.sold
+        ? content.sold
+        : content.available;
 
 
     return (
@@ -119,6 +129,17 @@ export default function ArtworkClient({
                         {description}
                     </div>
                 )}
+
+
+                {/*Interest*/}
+                <ArtworkInquiryLink
+                    href={inquiryHref}
+                >
+                    {inquiryLabel}
+                </ArtworkInquiryLink>
+
+
+
 
                 {/* NAVIGATION */}
                 <div className="flex gap-5 mt-8 font-roboto">

@@ -1,0 +1,32 @@
+import Link from "next/link";
+import { CircleArrowRight } from "lucide-react";
+import clsx from "clsx";
+
+export default function ArtworkInquiryLink({ href, children, className }) {
+
+    const baseClasses = "transition-colors duration-300";
+
+    return (
+        <Link
+            href={href}
+            className={clsx(
+                "group inline-flex items-center gap-2",
+                "mt-5",
+                "text-xl text-yellow-400/65",
+                "transition-colors duration-300",
+                "hover:text-white",
+                className
+            )}
+        >
+            <span className={clsx(baseClasses)}>
+                {children}
+            </span>
+
+            <CircleArrowRight
+                size={18}
+                strokeWidth={1.6}
+                className={baseClasses}
+            />
+        </Link>
+    );
+}

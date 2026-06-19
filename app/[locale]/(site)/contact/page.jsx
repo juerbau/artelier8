@@ -1,9 +1,11 @@
+import {pageContent} from "@/lib/i18n/pageContent";
+import {cleanQueryText, getStringParam} from "@/lib/validation/searchParams-helpers";
+
 import ContactForm from "@/ui/components/contact/ContactForm";
 import NewsletterSignup from "@/ui/components/contact/NewsletterSignup";
 import FadeInSection from "@/ui/components/FadeInSection";
 import {buildMetadata} from "@/lib/seo";
 import ContactAddress from "@/ui/components/contact/ContactAddress";
-import {pageContent} from "@/lib/i18n/pageContent";
 import PageTitle from "@/ui/components/PageTitle";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
 import PageSubtitle from "@/ui/components/PageSubtitle";
@@ -26,10 +28,24 @@ export async function generateMetadata({params}) {
     });
 }
 
-export default async function ContactPage({params}) {
-    const {locale} = await params;
+
+export default async function ContactPage({ params, searchParams }) {
+    const { locale } = await params;
+    const query = await searchParams;
+
     const safeLocale = locale?.startsWith("de") ? "de" : "en";
+
+    const allowedTypes = ["general", "artwork", "order"];
+
+    const initialType = allowedTypes.includes(query?.type)
+        ? query.type
+        : "general";
+
+    const initialArtworkTitle = cleanQueryText(query?.artwork, 120);
+    const sold = getStringParam(query, "sold");
+
     const content = pageContent[safeLocale].contact;
+    const messageContent = pageContent[safeLocale].artwork.message;
 
     return (
         <PageContent
@@ -61,7 +77,13 @@ export default async function ContactPage({params}) {
                     {content?.subtitle}
                 </PageSubtitle>
 
-                <ContactForm locale={locale}/>
+                <ContactForm
+                    locale={locale}
+                    initialType={initialType}
+                    initialArtworkTitle={initialArtworkTitle}
+                    sold={sold}
+                    message={messageContent}
+                />
                 <NewsletterSignup locale={locale}/>
                 <ContactAddress locale={locale}/>
             </FadeInSection>

@@ -11,15 +11,15 @@ export default function BeforeAfterSlider({ beforeImage, afterImage }) {
     const [position, setPosition] = useState(50);
 
     return (
-        <div className="relative w-full overflow-hidden rounded-xl aspect-video">
+        <div className="relative overflow-hidden rounded-xl aspect-[4/5] sm:aspect-[3/4] md:aspect-video">
 
             {/* Nachher */}
             <Image
                 src={afterImage}
                 alt=""
                 fill
-                sizes="100vw"
-                className="object-cover"
+                sizes="(min-width: 768px) 90vw, 100vw"
+                className="object-cover object-center"
             />
 
             {/* Vorher */}

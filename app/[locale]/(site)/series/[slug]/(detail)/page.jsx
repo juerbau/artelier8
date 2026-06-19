@@ -104,9 +104,9 @@ export default async function SeriesDetailPage({params}) {
                 as="section"
                 duration={2}
             >
-                <PageTitle
-                    title={title}
-                />
+                <PageTitle>
+                    {title}
+                </PageTitle>
             </FadeInSection>
 
             <GoldenLineDivider
@@ -121,13 +121,13 @@ export default async function SeriesDetailPage({params}) {
                 delay={0.25}
                 duration={1.8}
             >
-                <PageSubtitle
-                    subtitle={
+                <PageSubtitle>
+                    {
                         locale === "en" && series.intro_en
                             ? series.intro_en
                             : series.intro_de
                     }
-                />
+                </PageSubtitle>
 
                 <ArtworkGrid
                     artworks={series.artworks}

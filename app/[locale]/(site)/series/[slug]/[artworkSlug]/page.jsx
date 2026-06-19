@@ -1,9 +1,11 @@
-import {client} from "@/sanity/client"
-import {sanityFetch} from "@/sanity/fetch"
-import {artworkPageQuery, seriesBySlugQuery} from "@/sanity/queries/series"
-import ArtworkClient from "@/ui/components/series/detail/artwork/ArtworkClient"
+import {client} from "@/sanity/client";
+import {sanityFetch} from "@/sanity/fetch";
+import {artworkPageQuery, seriesBySlugQuery} from "@/sanity/queries/series";
+import {pageContent} from "@/lib/i18n/pageContent";
+
+import ArtworkClient from "@/ui/components/series/detail/artwork/ArtworkClient";
 import {notFound} from "next/navigation";
-import {buildMetadata} from "@/lib/seo"
+import {buildMetadata} from "@/lib/seo";
 import {buildImage} from "@/sanity/image";
 import PageContent from "@/ui/components/util/PageContent";
 
@@ -74,12 +76,12 @@ export async function generateStaticParams() {
         "slug": slug.current,
         "artworks": artworks[]->slug.current
       }
-    `)
+    `);
 
-    const locales = ["de", "en"]
+    const locales = ["de", "en"];
 
     return (data ?? []).flatMap((series) => {
-        const artworks = series.artworks ?? []
+        const artworks = series.artworks ?? [];
 
         return artworks.flatMap((artworkSlug) =>
             locales.map((locale) => ({
@@ -88,43 +90,48 @@ export async function generateStaticParams() {
                 artworkSlug
             }))
         )
-    })
+    });
 }
 
+
 export default async function ArtworkPage({params}) {
-    const {slug, artworkSlug, locale} = await params
+    
+    const {slug, artworkSlug, locale} = await params;
+    const safeLocale = locale?.startsWith("de") ? "de" : "en";
+
+    const content = pageContent[safeLocale].artwork.inquiryLink;
 
     const series = await sanityFetch({
         query: seriesBySlugQuery,
         params: {slug},
-    })
+    });
 
     if (!series) notFound();
 
-    const artworks = series.artworks || []
+    const artworks = series.artworks || [];
 
     const index = artworks.findIndex(
         (art) => art.slug === artworkSlug
-    )
+    );
 
     if (index === -1) notFound();
 
-    const artwork = artworks[index]
+    const artwork = artworks[index];
 
-    const prev = index > 0 ? artworks[index - 1] : null
-    const next = index < artworks.length - 1 ? artworks[index + 1] : null
+    const prev = index > 0 ? artworks[index - 1] : null;
+    const next = index < artworks.length - 1 ? artworks[index + 1] : null;
 
-    const title = artwork.title
+    const title = artwork.title;
 
     const description =
-        locale === "de"
+        safeLocale === "de"
             ? artwork.description_de
-            : artwork.description_en
+            : artwork.description_en;
 
     const technique =
-        locale === "de"
+        safeLocale === "de"
             ? artwork.technique_de
-            : artwork.technique_en
+            : artwork.technique_en;
 
     return (
         <PageContent
@@ -140,9 +147,10 @@ export default async function ArtworkPage({params}) {
                 prev={prev}
                 next={next}
                 slug={slug}
-                locale={locale}
+                locale={safeLocale}
+                content={content}
             />
 
         </PageContent>
-    )
+    );
 }

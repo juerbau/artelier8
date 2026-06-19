@@ -10,6 +10,7 @@ export default function FormField({
                                       textarea = false,
                                       onChange,
                                       autoComplete,
+                                      defaultValue = "",
                                       type = "text",
                                       ...props
                                   }) {
@@ -47,6 +48,7 @@ export default function FormField({
                         baseClasses,
                         "min-h-35 resize-none"
                     )}
+                    defaultValue={defaultValue}
                     onChange={onChange}
                     {...props}
                 />

@@ -90,7 +90,7 @@ export default async function ForYouPage({params}) {
                     </p>
 
                     <div className="flex justify-center pt-2">
-                        <MainButton href={`/${locale}/contact`}>
+                        <MainButton href={`/${locale}/contact?type=order`}>
                             {content.button}
                         </MainButton>
                     </div>
