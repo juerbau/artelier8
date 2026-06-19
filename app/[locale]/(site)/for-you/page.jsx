@@ -14,6 +14,7 @@ import stepTwoImage from "@/ui/images/Schritt 2_ergebnis.webp";
 import stepThreeImage from "@/ui/images/Schritt 3_ergebnis.webp";
 import stepFourImage from "@/ui/images/Schritt 4_ergebnis.webp";
 import MainButton from "@/ui/components/MainButton";
+import Eyebrow from "../../../../ui/components/Eyebrow";
 
 const processImages = {
     stepOne: stepOneImage,
@@ -44,6 +45,7 @@ export default async function ForYouPage({params}) {
             <FadeInSection
                 as="section"
                 duration={2}
+                y={0}
             >
                 <PageTitle>
                     {content.title}
@@ -56,15 +58,19 @@ export default async function ForYouPage({params}) {
                 className="mt-3 w-[min(100%,1000px)]"
             />
 
+            <Eyebrow>
+                Von der Idee zum Kunstwerk
+            </Eyebrow>
+
             <FadeInSection
                 as="section"
-                delay={0.25}
+                delay={0.5}
                 duration={1.8}
             >
                 <div className="mb-30 space-y-6">
-                    <p className="text-2xl mt-5 mb-10 uppercase tracking-[0.3em] text-[#D8B56A]">
-                        {content.eyebrow}
-                    </p>
+                    {/*<p className="text-2xl mt-5 mb-10 uppercase tracking-[0.3em] text-[#D8B56A]">*/}
+                    {/*    {content.eyebrow}*/}
+                    {/*</p>*/}
 
                     <p className="text-2xl text-white/80 leading-relaxed whitespace-pre-line">
                         {content.intro}

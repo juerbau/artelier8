@@ -4,7 +4,8 @@ export const beforeAfterJourneyQuery = `
         _id,
         title,
         beforeImage,
-        afterImage
+        afterImage,
+        displayFormat,
     }
 }
 `;

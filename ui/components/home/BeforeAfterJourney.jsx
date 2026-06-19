@@ -64,6 +64,7 @@ export default function BeforeAfterJourney({
                     <BeforeAfterSlider
                         beforeImage={urlFor(item.beforeImage).url()}
                         afterImage={urlFor(item.afterImage).url()}
+                        displayFormat={item.displayFormat}
                     />
                 </motion.div>
             </AnimatePresence>
