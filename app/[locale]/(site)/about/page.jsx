@@ -6,7 +6,6 @@ import ArtistStatement from "@/ui/components/about/ArtistStatement";
 import Studio from "@/ui/components/about/Studio";
 import Outro from "@/ui/components/about/Outro";
 import FadeInSection from "@/ui/components/FadeInSection";
-import PageSubtitle from "@/ui/components/PageSubtitle";
 import PageTitle from "@/ui/components/PageTitle";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
 import PageContent from "@/ui/components/util/PageContent";
@@ -14,7 +13,7 @@ import ContentWidth from "@/ui/components/util/ContentWidth";
 import ArtistPortrait from "@/ui/components/about/ArtistPortrait";
 import Eyebrow from "@/ui/components/Eyebrow";
 import PageIntro from "@/ui/components/PageIntro";
-import Signature from "@/ui/components/home/Signature";
+import Signature from "@/ui/components/about/Signature";
 
 export async function generateMetadata({params}) {
     const {locale} = await params;

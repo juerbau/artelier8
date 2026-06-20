@@ -18,9 +18,8 @@ import MainButton from "@/ui/components/MainButton";
 import PageContent from "@/ui/components/util/PageContent";
 import ContentWidth from "@/ui/components/util/ContentWidth";
 import FadeInSection from "@/ui/components/FadeInSection";
-import Logo from "@/ui/components/Logo";
-import Signature from "@/ui/components/home/Signature";
 import Motto from "@/ui/components/home/Motto";
+import HomeHeroAppearance from "@/ui/components/home/HomeHeroAppearance";
 
 
 export async function generateMetadata({params}) {
@@ -70,14 +69,11 @@ export default async function HomePage({params}) {
     return (
         <PageContent width="lg" className="text-center">
             <header>
-                <FadeInSection as="div" duration={2}>
-                    <Logo variant="hero"/>
-                </FadeInSection>
-
-                <GoldenLineDivider delay={0.08} duration={1} className="mt-5 w-[90%]"/>
+                <HomeHeroAppearance/>
+                <GoldenLineDivider delay={0.2} duration={1} className="mt-5 w-[90%]"/>
             </header>
 
-            <FadeInSection as="div" delay={0.25} duration={1.8} className="mt-10">
+            <FadeInSection as="div" delay={0.6} duration={1.8} className="mt-10">
                 <div className="space-y-24 md:space-y-32">
                     <div className="space-y-16">
                         <Slogan content={content.slogan}/>
@@ -88,7 +84,7 @@ export default async function HomePage({params}) {
                         {/* Motto */}
                         <ContentWidth width="default">
                             <Motto content={content}/>
-                            
+
                         </ContentWidth>
                     </div>
 
