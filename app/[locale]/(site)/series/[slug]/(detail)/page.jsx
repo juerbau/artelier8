@@ -10,6 +10,8 @@ import PageTitle from "@/ui/components/PageTitle";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
 import PageSubtitle from "@/ui/components/PageSubtitle";
 import PageContent from "@/ui/components/util/PageContent";
+import PageIntro from "@/ui/components/PageIntro";
+import ContentWidth from "../../../../../../ui/components/util/ContentWidth";
 
 
 /* SEO Metadata */
@@ -100,19 +102,16 @@ export default async function SeriesDetailPage({params}) {
             width="lg"
             className="text-center"
         >
-            <FadeInSection
-                as="section"
-                duration={2}
-            >
-                <PageTitle>
-                    {title}
-                </PageTitle>
-            </FadeInSection>
+
+            <PageTitle>
+                {title}
+            </PageTitle>
+
 
             <GoldenLineDivider
                 delay={0.08}
                 duration={1}
-                className="mt-3 w-[min(50%,1000px)]"
+                className="mt-3 mb-10 w-[80%]"
             />
 
             <FadeInSection
@@ -121,13 +120,15 @@ export default async function SeriesDetailPage({params}) {
                 delay={0.25}
                 duration={1.8}
             >
-                <PageSubtitle>
-                    {
-                        locale === "en" && series.intro_en
-                            ? series.intro_en
-                            : series.intro_de
-                    }
-                </PageSubtitle>
+                <ContentWidth width="default">
+                    <PageIntro className="mb-15">
+                        {
+                            locale === "en" && series.intro_en
+                                ? series.intro_en
+                                : series.intro_de
+                        }
+                    </PageIntro>
+                </ContentWidth>
 
                 <ArtworkGrid
                     artworks={series.artworks}

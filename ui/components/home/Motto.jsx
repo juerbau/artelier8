@@ -8,7 +8,7 @@ export default function Motto({ content, className }) {
                 // "rounded-2xl bg-gray-600",
                 // "text-[clamp(1rem,calc(1.1rem+2vw),1.75rem)]",
                 "leading-relaxed whitespace-pre-line",
-                "text-[#D8B56A] text-3xl",
+                "text-3xl text-[#D8B56A]",
                 className
             )}
         >

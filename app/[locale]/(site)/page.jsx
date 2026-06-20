@@ -21,6 +21,7 @@ import FadeInSection from "@/ui/components/FadeInSection";
 import Motto from "@/ui/components/home/Motto";
 import HomeHeroAppearance from "@/ui/components/home/HomeHeroAppearance";
 import Eyebrow from "../../../ui/components/Eyebrow";
+import PageTitle from "../../../ui/components/PageTitle";
 
 
 export async function generateMetadata({params}) {
@@ -72,7 +73,10 @@ export default async function HomePage({params}) {
             <header>
                 <HomeHeroAppearance/>
 
-                <Slogan content={content.slogan}/>
+                <PageTitle>
+                    {content.slogan}
+                </PageTitle>
+                {/*<Slogan content={content.slogan}/>*/}
 
                 <GoldenLineDivider delay={0.2} duration={1} className="mt-5 w-[90%]"/>
 
@@ -82,22 +86,23 @@ export default async function HomePage({params}) {
             </header>
 
             <FadeInSection as="div" delay={0.6} duration={1.8} className="mt-18">
-                <div className="space-y-24 md:space-y-32">
+                <div className="space-y-24">
                     <div className="space-y-16">
 
 
 
                         <HomeGallery artworks={artworks} locale={locale}/>
 
-                        {/* Motto */}
-                        <ContentWidth width="default">
-                            <Motto content={content}/>
 
-                        </ContentWidth>
+                        {/* Motto */}
+                        {/*<ContentWidth width="default">*/}
+                        {/*    <Motto content={content}/>*/}
+
+                        {/*</ContentWidth>*/}
                     </div>
 
-                    <div className="space-y-8">
-                        <p className="text-body text-white/80 leading-relaxed whitespace-pre-line">
+                    <div className="space-y-8 text-body">
+                        <p className="text-white/80 leading-relaxed whitespace-pre-line">
                             {content.welcome}
                         </p>
 
