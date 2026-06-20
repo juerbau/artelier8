@@ -15,6 +15,7 @@ import stepThreeImage from "@/ui/images/Schritt 3_ergebnis.webp";
 import stepFourImage from "@/ui/images/Schritt 4_ergebnis.webp";
 import MainButton from "@/ui/components/MainButton";
 import Eyebrow from "../../../../ui/components/Eyebrow";
+import PageIntro from "../../../../ui/components/PageIntro";
 
 const processImages = {
     stepOne: stepOneImage,
@@ -42,15 +43,9 @@ export default async function ForYouPage({params}) {
             width="lg"
             className="text-center"
         >
-            <FadeInSection
-                as="section"
-                duration={2}
-                y={0}
-            >
-                <PageTitle>
-                    {content.title}
-                </PageTitle>
-            </FadeInSection>
+            <PageTitle>
+                {content.title}
+            </PageTitle>
 
             <GoldenLineDivider
                 delay={0.08}
@@ -59,7 +54,7 @@ export default async function ForYouPage({params}) {
             />
 
             <Eyebrow>
-                Von der Idee zum Kunstwerk
+                {content.eyebrow}
             </Eyebrow>
 
             <FadeInSection
@@ -67,15 +62,9 @@ export default async function ForYouPage({params}) {
                 delay={0.5}
                 duration={1.8}
             >
-                <div className="mb-30 space-y-6">
-                    {/*<p className="text-2xl mt-5 mb-10 uppercase tracking-[0.3em] text-[#D8B56A]">*/}
-                    {/*    {content.eyebrow}*/}
-                    {/*</p>*/}
-
-                    <p className="text-2xl text-white/80 leading-relaxed whitespace-pre-line">
-                        {content.intro}
-                    </p>
-                </div>
+                <PageIntro className="mb-25">
+                    {content.intro}
+                </PageIntro>
 
                 <DesignProcess
                     steps={processSteps}

@@ -1,5 +1,5 @@
 import Insights from "@/ui/components/insights/Insights";
-import { pageContent} from "@/lib/i18n/pageContent";
+import {insightsContent} from "@/lib/i18n/insights/insightsContent";
 import { sanityFetch} from "@/sanity/fetch";
 import { momentsQuery} from "@/sanity/queries/moments";
 import { buildMetadata} from "@/lib/seo";
@@ -8,6 +8,8 @@ import PageTitle from "@/ui/components/PageTitle";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
 import PageSubtitle from "@/ui/components/PageSubtitle";
 import PageContent from "@/ui/components/util/PageContent";
+import Eyebrow from "@/ui/components/Eyebrow";
+import PageIntro from "@/ui/components/PageIntro";
 
 export async function generateMetadata({params}) {
     const {locale} = await params;
@@ -32,38 +34,37 @@ export default async function InsightsPage({params}) {
     });
 
     const safeLocale = locale?.startsWith("de") ? "de" : "en";
-    const content = pageContent[safeLocale].insights;
+    const content = insightsContent[safeLocale];
 
     return (
         <PageContent
             width="lg"
             className="text-center"
         >
-            <FadeInSection
-                as="section"
-                duration={2}
-            >
-                <PageTitle>
-                    {content?.title}
-                </PageTitle>
-            </FadeInSection>
+            <PageTitle>
+                {content.title}
+            </PageTitle>
 
             <GoldenLineDivider
                 delay={0.08}
                 duration={1}
-                className="mt-3 w-[80%]"
+                className="mt-3 w-[min(100%,1000px)]"
             />
+
+            <Eyebrow>
+                {content.eyebrow}
+            </Eyebrow>
 
             <FadeInSection
                 className="space-y-16"
                 as="section"
-                delay={0.25}
+                delay={0.5}
                 duration={1.8}
             >
 
-                <PageSubtitle>
-                    {content?.subtitle}
-                </PageSubtitle>
+                <PageIntro className="mb-25">
+                    {content.intro}
+                </PageIntro>
 
                 <Insights moments={moments} locale={locale}/>
             </FadeInSection>

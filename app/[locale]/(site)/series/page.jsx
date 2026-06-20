@@ -1,15 +1,18 @@
-import SeriesList from "@/ui/components/series/SeriesList";
-import {pageContent} from "@/lib/i18n/pageContent";
 import {sanityFetch} from "@/sanity/fetch";
 import {seriesListQuery} from "@/sanity/queries/series";
 import {openGraphQuery} from "@/sanity/queries/openGraph";
+import {seriesContent} from "@/lib/i18n/series/seriesContent";
+
 import {buildMetadata} from "@/lib/seo";
 import {buildImage} from "@/sanity/image";
+
+import SeriesList from "@/ui/components/series/SeriesList";
 import FadeInSection from "@/ui/components/FadeInSection";
 import PageTitle from "@/ui/components/PageTitle";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
-import PageSubtitle from "@/ui/components/PageSubtitle";
 import PageContent from "@/ui/components/util/PageContent";
+import Eyebrow from "@/ui/components/Eyebrow";
+import PageIntro from "@/ui/components/PageIntro";
 
 
 export async function generateMetadata({params}) {
@@ -47,28 +50,26 @@ export default async function SeriesPage({params}) {
     });
 
     const safeLocale = locale?.startsWith("de") ? "de" : "en";
-    const content = pageContent[safeLocale].series;
+    const content = seriesContent[safeLocale];
 
     return (
         <PageContent
             width="lg"
             className="text-center"
         >
-            <FadeInSection
-                as="section"
-                duration={2}
-            >
-                <PageTitle>
-                    {content?.title}
-                </PageTitle>
-
-            </FadeInSection>
+            <PageTitle>
+                {content.title}
+            </PageTitle>
 
             <GoldenLineDivider
                 delay={0.08}
                 duration={1}
-                className="mt-3 w-[min(50%,1000px)]"
+                className="mt-3 w-[90%]"
             />
+
+            <Eyebrow>
+                {content.eyebrow}
+            </Eyebrow>
 
             <FadeInSection
                 className="space-y-16"
@@ -76,9 +77,9 @@ export default async function SeriesPage({params}) {
                 delay={0.25}
                 duration={1.8}
             >
-                <PageSubtitle>
-                    {content?.subtitle}
-                </PageSubtitle>
+                <PageIntro className="mb-25">
+                    {content.intro}
+                </PageIntro>
 
                 <SeriesList series={series || []} locale={locale}/>
             </FadeInSection>

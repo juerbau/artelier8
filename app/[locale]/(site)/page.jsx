@@ -1,5 +1,3 @@
-import clsx from "clsx";
-
 import {sanityFetch} from "@/sanity/fetch";
 import {homeSliderQuery} from "@/sanity/queries/home";
 import {discoverJourneyQuery} from "@/sanity/queries/discoverJourney";
@@ -17,13 +15,11 @@ import Slogan from "@/ui/components/home/Slogan";
 import DiscoverJourney from "@/ui/components/home/DiscoverJourney";
 import BeforeAfterJourney from "@/ui/components/home/BeforeAfterJourney";
 import MainButton from "@/ui/components/MainButton";
-
 import PageContent from "@/ui/components/util/PageContent";
 import ContentWidth from "@/ui/components/util/ContentWidth";
 import FadeInSection from "@/ui/components/FadeInSection";
 import Logo from "@/ui/components/Logo";
 import Signature from "@/ui/components/home/Signature";
-import Text from "@/ui/components/util/Text";
 import Motto from "@/ui/components/home/Motto";
 
 
@@ -76,7 +72,6 @@ export default async function HomePage({params}) {
             <header>
                 <FadeInSection as="div" duration={2}>
                     <Logo variant="hero"/>
-                    <Signature/>
                 </FadeInSection>
 
                 <GoldenLineDivider delay={0.08} duration={1} className="mt-5 w-[90%]"/>

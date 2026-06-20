@@ -1,8 +1,4 @@
 import Image from "next/image";
-// import imageOne from "@/ui/images/discover-1_image-1-1.webp";
-// import imageTwo from "@/ui/images/discover-1_image-1-2.webp";
-// import imageThree from "@/ui/images/discover-1_image-2-1.webp";
-// import imageFour from "@/ui/images/discover-1_image-2-2.webp";
 import {buildImage} from "@/sanity/image";
 
 
@@ -27,6 +23,14 @@ export default function DiscoverGrid({gallery}) {
                             alt=""
                             fill
                             sizes="25vw"
+                            placeholder={
+                                gallery.imageTopLeft?.blurDataURL
+                                    ? "blur"
+                                    : "empty"
+                            }
+                            blurDataURL={
+                                gallery.imageTopLeft?.blurDataURL
+                            }
                             className="object-cover"
                         />
                     </div>
@@ -41,7 +45,15 @@ export default function DiscoverGrid({gallery}) {
                             })}
                             alt=""
                             fill
-                            sizes="75vw"
+                            sizes="25vw"
+                            placeholder={
+                                gallery.imageTopRight?.blurDataURL
+                                    ? "blur"
+                                    : "empty"
+                            }
+                            blurDataURL={
+                                gallery.imageTopRight?.blurDataURL
+                            }
                             className="object-cover"
                         />
                     </div>
@@ -56,11 +68,20 @@ export default function DiscoverGrid({gallery}) {
                     <div className="relative aspect-3/1 overflow-hidden">
                         <Image
                             src={buildImage({
-                                source: gallery.imageBottomLeft,                                width: 800,
+                                source: gallery.imageBottomLeft,
+                                width: 800,
                             })}
                             alt=""
                             fill
-                            sizes="75vw"
+                            sizes="25vw"
+                            placeholder={
+                                gallery.imageBottomLeft?.blurDataURL
+                                    ? "blur"
+                                    : "empty"
+                            }
+                            blurDataURL={
+                                gallery.imageBottomLeft?.blurDataURL
+                            }
                             className="object-cover"
                         />
                     </div>
@@ -70,11 +91,20 @@ export default function DiscoverGrid({gallery}) {
                     <div className="relative aspect-square overflow-hidden">
                         <Image
                             src={buildImage({
-                                source: gallery.imageBottomRight,                                width: 800,
+                                source: gallery.imageBottomRight,
+                                width: 800,
                             })}
                             alt=""
                             fill
                             sizes="25vw"
+                            placeholder={
+                                gallery.imageBottomRight?.blurDataURL
+                                    ? "blur"
+                                    : "empty"
+                            }
+                            blurDataURL={
+                                gallery.imageBottomRight?.blurDataURL
+                            }
                             className="object-cover"
                         />
                     </div>

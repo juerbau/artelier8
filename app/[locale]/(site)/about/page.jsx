@@ -1,8 +1,8 @@
 import {sanityFetch} from "@/sanity/fetch";
 import {aboutImagesQuery} from "@/sanity/queries/about";
 import {buildMetadata} from "@/lib/seo";
-import {pageContent} from "@/lib/i18n/pageContent";
-import Portrait from "@/ui/components/about/Portrait";
+import {aboutContent} from "@/lib/i18n/about/aboutContent";
+import ArtistStatement from "@/ui/components/about/ArtistStatement";
 import Studio from "@/ui/components/about/Studio";
 import Outro from "@/ui/components/about/Outro";
 import FadeInSection from "@/ui/components/FadeInSection";
@@ -12,6 +12,9 @@ import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
 import PageContent from "@/ui/components/util/PageContent";
 import ContentWidth from "@/ui/components/util/ContentWidth";
 import ArtistPortrait from "@/ui/components/about/ArtistPortrait";
+import Eyebrow from "@/ui/components/Eyebrow";
+import PageIntro from "@/ui/components/PageIntro";
+import Signature from "@/ui/components/home/Signature";
 
 export async function generateMetadata({params}) {
     const {locale} = await params;
@@ -37,45 +40,50 @@ export default async function AboutPage({params}) {
     });
 
     const safeLocale = locale?.startsWith("de") ? "de" : "en";
-    const content = pageContent[safeLocale].about;
+    const content = aboutContent[safeLocale];
 
     return (
         <PageContent
-            width="md"
+            width="lg"
             className="text-center"
         >
-            <ContentWidth width="full">
 
-                <FadeInSection
-                    as="section"
-                    duration={2}
-                >
-                    <PageTitle>
-                        {content?.title}
-                    </PageTitle>
-                </FadeInSection>
+            <PageTitle>
+                {content.title}
+            </PageTitle>
 
-                <GoldenLineDivider
-                    delay={0.08}
-                    duration={1}
-                    className="mt-3"
-                />
+            <GoldenLineDivider
+                delay={0.08}
+                duration={1}
+                className="mt-3 w-[min(100%,1000px)]"
+            />
 
-                <FadeInSection
-                    className="space-y-10"
-                    as="section"
-                    delay={0.25}
-                    duration={1.8}
-                >
-                    <PageSubtitle>
-                        {content?.subtitle}
-                    </PageSubtitle>
+            <Eyebrow>
+                {content.eyebrow}
+            </Eyebrow>
 
+            <FadeInSection
+                className="space-y-10"
+                as="section"
+                delay={0.25}
+                duration={1.8}
+            >
+                <ContentWidth width="default">
+                    <PageIntro className="mb-15">
+                        {content.intro}
+                    </PageIntro>
+                </ContentWidth>
+
+
+                <ContentWidth width="default">
+
+                    <Signature />
+                    <br/>
                     <ArtistPortrait image={data?.portraitImage}/>
-                    {/*<Portrait*/}
-                    {/*    */}
-                    {/*    text={content?.portrait}*/}
-                    {/*/>*/}
+
+                    <ArtistStatement
+                        text={content?.portrait}
+                    />
 
                     <Studio
                         image={data?.studioImage}
@@ -86,8 +94,9 @@ export default async function AboutPage({params}) {
                         locale={safeLocale}
                         text={content?.outro}
                     />
-                </FadeInSection>
-            </ContentWidth>
+                </ContentWidth>
+            </FadeInSection>
+
         </PageContent>
     );
 }
