@@ -1,7 +1,7 @@
 import Image from "next/image";
-import signature from "@/ui/images/Signatur-weiss.png";
+import signature from "@/ui/images/Signatur-gold.png";
 
-export default function Signature(){
+export default function GoldenSignature(){
 
     return (
             <Image

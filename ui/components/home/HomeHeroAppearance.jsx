@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import Logo from "../Logo";
+import Slogan from "./Slogan";
 
 const DEFAULT_EASE = [0.22, 1, 0.36, 1];
 

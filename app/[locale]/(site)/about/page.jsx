@@ -14,6 +14,7 @@ import ArtistPortrait from "@/ui/components/about/ArtistPortrait";
 import Eyebrow from "@/ui/components/Eyebrow";
 import PageIntro from "@/ui/components/PageIntro";
 import Signature from "@/ui/components/about/Signature";
+import GoldenSignature from "@/ui/components/about/GoldenSignature";
 
 export async function generateMetadata({params}) {
     const {locale} = await params;
@@ -76,7 +77,8 @@ export default async function AboutPage({params}) {
 
                 <ContentWidth width="default">
 
-                    <Signature />
+                    {/*<Signature />*/}
+                    <GoldenSignature/>
                     <br/>
                     <ArtistPortrait image={data?.portraitImage}/>
 

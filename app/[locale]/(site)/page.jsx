@@ -20,6 +20,7 @@ import ContentWidth from "@/ui/components/util/ContentWidth";
 import FadeInSection from "@/ui/components/FadeInSection";
 import Motto from "@/ui/components/home/Motto";
 import HomeHeroAppearance from "@/ui/components/home/HomeHeroAppearance";
+import Eyebrow from "../../../ui/components/Eyebrow";
 
 
 export async function generateMetadata({params}) {
@@ -70,13 +71,20 @@ export default async function HomePage({params}) {
         <PageContent width="lg" className="text-center">
             <header>
                 <HomeHeroAppearance/>
+
+                <Slogan content={content.slogan}/>
+
                 <GoldenLineDivider delay={0.2} duration={1} className="mt-5 w-[90%]"/>
+
+                <Eyebrow>
+                    {content?.eyebrow}
+                </Eyebrow>
             </header>
 
-            <FadeInSection as="div" delay={0.6} duration={1.8} className="mt-10">
+            <FadeInSection as="div" delay={0.6} duration={1.8} className="mt-18">
                 <div className="space-y-24 md:space-y-32">
                     <div className="space-y-16">
-                        <Slogan content={content.slogan}/>
+
 
 
                         <HomeGallery artworks={artworks} locale={locale}/>
