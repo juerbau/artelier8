@@ -51,9 +51,9 @@ export default async function InsightsPage({params}) {
                 className="mt-3 w-[min(100%,1000px)]"
             />
 
-            <Eyebrow>
-                {content.eyebrow}
-            </Eyebrow>
+            <Eyebrow
+                content={content.eyebrow}
+            />
 
             <FadeInSection
                 className="space-y-16"

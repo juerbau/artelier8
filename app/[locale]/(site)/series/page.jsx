@@ -67,9 +67,9 @@ export default async function SeriesPage({params}) {
                 className="mt-3 w-[90%]"
             />
 
-            <Eyebrow>
-                {content.eyebrow}
-            </Eyebrow>
+            <Eyebrow
+                content={content.eyebrow}
+            />
 
             <FadeInSection
                 className="space-y-16"

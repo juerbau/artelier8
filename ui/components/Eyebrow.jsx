@@ -6,9 +6,11 @@ import clsx from "clsx";
 const DEFAULT_EASE = [0.22, 1, 0.36, 1];
 
 export default function Eyebrow({
-                                    children,
+                                    content,
                                     className,
                                 }) {
+
+
     return (
         <motion.div
             viewport={{once: true}}
@@ -16,11 +18,18 @@ export default function Eyebrow({
             whileInView={{clipPath: "inset(0 0% 0 0%)"}}
             transition={{duration: 2, ease: [0.22, 1, 0.36, 1]}}
             className={clsx(
-                "mx-auto text-2xl mt-5 mb-10 uppercase tracking-[0.3em] text-[#D8B56A]",
+                "mx-auto text-body mt-5 mb-10 uppercase tracking-[0.3em] text-[#D8B56A]",
                 className
             )}
         >
-            {children}
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-y-2 sm:gap-y-0 sm:gap-x-2">
+                <span>{content[0]}</span>
+                <span className="hidden sm:inline-block">·</span>
+                <span>{content[1]}</span>
+                <span className="hidden sm:inline-block">·</span>
+                <span>{content[2]}</span>
+            </div>
+
         </motion.div>
     );
 }

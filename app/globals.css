@@ -7,10 +7,11 @@
     --font-sans: var(--font-roboto-serif);
     --font-roboto: var(--font-roboto);
 
+
     --text-display: clamp(2rem, calc(1.875rem + 0.5vw), 2.25rem);
     --text-section: clamp(1.5rem, calc(1.375rem + 0.65vw), 1.875rem);
 
-    --text-body: clamp(1.25rem, 1.125rem + 0.5vw, 1.5rem);
+    --text-body: clamp(1.00rem, calc(0.75rem + 1.00vw), 1.50rem);
 
     --text-meta: clamp(0.875rem, calc(0.8rem + 0.43vw), 1.125rem);
     --text-small: clamp(0.8125rem, calc(0.78rem + 0.15vw), 0.875rem);

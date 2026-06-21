@@ -1,15 +1,17 @@
 import Image from "next/image";
 import signature from "@/ui/images/Signatur-gold.png";
+import {cn} from "@/lib/utils/cn";
 
-export default function GoldenSignature(){
+export default function GoldenSignature({className}) {
 
     return (
+        <div className={cn("h-auto", className)}>
             <Image
                 src={signature}
                 alt="Signature Bettina Hagedorn"
-                sizes="(max-width: 768px) 320px, 560px"
+                sizes="(max-width: 768px) 400px, 560px"
                 priority
-                className="mx-auto mt-3 w-[clamp(320px,38vw,400px)] h-auto"
             />
+        </div>
     );
 }

@@ -53,9 +53,9 @@ export default async function ForYouPage({params}) {
                 className="mt-3 w-[min(100%,1000px)]"
             />
 
-            <Eyebrow>
-                {content.eyebrow}
-            </Eyebrow>
+            <Eyebrow
+                content={content.eyebrow}
+            />
 
             <FadeInSection
                 as="section"

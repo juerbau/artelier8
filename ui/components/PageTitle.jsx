@@ -17,7 +17,7 @@ export default function PageTitle({
         transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
 
             className={clsx(
-                "text-[clamp(2rem,calc(1.5rem+2vw),3rem)]",
+                "text-[clamp(1.5rem,0.75rem+3.00vw,3.00rem)]",
                 className
             )}
         >

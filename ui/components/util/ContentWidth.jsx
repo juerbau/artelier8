@@ -7,7 +7,7 @@ export default function ContentWidth({
                                      }) {
     const widthClasses = {
         narrow: "w-11/12 sm:w-4/5 lg:w-3/5",
-        default: "w-11/12 sm:w-5/6 lg:w-4/5",
+        default: "w-4/5",
         wide: "w-full sm:w-11/12",
         full: "w-full",
     };

@@ -1,6 +1,6 @@
-import clsx from "clsx";
+import {cn} from "@/lib/utils/cn"
 
-export default function Text({
+export default function TextContent({
                                  children,
                                  variant = "body",
                                  leading = "relaxed",
@@ -28,7 +28,7 @@ export default function Text({
 
     return (
         <Component
-            className={clsx(
+            className={cn(
                 typographyVariants[variant] ?? typographyVariants.body,
                 leadingVariants[leading] ?? leadingVariants.relaxed,
                 className

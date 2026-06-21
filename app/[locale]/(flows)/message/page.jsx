@@ -9,7 +9,7 @@ import PageContent from "@/ui/components/util/PageContent";
 import PageTitle from "@/ui/components/PageTitle";
 import MainButton from "@/ui/components/MainButton";
 import ContentWidth from "@/ui/components/util/ContentWidth";
-import Text from "@/ui/components/util/Text";
+import TextContent from "../../../../ui/components/util/TextContent";
 
 
 
@@ -128,12 +128,12 @@ export default async function MessagePage({ params, searchParams }) {
                 <ContentWidth
                     width="default"
                 >
-                    <Text
+                    <TextContent
                         variant="body"
                         className="leading-relaxed py-5 mb-5"
                     >
                         {content?.message}
-                    </Text>
+                    </TextContent>
                 </ContentWidth>
             </FadeInSection>
 

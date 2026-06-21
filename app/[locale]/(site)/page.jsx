@@ -71,6 +71,7 @@ export default async function HomePage({params}) {
     return (
         <PageContent width="lg" className="text-center">
             <header>
+                
                 <HomeHeroAppearance/>
 
                 <PageTitle>
@@ -80,9 +81,10 @@ export default async function HomePage({params}) {
 
                 <GoldenLineDivider delay={0.2} duration={1} className="mt-5 w-[90%]"/>
 
-                <Eyebrow>
-                    {content?.eyebrow}
-                </Eyebrow>
+                <Eyebrow
+                    content={content.eyebrow}
+                />
+
             </header>
 
             <FadeInSection as="div" delay={0.6} duration={1.8} className="mt-18">
