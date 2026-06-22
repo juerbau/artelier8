@@ -7,7 +7,7 @@ import {buildImage} from "@/sanity/image";
 import {openGraphQuery} from "@/sanity/queries/openGraph";
 import {buildMetadata} from "@/lib/seo"
 
-import {homePageContent} from "@/lib/i18n/home/homePageContent"
+import {homeContent} from "@/lib/i18n/home/homeContent"
 
 import HomeGallery from "@/ui/components/home/HomeGallery"
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
@@ -20,35 +20,20 @@ import ContentWidth from "@/ui/components/util/ContentWidth";
 import FadeInSection from "@/ui/components/FadeInSection";
 import Motto from "@/ui/components/home/Motto";
 import HomeHeroAppearance from "@/ui/components/home/HomeHeroAppearance";
-import Eyebrow from "../../../ui/components/Eyebrow";
-import PageTitle from "../../../ui/components/PageTitle";
+import Eyebrow from "@/ui/components/Eyebrow";
+import PageTitle from "@/ui/components/PageTitle";
+import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
 
 
 export async function generateMetadata({params}) {
-    const {locale} = await params;
 
-    const openGraph = await sanityFetch({
-        query: openGraphQuery
-    });
-
-    const ogImage = buildImage({
-        source: openGraph?.ogHome,
-        width: 1200,
-        height: 630,
-        fit: "crop",
-    });
-
+    const locale = await getSafeLocale(params);
+    const content = homeContent[locale];
 
     return buildMetadata({
-        title: {
-            absolute: locale === "de"
-                ? "ARTelier8 — Werke mit Präsenz und Charakter"
-                : "ARTelier8 — Works with Presence and Character",
-        },
-        description: locale === "de"
-            ? "Zeitgenössische Kunst von Bettina Hagedorn: Werke mit Präsenz und Charakter, geprägt von Struktur, Freiheit, Tiefe und Spannung."
-            : "Contemporary art by Bettina Hagedorn: works with presence and character, shaped by structure, freedom, depth, and tension.",
-        image: ogImage || "/og/fallback.jpg",
+        title: content.metadata.title,
+        description: content.metadata.description,
+        image: "/og/ogImage.jpg",
         locale,
         path: "/",
     })
@@ -57,9 +42,8 @@ export async function generateMetadata({params}) {
 
 export default async function HomePage({params}) {
 
-    const {locale} = await params;
-    const safeLocale = locale?.startsWith("de") ? "de" : "en";
-    const content = homePageContent[safeLocale];
+    const locale = await getSafeLocale(params);
+    const content = homeContent[locale];
 
     const [artworks, discoverJourney, beforeAfterJourney] = await Promise.all([
         sanityFetch({query: homeSliderQuery}),
@@ -71,13 +55,12 @@ export default async function HomePage({params}) {
     return (
         <PageContent width="lg" className="text-center">
             <header>
-                
+
                 <HomeHeroAppearance/>
 
                 <PageTitle>
                     {content.slogan}
                 </PageTitle>
-                {/*<Slogan content={content.slogan}/>*/}
 
                 <GoldenLineDivider delay={0.2} duration={1} className="mt-5 w-[90%]"/>
 
@@ -91,19 +74,12 @@ export default async function HomePage({params}) {
                 <div className="space-y-24">
                     <div className="space-y-16">
 
-
-
                         <HomeGallery artworks={artworks} locale={locale}/>
 
-
-                        {/* Motto */}
-                        {/*<ContentWidth width="default">*/}
-                        {/*    <Motto content={content}/>*/}
-
-                        {/*</ContentWidth>*/}
                     </div>
 
                     <div className="space-y-8 text-body">
+
                         <p className="text-white/80 leading-relaxed whitespace-pre-line">
                             {content.welcome}
                         </p>
@@ -111,9 +87,11 @@ export default async function HomePage({params}) {
                         <p className="text-body text-white/80 leading-relaxed whitespace-pre-line">
                             {content.introduction}
                         </p>
+
                     </div>
 
                     <section className="space-y-10 md:space-y-12">
+
                         <h2 className="text-body font-normal text-white/80 leading-relaxed whitespace-pre-line">
                             {content.discover.title}
                         </h2>
@@ -126,9 +104,11 @@ export default async function HomePage({params}) {
                                 {content.discover.button}
                             </MainButton>
                         </div>
+
                     </section>
 
                     <section className="space-y-10 md:space-y-12">
+
                         <h2 className="text-body font-normal text-white/80 leading-relaxed whitespace-pre-line">
                             {content.create.title}
                         </h2>
@@ -140,6 +120,7 @@ export default async function HomePage({params}) {
                                 {content.create.button}
                             </MainButton>
                         </div>
+
                     </section>
                 </div>
             </FadeInSection>

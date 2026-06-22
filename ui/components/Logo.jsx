@@ -17,7 +17,7 @@ export default function Logo({variant}) {
         },
 
         hero: {
-            width: "mx-auto w-[clamp(240px,35vw,450px)]",
+            width: "mx-auto w-[clamp(15.00rem,8.44rem+26.25vw,28.13rem)]",
             sizes: "(max-width: 768px) 300px, 500px",
         },
     };

@@ -1,9 +1,9 @@
 import Image from "next/image";
 import {cn} from "@/lib/utils/cn";
-import {buildImage} from "@/sanity/image";
 
 export default function AboutImage({
-                                       image,
+                                       src,
+                                       alt,
                                        width,
                                        height,
                                        sizes,
@@ -16,8 +16,8 @@ export default function AboutImage({
         )}
         >
             <Image
-                src={buildImage({source: image, width: width})}
-                alt="Portrait"
+                src={src}
+                alt={alt}
                 width={width}
                 height={height}
                 sizes={sizes}

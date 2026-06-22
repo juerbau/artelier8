@@ -7,16 +7,15 @@ import LegalLink from "@/ui/components/footer/LegalLink";
 export default function Footer({locale}) {
     return (
         <footer className="font-roboto bg-gray-700">
-            <div className="mx-auto max-w-6xl px-12 md:px-15 py-5">
+            <div className="max-w-6xl mx-auto pr-12 md:pr-15 pl-5 sm:pl-10 py-5">
 
                 <div className="flex items-center justify-between">
 
                     {/* Left */}
                     <Link href={'/'}>
-
-    <span className="text-white text-[18px] opacity-80 flex items-center gap-1">
-      &copy; ARTelier8
-    </span>
+                        <span className="text-white text-meta opacity-80 flex items-center gap-1">
+                            &copy; ARTelier8
+                        </span>
 
 
                     </Link>
@@ -27,14 +26,10 @@ export default function Footer({locale}) {
                             "flex items-center",
 
                             // spacing
-                            "gap-6",
-                            "max-[600px]:gap-4",
-                            "max-[420px]:gap-3",
+                            "gap-[clamp(0.75rem,0.38rem+1.50vw,1.50rem)]",
 
                             // typography
-                            "text-[18px]",
-                            "max-[600px]:text-[16px]",
-                            "max-[420px]:text-[13px]"
+                            "text-meta",
                         )}
                     >
                         <InstagramLink/>
