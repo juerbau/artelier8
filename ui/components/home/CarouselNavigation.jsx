@@ -1,11 +1,12 @@
 "use client";
 
-import clsx from "clsx";
+import {cn} from "@/lib/utils/cn";
 import {
     ChevronLeft,
     ChevronRight,
 } from "lucide-react";
 import {motion} from "motion/react";
+
 
 export default function CarouselNavigation({
                                                currentIndex,
@@ -16,7 +17,7 @@ export default function CarouselNavigation({
                                            }) {
     return (
         <div
-            className={clsx(
+            className={cn(
                 "flex items-center justify-center gap-6"
             )}
         >
@@ -24,7 +25,7 @@ export default function CarouselNavigation({
             <button
                 type="button"
                 onClick={onPrevious}
-                className={clsx(
+                className={cn(
                     "text-gold",
                     "transition-opacity",
                     "hover:opacity-70"
@@ -35,7 +36,7 @@ export default function CarouselNavigation({
 
             {/* Dots */}
             <div
-                className={clsx(
+                className={cn(
                     "flex items-center gap-3"
                 )}
             >
@@ -59,7 +60,7 @@ export default function CarouselNavigation({
                             duration: 1.1,
                             ease: "easeInOut",
                         }}
-                        className={clsx(
+                        className={cn(
                             "rounded-full",
                             index === currentIndex
                                 ? "w-4 h-4 bg-[#D8B56A]"
@@ -73,7 +74,7 @@ export default function CarouselNavigation({
             <button
                 type="button"
                 onClick={onNext}
-                className={clsx(
+                className={cn(
                     "text-gold",
                     "transition-opacity",
                     "hover:opacity-70"

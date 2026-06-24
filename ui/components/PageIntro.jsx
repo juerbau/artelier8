@@ -1,9 +1,11 @@
-import clsx from "clsx";
+import {cn} from "@/lib/utils/cn";
 
 export default function PageIntro({children, className}){
+
     return (
-        <p className={clsx(
-            "text-body text-white/80",
+        <p className={cn(
+            "text-body",
+            "text-white/80",
             "leading-relaxed whitespace-pre-line",
             className
         )}>

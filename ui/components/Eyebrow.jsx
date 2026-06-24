@@ -1,9 +1,8 @@
 "use client";
 
 import {motion} from "motion/react";
-import clsx from "clsx";
+import {cn} from "@/lib/utils/cn";
 
-const DEFAULT_EASE = [0.22, 1, 0.36, 1];
 
 export default function Eyebrow({
                                     content,
@@ -17,7 +16,7 @@ export default function Eyebrow({
             initial={{clipPath: "inset(0 50% 0 50%)"}}
             whileInView={{clipPath: "inset(0 0% 0 0%)"}}
             transition={{duration: 2, ease: [0.22, 1, 0.36, 1]}}
-            className={clsx(
+            className={cn(
                 "mx-auto text-body mt-5 mb-10 uppercase tracking-[0.3em] text-[#D8B56A]",
                 className
             )}

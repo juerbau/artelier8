@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import {cn} from "@/lib/utils/cn";
 
 export default function PageMain({
                                      children,
@@ -6,7 +6,7 @@ export default function PageMain({
                                  }) {
     return (
         <main
-            className={clsx(
+            className={cn(
                 "relative", // Positioning context for absolute overlay elements (e.g. BackButton)
                 "px-[clamp(1rem,0rem+4vw,3rem)]",
                 "pt-20",

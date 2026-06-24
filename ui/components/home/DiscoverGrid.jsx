@@ -2,7 +2,6 @@ import Image from "next/image";
 import {buildImage} from "@/sanity/image";
 
 
-
 export default function DiscoverGrid({gallery}) {
 
     if (!gallery) return null;

@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+:root {
+    --background: #505c6c;
+    --foreground: #ffffff;
+}
+
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
@@ -14,7 +19,7 @@
     --text-body: clamp(1.00rem, calc(0.75rem + 1.00vw), 1.50rem);
 
     --text-meta: clamp(0.875rem, calc(0.8rem + 0.43vw), 1.125rem);
-    
+
     --text-small: clamp(0.8125rem, calc(0.78rem + 0.15vw), 0.875rem);
 
     /* display:  ca. 32px → 36px */
@@ -22,11 +27,6 @@
     /* body:     ca. 18px → 24px */
     /* meta:     ca. 14px → 18px */
     /* small:    ca. 13px → 14px */
-}
-
-:root {
-    --background: #505c6c;
-    --foreground: #ffffff;
 }
 
 body {

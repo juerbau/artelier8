@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import {cn} from "@/lib/utils/cn";
 
 export default function ContentWidth({
                                          children,
@@ -19,7 +19,7 @@ export default function ContentWidth({
 
     return (
         <div
-            className={clsx(
+            className={cn(
                 "mx-auto",
                 widthClasses[width] ?? widthClasses.default,
                 className

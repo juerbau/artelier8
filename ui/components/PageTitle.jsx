@@ -1,7 +1,7 @@
 "use client";
 
-import clsx from "clsx";
 import {motion} from "motion/react";
+import {cn} from "@/lib/utils/cn";
 
 export default function PageTitle({
                                       children,
@@ -16,7 +16,7 @@ export default function PageTitle({
         whileInView={{ clipPath: "inset(0 0% 0 0%)" }}
         transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
 
-            className={clsx(
+            className={cn(
                 "text-[clamp(1.5rem,0.75rem+3.00vw,3.00rem)]",
                 className
             )}

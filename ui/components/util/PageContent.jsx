@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import {cn} from "@/lib/utils/cn";
 
 export default function PageContent({
                                         children,
@@ -7,7 +7,7 @@ export default function PageContent({
                                     }) {
     return (
         <div
-            className={clsx(
+            className={cn(
                 "w-full",
                 "mx-auto",
 

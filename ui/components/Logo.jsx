@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import clsx from "clsx";
 import logo from "@/ui/images/Logo_schwarz-weiss_opt.png";
+import {cn} from "@/lib/utils/cn";
 
 export default function Logo({variant}) {
 
@@ -25,7 +25,7 @@ export default function Logo({variant}) {
     return (
         <Link href="/" className="block">
             <div
-                className={clsx(
+                className={cn(
                     "relative aspect-50/38",
                     logoConfig[variant].width
                 )}
@@ -36,7 +36,7 @@ export default function Logo({variant}) {
                     fill
                     priority={variant === "hero" || variant === "message"}
                     sizes={logoConfig[variant].sizes}
-                    className={clsx(
+                    className={cn(
                         "object-contain",
                         "opacity-90 hover:opacity-100",
                         "transition-opacity duration-300",

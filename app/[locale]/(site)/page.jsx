@@ -2,27 +2,21 @@ import {sanityFetch} from "@/sanity/fetch";
 import {homeSliderQuery} from "@/sanity/queries/home";
 import {discoverJourneyQuery} from "@/sanity/queries/discoverJourney";
 import {beforeAfterJourneyQuery} from "@/sanity/queries/beforeAfterJourney";
-import {buildImage} from "@/sanity/image";
 
-import {openGraphQuery} from "@/sanity/queries/openGraph";
 import {buildMetadata} from "@/lib/seo"
-
+import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
 import {homeContent} from "@/lib/i18n/home/homeContent"
 
 import HomeGallery from "@/ui/components/home/HomeGallery"
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
-import Slogan from "@/ui/components/home/Slogan";
 import DiscoverJourney from "@/ui/components/home/DiscoverJourney";
 import BeforeAfterJourney from "@/ui/components/home/BeforeAfterJourney";
 import MainButton from "@/ui/components/MainButton";
 import PageContent from "@/ui/components/util/PageContent";
-import ContentWidth from "@/ui/components/util/ContentWidth";
 import FadeInSection from "@/ui/components/FadeInSection";
-import Motto from "@/ui/components/home/Motto";
 import HomeHeroAppearance from "@/ui/components/home/HomeHeroAppearance";
 import Eyebrow from "@/ui/components/Eyebrow";
 import PageTitle from "@/ui/components/PageTitle";
-import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
 
 
 export async function generateMetadata({params}) {
@@ -58,11 +52,17 @@ export default async function HomePage({params}) {
 
                 <HomeHeroAppearance/>
 
-                <PageTitle>
+                <PageTitle
+                    className="px-10 sm:px-0"
+                >
                     {content.slogan}
                 </PageTitle>
 
-                <GoldenLineDivider delay={0.2} duration={1} className="mt-5 w-[90%]"/>
+                <GoldenLineDivider
+                    delay={0.2}
+                    duration={1}
+                    className="mt-5 w-[clamp(18.75rem,6.25rem+50.00vw,43.75rem)] sm:w-full"
+                />
 
                 <Eyebrow
                     content={content.eyebrow}
@@ -72,19 +72,16 @@ export default async function HomePage({params}) {
 
             <FadeInSection as="div" delay={0.6} duration={1.8} className="mt-18">
                 <div className="space-y-24">
-                    <div className="space-y-16">
 
-                        <HomeGallery artworks={artworks} locale={locale}/>
-
-                    </div>
+                    <HomeGallery artworks={artworks} locale={locale}/>
 
                     <div className="space-y-8 text-body">
 
-                        <p className="text-body text-white/80 leading-relaxed whitespace-pre-line">
+                        <p className="text-white/80 leading-relaxed whitespace-pre-line">
                             {content.welcome}
                         </p>
 
-                        <p className="text-body text-white/80 leading-relaxed whitespace-pre-line">
+                        <p className="text-white/80 leading-relaxed whitespace-pre-line">
                             {content.introduction}
                         </p>
 
@@ -92,7 +89,7 @@ export default async function HomePage({params}) {
 
                     <section className="space-y-10 md:space-y-12">
 
-                        <h2 className="text-body font-normal text-white/80 leading-relaxed whitespace-pre-line">
+                        <h2 className="text-body text-white/80 leading-relaxed whitespace-pre-line">
                             {content.discover.title}
                         </h2>
 
@@ -109,7 +106,7 @@ export default async function HomePage({params}) {
 
                     <section className="space-y-10 md:space-y-12">
 
-                        <h2 className="text-body font-normal text-white/80 leading-relaxed whitespace-pre-line">
+                        <h2 className="text-body text-white/80 leading-relaxed whitespace-pre-line">
                             {content.create.title}
                         </h2>
 

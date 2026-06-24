@@ -2,9 +2,8 @@
 
 import { useRouter } from "next/navigation"
 import { ArrowBigLeft } from "lucide-react";
+import {cn} from "@/lib/utils/cn";
 
-
-import clsx from "clsx";
 
 export default function BackButton({
                                        href,
@@ -34,7 +33,7 @@ export default function BackButton({
     return (
         <button
             onClick={handleBack}
-            className={clsx(
+            className={cn(
                 "flex items-center gap-2",
                 "cursor-pointer",
                 "border border-white/30 px-3 py-2 rounded-md ",

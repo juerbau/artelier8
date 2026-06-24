@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import {cn} from "@/lib/utils/cn";
 
 const ui = {
     sold: {
@@ -12,7 +12,7 @@ export default function SoldLabel({ locale = "en", className = "" }) {
 
     return (
         <div
-            className={clsx(
+            className={cn(
                 "uppercase tracking-[0.2em]",
                 "text-black text-xs",
                 "font-roboto",

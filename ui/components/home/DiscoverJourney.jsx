@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import {useState} from "react";
+import {AnimatePresence, motion} from "motion/react";
 
 import DiscoverGrid from "./DiscoverGrid";
 import CarouselNavigation from "./CarouselNavigation";
 
-export default function DiscoverJourney({ galleries = [] }) {
+export default function DiscoverJourney({galleries = []}) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     if (!galleries.length) return null;
@@ -54,7 +54,7 @@ export default function DiscoverJourney({ galleries = [] }) {
                         ease: "easeInOut",
                     }}
                 >
-                    <DiscoverGrid gallery={gallery} />
+                    <DiscoverGrid gallery={gallery}/>
                 </motion.div>
             </AnimatePresence>
 

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import clsx from "clsx";
 import {cn} from "@/lib/utils/cn";
 
 export default function MainButton({
@@ -11,7 +10,7 @@ export default function MainButton({
                                        ...props
                                    }) {
 
-    const buttonClasses = clsx(
+    const buttonClasses = cn(
         "inline-flex items-center justify-center",
         "w-auto",
         "px-5 py-2",

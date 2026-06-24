@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import clsx from "clsx";
+import {cn} from "@/lib/utils/cn";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const allowedDisplayFormats = ["landscape", "square", "portrait"];
@@ -54,7 +54,7 @@ function BeforeAfterSliderInner({
 
                 {/* Innerer Slider-Rahmen: Breite hängt vom Format ab */}
                 <div
-                    className={clsx(
+                    className={cn(
                         "relative mx-auto",
                         frameClasses[safeDisplayFormat]
                     )}
@@ -66,7 +66,7 @@ function BeforeAfterSliderInner({
                         {/* Lade-Overlay */}
                         {!imagesReady && (
                             <div
-                                className={clsx(
+                                className={cn(
                                     "absolute inset-0 z-20",
                                     "bg-white/10",
                                     "backdrop-blur-md",
@@ -82,7 +82,7 @@ function BeforeAfterSliderInner({
                             fill
                             sizes={imageSizes[safeDisplayFormat]}
                             onLoad={() => setAfterLoaded(true)}
-                            className={clsx(
+                            className={cn(
                                 "object-cover object-center",
                                 "transition-opacity duration-700",
                                 imagesReady ? "opacity-100" : "opacity-0"
@@ -102,7 +102,7 @@ function BeforeAfterSliderInner({
                                 fill
                                 sizes={imageSizes[safeDisplayFormat]}
                                 onLoad={() => setBeforeLoaded(true)}
-                                className={clsx(
+                                className={cn(
                                     "object-cover object-center",
                                     "transition-opacity duration-700",
                                     imagesReady ? "opacity-100" : "opacity-0"
@@ -127,7 +127,7 @@ function BeforeAfterSliderInner({
                         <div className="pointer-events-none absolute left-0 right-0 top-full z-20">
                             <div className="relative">
                                 <div
-                                    className={clsx(
+                                    className={cn(
                                         "absolute top-0",
                                         "flex -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-0.5",
                                         "rounded-full",
@@ -161,7 +161,7 @@ function BeforeAfterSliderInner({
                             onChange={(e) =>
                                 setPosition(Number(e.target.value))
                             }
-                            className={clsx(
+                            className={cn(
                                 "absolute inset-x-0 top-0",
                                 "-bottom-4 sm:-bottom-5 md:-bottom-6 lg:-bottom-7",
                                 "z-30",

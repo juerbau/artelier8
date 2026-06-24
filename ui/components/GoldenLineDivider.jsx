@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import clsx from "clsx";
+import {cn} from "@/lib/utils/cn";
 
 const DEFAULT_EASE = [0.22, 1, 0.36, 1];
 
@@ -22,7 +22,7 @@ export default function GoldenLineDivider({
                 delay,
                 ease: DEFAULT_EASE,
             }}
-            className={clsx(
+            className={cn(
                 "mx-auto h-px origin-center bg-[#D8B56A]",
                 className
             )}
