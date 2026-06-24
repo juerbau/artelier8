@@ -5,6 +5,7 @@ import {buildImage} from "@/sanity/image";
 import {buildMetadata} from "@/lib/seo";
 import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
 import {aboutContent} from "@/lib/i18n/about/aboutContent";
+import {cn} from "@/lib/utils/cn";
 
 import FadeInSection from "@/ui/components/FadeInSection";
 import PageTitle from "@/ui/components/PageTitle";
@@ -47,14 +48,20 @@ export default async function AboutPage({params}) {
             className="text-center"
         >
 
-            <PageTitle>
+            <PageTitle
+                className="whitespace-pre-line sm:whitespace-normal"
+            >
                 {content.title}
             </PageTitle>
 
             <GoldenLineDivider
                 delay={0.08}
                 duration={1}
-                className="mt-3 w-[clamp(19.88rem,14.19rem+22.75vw,31.25rem)] sm:w-full"
+                className={cn(
+                    "mt-3",
+                    "w-[clamp(15.63rem,12.19rem+13.75vw,22.50rem)]",
+                    "sm:w-[clamp(30.00rem,20.00rem+40.00vw,50.00rem)]"
+                )}
             />
 
             <Eyebrow
