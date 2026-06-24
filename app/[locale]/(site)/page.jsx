@@ -80,7 +80,7 @@ export default async function HomePage({params}) {
 
                     <div className="space-y-8 text-body">
 
-                        <p className="text-white/80 leading-relaxed whitespace-pre-line">
+                        <p className="text-body text-white/80 leading-relaxed whitespace-pre-line">
                             {content.welcome}
                         </p>
 

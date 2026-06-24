@@ -1,5 +1,6 @@
 import Link from "next/link";
 import clsx from "clsx";
+import {cn} from "@/lib/utils/cn";
 
 export default function MainButton({
                                        children,
@@ -15,7 +16,8 @@ export default function MainButton({
         "w-auto",
         "px-5 py-2",
         "rounded-md",
-        "text-lg tracking-wide",
+        "text-meta",
+        "tracking-wide",
         "font-roboto",
         "text-black bg-[#D8B56A]",
         "transition-colors duration-300",
