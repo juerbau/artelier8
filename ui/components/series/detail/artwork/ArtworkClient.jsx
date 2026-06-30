@@ -3,8 +3,11 @@
 import { useRouter } from "next/navigation";
 import { useRef, useEffect } from "react";
 import Link from "next/link";
+
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
-import clsx from "clsx"
+
+import {cn} from "@/lib/utils/cn";
+
 import ArtworkGallery from "@/ui/components/series/detail/artwork/ArtworkGallery";
 import ArtworkInquiryLink from "@/ui/components/series/detail/artwork/ArtworkInquiryLink";
 
@@ -75,7 +78,7 @@ export default function ArtworkClient({
 
     return (
         <div
-            className="grid md:grid-cols-2 gap-10 text-white items-start"
+            className="grid md:grid-cols-2 gap-10 mt-5 items-start"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
         >
@@ -84,7 +87,7 @@ export default function ArtworkClient({
             <div>
 
                 {/* MOBILE TITLE */}
-                <h1 className="text-3xl mb-6 md:hidden truncate">
+                <h1 className="text-display mb-6 md:hidden truncate">
                     {title}
                 </h1>
 
@@ -100,12 +103,12 @@ export default function ArtworkClient({
             {/* RIGHT COLUMN — INFO */}
             <div className="text-left">
                 {/* DESKTOP TITLE */}
-                <h1 className="text-4xl mb-6 hidden md:block truncate">
+                <h1 className="text-display mb-6 hidden md:block truncate">
                     {title}
                 </h1>
 
                 {/* META DATA */}
-                <div className="text-lg md:text-xl text-white/80 space-y-2 mb-8 max-w-md">
+                <div className="text-body text-white/80 space-y-2 mb-8 max-w-md">
                     {artwork?.size && (
                         <p className="truncate" title={artwork.size}>
                             {artwork.size}
@@ -125,7 +128,7 @@ export default function ArtworkClient({
 
                 {/* DESCRIPTION */}
                 {description && (
-                    <div className="text-lg md:text-xl text-white/90 leading-relaxed max-w-md whitespace-pre-line">
+                    <div className="text-body text-white/90 leading-relaxed max-w-md whitespace-pre-line">
                         {description}
                     </div>
                 )}
@@ -148,7 +151,7 @@ export default function ArtworkClient({
                         <Link
                             href={`/${locale}/series/${slug}/${prev.slug}`}
                             aria-label={locale === "de" ? "Vorheriges Werk" : "Previous artwork"}
-                            className={clsx(
+                            className={cn(
                                 "border border-white/40",
                                 "px-5 py-2",
                                 "rounded-md ",
@@ -163,7 +166,7 @@ export default function ArtworkClient({
                         <Link
                             href={`/${locale}/series/${slug}/${next.slug}`}
                             aria-label={locale === "de" ? "Nächstes Werk" : "Next artwork"}
-                            className={clsx(
+                            className={cn(
                                 "border border-white/40",
                                 "px-5 py-2",
                                 "rounded-md ",

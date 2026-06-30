@@ -171,7 +171,7 @@ export default function ContactForm({locale, initialType, initialArtworkTitle, s
                                         e.target.value
                                     );
                                 }}
-                                className="h-4 w-4 accent-black"
+                                className="h-4 w-4 accent-black shrink-0"
                             />
 
                             {option.label}

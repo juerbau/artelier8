@@ -1,17 +1,20 @@
+import {notFound} from "next/navigation";
+
 import {client} from "@/sanity/client";
 import {sanityFetch} from "@/sanity/fetch";
 import {artworkPageQuery, seriesBySlugQuery} from "@/sanity/queries/series";
-import {pageContent} from "@/lib/i18n/pageContent";
+
+import {artworkContent} from "@/lib/i18n/artwork/artworkContent";
+import {buildMetadata} from "@/lib/seo";
+import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
 
 import ArtworkClient from "@/ui/components/series/detail/artwork/ArtworkClient";
-import {notFound} from "next/navigation";
-import {buildMetadata} from "@/lib/seo";
-import {buildImage} from "@/sanity/image";
 import PageContent from "@/ui/components/util/PageContent";
 
 
 export async function generateMetadata({params}) {
-    const {slug, artworkSlug, locale} = await params;
+    const locale = await getSafeLocale(params);
+    const { slug, artworkSlug } = await params;
 
     const data = await sanityFetch({
         query: artworkPageQuery,
@@ -27,22 +30,12 @@ export async function generateMetadata({params}) {
         return buildMetadata({
             title: "Artwork",
             description: "",
-            image: "/og/fallback.jpg",
+            image: "/og/ogImage.jpg",
             locale,
             path: `/series/${slug}/${artworkSlug}`,
         });
     }
 
-    // OG Image (sauber skaliert)
-    const ogImageBase = buildImage({
-        source: artwork.mainImage,
-        width: 1200,
-        height: 630,
-        fit: "crop",
-    });
-    const ogImage = ogImageBase
-        ? `${ogImageBase}&v=${artwork._rev}`
-        : null;
 
     // Title
     const title = artwork.title;
@@ -63,7 +56,7 @@ export async function generateMetadata({params}) {
     return buildMetadata({
         title,
         description,
-        image: ogImage || "/og/fallback.jpg",
+        image: "/og/ogImage.jpg",
         locale,
         path: `/series/${slug}/${artworkSlug}`,
     });
@@ -95,11 +88,11 @@ export async function generateStaticParams() {
 
 
 export default async function ArtworkPage({params}) {
-    
-    const {slug, artworkSlug, locale} = await params;
-    const safeLocale = locale?.startsWith("de") ? "de" : "en";
 
-    const content = pageContent[safeLocale].artwork.inquiryLink;
+    const locale = await getSafeLocale(params);
+    const { slug, artworkSlug } = await params;
+
+    const content = artworkContent[locale].artwork.inquiryLink;
 
     const series = await sanityFetch({
         query: seriesBySlugQuery,
@@ -124,12 +117,12 @@ export default async function ArtworkPage({params}) {
     const title = artwork.title;
 
     const description =
-        safeLocale === "de"
+        locale === "de"
             ? artwork.description_de
             : artwork.description_en;
 
     const technique =
-        safeLocale === "de"
+        locale === "de"
             ? artwork.technique_de
             : artwork.technique_en;
 
@@ -147,7 +140,7 @@ export default async function ArtworkPage({params}) {
                 prev={prev}
                 next={next}
                 slug={slug}
-                locale={safeLocale}
+                locale={locale}
                 content={content}
             />
 

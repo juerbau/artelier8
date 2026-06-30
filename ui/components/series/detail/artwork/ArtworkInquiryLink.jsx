@@ -12,7 +12,7 @@ export default function ArtworkInquiryLink({ href, children, className }) {
             className={clsx(
                 "group inline-flex items-center gap-2",
                 "mt-5",
-                "text-xl text-yellow-400/65",
+                "text-meta text-white/50 underline",
                 "transition-colors duration-300",
                 "hover:text-white",
                 className

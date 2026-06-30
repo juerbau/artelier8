@@ -97,7 +97,7 @@ export default function GalleryRoom({ series }) {
                                 />
 
                                 {/* 💡 Licht */}
-                                <div className="absolute inset-0 bg-gradient-to-b from-white/8 via-transparent to-black/15 mix-blend-soft-light pointer-events-none" />
+                                <div className="absolute inset-0 bg-linear-to-b from-white/8 via-transparent to-black/15 mix-blend-soft-light pointer-events-none" />
 
                                 {/* 🪶 Bodenkontakt */}
                                 <div className="absolute -bottom-0.75 left-1/2 -translate-x-1/2 w-[45%] h-0.75 bg-black/20 blur-sm" />

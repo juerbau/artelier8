@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import { motion } from "motion/react";
-import clsx from "clsx";
+
+import {cn} from "@/lib/utils/cn";
 import { getNewsletterSchema } from "@/lib/validation/newsletter-schema";
 import { splitZodErrors } from "@/lib/validation/validation-helpers";
+import { newsletterSignupContent } from "@/lib/i18n/newsletterSignupContent";
+
 import FormField from "@/ui/components/contact/FormField";
 import InfoBox from "@/ui/components/InfoBox";
-import { newsletterSignupContent } from "@/lib/i18n/newsletterSignupContent";
 import MainButton from "@/ui/components/MainButton";
 
 
@@ -88,21 +90,6 @@ export default function NewsletterSignup({ locale }) {
         }
     }
 
-    const buttonClasses = clsx(
-        "self-center w-auto",
-        "inline-flex items-center justify-center",
-        "px-5 py-2.5",
-        "text-sm tracking-wide",
-        "rounded-md",
-        "bg-black text-white",
-        "transition-colors duration-200",
-        "cursor-pointer",
-        "hover:bg-neutral-800",
-        {
-            "opacity-50 cursor-not-allowed": status === "loading",
-        }
-    );
-
     const message =
         apiError ||
         (status === "success" && content.success) ||
@@ -114,7 +101,7 @@ export default function NewsletterSignup({ locale }) {
 
     return (
         <>
-            <p className="mb-8 text-center whitespace-pre-line text-2xl leading-relaxed">
+            <p className="mb-8 text-center whitespace-pre-line text-body leading-relaxed">
                 {content.intro}
             </p>
 
@@ -159,7 +146,7 @@ export default function NewsletterSignup({ locale }) {
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            className={clsx(
+                            className={cn(
                                 "mx-auto max-w-md text-center leading-relaxed",
                                 "whitespace-pre-line",
                                 isWarning

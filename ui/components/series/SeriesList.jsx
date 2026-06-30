@@ -19,7 +19,7 @@ export default function SeriesList({series, locale}) {
                     >
 
                         {/* 🏷️ Titel */}
-                        <div className="mb-10 text-center text-3xl md:text-4xl text-white">
+                        <div className="mb-10 text-center text-display text-white">
                             {title}
                         </div>
 

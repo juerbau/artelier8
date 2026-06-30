@@ -22,7 +22,7 @@ export default function ArtworkGrid({artworks, locale, seriesSlug}) {
                         >
 
                             {/* Titel */}
-                            <div className="mb-4 text-white text-2xl">
+                            <div className="mb-4 text-white text-body">
                                 {title}
                             </div>
 

@@ -1,22 +1,24 @@
+import {notFound} from "next/navigation";
+
 import {client} from "@/sanity/client";
 import {sanityFetch} from "@/sanity/fetch";
 import {seriesBySlugQuery} from "@/sanity/queries/series";
-import ArtworkGrid from "@/ui/components/series/detail/ArtworkGrid";
+
 import {buildMetadata} from "@/lib/seo";
-import {notFound} from "next/navigation";
-import {buildImage} from "@/sanity/image";
+import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
+
+import ArtworkGrid from "@/ui/components/series/detail/ArtworkGrid";
 import FadeInSection from "@/ui/components/FadeInSection";
 import PageTitle from "@/ui/components/PageTitle";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
-import PageSubtitle from "@/ui/components/PageSubtitle";
 import PageContent from "@/ui/components/util/PageContent";
 import PageIntro from "@/ui/components/PageIntro";
-import ContentWidth from "../../../../../../ui/components/util/ContentWidth";
 
 
 /* SEO Metadata */
 export async function generateMetadata({params}) {
-    const {slug, locale} = await params;
+    const locale = await getSafeLocale(params);
+    const {slug} = await params;
 
     const series = await sanityFetch({
         query: seriesBySlugQuery,
@@ -29,18 +31,11 @@ export async function generateMetadata({params}) {
         return buildMetadata({
             title: "Series",
             description: "",
-            image: "/og/fallback.jpg",
+            image: "/og/ogImage.jpg",
             locale,
             path: `/series/${slug}`,
         });
     }
-
-    const ogImage = buildImage({
-        source: series?.ogImage,
-        width: 1200,
-        height: 630,
-        fit: "crop",
-    });
 
     const title =
         locale === "de"
@@ -55,7 +50,7 @@ export async function generateMetadata({params}) {
     return buildMetadata({
         title,
         description,
-        image: ogImage || "/og/fallback.jpg",
+        image: "/og/ogImage.jpg",
         locale,
         path: `/series/${slug}`,
     });
@@ -83,7 +78,9 @@ export async function generateStaticParams() {
 
 /* Page */
 export default async function SeriesDetailPage({params}) {
-    const {slug, locale} = await params;
+
+    const locale = await getSafeLocale(params);
+    const {slug} = await params;
 
     const series = await sanityFetch({
         query: seriesBySlugQuery,
@@ -93,9 +90,9 @@ export default async function SeriesDetailPage({params}) {
     if (!series) notFound();
 
     const title =
-        locale === "en"
-            ? series.title_en
-            : series.title_de;
+        locale === "de"
+            ? series.title_de
+            : series.title_en;
 
     return (
         <PageContent
@@ -103,7 +100,7 @@ export default async function SeriesDetailPage({params}) {
             className="text-center"
         >
 
-            <PageTitle>
+            <PageTitle className="px-7">
                 {title}
             </PageTitle>
 
@@ -111,7 +108,7 @@ export default async function SeriesDetailPage({params}) {
             <GoldenLineDivider
                 delay={0.08}
                 duration={1}
-                className="mt-3 mb-10 w-[80%]"
+                className="mt-3 mb-5 w-[90%]"
             />
 
             <FadeInSection
@@ -120,15 +117,14 @@ export default async function SeriesDetailPage({params}) {
                 delay={0.25}
                 duration={1.8}
             >
-                <ContentWidth width="default">
-                    <PageIntro className="mb-15">
-                        {
-                            locale === "en" && series.intro_en
-                                ? series.intro_en
-                                : series.intro_de
-                        }
-                    </PageIntro>
-                </ContentWidth>
+
+                    <PageIntro className="mb-15 w-4/5 text-center mx-auto">
+                    {
+                        locale === "en" && series.intro_en
+                            ? series.intro_en
+                            : series.intro_de
+                    }
+                </PageIntro>
 
                 <ArtworkGrid
                     artworks={series.artworks}

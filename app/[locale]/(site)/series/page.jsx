@@ -1,10 +1,9 @@
 import {sanityFetch} from "@/sanity/fetch";
 import {seriesListQuery} from "@/sanity/queries/series";
-import {openGraphQuery} from "@/sanity/queries/openGraph";
-import {seriesContent} from "@/lib/i18n/series/seriesContent";
 
+import {seriesContent} from "@/lib/i18n/series/seriesContent";
+import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
 import {buildMetadata} from "@/lib/seo";
-import {buildImage} from "@/sanity/image";
 
 import SeriesList from "@/ui/components/series/SeriesList";
 import FadeInSection from "@/ui/components/FadeInSection";
@@ -16,26 +15,14 @@ import PageIntro from "@/ui/components/PageIntro";
 
 
 export async function generateMetadata({params}) {
-    const {locale} = await params;
-    const isDe = locale === "de";
 
-    const openGraph = await sanityFetch({
-        query: openGraphQuery,
-    });
-
-    const ogImage = buildImage({
-        source: openGraph?.ogSeriesOverview,
-        width: 1200,
-        height: 630,
-        fit: "crop",
-    })
+    const locale = await getSafeLocale(params);
+    const content = seriesContent[locale];
 
     return buildMetadata({
-        title: isDe ? "Serien" : "Series",
-        description: isDe
-            ? "Serien zeitgenössischer Kunst von Bettina Hagedorn: Motive entwickeln sich weiter, verändern sich und gewinnen eine eigene Präsenz."
-            : "Series of contemporary art by Bettina Hagedorn: motifs evolve, shift, and develop their own presence.",
-        image: ogImage || "/og/fallback.jpg",
+        title: content.metadata.title,
+        description: content.metadata.description,
+        image: "/og/ogImage.jpg",
         locale,
         path: "/series",
     });
@@ -43,21 +30,22 @@ export async function generateMetadata({params}) {
 
 
 export default async function SeriesPage({params}) {
-    const {locale} = await params;
+
+    const locale = await getSafeLocale(params);
+    const content = seriesContent[locale];
 
     const series = await sanityFetch({
         query: seriesListQuery,
     });
-
-    const safeLocale = locale?.startsWith("de") ? "de" : "en";
-    const content = seriesContent[safeLocale];
 
     return (
         <PageContent
             width="lg"
             className="text-center"
         >
-            <PageTitle>
+            <PageTitle
+                className="whitespace-pre-line sm:whitespace-normal"
+            >
                 {content.title}
             </PageTitle>
 

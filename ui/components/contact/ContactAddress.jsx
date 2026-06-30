@@ -8,11 +8,11 @@ export default function ContactAddress({ locale }) {
 
     return (
         <section className="mx-auto max-w-2xl text-center">
-            <h2 className="mb-5 text-2xl leading-relaxed">
+            <h2 className="mb-5 text-body leading-relaxed">
                 {content.heading}
             </h2>
 
-            <div className="font-roboto text-lg leading-relaxed">
+            <div className="font-roboto text-meta leading-relaxed">
                 <p>Bettina Hagedorn</p>
                 <p>Am Graben 8</p>
                 <p>D-78345 Moos-Iznang</p>
