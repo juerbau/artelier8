@@ -1,5 +1,6 @@
 import Image from "next/image";
 import {cn} from "@/lib/utils/cn";
+import {buildImage} from "@/sanity/image";
 
 
 export default function DesignProcess({
@@ -43,7 +44,10 @@ export default function DesignProcess({
                                 )}
                             >
                                 <Image
-                                    src={step.image}
+                                    src={buildImage({
+                                        source: step.image,
+                                        width: 1000,
+                                    })}
                                     alt={step.imageAlt}
                                     fill
                                     sizes="(min-width: 768px) 50vw, 100vw"

@@ -5,11 +5,14 @@ import {useState} from "react";
 
 import {cn} from "@/lib/utils/cn";
 
-import imageBefore from "@/ui/images/vyper-vorher-neu.webp";
-import imageAfter from "@/ui/images/vyper-nachher.webp";
+import {buildImage} from "@/sanity/image";
 
 
-export default function ImageTransform({content}) {
+export default function ImageTransform({
+                                           content,
+                                           beforeImage,
+                                           afterImage,
+                                       }) {
 
     const [revealed, setRevealed] = useState(false);
 
@@ -32,7 +35,10 @@ export default function ImageTransform({content}) {
                     )}
                 >
                     <Image
-                        src={imageAfter}
+                        src={buildImage({
+                            source: afterImage,
+                            width: 1600,
+                        })}
                         alt={content.alt.imageAfter}
                         fill
                         sizes="100vw"
@@ -51,7 +57,10 @@ export default function ImageTransform({content}) {
                     )}
                 >
                     <Image
-                        src={imageBefore}
+                        src={buildImage({
+                            source: beforeImage,
+                            width: 1600,
+                        })}
                         alt={content.alt.imageBefore}
                         fill
                         sizes="100vw"

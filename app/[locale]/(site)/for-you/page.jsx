@@ -1,3 +1,6 @@
+import {forYouImagesQuery} from "@/sanity/queries/forYouImages";
+import {sanityFetch} from "@/sanity/fetch";
+
 import {forYouContent} from "@/lib/i18n/for-you/forYouContent";
 import {processStepsContent} from "@/lib/i18n/for-you/processSteps";
 import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
@@ -10,10 +13,6 @@ import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
 import PageContent from "@/ui/components/util/PageContent";
 import DesignProcess from "@/ui/components/for-you/DesignProcess";
 import ImageTransform from "@/ui/components/for-you/ImageTransform";
-import stepOneImage from "@/ui/images/Schritt 1_ergebnis.webp";
-import stepTwoImage from "@/ui/images/Schritt 2_ergebnis.webp";
-import stepThreeImage from "@/ui/images/Schritt 3_ergebnis.webp";
-import stepFourImage from "@/ui/images/Schritt 4_ergebnis.webp";
 import MainButton from "@/ui/components/MainButton";
 import Eyebrow from "@/ui/components/Eyebrow";
 import PageIntro from "@/ui/components/PageIntro";
@@ -34,18 +33,22 @@ export async function generateMetadata({ params }) {
 }
 
 
-const processImages = {
-    stepOne: stepOneImage,
-    stepTwo: stepTwoImage,
-    stepThree: stepThreeImage,
-    stepFour: stepFourImage,
-};
-
 export default async function ForYouPage({params}) {
 
     const locale = await getSafeLocale(params);
     const content = forYouContent[locale];
     const designProcessContent = processStepsContent[locale];
+
+    const forYouImages = await sanityFetch({
+        query: forYouImagesQuery,
+    });
+
+    const processImages = {
+        stepOne: forYouImages?.stepOneImage,
+        stepTwo: forYouImages?.stepTwoImage,
+        stepThree: forYouImages?.stepThreeImage,
+        stepFour: forYouImages?.stepFourImage,
+    };
 
     const processSteps = designProcessContent.steps.map((step) => ({
         ...step,
@@ -99,7 +102,10 @@ export default async function ForYouPage({params}) {
 
                 <ImageTransform
                     content={content.imageTransform}
+                    beforeImage={forYouImages?.beforeImage}
+                    afterImage={forYouImages?.afterImage}
                 />
+
                 <section className="pt-20 md:pt-28 space-y-6">
                     <p className={cn(
                         "mx-auto max-w-2xl",
