@@ -1,18 +1,21 @@
+import {orderFormContent} from "@/lib/i18n/orderFormContent";
+import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
+
 import OrderForm from "@/ui/components/order/OrderForm";
 import FadeInSection from "@/ui/components/FadeInSection";
 import PageTitle from "@/ui/components/PageTitle";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
 import PageSubtitle from "@/ui/components/PageSubtitle";
-import {orderFormContent} from "@/lib/i18n/orderFormContent";
 import Logo from "@/ui/components/Logo";
 import PageContent from "@/ui/components/util/PageContent";
+import PageIntro from "../../../../ui/components/PageIntro";
+
 
 export default async function OrderPage({params, searchParams}) {
-    const {locale} = await params;
+    const locale = await getSafeLocale(params);
     const {token} = await searchParams;
 
-    const safeLocale = locale?.startsWith("de") ? "de" : "en";
-    const content = orderFormContent[safeLocale];
+    const content = orderFormContent[locale];
 
     return (
 
@@ -48,9 +51,9 @@ export default async function OrderPage({params, searchParams}) {
                 delay={0.5}
                 duration={1.8}
             >
-                <PageSubtitle textSize="text-lg md:text-xl">
+                <PageIntro className="mt-5">
                     {content?.subtitle}
-                </PageSubtitle>
+                </PageIntro>
 
                 <OrderForm locale={locale}
                            token={token}

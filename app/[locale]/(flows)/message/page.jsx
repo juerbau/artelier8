@@ -1,4 +1,5 @@
 import {notFound} from "next/navigation";
+
 import {messageContent} from "@/lib/i18n/messageContent";
 import {getStringParam, getContentEntry} from "@/lib/validation/searchParams-helpers";
 
@@ -9,19 +10,20 @@ import PageContent from "@/ui/components/util/PageContent";
 import PageTitle from "@/ui/components/PageTitle";
 import MainButton from "@/ui/components/MainButton";
 import ContentWidth from "@/ui/components/util/ContentWidth";
-import TextContent from "../../../../ui/components/util/TextContent";
+import TextContent from "@/ui/components/util/TextContent";
+import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
 
 
 
 
 export default async function MessagePage({ params, searchParams }) {
-    const { locale } = await params;
-    const safeLocale = locale?.startsWith("de") ? "de" : "en";
+
+    const locale = await getSafeLocale(params);
 
     const query = await searchParams;
 
     const type = getStringParam(query, "type");
-    const messages = messageContent[safeLocale];
+    const messages = messageContent[locale];
 
     let content = null;
     let href = "/";
@@ -80,7 +82,7 @@ export default async function MessagePage({ params, searchParams }) {
                 button: contactContent.buttonText,
             };
 
-            href = `/${safeLocale}/contact`;
+            href = `/${locale}/contact`;
         }
     }
 

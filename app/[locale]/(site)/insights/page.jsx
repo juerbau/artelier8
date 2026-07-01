@@ -1,47 +1,53 @@
-import Insights from "@/ui/components/insights/Insights";
+import {sanityFetch} from "@/sanity/fetch";
+import {momentsQuery} from "@/sanity/queries/moments";
+
 import {insightsContent} from "@/lib/i18n/insights/insightsContent";
-import { sanityFetch} from "@/sanity/fetch";
-import { momentsQuery} from "@/sanity/queries/moments";
-import { buildMetadata} from "@/lib/seo";
+import {buildMetadata} from "@/lib/seo";
+import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
+
+import Insights from "@/ui/components/insights/Insights";
 import FadeInSection from "@/ui/components/FadeInSection";
 import PageTitle from "@/ui/components/PageTitle";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
-import PageSubtitle from "@/ui/components/PageSubtitle";
 import PageContent from "@/ui/components/util/PageContent";
 import Eyebrow from "@/ui/components/Eyebrow";
 import PageIntro from "@/ui/components/PageIntro";
 
+
 export async function generateMetadata({params}) {
-    const {locale} = await params;
-    const isDe = locale === "de";
+
+    const locale = await getSafeLocale(params);
+    const content = insightsContent[locale];
 
     return buildMetadata({
-        title: isDe ? "Einblicke" : "Insights",
-        description: isDe
-            ? "Ausgewählte Momente, Ausstellungen und Einblicke rund um die Arbeiten von ARTelier8."
-            : "Selected moments, exhibitions, and insights surrounding the work of ARTelier8.",
-        image: "/og/fallback.jpg",
+        title: content.metadata.title,
+        description: content.metadata.description,
+        image: "/og/ogImage.jpg",
         locale,
         path: "/insights",
     });
 }
 
+
 export default async function InsightsPage({params}) {
-    const {locale} = await params;
+
+    const locale = await getSafeLocale(params);
+    const content = insightsContent[locale];
+
 
     const moments = await sanityFetch({
         query: momentsQuery,
     });
 
-    const safeLocale = locale?.startsWith("de") ? "de" : "en";
-    const content = insightsContent[safeLocale];
 
     return (
         <PageContent
             width="lg"
             className="text-center"
         >
-            <PageTitle>
+            <PageTitle
+                className="whitespace-pre-line sm:whitespace-normal"
+            >
                 {content.title}
             </PageTitle>
 

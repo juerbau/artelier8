@@ -17,11 +17,11 @@ export default function Insights({ moments = [], locale = "de" }) {
                     >
 
 
-                        <h3 className="mb-3 text-2xl leading-tight">
+                        <h3 className="mb-3 text-body leading-tight">
                             {moment.title}
                         </h3>
 
-                        <p className="mb-3 text-[11px] uppercase tracking-[0.16em]">
+                        <p className="mb-3 text-mini uppercase">
                             {moment.location
                                 ? `${moment.location} · `
                                 : ""}
@@ -45,7 +45,7 @@ export default function Insights({ moments = [], locale = "de" }) {
 
 
                             {description && (
-                                <p className="text-left whitespace-pre-line text-lg leading-7">
+                                <p className="text-left whitespace-pre-line text-meta leading-7">
                                     {description}
                                 </p>
                             )}</div>

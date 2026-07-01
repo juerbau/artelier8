@@ -1,21 +1,38 @@
+import {forYouContent} from "@/lib/i18n/for-you/forYouContent";
+import {processStepsContent} from "@/lib/i18n/for-you/processSteps";
+import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
+import {buildMetadata} from "@/lib/seo";
+import {cn} from "@/lib/utils/cn";
+
 import FadeInSection from "@/ui/components/FadeInSection";
 import PageTitle from "@/ui/components/PageTitle";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
 import PageContent from "@/ui/components/util/PageContent";
-
-import {forYouContent} from "@/lib/i18n/for-you/forYouContent";
-import {processStepsContent} from "@/lib/i18n/for-you/processSteps";
-
 import DesignProcess from "@/ui/components/for-you/DesignProcess";
 import ImageTransform from "@/ui/components/for-you/ImageTransform";
-
 import stepOneImage from "@/ui/images/Schritt 1_ergebnis.webp";
 import stepTwoImage from "@/ui/images/Schritt 2_ergebnis.webp";
 import stepThreeImage from "@/ui/images/Schritt 3_ergebnis.webp";
 import stepFourImage from "@/ui/images/Schritt 4_ergebnis.webp";
 import MainButton from "@/ui/components/MainButton";
-import Eyebrow from "../../../../ui/components/Eyebrow";
-import PageIntro from "../../../../ui/components/PageIntro";
+import Eyebrow from "@/ui/components/Eyebrow";
+import PageIntro from "@/ui/components/PageIntro";
+
+
+export async function generateMetadata({ params }) {
+
+    const locale = await getSafeLocale(params);
+    const content = forYouContent[locale];
+
+    return buildMetadata({
+        title: content.metadata.title,
+        description: content.metadata.description,
+        image: "/og/ogImage.jpg",
+        locale,
+        path: "/for-you",
+    });
+}
+
 
 const processImages = {
     stepOne: stepOneImage,
@@ -26,12 +43,9 @@ const processImages = {
 
 export default async function ForYouPage({params}) {
 
-    const {locale} = await params;
-
-    const safeLocale = locale?.startsWith("de") ? "de" : "en";
-
-    const content = forYouContent[safeLocale];
-    const designProcessContent = processStepsContent[safeLocale];
+    const locale = await getSafeLocale(params);
+    const content = forYouContent[locale];
+    const designProcessContent = processStepsContent[locale];
 
     const processSteps = designProcessContent.steps.map((step) => ({
         ...step,
@@ -43,7 +57,9 @@ export default async function ForYouPage({params}) {
             width="lg"
             className="text-center"
         >
-            <PageTitle>
+            <PageTitle
+                className="whitespace-pre-line sm:whitespace-normal"
+            >
                 {content.title}
             </PageTitle>
 
@@ -71,7 +87,12 @@ export default async function ForYouPage({params}) {
                 />
 
                 <div className="space-y-6 text-center">
-                    <p className="mx-auto mt-40 mb-10 max-w-3xl text-xl text-white/80 leading-relaxed whitespace-pre-line md:text-2xl">
+                    <p className={cn(
+                        "mx-auto mt-40 mb-10",
+                        "text-body",
+                        "max-w-3xl text-white/80 leading-relaxed",
+                        "whitespace-pre-line")}
+                    >
                         {content.imageTransform.intro}
                     </p>
                 </div>
@@ -80,7 +101,12 @@ export default async function ForYouPage({params}) {
                     content={content.imageTransform}
                 />
                 <section className="pt-20 md:pt-28 space-y-6">
-                    <p className="mx-auto max-w-2xl text-xl leading-relaxed text-white/80 md:text-2xl whitespace-pre-line">
+                    <p className={cn(
+                        "mx-auto max-w-2xl",
+                        "text-body text-white/80",
+                        "leading-relaxed",
+                        "whitespace-pre-line")}
+                    >
                         {content.outro}
                     </p>
 

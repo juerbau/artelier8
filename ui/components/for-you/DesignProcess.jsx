@@ -1,10 +1,11 @@
 import Image from "next/image";
-import clsx from "clsx";
+import {cn} from "@/lib/utils/cn";
+
 
 export default function DesignProcess({
-
                                           steps = [],
                                       }) {
+
     return (
         <section className="space-y-30">
 
@@ -15,10 +16,12 @@ export default function DesignProcess({
                     return (
                         <article
                             key={step.number}
-                            className={clsx("grid gap-6 md:grid-cols-2 md:grid-rows-[auto_1fr] md:items-start md:gap-x-12 md:gap-y-3")}
+                            className={cn(
+                                "grid gap-6 md:grid-cols-2 md:grid-rows-[auto_1fr]",
+                                "md:items-start md:gap-x-12 md:gap-y-3")}
                         >
                             <div
-                                className={clsx(
+                                className={cn(
                                     "order-1 space-y-3 text-left",
                                     imageFirstDesktop ? "md:col-start-2 md:row-start-1" : "md:col-start-1 md:row-start-1"
                                 )}
@@ -27,15 +30,15 @@ export default function DesignProcess({
                                     {step.number}
                                 </p>
 
-                                <h3 className="text-2xl md:text-3xl">
+                                <h3 className="text-display">
                                     {step.title}
                                 </h3>
                             </div>
 
                             <div
-                                className={clsx(
+                                className={cn(
                                     "relative order-2 overflow-hidden rounded-xl",
-                                    "aspect-[16/10]",
+                                    "aspect-16/10",
                                     imageFirstDesktop ? "md:col-start-1 md:row-start-1 md:row-span-2" : "md:col-start-2 md:row-start-1 md:row-span-2"
                                 )}
                             >
@@ -49,12 +52,12 @@ export default function DesignProcess({
                             </div>
 
                             <div
-                                className={clsx(
+                                className={cn(
                                     "order-3 text-left",
                                     imageFirstDesktop ? "md:col-start-2 md:row-start-2" : "md:col-start-1 md:row-start-2"
                                 )}
                             >
-                                <p className="text-lg leading-relaxed text-white/80 md:text-xl">
+                                <p className="text-body leading-relaxed text-white/80">
                                     {step.text}
                                 </p>
                             </div>
