@@ -1,9 +1,9 @@
 import Link from "next/link"
-import { footerContent } from "@/lib/i18n"
+import {footerContent} from "@/lib/i18n/footer/footerContent"
 
-export default function LegalLink({ locale, name }) {
-    const safeLocale = locale?.startsWith("de") ? "de" : "en"
-    const content = footerContent[safeLocale][name]
+export default function LegalLink({locale, name}) {
+
+    const content = footerContent[locale][name]
 
     return (
         <Link

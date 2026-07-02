@@ -38,6 +38,12 @@ export default function Insights({ moments = [], locale = "de" }) {
                                     alt={moment.title}
                                     fill
                                     sizes="(min-width: 768px) 768px, 100vw"
+                                    placeholder={
+                                        moment.mainImage?.asset?.metadata?.lqip
+                                            ? "blur"
+                                            : "empty"
+                                    }
+                                    blurDataURL={moment.mainImage?.asset?.metadata?.lqip}
                                     className="object-cover"
                                 />
                             </div>

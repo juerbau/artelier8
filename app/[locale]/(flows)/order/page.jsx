@@ -5,13 +5,13 @@ import OrderForm from "@/ui/components/order/OrderForm";
 import FadeInSection from "@/ui/components/FadeInSection";
 import PageTitle from "@/ui/components/PageTitle";
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
-import PageSubtitle from "@/ui/components/PageSubtitle";
 import Logo from "@/ui/components/Logo";
 import PageContent from "@/ui/components/util/PageContent";
-import PageIntro from "../../../../ui/components/PageIntro";
+import PageIntro from "@/ui/components/PageIntro";
 
 
 export default async function OrderPage({params, searchParams}) {
+
     const locale = await getSafeLocale(params);
     const {token} = await searchParams;
 

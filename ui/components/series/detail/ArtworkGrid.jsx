@@ -1,5 +1,6 @@
 import Link from "next/link"
-import clsx from "clsx";
+import {cn} from "@/lib/utils/cn";
+
 import ArtworkImage from "@/ui/components/series/detail/ArtworkImage";
 import SoldLabel from "@/ui/components/SoldLabel"
 
@@ -28,7 +29,7 @@ export default function ArtworkGrid({artworks, locale, seriesSlug}) {
 
                             {/* Bildrahmen */}
                             <div
-                                className={clsx(
+                                className={cn(
                                     "rounded-lg border border-white/80 overflow-hidden",
                                     "transform-gpu transition-transform duration-500 ease-out",
                                     "group-hover:scale-[1.03] group-hover:shadow-xl"

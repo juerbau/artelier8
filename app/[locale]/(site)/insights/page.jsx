@@ -1,5 +1,5 @@
 import {sanityFetch} from "@/sanity/fetch";
-import {momentsQuery} from "@/sanity/queries/moments";
+import {insightsQuery} from "@/sanity/queries/insights";
 
 import {insightsContent} from "@/lib/i18n/insights/insightsContent";
 import {buildMetadata} from "@/lib/seo";
@@ -36,7 +36,7 @@ export default async function InsightsPage({params}) {
 
 
     const moments = await sanityFetch({
-        query: momentsQuery,
+        query: insightsQuery,
     });
 
 

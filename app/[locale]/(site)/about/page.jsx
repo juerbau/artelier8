@@ -86,7 +86,8 @@ export default async function AboutPage({params}) {
                 <div className="mx-auto w-[clamp(17.50rem,7.50rem+40.00vw,37.50rem)]">
 
                     <AboutImage
-                        src={buildImage({source: data?.portraitImage, width: 1400})}
+                        src={buildImage({ source: data?.portraitImage, width: 1400 })}
+                        blurDataURL={data?.portraitImage?.asset?.metadata?.lqip}
                         alt={content.portrait.image.alt}
                         width={1400}
                         height={1800}
@@ -103,7 +104,8 @@ export default async function AboutPage({params}) {
                     </p>
 
                     <AboutImage
-                        src={buildImage({source: data?.studioImage, width: 1000})}
+                        src={buildImage({ source: data?.studioImage, width: 1000 })}
+                        blurDataURL={data?.studioImage?.asset?.metadata?.lqip}
                         alt={content.studio.image.alt}
                         width={1000}
                         height={700}

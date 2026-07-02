@@ -1,11 +1,11 @@
-import {linkifyText} from "../../../lib/legal/linkifyText";
+import {linkifyText} from "@/lib/legal/linkifyText";
 
 export default function LegalContent({sections}) {
     return (
-        <div className="space-y-12 text-lg leading-relaxed">
+        <div className="space-y-12 text-meta leading-relaxed">
             {sections.map((section) => (
                 <div key={section.title}>
-                    <h2 className="text-[22px]">
+                    <h2 className="text-body">
                         {section.title}
                     </h2>
 

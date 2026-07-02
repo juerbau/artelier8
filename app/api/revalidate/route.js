@@ -37,17 +37,6 @@ export async function POST(req) {
         switch (type) {
 
             // =========================
-            // 🏠 GLOBAL OPEN GRAPH
-            // =========================
-            case "openGraph": {
-                locales.forEach((locale) => {
-                    revalidatePath(`/${locale}/series`);
-                });
-
-                break;
-            }
-
-            // =========================
             // 🎬 SERIES
             // =========================
             case "series": {
@@ -75,7 +64,7 @@ export async function POST(req) {
 
                 if (!artworkSlug) break;
 
-                // 🔎 Finde die Series
+                // 🔎 Zugehörige Serie ermitteln
                 const result = await client.fetch(
                     `
                     *[_type == "series" && $slug in artworks[]->slug.current][0]{
@@ -89,8 +78,9 @@ export async function POST(req) {
 
                 if (seriesSlug) {
                     locales.forEach((locale) => {
-                        revalidatePath(`/${locale}/series/${seriesSlug}/${artworkSlug}`);
                         revalidatePath(`/${locale}/series`);
+                        revalidatePath(`/${locale}/series/${seriesSlug}`);
+                        revalidatePath(`/${locale}/series/${seriesSlug}/${artworkSlug}`);
                     });
 
                     // 🆕 Sitemap aktualisieren
@@ -114,22 +104,38 @@ export async function POST(req) {
             }
 
             // =========================
-            // ✨ MOMENTS
+            // ✨ INSIGHTS
             // =========================
             case "moment":
             case "momentsPage": {
                 locales.forEach((locale) => {
-                    revalidatePath(`/${locale}/moments`);
+                    revalidatePath(`/${locale}/insights`);
                 });
                 break;
             }
 
             // =========================
-            // 🏠 HOME (Slider / Series Order)
+            // 🎨 HOME
             // =========================
             case "homeSlider":
-            case "seriesList": {
-                ["/", "/de", "/en"].forEach((path) => revalidatePath(path));
+            case "seriesList":
+            case "discoverJourney":
+            case "discoverGallery":
+            case "beforeAfterJourney":
+            case "beforeAfterGallery": {
+                ["/", "/de", "/en"].forEach((path) => {
+                    revalidatePath(path);
+                });
+                break;
+            }
+
+            // =========================
+            // ✨ FOR YOU
+            // =========================
+            case "forYouImages": {
+                locales.forEach((locale) => {
+                    revalidatePath(`/${locale}/for-you`);
+                });
                 break;
             }
 

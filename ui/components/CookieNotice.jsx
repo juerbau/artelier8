@@ -1,10 +1,10 @@
 "use client"
 
-import { useEffect, useState } from "react";
-import { motion } from "motion/react";
-import { usePathname } from "next/navigation";
+import {useEffect, useState} from "react";
+import {motion} from "motion/react";
+import {usePathname} from "next/navigation";
 import Link from "next/link";
-import { cookieContent } from "@/lib/i18n/cookieContent";
+import {cookieContent} from "@/lib/i18n/cookieContent";
 
 const EXPIRY_DAYS = 14
 
@@ -47,13 +47,14 @@ export default function CookieNotice() {
 
     return (
         <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            transition={{duration: 1.2, ease: [0.22, 1, 0.36, 1]}}
             className="fixed bottom-6 left-0 w-full flex justify-center pointer-events-none z-40"
         >
             <div className="w-full max-w-6xl px-6 flex justify-center">
-                <div className="pointer-events-auto text-sm font-roboto text-white bg-white/5 backdrop-blur-md px-5 py-3 rounded-full">
+                <div
+                    className="pointer-events-auto text-small font-roboto text-white bg-white/5 backdrop-blur-md px-5 py-3 rounded-full">
                     <p className="text-center leading-relaxed">
                         {content.text}
                         <Link

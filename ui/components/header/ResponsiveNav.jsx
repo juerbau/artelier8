@@ -1,17 +1,18 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import {useState, useRef, useEffect} from "react";
+import {motion, AnimatePresence} from "motion/react";
 import Link from "next/link";
-import { nav } from "@/lib/i18n";
-import clsx from "clsx";
-import { SquareMenu } from "lucide-react";
+import {SquareMenu} from "lucide-react";
+
+import {navContent} from "@/lib/i18n/navigation/navContent";
+import {cn} from "@/lib/utils/cn";
 
 
 export default function ResponsiveNav({locale, pathname}) {
     const [open, setOpen] = useState(false);
     const menuRef = useRef(null);
-    const t = nav[locale];
+    const t = navContent[locale];
 
     const links = [
         {key: "home", href: `/${locale}`},
@@ -58,7 +59,7 @@ export default function ResponsiveNav({locale, pathname}) {
 
                         {/* Hover underline */}
                         <span
-                            className={clsx(
+                            className={cn(
                                 "pointer-events-none absolute left-0 bottom-0 h-px w-full",
                                 "bg-white/30",
                                 "opacity-0",
@@ -87,7 +88,7 @@ export default function ResponsiveNav({locale, pathname}) {
             {/* Mobile Trigger */}
             <button
                 onClick={() => setOpen(!open)}
-                className={clsx(
+                className={cn(
                     "md:hidden flex flex-col items-center",
                     "pt-2 pb-0.5",
                     "text-lg tracking-wide",
@@ -136,7 +137,7 @@ export default function ResponsiveNav({locale, pathname}) {
                 }`}
             >
                 <nav
-                    className={`bg-gray-600 text-white w-50 px-8 py-6 flex flex-col items-center gap-5 text-xl tracking-wide rounded-lg origin-top transform transition-transform duration-400 ${
+                    className={`bg-gray-600 w-50 px-8 py-6 flex flex-col items-center gap-5 text-xl tracking-wide rounded-lg origin-top transform transition-transform duration-400 ${
                         open
                             ? "scale-y-100 translate-y-0"
                             : "scale-y-0 -translate-y-2"
@@ -147,7 +148,7 @@ export default function ResponsiveNav({locale, pathname}) {
                             key={link.key}
                             href={link.href}
                             onClick={() => setOpen(false)}
-                            className={clsx(
+                            className={cn(
                                 "whitespace-nowrap",
                                 "text-lg tracking-wide text-white",
                                 "pb-0.5 leading-none",

@@ -1,8 +1,10 @@
 import Link from "next/link";
-import clsx from "clsx";
+
+import {cn} from "@/lib/utils/cn";
 
 import InstagramLink from "@/ui/components/footer/InstagramLink";
 import LegalLink from "@/ui/components/footer/LegalLink";
+
 
 export default function Footer({locale}) {
     return (
@@ -22,7 +24,7 @@ export default function Footer({locale}) {
 
                     {/* Right */}
                     <div
-                        className={clsx(
+                        className={cn(
                             "flex items-center",
 
                             // spacing

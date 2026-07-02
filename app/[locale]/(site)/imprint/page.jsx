@@ -1,11 +1,15 @@
 import {legalContent} from "@/lib/i18n/legalContent";
+import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
+
 import LegalContent from "@/ui/components/legal/LegalContent";
 import LegalHeading from "@/ui/components/legal/LegalHeading";
 import FadeInSection from "@/ui/components/FadeInSection";
 import PageContent from "@/ui/components/util/PageContent";
 
+
 export async function generateMetadata({params}) {
-    const {locale} = await params;
+
+    const locale = await getSafeLocale(params);
     const data = legalContent.imprint[locale] ?? legalContent.imprint.de;
 
     return {
@@ -18,8 +22,10 @@ export async function generateMetadata({params}) {
     };
 }
 
+
 export default async function ImprintPage({params}) {
-    const {locale} = await params;
+
+    const locale = await getSafeLocale(params);
     const data = legalContent.imprint[locale] ?? legalContent.imprint.de;
 
     return (

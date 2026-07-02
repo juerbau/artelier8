@@ -51,8 +51,11 @@ export default function DesignProcess({
                                     alt={step.imageAlt}
                                     fill
                                     sizes="(min-width: 768px) 50vw, 100vw"
+                                    placeholder={step.image?.asset?.metadata?.lqip ? "blur" : "empty"}
+                                    blurDataURL={step.image?.asset?.metadata?.lqip}
                                     className="object-cover"
                                 />
+                                
                             </div>
 
                             <div

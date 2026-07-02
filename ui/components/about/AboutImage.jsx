@@ -1,5 +1,5 @@
 import Image from "next/image";
-import {cn} from "@/lib/utils/cn";
+import { cn } from "@/lib/utils/cn";
 
 export default function AboutImage({
                                        src,
@@ -7,13 +7,15 @@ export default function AboutImage({
                                        width,
                                        height,
                                        sizes,
-                                       className
+                                       blurDataURL,
+                                       className,
                                    }) {
     return (
-        <div className={cn(
-            "rounded-lg border border-white/80 overflow-hidden",
-            className,
-        )}
+        <div
+            className={cn(
+                "rounded-lg border border-white/80 overflow-hidden",
+                className
+            )}
         >
             <Image
                 src={src}
@@ -22,8 +24,9 @@ export default function AboutImage({
                 height={height}
                 sizes={sizes}
                 priority
+                placeholder={blurDataURL ? "blur" : "empty"}
+                blurDataURL={blurDataURL}
             />
-
         </div>
     );
 }

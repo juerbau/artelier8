@@ -13,7 +13,7 @@ export default function ContactAddress({ locale }) {
             </h2>
 
             <div className="font-roboto text-meta leading-relaxed">
-                <p>Bettina Hagedorn</p>
+                <p>Bettina J. Hagedorn</p>
                 <p>Am Graben 8</p>
                 <p>D-78345 Moos-Iznang</p>
                 <p>

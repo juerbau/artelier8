@@ -10,11 +10,12 @@ import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
 
 import ArtworkClient from "@/ui/components/series/detail/artwork/ArtworkClient";
 import PageContent from "@/ui/components/util/PageContent";
+import ScrollToTop from "@/ui/components/ScrollToTop";
 
 
 export async function generateMetadata({params}) {
     const locale = await getSafeLocale(params);
-    const { slug, artworkSlug } = await params;
+    const {slug, artworkSlug} = await params;
 
     const data = await sanityFetch({
         query: artworkPageQuery,
@@ -90,7 +91,7 @@ export async function generateStaticParams() {
 export default async function ArtworkPage({params}) {
 
     const locale = await getSafeLocale(params);
-    const { slug, artworkSlug } = await params;
+    const {slug, artworkSlug} = await params;
 
     const content = artworkContent[locale].artwork.inquiryLink;
 
@@ -127,23 +128,26 @@ export default async function ArtworkPage({params}) {
             : artwork.technique_en;
 
     return (
-        <PageContent
-            width="lg"
-            className="text-center"
-        >
+        <>
+            <ScrollToTop/>
+            <PageContent
+                width="lg"
+                className="text-center"
+            >
 
-            <ArtworkClient
-                artwork={artwork}
-                title={title}
-                description={description}
-                technique={technique}
-                prev={prev}
-                next={next}
-                slug={slug}
-                locale={locale}
-                content={content}
-            />
+                <ArtworkClient
+                    artwork={artwork}
+                    title={title}
+                    description={description}
+                    technique={technique}
+                    prev={prev}
+                    next={next}
+                    slug={slug}
+                    locale={locale}
+                    content={content}
+                />
 
-        </PageContent>
+            </PageContent>
+        </>
     );
 }

@@ -1,9 +1,12 @@
-export const homeSliderQuery = `
-*[_id == "homeSlider"][0]{
-  slides[]->{
+export const insightsQuery = `
+*[_id == "momentsPage"][0]{
+  moments[]->{
     _id,
     title,
-    "slug": slug.current,
+    date,
+    location,
+    description_de,
+    description_en,
 
     mainImage{
       ...,
@@ -18,9 +21,7 @@ export const homeSliderQuery = `
           }
         }
       }
-    },
-
-    "seriesSlug": *[_type == "series" && references(^._id)][0].slug.current
+    }
   }
-}.slides
+}.moments
 `;

@@ -3,7 +3,7 @@
 import Image from "next/image"
 import {buildImage} from "@/sanity/image"
 import { useState } from "react"
-import clsx from "clsx";
+import {cn} from "@/lib/utils/cn";
 
 
 export default function ArtworkImage({ image, title, priority }) {
@@ -19,7 +19,7 @@ export default function ArtworkImage({ image, title, priority }) {
             onLoad={(e) => {
                 if (e.target.complete) setLoaded(true)
             }}
-            className={clsx(
+            className={cn(
                 "object-cover transition-opacity duration-700",
                 loaded ? "opacity-100" : "opacity-0"
             )}

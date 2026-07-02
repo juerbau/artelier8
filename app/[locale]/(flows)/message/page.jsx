@@ -2,6 +2,7 @@ import {notFound} from "next/navigation";
 
 import {messageContent} from "@/lib/i18n/messageContent";
 import {getStringParam, getContentEntry} from "@/lib/validation/searchParams-helpers";
+import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
 
 import FadeInSection from "@/ui/components/FadeInSection";
 import Logo from "@/ui/components/Logo";
@@ -11,7 +12,6 @@ import PageTitle from "@/ui/components/PageTitle";
 import MainButton from "@/ui/components/MainButton";
 import ContentWidth from "@/ui/components/util/ContentWidth";
 import TextContent from "@/ui/components/util/TextContent";
-import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
 
 
 

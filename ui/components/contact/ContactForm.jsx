@@ -2,12 +2,15 @@
 
 import {useState} from "react";
 import {useRouter} from "next/navigation";
+
 import {getContactSchema} from "@/lib/validation/contact-schema";
 import {splitZodErrors} from "@/lib/validation/validation-helpers";
-import {contactForm} from "@/lib/i18n";
+import {contactFormContent} from "@/lib/i18n/contact/contactFormContent";
+
 import FormField from "@/ui/components/contact/FormField";
 import InfoBox from "@/ui/components/InfoBox";
 import MainButton from "@/ui/components/MainButton";
+
 
 export default function ContactForm({locale, initialType, initialArtworkTitle, sold, message}) {
     const router = useRouter();
@@ -18,8 +21,7 @@ export default function ContactForm({locale, initialType, initialArtworkTitle, s
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const [inquiryType, setInquiryType] = useState(initialType);
 
-    const safeLocale = locale?.startsWith("de") ? "de" : "en";
-    const content = contactForm[safeLocale];
+    const content = contactFormContent[locale];
 
     const isSold = sold === "true";
     const initialMessage = initialArtworkTitle
@@ -91,7 +93,7 @@ export default function ContactForm({locale, initialType, initialArtworkTitle, s
             }
 
             router.push(
-                `/${safeLocale}/message?type=contact&option=${inquiryType}`
+                `/${locale}/message?type=contact&option=${inquiryType}`
             );
 
         } catch {

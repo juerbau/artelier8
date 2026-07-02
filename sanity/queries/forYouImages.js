@@ -1,10 +1,93 @@
 export const forYouImagesQuery = `
 *[_type == "forYouImages" && _id == "forYouImages"][0]{
-  stepOneImage,
-  stepTwoImage,
-  stepThreeImage,
-  stepFourImage,
-  beforeImage,
-  afterImage,
+  stepOneImage{
+    ...,
+    asset->{
+      _id,
+      metadata{
+        lqip,
+        dimensions{
+          width,
+          height,
+          aspectRatio
+        }
+      }
+    }
+  },
+
+  stepTwoImage{
+    ...,
+    asset->{
+      _id,
+      metadata{
+        lqip,
+        dimensions{
+          width,
+          height,
+          aspectRatio
+        }
+      }
+    }
+  },
+
+  stepThreeImage{
+    ...,
+    asset->{
+      _id,
+      metadata{
+        lqip,
+        dimensions{
+          width,
+          height,
+          aspectRatio
+        }
+      }
+    }
+  },
+
+  stepFourImage{
+    ...,
+    asset->{
+      _id,
+      metadata{
+        lqip,
+        dimensions{
+          width,
+          height,
+          aspectRatio
+        }
+      }
+    }
+  },
+
+  beforeImage{
+    ...,
+    asset->{
+      _id,
+      metadata{
+        lqip,
+        dimensions{
+          width,
+          height,
+          aspectRatio
+        }
+      }
+    }
+  },
+
+  afterImage{
+    ...,
+    asset->{
+      _id,
+      metadata{
+        lqip,
+        dimensions{
+          width,
+          height,
+          aspectRatio
+        }
+      }
+    }
+  }
 }
 `;

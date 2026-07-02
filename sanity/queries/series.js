@@ -21,7 +21,6 @@ export const seriesBySlugQuery = `
   intro_de,
   intro_en,
   "slug": slug.current,
-  ogImage,
   
   artworks[]->{
     _id,

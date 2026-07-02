@@ -70,11 +70,16 @@ export default function HomeGallery({artworks, locale}) {
                                 >
 
                                     <Image
-                                        src={buildImage({source: artwork.mainImage, width: 1200})}
+                                        src={buildImage({
+                                            source: artwork.mainImage,
+                                            width: 1200,
+                                        })}
                                         alt={artwork.title || "Artwork"}
                                         fill
                                         sizes="(min-width: 1024px) 33vw, 100vw"
                                         priority={i === 0}
+                                        placeholder="blur"
+                                        blurDataURL={artwork.mainImage?.asset?.metadata?.lqip}
                                         className="object-cover"
                                     />
 

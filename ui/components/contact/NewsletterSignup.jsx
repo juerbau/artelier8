@@ -1,19 +1,19 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "motion/react";
+import {useState} from "react";
+import {motion} from "motion/react";
 
 import {cn} from "@/lib/utils/cn";
-import { getNewsletterSchema } from "@/lib/validation/newsletter-schema";
-import { splitZodErrors } from "@/lib/validation/validation-helpers";
-import { newsletterSignupContent } from "@/lib/i18n/newsletterSignupContent";
+import {getNewsletterSchema} from "@/lib/validation/newsletter-schema";
+import {splitZodErrors} from "@/lib/validation/validation-helpers";
+import {newsletterSignupContent} from "@/lib/i18n/newsletterSignupContent";
 
 import FormField from "@/ui/components/contact/FormField";
 import InfoBox from "@/ui/components/InfoBox";
 import MainButton from "@/ui/components/MainButton";
 
 
-export default function NewsletterSignup({ locale }) {
+export default function NewsletterSignup({locale}) {
     const [status, setStatus] = useState("idle");
     const [validationError, setValidationError] = useState("");
     const [apiError, setApiError] = useState("");
@@ -36,7 +36,7 @@ export default function NewsletterSignup({ locale }) {
         const result = schema.safeParse(data);
 
         if (!result.success) {
-            const { fieldErrors, formErrors } = splitZodErrors(result.error)
+            const {fieldErrors, formErrors} = splitZodErrors(result.error)
 
             setValidationError(fieldErrors.email || "")
             setApiError(formErrors.length > 0 ? content.apiError : "")
@@ -144,8 +144,8 @@ export default function NewsletterSignup({ locale }) {
                 <div className="min-h-24 pt-3 text-center">
                     {message && (
                         <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
+                            initial={{opacity: 0}}
+                            animate={{opacity: 1}}
                             className={cn(
                                 "mx-auto max-w-md text-center leading-relaxed",
                                 "whitespace-pre-line",
