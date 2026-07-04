@@ -3,13 +3,13 @@
 import {useRef, useState} from "react";
 import {X, ImagePlus} from "lucide-react";
 import {motion, AnimatePresence} from "motion/react";
-import clsx from "clsx"
 import {
     UPLOAD_MAX_FILES,
     UPLOAD_MAX_SIZE_MB,
     UPLOAD_MAX_SIZE_BYTES,
     UPLOAD_ACCEPTED_TYPES,
 } from "@/lib/upload/config";
+import {cn} from "@/lib/utils/cn";
 
 export default function OrderImageUpload({
                                              content,
@@ -93,7 +93,11 @@ export default function OrderImageUpload({
                 {content.question}
             </p>
 
-            <p className="text-base whitespace-pre-line">
+            <p className="text-lg whitespace-pre-line">
+                {content.notice}
+            </p>
+
+            <p className="text-lg whitespace-pre-line">
                 {content.helper}
             </p>
 
@@ -118,7 +122,7 @@ export default function OrderImageUpload({
                         inputRef.current?.click()
                     }
                 }}
-                className={clsx(
+                className={cn(
                     "flex w-full items-center justify-center gap-2",
                     "rounded-2xl border border-dashed px-6 py-8",
                     "text-sm transition",
@@ -143,7 +147,7 @@ export default function OrderImageUpload({
                         initial={{opacity: 0, y: 6}}
                         animate={{opacity: 1, y: 0}}
                         exit={{opacity: 0, y: 6}}
-                        className={clsx(
+                        className={cn(
                             "grid gap-4",
                             gridClassName
                         )}
@@ -155,7 +159,7 @@ export default function OrderImageUpload({
                                 initial={{opacity: 0, scale: 0.96}}
                                 animate={{opacity: 1, scale: 1}}
                                 exit={{opacity: 0, scale: 0.96}}
-                                className={clsx(
+                                className={cn(
                                     "group relative overflow-hidden rounded-2xl",
                                     "border border-white/30 bg-white/10"
                                 )}
@@ -163,7 +167,7 @@ export default function OrderImageUpload({
                                 <img
                                     src={image.preview}
                                     alt=""
-                                    className={clsx(
+                                    className={cn(
                                         "aspect-square w-full object-cover",
                                         "transition duration-500 group-hover:scale-105"
                                     )}
@@ -172,11 +176,10 @@ export default function OrderImageUpload({
                                 <button
                                     type="button"
                                     onClick={() => removeImage(image.id)}
-                                    className={clsx(
+                                    className={cn(
                                         "absolute right-2 top-2 flex size-8 items-center justify-center",
                                         "rounded-full bg-black/60 text-white shadow-sm backdrop-blur",
-                                        "opacity-100 transition sm:opacity-0 sm:group-hover:opacity-100",
-                                        "hover:bg-black"
+                                        "opacity-100 transition hover:bg-black"
                                     )}
                                     aria-label="Bild entfernen"
                                 >

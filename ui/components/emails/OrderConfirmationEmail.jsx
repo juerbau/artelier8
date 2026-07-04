@@ -3,8 +3,8 @@ import {
     Text,
     Link,
 } from "@react-email/components";
-import MailLayout, { mailStyles } from "@/ui/components/emails/MailLayout";
-import { orderEmailContent } from "@/lib/i18n/orderEmailContent";
+import MailLayout, {mailStyles} from "@/ui/components/emails/MailLayout";
+import {orderEmailContent} from "@/lib/i18n/order/orderEmailContent";
 
 function formatValue(value) {
     if (value === undefined || value === null || value === "") {
@@ -19,15 +19,14 @@ export default function OrderConfirmationEmail({
                                                    artistEmail,
                                                    order,
                                                }) {
-    const safeLocale = locale === "de" ? "de" : "en";
-    const content = orderEmailContent[safeLocale].confirmation;
+    const content = orderEmailContent[locale].confirmation;
     const labels = content.labels;
 
     const referenceImages = order?.referenceImages || [];
 
     return (
         <MailLayout
-            locale={safeLocale}
+            locale={locale}
             footerNote={content.footerNote}
         >
             <Section style={mailStyles.content}>

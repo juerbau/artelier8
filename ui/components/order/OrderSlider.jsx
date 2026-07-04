@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import {cn} from "@/lib/utils/cn";
 
 export default function OrderSlider({
                                         label,
@@ -14,7 +14,7 @@ export default function OrderSlider({
     const percentage = ((value - min) / (max - min)) * 100;
 
     return (
-        <div className={clsx("space-y-4", className)}>
+        <div className={cn("space-y-4", className)}>
             {label && (
                 <p className="font-roboto text-lg">
                     {label}

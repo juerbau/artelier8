@@ -1,19 +1,19 @@
-import { NextResponse } from "next/server";
-import { redis, checkRateLimit } from "@/lib/security/rate-limit";
-import { getOrderSchema } from "@/lib/validation/order-schema";
-import { removeMetaFields } from "@/lib/validation/validation-helpers";
-import { checkOrigin } from "@/lib/security/origin-check";
-import { isHoneypotTriggered } from "@/lib/security/honeypot";
-import { sendOrderRequestEmail } from "@/lib/email/sendOrderRequestEmail";
-import { sendOrderConfirmationEmail } from "@/lib/email/sendOrderConfirmationEmail";
-import { getEmailTo } from "@/lib/email/config";
+import {NextResponse} from "next/server";
+import {redis, checkRateLimit} from "@/lib/security/rate-limit";
+import {getOrderSchema} from "@/lib/validation/order-schema";
+import {removeMetaFields} from "@/lib/validation/validation-helpers";
+import {checkOrigin} from "@/lib/security/origin-check";
+import {isHoneypotTriggered} from "@/lib/security/honeypot";
+import {sendOrderRequestEmail} from "@/lib/email/sendOrderRequestEmail";
+import {sendOrderConfirmationEmail} from "@/lib/email/sendOrderConfirmationEmail";
+import {getEmailTo} from "@/lib/email/config";
 
 export async function POST(req) {
     try {
         if (!checkOrigin(req)) {
             return NextResponse.json(
-                { success: false, error: "forbidden" },
-                { status: 403 }
+                {success: false, error: "forbidden"},
+                {status: 403}
             );
         }
 
@@ -21,8 +21,8 @@ export async function POST(req) {
 
         if (isHoneypotTriggered(body)) {
             return NextResponse.json(
-                { success: true },
-                { status: 200 }
+                {success: true},
+                {status: 200}
             );
         }
 
@@ -30,15 +30,15 @@ export async function POST(req) {
 
         if (!allowed) {
             return NextResponse.json(
-                { success: false, error: "rate_limit" },
+                {success: false, error: "rate_limit"},
                 {
                     status: 429,
-                    headers: { "Retry-After": "60" },
+                    headers: {"Retry-After": "60"},
                 }
             );
         }
 
-        const locale = body?.locale?.startsWith("de") ? "de" : "en";
+        const locale = body?.locale;
         const token = body?.token;
 
         if (!token) {
@@ -47,7 +47,7 @@ export async function POST(req) {
                     success: false,
                     error: "missing_token",
                 },
-                { status: 400 }
+                {status: 400}
             );
         }
 
@@ -60,7 +60,7 @@ export async function POST(req) {
                     success: false,
                     error: "invalid_or_expired_token",
                 },
-                { status: 400 }
+                {status: 400}
             );
         }
 
@@ -77,7 +77,7 @@ export async function POST(req) {
                     success: false,
                     error: "missing_customer_email",
                 },
-                { status: 400 }
+                {status: 400}
             );
         }
 
@@ -93,7 +93,7 @@ export async function POST(req) {
                     error: "validation",
                     issues: result.error.issues,
                 },
-                { status: 400 }
+                {status: 400}
             );
         }
 
@@ -107,7 +107,7 @@ export async function POST(req) {
                     success: false,
                     error: "missing_contact_email",
                 },
-                { status: 500 }
+                {status: 500}
             );
         }
 
@@ -125,7 +125,7 @@ export async function POST(req) {
                         resArtist.error.message ||
                         "Failed to send order request email",
                 },
-                { status: resArtist.error.statusCode || 500 }
+                {status: resArtist.error.statusCode || 500}
             );
         }
 
@@ -144,7 +144,7 @@ export async function POST(req) {
                         resCustomer.error.message ||
                         "Failed to send order confirmation email",
                 },
-                { status: resCustomer.error.statusCode || 500 }
+                {status: resCustomer.error.statusCode || 500}
             );
         }
 
@@ -169,7 +169,7 @@ export async function POST(req) {
                 success: false,
                 error: "server_error",
             },
-            { status: 500 }
+            {status: 500}
         );
     }
 }

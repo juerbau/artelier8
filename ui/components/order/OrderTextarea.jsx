@@ -1,5 +1,5 @@
-import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
+import {cn} from "@/lib/utils/cn";
 
 export default function OrderTextarea({
                                           label,
@@ -13,7 +13,7 @@ export default function OrderTextarea({
                                           className,
                                       }) {
     return (
-        <div className={clsx("space-y-2", className)}>
+        <div className={cn("space-y-2", className)}>
             {label && (
                 <label
                     htmlFor={name}
@@ -36,7 +36,7 @@ export default function OrderTextarea({
                 onChange={(e) => onChange(e.target.value)}
                 placeholder={placeholder}
                 rows={rows}
-                className={clsx(
+                className={cn(
                     "w-full resize-y rounded-md border border-white/20 bg-white px-4 py-3",
                     "font-roboto text-black",
                     "outline-none transition",

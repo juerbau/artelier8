@@ -1,9 +1,9 @@
-import { Section, Heading, Text, Link } from "@react-email/components";
-import MailLayout, { mailStyles } from "./MailLayout";
-import { orderLinkContent } from "@/lib/i18n/emailContent";
+import {Section, Heading, Text, Link} from "@react-email/components";
+import MailLayout, {mailStyles} from "./MailLayout";
+import {orderLinkContent} from "@/lib/i18n/order/orderLinkContent";
 
 
-export default function OrderLinkEmail({ locale = "de", orderUrl }) {
+export default function OrderLinkEmail({locale = "de", orderUrl}) {
 
     const content = orderLinkContent[locale] ?? orderLinkContent.de;
 

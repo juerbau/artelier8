@@ -1,62 +1,186 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { uploadReferenceImages } from "@/lib/upload/upload-reference-images";
+import {useState} from "react";
+import {useRouter} from "next/navigation";
+
+import {getOrderClientSchema} from "@/lib/validation/order-client-schema";
+import {splitZodErrors} from "@/lib/validation/validation-helpers";
+import {uploadReferenceImages} from "@/lib/upload/upload-reference-images";
+
 import OrderSection from "./OrderSection";
 import OrderRadioGroup from "./OrderRadioGroup";
 import OrderField from "./OrderField";
 import OrderTextarea from "./OrderTextarea";
 import OrderSlider from "./OrderSlider";
 import OrderImageUpload from "./OrderImageUpload";
+
 import MainButton from "@/ui/components/MainButton";
 
 
-export default function OrderForm({ locale, token, formContent }) {
+export default function OrderForm({locale, token, formContent}) {
     const [timeline, setTimeline] = useState("");
     const [occasion, setOccasion] = useState("");
+
     const [colorPreferences, setColorPreferences] = useState("");
     const [colorsToAvoid, setColorsToAvoid] = useState("");
+
     const [abstractionLevel, setAbstractionLevel] = useState(5);
     const [motifRepresentation, setMotifRepresentation] = useState("");
+
     const [format, setFormat] = useState("");
     const [preferredSize, setPreferredSize] = useState("");
+
     const [referenceImages, setReferenceImages] = useState([]);
+
     const [additionalWishes, setAdditionalWishes] = useState("");
     const [phone, setPhone] = useState("");
 
-    const router = useRouter();
+    const [errors, setErrors] = useState({});
+    const [formError, setFormError] = useState("");
+    const [hasSubmitted, setHasSubmitted] = useState(false);
 
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [submitError, setSubmitError] = useState("");
 
-    const safeLocale = locale?.startsWith("de") ? "de" : "en";
+    const router = useRouter();
 
     const content = formContent;
 
-    async function handleSubmit(event) {
-        event.preventDefault()
 
-        setIsSubmitting(true)
-        setSubmitError("")
+    function handleFieldChange(field, value) {
+
+        if (!hasSubmitted) return;
+
+        const schema = getOrderClientSchema(locale);
+
+        const result = schema.safeParse({
+            timeline:
+                field === "timeline"
+                    ? value
+                    : timeline,
+
+            occasion:
+                field === "occasion"
+                    ? value
+                    : occasion,
+
+            colorPreferences:
+                field === "colorPreferences"
+                    ? value
+                    : colorPreferences,
+
+            colorsToAvoid:
+                field === "colorsToAvoid"
+                    ? value
+                    : colorsToAvoid,
+
+            abstractionLevel:
+                field === "abstractionLevel"
+                    ? value
+                    : abstractionLevel,
+
+            motifRepresentation:
+                field === "motifRepresentation"
+                    ? value
+                    : motifRepresentation,
+
+            format:
+                field === "format"
+                    ? value
+                    : format,
+
+            preferredSize:
+                field === "preferredSize"
+                    ? value
+                    : preferredSize,
+
+            referenceImages:
+                field === "referenceImages"
+                    ? value
+                    : referenceImages,
+
+            additionalWishes:
+                field === "additionalWishes"
+                    ? value
+                    : additionalWishes,
+
+            phone:
+                field === "phone"
+                    ? value
+                    : phone,
+
+            locale,
+            website: "",
+        });
+
+        if (result.success) {
+
+            setErrors((prev) => ({
+                ...prev,
+                [field]: undefined,
+            }));
+
+        } else {
+
+            const {fieldErrors} = splitZodErrors(result.error);
+
+            setErrors((prev) => ({
+                ...prev,
+                [field]: fieldErrors[field],
+            }));
+        }
+
+        setFormError("");
+    }
+
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+
+        setHasSubmitted(true);
+        setIsSubmitting(true);
+        setErrors({});
+        setFormError("");
+
+        const validationResult = getOrderClientSchema(locale).safeParse({
+            timeline,
+            occasion,
+            colorPreferences,
+            colorsToAvoid,
+            abstractionLevel,
+            motifRepresentation,
+            format,
+            preferredSize,
+            referenceImages,
+            additionalWishes,
+            phone,
+            locale,
+            website: "",
+        });
+
+        if (!validationResult.success) {
+
+            const {fieldErrors, formErrors} =
+                splitZodErrors(validationResult.error);
+
+            setErrors(fieldErrors);
+            setFormError(
+                formErrors.length > 0
+                    ? content.error
+                    : ""
+            );
+
+            setIsSubmitting(false);
+            return;
+        }
 
         try {
+
             const uploadedReferenceImages =
                 await uploadReferenceImages(referenceImages);
 
             const payload = {
-                timeline,
-                occasion,
-                colorPreferences,
-                colorsToAvoid,
-                abstractionLevel,
-                motifRepresentation,
-                format,
-                preferredSize,
+                ...validationResult.data,
                 referenceImages: uploadedReferenceImages,
-                additionalWishes,
-                phone,
-                locale: safeLocale,
                 token,
             };
 
@@ -68,7 +192,8 @@ export default function OrderForm({ locale, token, formContent }) {
                 body: JSON.stringify(payload),
             });
 
-            const responseData = await res.json().catch(() => null);
+            const responseData =
+                await res.json().catch(() => null);
 
             if (!res.ok || !responseData?.success) {
                 throw new Error(
@@ -78,16 +203,19 @@ export default function OrderForm({ locale, token, formContent }) {
                 );
             }
 
+            router.push(`/${locale}/message?type=order`);
 
-            router.push(`/${safeLocale}/message?type=order`);
+        } catch {
 
+            setFormError(content.error);
 
-        } catch (error) {
-            setSubmitError(error.message)
         } finally {
-            setIsSubmitting(false)
+
+            setIsSubmitting(false);
+
         }
     }
+
 
     return (
         <form
@@ -104,25 +232,23 @@ export default function OrderForm({ locale, token, formContent }) {
                 <OrderRadioGroup
                     name="timeline"
                     value={timeline}
-                    onChange={setTimeline}
+                    error={errors.timeline}
+                    onChange={(value) => {
+                        setTimeline(value);
+                        handleFieldChange("timeline", value);
+                    }}
                     options={[
                         {
                             value: "within4Weeks",
-                            label:
-                            content.timeline.options
-                                .within4Weeks,
+                            label: content.timeline.options.within4Weeks,
                         },
                         {
                             value: "within2to3Months",
-                            label:
-                            content.timeline.options
-                                .within2to3Months,
+                            label: content.timeline.options.within2to3Months,
                         },
                         {
                             value: "specificOccasion",
-                            label:
-                            content.timeline.options
-                                .specificOccasion,
+                            label: content.timeline.options.specificOccasion,
                         },
                     ]}
                 />
@@ -131,16 +257,25 @@ export default function OrderForm({ locale, token, formContent }) {
                         label={content.timeline.occasionLabel}
                         name="occasion"
                         value={occasion}
-                        onChange={setOccasion}
+                        error={errors.occasion}
+                        onChange={(value) => {
+                            setOccasion(value);
+                            handleFieldChange("occasion", value);
+                        }}
                     />
                 )}
             </OrderSection>
+
             <OrderSection title={content.sections.colors.title}>
                 <OrderTextarea
                     label={content.colors.question}
                     name="colorPreferences"
                     value={colorPreferences}
-                    onChange={setColorPreferences}
+                    error={errors.colorPreferences}
+                    onChange={(value) => {
+                        setColorPreferences(value);
+                        handleFieldChange("colorPreferences", value);
+                    }}
                     rows={3}
                     placeholder={content.colors.placeholder}
                 />
@@ -149,16 +284,24 @@ export default function OrderForm({ locale, token, formContent }) {
                     label={content.colors.avoidLabel}
                     name="colorsToAvoid"
                     value={colorsToAvoid}
-                    onChange={setColorsToAvoid}
+                    error={errors.colorsToAvoid}
+                    onChange={(value) => {
+                        setColorsToAvoid(value);
+                        handleFieldChange("colorsToAvoid", value);
+                    }}
                     rows={3}
                 />
             </OrderSection>
+
             <OrderSection title={content.sections.motif.title}>
                 <OrderSlider
                     label={content.motif.interpretationQuestion}
                     name="abstractionLevel"
                     value={abstractionLevel}
-                    onChange={setAbstractionLevel}
+                    onChange={(value) => {
+                        setAbstractionLevel(value);
+                        handleFieldChange("abstractionLevel", value);
+                    }}
                     min={0}
                     max={10}
                     leftLabel={content.motif.realistic}
@@ -171,7 +314,11 @@ export default function OrderForm({ locale, token, formContent }) {
                     <OrderRadioGroup
                         name="motifRepresentation"
                         value={motifRepresentation}
-                        onChange={setMotifRepresentation}
+                        error={errors.motifRepresentation}
+                        onChange={(value) => {
+                            setMotifRepresentation(value);
+                            handleFieldChange("motifRepresentation", value);
+                        }}
                         options={[
                             {
                                 value: "full",
@@ -189,6 +336,7 @@ export default function OrderForm({ locale, token, formContent }) {
                     />
                 </div>
             </OrderSection>
+
             <OrderSection title={content.sections.formatAndSize.title}>
                 <p className="text-lg">
                     {content.formatAndSize.question}
@@ -197,7 +345,11 @@ export default function OrderForm({ locale, token, formContent }) {
                 <OrderRadioGroup
                     name="format"
                     value={format}
-                    onChange={setFormat}
+                    error={errors.format}
+                    onChange={(value) => {
+                        setFormat(value);
+                        handleFieldChange("format", value);
+                    }}
                     options={[
                         {
                             value: "square",
@@ -218,27 +370,42 @@ export default function OrderForm({ locale, token, formContent }) {
                     label={content.formatAndSize.sizeLabel}
                     name="preferredSize"
                     value={preferredSize}
-                    onChange={setPreferredSize}
+                    error={errors.preferredSize}
+                    onChange={(value) => {
+                        setPreferredSize(value);
+                        handleFieldChange("preferredSize", value);
+                    }}
                     helper={content.formatAndSize.sizeHelper}
                 />
             </OrderSection>
+
             <OrderSection title={content.sections.references.title}>
                 <OrderImageUpload
                     content={content.references}
                     value={referenceImages}
-                    onChange={setReferenceImages}
+                    error={errors.referenceImages}
+                    onChange={(value) => {
+                        setReferenceImages(value);
+                        handleFieldChange("referenceImages", value);
+                    }}
                 />
             </OrderSection>
+
             <OrderSection title={content.sections.wishes.title}>
                 <OrderTextarea
                     label={content.wishes.question}
                     name="additionalWishes"
                     value={additionalWishes}
-                    onChange={setAdditionalWishes}
+                    error={errors.additionalWishes}
+                    onChange={(value) => {
+                        setAdditionalWishes(value);
+                        handleFieldChange("additionalWishes", value);
+                    }}
                     placeholder={content.wishes.placeholder}
                     rows={4}
                 />
             </OrderSection>
+
             <OrderSection title={content.sections.contact.title}>
                 <p className="text-lg leading-relaxed">
                     {content.contact.question}
@@ -249,13 +416,26 @@ export default function OrderForm({ locale, token, formContent }) {
                     name="phone"
                     type="tel"
                     value={phone}
-                    onChange={setPhone}
+                    error={errors.phone}
+                    onChange={(value) => {
+                        setPhone(value);
+                        handleFieldChange("phone", value);
+                    }}
                 />
             </OrderSection>
 
-            {submitError && (
-                <p className="text-sm text-red-600">
-                    {submitError}
+            <input
+                type="text"
+                name="website"
+                className="absolute -left-2499.75"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+            />
+
+            {formError && (
+                <p className="mt-3 text-lg font-roboto text-yellow-300">
+                    {formError}
                 </p>
             )}
 

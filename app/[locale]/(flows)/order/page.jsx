@@ -1,4 +1,7 @@
-import {orderFormContent} from "@/lib/i18n/orderFormContent";
+import {redirect} from "next/navigation";
+
+import {redis} from "@/lib/security/rate-limit";
+import {orderFormContent} from "@/lib/i18n/order/orderFormContent";
 import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
 
 import OrderForm from "@/ui/components/order/OrderForm";
@@ -15,7 +18,24 @@ export default async function OrderPage({params, searchParams}) {
     const locale = await getSafeLocale(params);
     const {token} = await searchParams;
 
+    const isDeveloper =
+        token === process.env.DEV_TOKEN;
+
     const content = orderFormContent[locale];
+
+    if (!isDeveloper) {
+        // Developer Token vorhanden?
+        if (!token) {
+            redirect(`/${locale}/message?type=order-invalid`);
+        }
+
+        // Token in Upstash prüfen
+        const email = await redis.get(`order:request:${token}`);
+
+        if (!email) {
+            redirect(`/${locale}/message?type=order-invalid`);
+        }
+    }
 
     return (
 

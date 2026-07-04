@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "motion/react";
-import clsx from "clsx";
+import {cn} from "@/lib/utils/cn";
 
 export default function FormField({
                                       label,
@@ -16,7 +16,7 @@ export default function FormField({
                                   }) {
     const id = `field-${name}`;
 
-    const baseClasses = clsx(
+    const baseClasses = cn(
         "w-full",
         "bg-white text-black font-roboto",
         "px-4 py-3",
@@ -44,7 +44,7 @@ export default function FormField({
                     id={id}
                     name={name}
                     autoComplete={autoComplete}
-                    className={clsx(
+                    className={cn(
                         baseClasses,
                         "min-h-35 resize-none"
                     )}
@@ -64,7 +64,7 @@ export default function FormField({
                 />
             )}
 
-            <div className={clsx(
+            <div className={cn(
                 textarea ? "min-h-7" : "mt-1 min-h-7"
             )}>
                 <AnimatePresence mode="wait">

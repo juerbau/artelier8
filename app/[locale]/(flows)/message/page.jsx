@@ -65,6 +65,24 @@ export default async function MessagePage({ params, searchParams }) {
         }
     }
 
+    if (type === "order-invalid") {
+        const orderInvalidContent = getContentEntry(messages, "orderInvalid");
+
+        if (
+            orderInvalidContent?.title &&
+            orderInvalidContent?.success &&
+            orderInvalidContent?.buttonText
+        ) {
+            content = {
+                title: orderInvalidContent.title,
+                message: orderInvalidContent.success,
+                button: orderInvalidContent.buttonText,
+            };
+
+            href = `/${locale}/contact`;
+        }
+    }
+
     if (type === "contact") {
         const option = getStringParam(query, "option");
 

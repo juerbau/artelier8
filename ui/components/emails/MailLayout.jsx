@@ -131,7 +131,7 @@ export const mailStyles = {
         maxWidth: "460px",
         margin: "28px auto 0",
         color: "rgba(255,255,255,0.78)",
-        fontSize: "13px",
+        fontSize: "16px",
         lineHeight: "1.7",
     },
 

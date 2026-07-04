@@ -1,5 +1,5 @@
-import clsx from "clsx";
 import {AnimatePresence, motion} from "motion/react";
+import {cn} from "@/lib/utils/cn";
 
 export default function OrderField({
                                        label,
@@ -14,7 +14,7 @@ export default function OrderField({
                                        className,
                                    }) {
     return (
-        <div className={clsx("space-y-2", className)}>
+        <div className={cn("space-y-2", className)}>
             {label && (
                 <label
                     htmlFor={name}
@@ -38,7 +38,7 @@ export default function OrderField({
                 onChange={(e) => onChange(e.target.value)}
                 placeholder={placeholder}
                 autoComplete={autoComplete}
-                className={clsx(
+                className={cn(
                     "w-full rounded-md border border-white/20 bg-white px-4 py-3",
                     "font-roboto text-black",
                     "outline-none transition",

@@ -41,7 +41,6 @@ export async function POST(req) {
             )
         }
 
-        const locale = body?.locale?.startsWith("de") ? "de" : "en";
         const formData = removeMetaFields(body);
 
         const schema = getNewsletterSchema(locale);

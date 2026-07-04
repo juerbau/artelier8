@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CircleArrowRight } from "lucide-react";
-import clsx from "clsx";
+import {cn} from "@/lib/utils/cn";
 
 export default function ArtworkInquiryLink({ href, children, className }) {
 
@@ -9,7 +9,7 @@ export default function ArtworkInquiryLink({ href, children, className }) {
     return (
         <Link
             href={href}
-            className={clsx(
+            className={cn(
                 "group inline-flex items-center gap-2",
                 "mt-5",
                 "text-meta text-white/50 underline",
@@ -18,7 +18,7 @@ export default function ArtworkInquiryLink({ href, children, className }) {
                 className
             )}
         >
-            <span className={clsx(baseClasses)}>
+            <span className={cn(baseClasses)}>
                 {children}
             </span>
 

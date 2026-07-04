@@ -3,7 +3,6 @@
 import {usePathname} from "next/navigation"
 import LangSwitch from "@/ui/components/header/LangSwitch"
 import ResponsiveNav from "@/ui/components/header/ResponsiveNav"
-import clsx from "clsx";
 import Logo from "@/ui/components/Logo";
 
 

@@ -3,8 +3,8 @@ import {
     Text,
     Link,
 } from "@react-email/components";
-import { orderEmailContent } from "@/lib/i18n/orderEmailContent";
-import MailLayout, { mailStyles } from "@/ui/components/emails/MailLayout";
+import {orderEmailContent} from "@/lib/i18n/order/orderEmailContent";
+import MailLayout, {mailStyles} from "@/ui/components/emails/MailLayout";
 
 function formatValue(value) {
     if (value === undefined || value === null || value === "") {
