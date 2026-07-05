@@ -28,7 +28,7 @@ export async function generateMetadata({params}) {
     return buildMetadata({
         title: og.title,
         description: og.description,
-        image: "/og/ogImage.jpg",
+        image: og.image,
         locale,
         path: "/",
     })
