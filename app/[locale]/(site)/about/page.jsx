@@ -5,6 +5,7 @@ import {buildImage} from "@/sanity/image";
 import {buildMetadata} from "@/lib/seo";
 import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
 import {aboutContent} from "@/lib/i18n/about/aboutContent";
+import {ogImage} from "@/lib/i18n/ogImage";
 import {cn} from "@/lib/utils/cn";
 
 import FadeInSection from "@/ui/components/FadeInSection";
@@ -21,11 +22,12 @@ export async function generateMetadata({params}) {
 
     const locale = await getSafeLocale(params);
     const content = aboutContent[locale];
+    const image = ogImage[locale];
 
     return buildMetadata({
         title: content.metadata.title,
         description: content.metadata.description,
-        image: "/og/ogImage.jpg",
+        image,
         locale,
         path: "/about",
     });

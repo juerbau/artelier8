@@ -6,7 +6,7 @@ import {beforeAfterJourneyQuery} from "@/sanity/queries/beforeAfterJourney";
 import {buildMetadata} from "@/lib/seo"
 import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
 import {homeContent} from "@/lib/i18n/home/homeContent";
-import {ogContent} from "@/lib/i18n/ogContent";
+import {ogImage} from "@/lib/i18n/ogImage";
 
 import HomeGallery from "@/ui/components/home/HomeGallery"
 import GoldenLineDivider from "@/ui/components/GoldenLineDivider";
@@ -23,15 +23,16 @@ import PageTitle from "@/ui/components/PageTitle";
 export async function generateMetadata({params}) {
 
     const locale = await getSafeLocale(params);
-    const og = ogContent[locale];
+    const content = homeContent[locale];
+    const image = ogImage[locale];
 
     return buildMetadata({
-        title: og.title,
-        description: og.description,
-        image: og.image,
+        title: content.metadata.title,
+        description: content.metadata.description,
+        image,
         locale,
         path: "/",
-    })
+    });
 }
 
 

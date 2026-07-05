@@ -2,6 +2,8 @@ import {sanityFetch} from "@/sanity/fetch";
 import {seriesListQuery} from "@/sanity/queries/series";
 
 import {seriesContent} from "@/lib/i18n/series/seriesContent";
+import {ogImage} from "@/lib/i18n/ogImage";
+
 import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
 import {buildMetadata} from "@/lib/seo";
 
@@ -18,11 +20,12 @@ export async function generateMetadata({params}) {
 
     const locale = await getSafeLocale(params);
     const content = seriesContent[locale];
+    const image = ogImage[locale];
 
     return buildMetadata({
         title: content.metadata.title,
         description: content.metadata.description,
-        image: "/og/ogImage.jpg",
+        image,
         locale,
         path: "/series",
     });

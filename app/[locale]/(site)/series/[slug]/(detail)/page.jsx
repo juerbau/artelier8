@@ -6,6 +6,7 @@ import {seriesBySlugQuery} from "@/sanity/queries/series";
 
 import {buildMetadata} from "@/lib/seo";
 import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
+import {ogImage} from "@/lib/i18n/ogImage";
 
 import ArtworkGrid from "@/ui/components/series/detail/ArtworkGrid";
 import FadeInSection from "@/ui/components/FadeInSection";
@@ -17,8 +18,10 @@ import PageIntro from "@/ui/components/PageIntro";
 
 /* SEO Metadata */
 export async function generateMetadata({params}) {
+
     const locale = await getSafeLocale(params);
     const {slug} = await params;
+    const image = ogImage[locale];
 
     const series = await sanityFetch({
         query: seriesBySlugQuery,
@@ -26,15 +29,9 @@ export async function generateMetadata({params}) {
     });
 
 
-    // Stabiler Fallback statt leerem Objekt
+    // Serie existiert nicht oder ist nicht veröffentlicht.
     if (!series) {
-        return buildMetadata({
-            title: "Series",
-            description: "",
-            image: "/og/ogImage.jpg",
-            locale,
-            path: `/series/${slug}`,
-        });
+        notFound();
     }
 
     const title =
@@ -50,7 +47,7 @@ export async function generateMetadata({params}) {
     return buildMetadata({
         title,
         description,
-        image: "/og/ogImage.jpg",
+        image,
         locale,
         path: `/series/${slug}`,
     });

@@ -1,4 +1,6 @@
 import {contactContent} from "@/lib/i18n/contact/contactContent";
+import {ogImage} from "@/lib/i18n/ogImage";
+
 import {cleanQueryText, getStringParam} from "@/lib/validation/searchParams-helpers";
 import {buildMetadata} from "@/lib/seo";
 import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
@@ -18,11 +20,12 @@ export async function generateMetadata({params}) {
 
     const locale = await getSafeLocale(params);
     const content = contactContent[locale];
+    const image = ogImage[locale];
 
     return buildMetadata({
         title: content.metadata.title,
         description: content.metadata.description,
-        image: "/og/ogImage.jpg",
+        image,
         locale,
         path: "/contact",
     });

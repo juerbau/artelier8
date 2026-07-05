@@ -5,6 +5,8 @@ import {sanityFetch} from "@/sanity/fetch";
 import {artworkPageQuery, seriesBySlugQuery} from "@/sanity/queries/series";
 
 import {artworkContent} from "@/lib/i18n/artwork/artworkContent";
+import {ogImage} from "@/lib/i18n/ogImage";
+
 import {buildMetadata} from "@/lib/seo";
 import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
 
@@ -14,6 +16,7 @@ import ScrollToTop from "@/ui/components/ScrollToTop";
 
 
 export async function generateMetadata({params}) {
+
     const locale = await getSafeLocale(params);
     const {slug, artworkSlug} = await params;
 
@@ -27,14 +30,8 @@ export async function generateMetadata({params}) {
 
 
     // Stabiler Fallback
-    if (!artwork) {
-        return buildMetadata({
-            title: "Artwork",
-            description: "",
-            image: "/og/ogImage.jpg",
-            locale,
-            path: `/series/${slug}/${artworkSlug}`,
-        });
+    if (!artwork || !series) {
+        notFound();
     }
 
 
@@ -54,10 +51,12 @@ export async function generateMetadata({params}) {
 
     const description = rawDescription || fallbackDescription || "";
 
+    const image = ogImage[locale];
+
     return buildMetadata({
         title,
         description,
-        image: "/og/ogImage.jpg",
+        image,
         locale,
         path: `/series/${slug}/${artworkSlug}`,
     });

@@ -8,7 +8,7 @@ export default function GoldenSignature({className}) {
         <div className={cn("h-auto", className)}>
             <Image
                 src={signature}
-                alt="Signature Bettina Hagedorn"
+                alt="Signature Bettina J. Hagedorn"
                 sizes="(max-width: 768px) 400px, 560px"
                 priority
             />

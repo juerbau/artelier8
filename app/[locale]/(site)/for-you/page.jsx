@@ -3,6 +3,8 @@ import {sanityFetch} from "@/sanity/fetch";
 
 import {forYouContent} from "@/lib/i18n/for-you/forYouContent";
 import {processStepsContent} from "@/lib/i18n/for-you/processSteps";
+import {ogImage} from "@/lib/i18n/ogImage";
+
 import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
 import {buildMetadata} from "@/lib/seo";
 import {cn} from "@/lib/utils/cn";
@@ -22,11 +24,12 @@ export async function generateMetadata({ params }) {
 
     const locale = await getSafeLocale(params);
     const content = forYouContent[locale];
+    const image = ogImage[locale];
 
     return buildMetadata({
         title: content.metadata.title,
         description: content.metadata.description,
-        image: "/og/ogImage.jpg",
+        image,
         locale,
         path: "/for-you",
     });
