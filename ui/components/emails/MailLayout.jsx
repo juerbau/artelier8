@@ -9,7 +9,7 @@ import {
     Link,
 } from "@react-email/components"
 
-export default function MailLayout({ locale = "de", children, footerNote }) {
+export default function MailLayout({ locale = "de", children, footerNote, unsubscribeFooter }) {
     const isDe = locale === "de"
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
 
@@ -39,10 +39,6 @@ export default function MailLayout({ locale = "de", children, footerNote }) {
                     </Container>
 
                     <Section style={styles.footerOutside}>
-                        <Text style={styles.footerTitle}>
-                            <span style={styles.footerArt}>ART</span>elier8
-                        </Text>
-
                         <Text style={styles.footerText}>
                             <Link href={siteUrl} style={styles.footerLink}>
                                 www.artelier8.de
@@ -74,6 +70,8 @@ export default function MailLayout({ locale = "de", children, footerNote }) {
                         {footerNote && (
                             <Text style={styles.legalText}>{footerNote}</Text>
                         )}
+
+                        {unsubscribeFooter}
 
                         <Text style={styles.signature}>
                             © {new Date().getFullYear()} ARTelier8
@@ -199,14 +197,6 @@ const styles = {
         margin: "30px auto 0",
         padding: "0 32px 12px",
         textAlign: "center",
-    },
-
-    footerTitle: {
-        margin: "0 0 10px",
-        color: "#ffffff",
-        fontSize: "14px",
-        lineHeight: "1.5",
-        letterSpacing: "0.16em",
     },
 
     footerArt: {

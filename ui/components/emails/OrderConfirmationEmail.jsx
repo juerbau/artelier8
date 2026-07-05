@@ -5,6 +5,8 @@ import {
 } from "@react-email/components";
 import MailLayout, {mailStyles} from "@/ui/components/emails/MailLayout";
 import {orderEmailContent} from "@/lib/i18n/order/orderEmailContent";
+import {orderFormContent} from "@/lib/i18n/order/orderFormContent";
+
 
 function formatValue(value) {
     if (value === undefined || value === null || value === "") {
@@ -24,6 +26,9 @@ export default function OrderConfirmationEmail({
 
     const referenceImages = order?.referenceImages || [];
 
+    const timeline = orderFormContent[locale].timeline.options[order.timeline];
+
+
     return (
         <MailLayout
             locale={locale}
@@ -38,11 +43,19 @@ export default function OrderConfirmationEmail({
                     {content.intro}
                 </Text>
 
-                <Text style={mailStyles.label}>{labels.timeline}</Text>
-                <Text style={mailStyles.value}>{formatValue(order?.timeline)}</Text>
+                {order.timeline && (
+                    <>
+                        <Text style={mailStyles.label}>{labels.timeline}</Text>
+                        <Text style={mailStyles.value}>{timeline}</Text>
+                    </>
+                )}
 
-                <Text style={mailStyles.label}>{labels.occasion}</Text>
-                <Text style={mailStyles.value}>{formatValue(order?.occasion)}</Text>
+                {order.occasion && (
+                    <>
+                        <Text style={mailStyles.label}>{labels.occasion}</Text>
+                        <Text style={mailStyles.value}>{order.occasion}</Text>
+                    </>
+                )}
 
                 <Text style={mailStyles.label}>{labels.colorPreferences}</Text>
                 <Text style={mailStyles.value}>{formatValue(order?.colorPreferences)}</Text>

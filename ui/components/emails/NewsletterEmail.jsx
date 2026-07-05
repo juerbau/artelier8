@@ -1,5 +1,5 @@
-import { Section, Heading, Text, Img } from "@react-email/components"
-import MailLayout, { mailStyles } from "./MailLayout"
+import {Section, Heading, Text, Img} from "@react-email/components"
+import MailLayout, {mailStyles} from "./MailLayout"
 
 export default function NewsletterEmail({
                                             title,
@@ -17,9 +17,18 @@ export default function NewsletterEmail({
     const unsubscribeLabel = isDe ? "Abmelden" : "Unsubscribe"
 
     return (
-        <MailLayout locale={locale} footerNote={footerNote}>
+        <MailLayout locale={locale}
+                    footerNote={footerNote}
+                    unsubscribeFooter={
+                        <Text style={styles.unsubscribeText}>
+                            <a href={unsubscribeUrl} style={styles.unsubscribeLink}>
+                                {unsubscribeLabel}
+                            </a>
+                        </Text>
+                    }
+        >
             {imageUrl && (
-                <Img src={imageUrl} alt={title} style={mailStyles.heroImage} />
+                <Img src={imageUrl} alt={title} style={mailStyles.heroImage}/>
             )}
 
             <Section
@@ -32,11 +41,7 @@ export default function NewsletterEmail({
                 <Heading style={mailStyles.heading}>{title}</Heading>
                 <Text style={mailStyles.text}>{text}</Text>
 
-                <Text style={styles.unsubscribeText}>
-                    <a href={unsubscribeUrl} style={styles.unsubscribeLink}>
-                        {unsubscribeLabel}
-                    </a>
-                </Text>
+
             </Section>
         </MailLayout>
     )

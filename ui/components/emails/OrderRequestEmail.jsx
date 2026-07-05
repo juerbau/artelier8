@@ -4,6 +4,7 @@ import {
     Link,
 } from "@react-email/components";
 import {orderEmailContent} from "@/lib/i18n/order/orderEmailContent";
+import {orderFormContent} from "@/lib/i18n/order/orderFormContent";
 import MailLayout, {mailStyles} from "@/ui/components/emails/MailLayout";
 
 function formatValue(value) {
@@ -20,9 +21,12 @@ export default function OrderRequestEmail({
                                               order,
                                           }) {
 
-    const content = orderEmailContent[locale];
+    const content = orderEmailContent[locale].request;
+    const labels = content.labels;
 
     const referenceImages = order?.referenceImages || [];
+
+    const timeline = orderFormContent[locale].timeline.options[order.timeline];
 
     return (
         <MailLayout locale={locale}>
@@ -35,46 +39,57 @@ export default function OrderRequestEmail({
                     {content.intro}
                 </Text>
 
-                <Text style={mailStyles.label}>{content.customerEmail}</Text>
+                <Text style={mailStyles.label}>{labels.customerEmail}</Text>
                 <Text style={mailStyles.value}>{formatValue(customerEmail)}</Text>
 
-                <Text style={mailStyles.label}>{content.phone}</Text>
+                <Text style={mailStyles.label}>{labels.phone}</Text>
                 <Text style={mailStyles.value}>{formatValue(order?.phone)}</Text>
 
-                <Text style={mailStyles.label}>{content.timeline}</Text>
-                <Text style={mailStyles.value}>{formatValue(order?.timeline)}</Text>
+                {order.timeline && (
+                    <>
+                        <Text style={mailStyles.label}>{labels.timeline}</Text>
+                        <Text style={mailStyles.value}>{timeline}</Text>
+                    </>
+                )}
 
-                <Text style={mailStyles.label}>{content.occasion}</Text>
-                <Text style={mailStyles.value}>{formatValue(order?.occasion)}</Text>
+                {order.occasion && (
+                    <>
+                        <Text style={mailStyles.label}>{labels.occasion}</Text>
+                        <Text style={mailStyles.value}>{order.occasion}</Text>
+                    </>
+                )}
 
-                <Text style={mailStyles.label}>{content.colorPreferences}</Text>
+                <Text style={mailStyles.label}>{labels.colorPreferences}</Text>
                 <Text style={mailStyles.value}>{formatValue(order?.colorPreferences)}</Text>
 
-                <Text style={mailStyles.label}>{content.colorsToAvoid}</Text>
+                <Text style={mailStyles.label}>{labels.colorsToAvoid}</Text>
                 <Text style={mailStyles.value}>{formatValue(order?.colorsToAvoid)}</Text>
 
-                <Text style={mailStyles.label}>{content.abstractionLevel}</Text>
+                <Text style={mailStyles.label}>{labels.abstractionLevel}</Text>
                 <Text style={mailStyles.value}>{formatValue(order?.abstractionLevel)}</Text>
 
-                <Text style={mailStyles.label}>{content.motifRepresentation}</Text>
+                <Text style={mailStyles.label}>{labels.motifRepresentation}</Text>
                 <Text style={mailStyles.value}>{formatValue(order?.motifRepresentation)}</Text>
 
-                <Text style={mailStyles.label}>{content.format}</Text>
+                <Text style={mailStyles.label}>{labels.format}</Text>
                 <Text style={mailStyles.value}>{formatValue(order?.format)}</Text>
 
-                <Text style={mailStyles.label}>{content.preferredSize}</Text>
+                <Text style={mailStyles.label}>{labels.preferredSize}</Text>
                 <Text style={mailStyles.value}>{formatValue(order?.preferredSize)}</Text>
 
-                <Text style={mailStyles.label}>{content.additionalWishes}</Text>
+                <Text style={mailStyles.label}>{labels.additionalWishes}</Text>
                 <Text style={mailStyles.value}>{formatValue(order?.additionalWishes)}</Text>
 
-                <Text style={mailStyles.label}>{content.references}</Text>
+                <Text style={mailStyles.label}>{labels.references}</Text>
 
                 {referenceImages.length > 0 ? (
                     referenceImages.map((image, index) => (
-                        <Text key={image.publicId || image.url || index} style={mailStyles.value}>
+                        <Text
+                            key={image.publicId || image.url || index}
+                            style={mailStyles.value}
+                        >
                             <Link href={image.url} style={styles.link}>
-                                {image.originalName || `Reference image ${index + 1}`}
+                                {image.originalName || `${content.referenceFallback} ${index + 1}`}
                             </Link>
                         </Text>
                     ))
