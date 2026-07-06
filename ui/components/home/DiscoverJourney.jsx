@@ -6,7 +6,10 @@ import {AnimatePresence, motion} from "motion/react";
 import DiscoverGrid from "./DiscoverGrid";
 import CarouselNavigation from "./CarouselNavigation";
 
-export default function DiscoverJourney({galleries = []}) {
+export default function DiscoverJourney({
+                                            galleries = [],
+                                            content,
+                                        }) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     if (!galleries.length) return null;
@@ -65,6 +68,7 @@ export default function DiscoverJourney({galleries = []}) {
                     onPrevious={previous}
                     onNext={next}
                     onSelect={setCurrentIndex}
+                    content={content}
                 />
             )}
 

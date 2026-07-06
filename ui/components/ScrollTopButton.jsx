@@ -8,6 +8,16 @@ import {cn} from "@/lib/utils/cn";
 export default function ScrollTopButton() {
     const [visible, setVisible] = useState(false)
 
+    const ariacontent = {
+        de: {
+            scrollToTop: "Zum Seitenanfang scrollen",
+        },
+
+        en: {
+            scrollToTop: "Scroll to top",
+        },
+    };
+
     useEffect(() => {
         const handleScroll = () => {
             const threshold = window.innerHeight * 0.7
@@ -38,6 +48,7 @@ export default function ScrollTopButton() {
                 "backdrop-blur-sm",
                 "transition-colors"
             )}
+            aria-label="Scroll to top"
         >
             <CircleChevronUp size={28}/>
         </motion.button>

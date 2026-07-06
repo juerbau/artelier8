@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { urlFor } from "@/sanity/image";
+import {useState} from "react";
+import {urlFor} from "@/sanity/image";
 import BeforeAfterSlider from "./BeforeAfterSlider";
 import CarouselNavigation from "./CarouselNavigation";
 import {AnimatePresence, motion} from "motion/react";
 
 export default function BeforeAfterJourney({
                                                items = [],
+                                               content,
                                            }) {
 
 
@@ -70,7 +71,6 @@ export default function BeforeAfterJourney({
             </AnimatePresence>
 
 
-
             {showNavigation && (
                 <CarouselNavigation
                     currentIndex={currentIndex}
@@ -78,6 +78,7 @@ export default function BeforeAfterJourney({
                     onPrevious={previous}
                     onNext={next}
                     onSelect={setCurrentIndex}
+                    content={content}
                 />
             )}
 

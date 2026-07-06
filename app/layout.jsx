@@ -1,6 +1,7 @@
-import { roboto, robotoSerif } from "@/ui/fonts";
+import {roboto, robotoSerif} from "@/ui/fonts";
 import "@/app/globals.css";
 import {siteUrl} from "@/lib/site";
+import {Analytics} from "@vercel/analytics/next";
 import ScrollTopButton from "@/ui/components/ScrollTopButton";
 
 
@@ -24,9 +25,10 @@ export default function RootLayout({children}) {
     return (
         <html lang="de">
         <body className={`${robotoSerif.variable} ${roboto.variable} font-sans antialiased`}>
-                {children}
-                <ScrollTopButton />
-            </body>
+        {children}
+        <ScrollTopButton/>
+        <Analytics/>
+        </body>
         </html>
     );
 }

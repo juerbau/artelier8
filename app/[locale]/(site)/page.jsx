@@ -95,7 +95,10 @@ export default async function HomePage({params}) {
                             {content.discover.title}
                         </h2>
 
-                        <DiscoverJourney galleries={discoverJourney?.galleries ?? []}/>
+                        <DiscoverJourney
+                            galleries={discoverJourney?.galleries ?? []}
+                            content={content}
+                        />
 
 
                         <div className="flex justify-center pt-2">
@@ -112,7 +115,10 @@ export default async function HomePage({params}) {
                             {content.create.title}
                         </h2>
 
-                        <BeforeAfterJourney items={beforeAfterJourney?.items ?? []}/>
+                        <BeforeAfterJourney
+                            items={beforeAfterJourney?.items ?? []}
+                            content={content}
+                        />
 
                         <div className="flex justify-center pt-2">
                             <MainButton href={`/${locale}/for-you`}>

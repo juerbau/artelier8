@@ -14,7 +14,9 @@ export default function CarouselNavigation({
                                                onPrevious,
                                                onNext,
                                                onSelect,
+                                               content,
                                            }) {
+
     return (
         <div
             className={cn(
@@ -30,6 +32,7 @@ export default function CarouselNavigation({
                     "transition-opacity",
                     "hover:opacity-70"
                 )}
+                aria-label={content.carouselNavigation.previous}
             >
                 <ChevronLeft size={33} strokeWidth={2.5} />
             </button>
@@ -66,6 +69,7 @@ export default function CarouselNavigation({
                                 ? "w-4 h-4 bg-[#D8B56A]"
                                 : "w-3 h-3 bg-white hover:bg-[#D8B56A]"
                         )}
+                        aria-label={`${content.carouselNavigation.goToSlide} ${index + 1}`}
                     />
                 ))}
             </div>
@@ -79,6 +83,7 @@ export default function CarouselNavigation({
                     "transition-opacity",
                     "hover:opacity-70"
                 )}
+                aria-label={content.carouselNavigation.next}
             >
                 <ChevronRight size={33} strokeWidth={2.5} />
             </button>

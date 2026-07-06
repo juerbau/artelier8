@@ -1,4 +1,4 @@
-import { SiInstagram } from "react-icons/si"
+import {SiInstagram} from "react-icons/si"
 
 export default function InstagramLink() {
     return (
@@ -11,6 +11,7 @@ export default function InstagramLink() {
         >
             <SiInstagram
                 className="h-[1em] w-[1em]"
+                aria-label="Instagram Icon"
             />
         </a>
     )

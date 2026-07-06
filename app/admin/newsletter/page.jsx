@@ -92,14 +92,18 @@ export default async function AdminNewsletterPage() {
                                         <p className="text-xs uppercase tracking-[0.2em] mb-2">
                                             Text (DE)
                                         </p>
-                                        <p className="whitespace-pre-line">{newsletter.text_de}</p>
+                                        <p className="max-w-sm truncate">
+                                            {newsletter.text_de}
+                                        </p>
                                     </div>
 
                                     <div>
                                         <p className="text-xs uppercase tracking-[0.2em] mb-2">
                                             Text (EN)
                                         </p>
-                                        <p className="whitespace-pre-line">{newsletter.text_en}</p>
+                                        <p className="max-w-sm truncate">
+                                            {newsletter.text_en}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
