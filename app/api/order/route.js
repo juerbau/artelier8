@@ -6,7 +6,7 @@ import {checkOrigin} from "@/lib/security/origin-check";
 import {isHoneypotTriggered} from "@/lib/security/honeypot";
 import {sendOrderRequestEmail} from "@/lib/email/sendOrderRequestEmail";
 import {sendOrderConfirmationEmail} from "@/lib/email/sendOrderConfirmationEmail";
-import {getEmailTo} from "@/lib/email/config";
+
 
 export async function POST(req) {
     try {
@@ -99,18 +99,6 @@ export async function POST(req) {
 
         const order = result.data;
 
-        const artistEmail = getEmailTo();
-
-        if (!artistEmail) {
-            return NextResponse.json(
-                {
-                    success: false,
-                    error: "missing_contact_email",
-                },
-                {status: 500}
-            );
-        }
-
         const resArtist = await sendOrderRequestEmail({
             locale,
             customerEmail,
@@ -132,7 +120,6 @@ export async function POST(req) {
         const resCustomer = await sendOrderConfirmationEmail({
             locale,
             to: customerEmail,
-            artistEmail,
             order,
         });
 

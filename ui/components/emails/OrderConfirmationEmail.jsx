@@ -3,9 +3,12 @@ import {
     Text,
     Link,
 } from "@react-email/components";
-import MailLayout, {mailStyles} from "@/ui/components/emails/MailLayout";
+
 import {orderEmailContent} from "@/lib/i18n/order/orderEmailContent";
 import {orderFormContent} from "@/lib/i18n/order/orderFormContent";
+import {getEmailReplyTo} from "@/lib/email/config";
+
+import MailLayout, {mailStyles} from "@/ui/components/emails/MailLayout";
 
 
 function formatValue(value) {
@@ -18,11 +21,12 @@ function formatValue(value) {
 
 export default function OrderConfirmationEmail({
                                                    locale = "de",
-                                                   artistEmail,
                                                    order,
                                                }) {
     const content = orderEmailContent[locale].confirmation;
     const labels = content.labels;
+
+    const artistEmail = getEmailReplyTo();
 
     const referenceImages = order?.referenceImages || [];
 

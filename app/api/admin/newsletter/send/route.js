@@ -5,7 +5,7 @@ import { getCurrentReadyNewsletter } from "@/lib/newsletter/get-current-ready-ne
 import { getActiveSubscribers } from "@/lib/newsletter/get-active-subscribers";
 import { buildNewsletterEmailHtml } from "@/lib/newsletter/buildNewsletterEmailHtml";
 import { acquireNewsletterSendLock, releaseNewsletterSendLock } from "@/lib/security/send-lock";
-import { getEmailFrom } from "@/lib/email/config";
+import {getEmailFrom, getEmailReplyTo} from "@/lib/email/config";
 import {resendAPI} from "@/lib/email/resend";
 
 const resend = resendAPI;
@@ -98,6 +98,7 @@ export async function POST() {
             const result = await resend.emails.send({
                 from,
                 to: subscriber.email,
+                replyTo: getEmailReplyTo(),
                 subject,
                 html,
             })

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import { buildImage } from "@/sanity/image"
 import { getCurrentReadyNewsletter } from "@/lib/newsletter/get-current-ready-newsletter"
 import { buildNewsletterEmailHtml } from "@/lib/newsletter/buildNewsletterEmailHtml"
-import { getEmailFrom, getEmailTo } from "@/lib/email/config";
+import {getEmailFrom, getEmailReplyTo, getEmailTo} from "@/lib/email/config";
 import {resendAPI} from "@/lib/email/resend";
 
 const resend = resendAPI;
@@ -56,6 +56,7 @@ export async function POST(req) {
         const result = await resend.emails.send({
             from,
             to,
+            replyTo: getEmailReplyTo(),
             subject: `[TEST] ${subject}`,
             html,
         })

@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/security/rate-limit";
-import {resendAPI} from "@/lib/email/resend";
 
-const resend = resendAPI;
 
 export async function GET(req) {
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
@@ -64,14 +62,6 @@ export async function GET(req) {
 
         await redis.set(subscriberKey, JSON.stringify(updatedSubscriber))
         await redis.del(tokenKey)
-
-        try {
-            await resend.contacts.create({
-                email: subscriber.email,
-            })
-        } catch (error) {
-            console.warn("Resend contact issue:", error?.message || error)
-        }
 
         return NextResponse.redirect(
             new URL(`/${locale}/message?type=newsletter&action=confirm&status=success`, siteUrl)

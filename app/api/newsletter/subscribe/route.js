@@ -3,7 +3,6 @@ import crypto from "crypto";
 import { redis, checkRateLimit } from "@/lib/security/rate-limit";
 import { getNewsletterSchema } from "@/lib/validation/newsletter-schema";
 import { removeMetaFields } from "@/lib/validation/validation-helpers";
-import { getEmailFrom } from "@/lib/email/config";
 import { sendConfirmationEmail } from "@/lib/email/sendConfirmationEmail";
 import { checkOrigin } from "@/lib/security/origin-check";
 import { isHoneypotTriggered } from "@/lib/security/honeypot"
@@ -95,7 +94,6 @@ export async function POST(req) {
             })
         }
 
-        const from = getEmailFrom()
         const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
 
         if (!siteUrl) {
@@ -156,7 +154,6 @@ export async function POST(req) {
         }
 
         const res = await sendConfirmationEmail({
-            from,
             to: email,
             locale,
             confirmUrl,

@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server"
-import { buildImage } from "@/sanity/image"
-import { getCurrentReadyNewsletter } from "@/lib/newsletter/get-current-ready-newsletter"
-import { buildNewsletterEmailHtml } from "@/lib/newsletter/buildNewsletterEmailHtml"
+import {NextResponse} from "next/server"
+import {buildImage} from "@/sanity/image"
+import {getCurrentReadyNewsletter} from "@/lib/newsletter/get-current-ready-newsletter"
+import {buildNewsletterEmailHtml} from "@/lib/newsletter/buildNewsletterEmailHtml"
 
 export async function GET(req) {
 
@@ -10,27 +10,27 @@ export async function GET(req) {
 
         if (!siteUrl) {
             return NextResponse.json(
-                { error: "Missing NEXT_PUBLIC_SITE_URL" },
-                { status: 500 }
+                {error: "Missing NEXT_PUBLIC_SITE_URL"},
+                {status: 500}
             )
         }
 
-        const { searchParams } = new URL(req.url)
+        const {searchParams} = new URL(req.url)
         const locale = searchParams.get("locale")?.startsWith("de") ? "de" : "en"
 
         const newsletter = await getCurrentReadyNewsletter()
 
         if (!newsletter) {
             return NextResponse.json(
-                { error: "No newsletter ready to preview" },
-                { status: 404 }
+                {error: "No newsletter ready to preview"},
+                {status: 404}
             )
         }
 
         if (newsletter.status === "sent") {
             return NextResponse.json(
-                { error: "Newsletter already sent" },
-                { status: 409 }
+                {error: "Newsletter already sent"},
+                {status: 409}
             )
         }
 
@@ -59,8 +59,8 @@ export async function GET(req) {
         })
     } catch (error) {
         return NextResponse.json(
-            { error: "Failed to render newsletter preview" },
-            { status: 500 }
+            {error: "Failed to render newsletter preview"},
+            {status: 500}
         )
     }
 }
