@@ -83,7 +83,6 @@ function BeforeAfterSliderInner({
                             sizes={imageSizes[safeDisplayFormat]}
                             onLoad={() => setAfterLoaded(true)}
                             className={cn(
-                                "pointer-events-none",
                                 "object-cover object-center",
                                 "transition-opacity duration-700",
                                 imagesReady ? "opacity-100" : "opacity-0"
@@ -104,7 +103,6 @@ function BeforeAfterSliderInner({
                                 sizes={imageSizes[safeDisplayFormat]}
                                 onLoad={() => setBeforeLoaded(true)}
                                 className={cn(
-                                    "pointer-events-none",
                                     "object-cover object-center",
                                     "transition-opacity duration-700",
                                     imagesReady ? "opacity-100" : "opacity-0"
@@ -164,11 +162,10 @@ function BeforeAfterSliderInner({
                                 setPosition(Number(e.target.value))
                             }
                             className={cn(
-                                "absolute inset-x-0 top-0",
-                                "-bottom-4 sm:-bottom-5 md:-bottom-6 lg:-bottom-7",
+                                "absolute inset-0",
                                 "z-30",
-                                "h-auto w-full",
-                                "opacity-0",
+                                "h-full w-full",
+                                "opacity-20",   // absichtlich sichtbar
                                 "cursor-ew-resize"
                             )}
                         />
