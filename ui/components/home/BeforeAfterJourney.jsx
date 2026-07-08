@@ -3,6 +3,7 @@
 import {useState} from "react";
 import {urlFor} from "@/sanity/image";
 import BeforeAfterSlider from "./BeforeAfterSlider";
+
 import CarouselNavigation from "./CarouselNavigation";
 import {AnimatePresence, motion} from "motion/react";
 

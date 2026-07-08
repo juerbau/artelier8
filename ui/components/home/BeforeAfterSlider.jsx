@@ -158,7 +158,7 @@ function BeforeAfterSliderInner({
                             min="0"
                             max="100"
                             value={position}
-                            onChange={(e) =>
+                            onInput={(e) =>
                                 setPosition(Number(e.target.value))
                             }
                             className={cn(
