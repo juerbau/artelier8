@@ -122,31 +122,31 @@ function BeforeAfterSliderInner({
                         )}
                     </div>
 
-                    {/* Griff halb auf dem unteren Bildrand */}
+                    {/* Griff in der Bildmitte */}
                     {imagesReady && (
-                        <div className="pointer-events-none absolute left-0 right-0 top-full z-20">
-                            <div className="relative">
-                                <div
-                                    className={cn(
-                                        "absolute top-0",
-                                        "flex -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-0.5",
-                                        "rounded-full",
-                                        "bg-white/90",
-                                        "shadow-lg",
-                                        "border border-white/50",
-                                        "backdrop-blur",
-                                        "w-11 h-7",
-                                        "sm:w-12 sm:h-8",
-                                        "md:w-14 md:h-9",
-                                        "lg:w-16 lg:h-10"
-                                    )}
-                                    style={{
-                                        left: `${position}%`,
-                                    }}
-                                >
-                                    <ChevronLeft className="h-4 w-4 text-black sm:h-[18px] sm:w-[18px] md:h-5 md:w-5" />
-                                    <ChevronRight className="h-4 w-4 text-black sm:h-[18px] sm:w-[18px] md:h-5 md:w-5" />
-                                </div>
+                        <div
+                            className="pointer-events-none absolute inset-y-0 left-0 right-0 z-20"
+                        >
+                            <div
+                                className={cn(
+                                    "absolute top-1/2",
+                                    "flex -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-0.5",
+                                    "rounded-full",
+                                    "bg-white/90",
+                                    "shadow-lg",
+                                    "border border-white/50",
+                                    "backdrop-blur",
+                                    "w-11 h-7",
+                                    "sm:w-12 sm:h-8",
+                                    "md:w-14 md:h-9",
+                                    "lg:w-16 lg:h-10"
+                                )}
+                                style={{
+                                    left: `${position}%`,
+                                }}
+                            >
+                                <ChevronLeft className="h-4 w-4 text-black sm:h-[18px] sm:w-[18px] md:h-5 md:w-5" />
+                                <ChevronRight className="h-4 w-4 text-black sm:h-[18px] sm:w-[18px] md:h-5 md:w-5" />
                             </div>
                         </div>
                     )}
@@ -158,14 +158,12 @@ function BeforeAfterSliderInner({
                             min="0"
                             max="100"
                             value={position}
-                            onInput={(e) =>
-                                setPosition(Number(e.target.value))
-                            }
+                            onChange={(e) => setPosition(Number(e.target.value))}
                             className={cn(
                                 "absolute inset-0",
                                 "z-30",
                                 "h-full w-full",
-                                "opacity-20",   // absichtlich sichtbar
+                                "opacity-0",
                                 "cursor-ew-resize"
                             )}
                         />
