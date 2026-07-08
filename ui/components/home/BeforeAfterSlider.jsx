@@ -83,6 +83,7 @@ function BeforeAfterSliderInner({
                             sizes={imageSizes[safeDisplayFormat]}
                             onLoad={() => setAfterLoaded(true)}
                             className={cn(
+                                "pointer-events-none",
                                 "object-cover object-center",
                                 "transition-opacity duration-700",
                                 imagesReady ? "opacity-100" : "opacity-0"
@@ -103,6 +104,7 @@ function BeforeAfterSliderInner({
                                 sizes={imageSizes[safeDisplayFormat]}
                                 onLoad={() => setBeforeLoaded(true)}
                                 className={cn(
+                                    "pointer-events-none",
                                     "object-cover object-center",
                                     "transition-opacity duration-700",
                                     imagesReady ? "opacity-100" : "opacity-0"
