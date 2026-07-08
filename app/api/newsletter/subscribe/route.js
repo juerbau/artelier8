@@ -19,7 +19,8 @@ export async function POST(req) {
             )
         }
 
-        const body = await req.json()
+        const body = await req.json();
+        const locale = body.locale?.startsWith("en") ? "en" : "de";
 
         if (isHoneypotTriggered(body)) {
             return NextResponse.json(
@@ -28,7 +29,7 @@ export async function POST(req) {
             )
         }
 
-        const allowed = await checkRateLimit(req, "newsletter")
+        const allowed = await checkRateLimit(req, "newsletter");
 
         if (!allowed) {
             return NextResponse.json(

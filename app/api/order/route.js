@@ -143,11 +143,6 @@ export async function POST(req) {
             locale,
         });
 
-        return NextResponse.json({
-            success: true,
-            status: "order-received",
-            locale,
-        });
     } catch (err) {
         console.error("Order error:", err);
 
