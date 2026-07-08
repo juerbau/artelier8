@@ -136,17 +136,15 @@ function BeforeAfterSliderInner({
                                     "shadow-lg",
                                     "border border-white/50",
                                     "backdrop-blur",
-                                    "w-11 h-7",
-                                    "sm:w-12 sm:h-8",
-                                    "md:w-14 md:h-9",
-                                    "lg:w-16 lg:h-10"
+                                    "w-6 h-6",
+                                    "md:w-10 md:h-10"
                                 )}
                                 style={{
                                     left: `${position}%`,
                                 }}
                             >
-                                <ChevronLeft className="h-4 w-4 text-black sm:h-[18px] sm:w-[18px] md:h-5 md:w-5" />
-                                <ChevronRight className="h-4 w-4 text-black sm:h-[18px] sm:w-[18px] md:h-5 md:w-5" />
+                                <ChevronLeft className="h-4 w-4 text-black md:h-5 md:w-5" />
+                                <ChevronRight className="h-4 w-4 text-black md:h-5 md:w-5" />
                             </div>
                         </div>
                     )}
