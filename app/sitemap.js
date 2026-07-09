@@ -1,15 +1,15 @@
-import { siteUrl } from "@/lib/site";
-import { client } from "@/sanity/client";
+import {siteUrl} from "@/lib/site";
+import {client} from "@/sanity/client";
 
 export default async function sitemap() {
     const series = await client.fetch(`
-    *[_type == "series" && defined(slug.current)]{
-      "slug": slug.current,
-      "artworks": artworks[]{
-        "slug": slug.current
-      }
-    }
-  `);
+*[_type == "series" && defined(slug.current)]{
+  "slug": slug.current,
+  "artworks": artworks[]->{
+    "slug": slug.current
+  }
+}
+`);
 
     const locales = ["de", "en"];
 
@@ -32,9 +32,11 @@ export default async function sitemap() {
             ...buildUrls(`/series/${s.slug}`),
 
             // Artworks
-            ...s.artworks.flatMap((a) =>
-                buildUrls(`/series/${s.slug}/${a.slug}`)
-            ),
+            ...s.artworks
+                .filter((a) => a?.slug)
+                .flatMap((a) =>
+                    buildUrls(`/series/${s.slug}/${a.slug}`)
+                ),
         ]),
     ];
 }
