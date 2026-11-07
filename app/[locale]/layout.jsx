@@ -4,16 +4,18 @@ import {getSafeLocale} from "@/lib/i18n/getSafeLocale";
 
 import CookieNotice from "@/ui/components/CookieNotice";
 
+import { SUPPORTED_LOCALES } from "@/lib/i18n/locales";
 
-const SUPPORTED_LOCALES = ["de", "en"];
 
 export default async function LocaleLayout({ children, params }) {
 
-    const locale = await getSafeLocale(params);
+    const { locale: requestedLocale } = await params;
 
-    if (!SUPPORTED_LOCALES.includes(locale)) {
+    if (!SUPPORTED_LOCALES.includes(requestedLocale)) {
         notFound();
     }
+
+    const locale = await getSafeLocale(params);
 
     return (
         <>

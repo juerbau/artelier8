@@ -3,6 +3,7 @@ import "@/app/globals.css";
 import {siteUrl} from "@/lib/site";
 import {Analytics} from "@vercel/analytics/next";
 import ScrollTopButton from "@/ui/components/ScrollTopButton";
+import PulseTracker from "@/ui/components/PulseTracker";
 
 
 export const metadata = {
@@ -27,7 +28,8 @@ export default function RootLayout({children}) {
         <body className={`${robotoSerif.variable} ${roboto.variable} font-sans antialiased`}>
         {children}
         <ScrollTopButton/>
-        <Analytics/>
+        {/*<Analytics/>*/}
+        <PulseTracker/>
         </body>
         </html>
     );
