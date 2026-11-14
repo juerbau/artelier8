@@ -23,7 +23,7 @@ function shouldTrackPath(pathname) {
     return true;
 }
 
-export default function PulseTracker() {
+export default function DashMySiteTracker() {
     const pathname = usePathname();
 
     const sessionRef = useRef(null);
@@ -55,7 +55,7 @@ export default function PulseTracker() {
         //     matchKey: sessionRef.current.matchKey,
         // });
 
-        fetch("/api/pulse", {
+        fetch("/api/dashmysite", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -68,13 +68,13 @@ export default function PulseTracker() {
             .then((response) => {
                 if (!response.ok) {
                     console.error(
-                        "[Pulse] Tracking failed:",
+                        "[DashMySite] Tracking failed:",
                         response.status
                     );
                 }
             })
             .catch((error) => {
-                console.error("[Pulse] Network error:", error);
+                console.error("[DashMySite] Network error:", error);
             });
 
     }, [pathname]);

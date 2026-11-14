@@ -48,14 +48,14 @@ export async function POST(request) {
             );
         }
 
-        const response = await fetch(process.env.PULSE_API_URL, {
+        const response = await fetch(process.env.DASHMYSITE_API_URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${process.env.PULSE_API_SECRET}`,
+                Authorization: `Bearer ${process.env.DASHMYSITE_API_SECRET}`,
             },
             body: JSON.stringify({
-                siteKey: process.env.PULSE_SITE_KEY,
+                siteKey: process.env.DASHMYSITE_SITE_KEY,
                 pathname,
                 matchKey,
             }),
@@ -64,7 +64,7 @@ export async function POST(request) {
 
         if (!response.ok) {
             console.error(
-                "Pulse tracking failed:",
+                "DashMySite tracking failed:",
                 response.status
             );
 
@@ -76,7 +76,7 @@ export async function POST(request) {
 
         return NextResponse.json({ success: true });
     } catch (error) {
-        console.error("ARTelier8 Pulse proxy error:", error);
+        console.error("ARTelier8 DashMySite proxy error:", error);
 
         return NextResponse.json(
             { success: false },
